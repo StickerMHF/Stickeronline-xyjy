@@ -5,6 +5,8 @@
   "main": "main.js",
   "dependencies": {
     "prettier": "^1.12.1",
+    "sass": "^1.27.0",
+    "scss": "^0.2.4",
     "uview-ui": "^1.7.6"
   },
   "devDependencies": {
