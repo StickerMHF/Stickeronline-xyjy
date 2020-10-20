@@ -1,7 +1,8 @@
 import Vue from 'vue'
+// import uView from "uview-ui";
+// Vue.use(uView);
 import App from './App'
-import uView from "uview-ui";
-Vue.use(uView);
+import '@/mock'
 import basics from './pages/basics/home.vue'
 Vue.component('basics',basics)
 
@@ -13,7 +14,6 @@ Vue.component('plugin',plugin)
 
 import cuCustom from './colorui/components/cu-custom.vue'
 Vue.component('cu-custom',cuCustom)
-
 Vue.config.productionTip = false
 
 App.mpType = 'app'

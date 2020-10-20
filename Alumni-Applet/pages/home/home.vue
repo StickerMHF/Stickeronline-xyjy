@@ -1,416 +1,242 @@
 <template>
-	<view class="page_edu">
-		<view class="page_edu_header">
-			<view class="cu-bar bg-white">
-				<view class="action">
-					<text class="cuIcon-title text-pink"></text> 全屏限高轮播
-				</view>
-				<view class="action">
-					<switch @change="DotStyle" :class="dotStyle?'checked':''" :checked="dotStyle?true:false"></switch>
+	<view class="page_home">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="false">
+			<block slot="content">首页</block>
+		</cu-custom>
+		<!-- banner -->
+		<view class="ph-menu">
+			<swiper class="ph-banner screen-swiper square-dot" :indicator-dots="true" :circular="true" :autoplay="true" interval="5000"
+			 duration="500">
+				<swiper-item class="ph-banner-item" v-for="(item,index) in swiperList" :key="index">
+					<image :src="item.url" v-if="item.type=='image'"></image>
+					<video :src="item.url" autoplay loop muted :show-play-btn="false" :controls="false" objectFit="cover" v-if="item.type=='video'"></video>
+				</swiper-item>
+			</swiper>
+		</view>
+		<!-- 列表 -->
+		<view class="ph-menu">
+			<view class="bg-white">
+				<view class="grid col-4 grid-square">
+
+					<view @click="menuClickHandler(item.id)" class="bg-img" v-for="(item,index) in menus" :style="[{ backgroundImage:'url(' + menus[index] + ')' }]">
+						<navigator :url="item.page+'?title='+item.txt" >
+							<view class="phm-item">
+								<view class="img_view phm-item-image">
+									<image :src="item.icon" class="image"></image>
+								</view>
+								<text class="phm-item-txt">{{item.txt}}</text>
+							</view>
+						</navigator>
+
+					</view>
 				</view>
 			</view>
 		</view>
-		<view class="page_content">
-			<view class="menu">
-				<template v-for="(it,i) in menus">
-					<view class="item" >
-						<view class="img_view" :style="{background: it.bg}">
-							<image :src="it.icon" class="image"></image>
-						</view>
-						<text class="txt">{{it.txt}}</text>
-					</view>
-				</template>
-			</view>
-			<view class="s_menu">
-				<template v-for="(it,i) in second_menus">
-					<view class="item" >
-						<image :src="it.icon" class="image"></image>
-						<text class="txt">{{it.txt}}</text>
-					</view>
-				</template>
-			</view>
-			<view class="ad">
-				<view class="ad_btn">
-					<text class="title">教资面试课上线</text>
-					<text class="sub_title">老用户现实立减100元</text>
+
+		<view class="ph-menu">
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					<text class="cuIcon-titles text-green1"></text> 校友分布
 				</view>
-				<image src="/static/tag.png" class="bg"></image>
+			</view>
+			<view>
+				sss
 			</view>
 		</view>
-		<scroll-view scroll-x="true" class="slider">
-			<template v-for="(it, i) in records">
-				<view class="item"  :style="{background: it.bg, marginRight: i === records.length - 1 ? '15px' : '0px'}">
-					<view class="item_content">
-						<view class="title">
-							<text class="first">{{it.title}}</text>
-							<text class="main">主讲：{{it.mainTeacher}}</text>
-							<text class="sub" :style="{color:it.subColor}">标题名称</text>
+
+		<view class="ph-menu">
+			<scroll-view scroll-x class="bg-white nav" scroll-with-animation>
+				<view class="cu-item" :class="index==tabCur?'text-green cur':''" v-for="(item,index) in tabList" :key="index" @tap="tabSelect"
+				 :data-id="item.id">
+					{{item.name}}
+				</view>
+			</scroll-view>
+			<view  class="phm-card cu-card case no-card" v-for="(item,index) in newsList">
+				<view class="cu-item shadow">
+					<view class="image">
+						<image :src="item.image" mode="widthFix"></image>
+						<view class="cu-bar bg-shadeBottom"> <text class="text-cut">{{item.desc}}</text></view>
+					</view>
+					<view class="cu-list ">
+						<view class="cu-item phm-zx-item">
+							<view class="phm-zx-content">
+								<view class="text-grey">{{item.name}}</view>
+								<view class="text-gray text-sm flex justify-between">
+									{{item.publishData}}
+									<view class="phm-zx-view text-gray text-sm">
+										<text class="cuIcon-attentionfill margin-lr-xs"></text> {{item.viewCount}}
+									</view>
+								</view>
+							</view>
 						</view>
-						<image class="image" :src="it.icon"></image>
-						<text class="free">免\n费</text>
 					</view>
 				</view>
-			</template>
-		</scroll-view>
+			</view>
+		</view>
 	</view>
 </template>
 
 <script>
 	export default {
+		components: {
+
+		},
 		data() {
 			return {
-				bannerlist:[{
-						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
-						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
-					},
-					{
-						image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
-						title: '身无彩凤双飞翼，心有灵犀一点通'
-					},
-					{
-						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
-						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
-					}
-				],
+				swiperList: [{
+					id: 0,
+					type: 'image',
+					url: '/static/home/banner12x.png'
+				}, {
+					id: 1,
+					type: 'image',
+					url: '/static/home/banner22x.png',
+				}, {
+					id: 2,
+					type: 'image',
+					url: '/static/home/banner32x.png'
+				}],
 				menus: [{
-						bg: 'linear-gradient(0deg,rgba(9,216,162,1),rgba(90,242,217,1))',
-						icon: '/static/graduation.png',
-						txt: '同伴管',
-						isFree: true
+						icon: '/static/home/dcxw2x.png',
+						txt: '地测新闻',
+						page: '/pages/home/news/news'
 					},
 					{
-						bg: 'linear-gradient(0deg,rgba(251,184,35,1),rgba(255,228,40,1))',
-						icon: '/static/live.png',
-						txt: '直播课',
-						isFree: false
+						icon: '/static/home/xqzt2x.png',
+						txt: '校庆专题',
+						page: '/pages/home/news/news'
 					},
 					{
-						bg: 'linear-gradient(0deg,rgba(255,126,34,1),rgba(240,184,27,1))',
-						icon: '/static/emblem.png',
-						txt: '优选课',
-						isFree: true
+						icon: '/static/home/ysjs2x.png',
+						txt: '院史介绍',
+						page: '/pages/schoolHistory/schoolHistory'
 					},
 					{
-						bg: 'linear-gradient(0deg,rgba(9,177,252,1),rgba(24,200,255,1))',
-						icon: '/static/question_bank.png',
-						txt: '智能题库',
-						isFree: true
+						icon: '/static/home/szll2x.png',
+						txt: '师资力量',
+						page: '/pages/teachers/teachers'
+					},
+					{
+						icon: '/static/home/xyhz2x.png',
+						txt: '校友合作',
+						page: '/pages/cooperation/cooperation'
+					},
+					{
+						icon: '/static/home/yxxy2x.png',
+						txt: '优秀校友',
+						page: '/pages/home/news/news'
+					},
+					{
+						icon: '/static/home/dlqq2x.png',
+						txt: '点亮全球',
+						page: '/pages/home/news/news'
+					},
+					{
+						id:'xyjz',
+						icon: '/static/home/xyjz2x.png',
+						txt: '校友捐赠',
+						page: '/pages/donations/donations1'
 					}
 				],
-				second_menus: [{
-						icon: '/static/exam.png',
-						txt: '考试教案'
-					},
-					{
-						icon: '/static/textbook.png',
-						txt: '教材教案',
-					},
-					{
-						icon: '/static/book_ticket.png',
-						txt: '青书券'
-					},
-					{
-						icon: '/static/more.png',
-						txt: '全部课程'
-					}
-				],
-				records: [{
-						bg: 'linear-gradient(-30deg,rgba(171,218,255,1),rgba(215,239,255,1))',
-						title: '教师考情分析',
-						mainTeacher: '小A',
-						subTitle: '标题名称',
-						subColor: '#15639F',
-						icon: '/static/test2.png',
-						isFree: true
-					},
-					{
-						bg: 'linear-gradient(-30deg,rgba(192,253,227,1),rgba(224,252,240,1))',
-						title: '查看详情',
-						mainTeacher: '小B',
-						subTitle: '标题名称',
-						subColor: '#07B77B',
-						icon: '/static/test.png',
-						isFree: false
-					},
-					{
-						bg: 'linear-gradient(-30deg,rgba(171,218,255,1),rgba(215,239,255,1))',
-						title: '教师考情分析',
-						mainTeacher: '小A',
-						subTitle: '标题名称',
-						subColor: '#15639F',
-						icon: '/static/test2.png',
-						isFree: true
-					}
-				]
+				tabCur: 0,
+				tabList: [{
+					name: '资讯',
+					id: 0
+				}, {
+					name: '推荐',
+					id: 1
+				}],
+				newsList: [{
+					image: '/static/home/banner22x.png',
+					name: '学生工作业务能力专题培训举办',
+					desc: '我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。',
+					publishData: '2020-10-18',
+					viewCount: 23
+				}, {
+					image: '/static/home/banner32x.png',
+					name: '正义天使 凯尔',
+					desc: '',
+					publishData: '2020-10-18',
+					viewCount: 23
+				}]
 			}
+
 		},
 		onLoad() {
 
 		},
 		methods: {
-
+			tabSelect(e) {
+				this.tabCur = e.currentTarget.dataset.id;
+			},
+			menuClickHandler(value){
+				if(value&&value=='xyjz'){
+					uni.navigateToMiniProgram({
+					  appId: 'wx57ef5751ef32a454',
+					  success(res) {
+					    // 打开成功
+					  }
+					})
+				}
+				
+			}
 		}
 	}
 </script>
 
-<style>
-	page {
-		width: 100%;
-		background-color: #ebebeb;
-	}
-</style>
+
 <style lang="scss" scoped>
-	@function realSize($args) {
-		@return $args / 1.5;
+	.phm-card {
+		border-bottom: 1rpx solid #e5dee5;
 	}
 
-	.page_edu {
-		width: 100%;
+	.ph-menu {
+		padding: 10px;
+		margin-bottom: 10px;
+		background: white;
 	}
 
-	.page_edu_header {
-		padding-top: var(--status-bar-height);
-		background-color: #0bc99d;
-		width: 100%;
-		height: realSize(415px);
-
-.banner-images{
-	width: 100%;
-	height: 100%;
-}
-		.header_content {
-			display: flex;
-			flex-direction: row;
-
-			.left {
-				display: flex;
-				flex-direction: column;
-				width: 57%;
-				margin-top: 10px;
-				margin-left: 15px;
-				margin-right: 15px;
-
-				.title {
-					width: realSize(419px);
-					height: realSize(59px);
-					font-size: realSize(47px);
-					font-weight: bold;
-					color: rgba(255, 255, 255, 1);
-				}
-
-				.sub_title {
-					margin-top: 3px;
-					font-size: realSize(18px);
-					font-weight: 400;
-					color: rgba(255, 255, 255, 1);
-
-					background: linear-gradient(0deg, rgba(120, 255, 224, 1) 0%, rgba(255, 255, 255, 1) 100%);
-					-webkit-background-clip: text;
-					-webkit-text-fill-color: transparent;
-				}
-
-				.btn {
-					margin-top: 3px;
-					width: realSize(198px);
-					height: realSize(60px);
-					background: linear-gradient(-30deg, rgba(252, 135, 29, 1), rgba(246, 185, 9, 1));
-					box-shadow: 0px 4px 10px 0px rgba(255, 121, 0, 0.5);
-					border-radius: realSize(30px);
-					color: rgba(255, 255, 255, 1);
-					display: flex;
-					align-items: center;
-					justify-content: center;
-				}
-			}
-		}
+	.ph-banner {
+		border-radius: 10px;
 	}
 
-	.page_content {
-		width: 100%;
-		margin-top: -74px;
-
-		.menu {
-			margin-left: 10px;
-			margin-right: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
-			height: realSize(176px);
-			background: rgba(255, 255, 255, 1);
-			box-shadow: 0px 10px 10px 0px rgba(0, 161, 124, 0.1);
-			border-radius: 10px;
-			display: flex;
-			flex-direction: row;
-			align-items: stretch;
-			justify-content: space-between;
-
-			.item {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-
-				.img_view {
-					width: 60px;
-					height: 60px;
-					border-radius: 30px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-
-					.image {
-						width: 50px;
-						height: 50px;
-					}
-				}
-
-				.txt {
-					margin-top: 5px;
-					font-size: 14px;
-					color: rgba(51, 51, 51, 1);
-				}
-			}
-		}
-
-		.s_menu {
-			display: flex;
-			flex-direction: row;
-			align-items: stretch;
-			justify-content: space-between;
-			margin-top: 15px;
-			margin-left: 10px;
-			margin-right: 10px;
-			padding-left: 10px;
-			padding-right: 10px;
-
-			.item {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-
-				.image {
-					width: 35px;
-					height: 35px;
-				}
-
-				.txt {
-					margin-top: 5px;
-					font-size: 14px;
-					color: rgba(51, 51, 51, 1);
-				}
-			}
-		}
-
-		.ad {
-			width: 100%;
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			justify-content: center;
-
-			.bg {
-				position: absolute;
-				width: 120px;
-				height: 105px;
-				left: 0;
-			}
-
-			.ad_btn {
-				width: 100%;
-				height: 63px;
-				margin: 30px;
-				background: linear-gradient(0deg, rgba(253, 155, 28, 1), rgba(251, 197, 33, 1));
-				border-radius: 67px;
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				justify-content: center;
-
-				.title {
-					font-size: realSize(38px);
-					font-family: PingFang-SC-Heavy;
-					font-weight: 800;
-					color: rgba(255, 255, 255, 1);
-				}
-
-				.sub_title {
-					background: linear-gradient(0deg, rgba(255, 128, 37, 1), rgba(255, 153, 32, 1));
-					box-shadow: 0px 4px 5px 0px rgba(92, 53, 48, 0.3), 0px 1px 0px 0px rgba(228, 228, 228, 1);
-					border-radius: realSize(24px);
-					font-size: realSize(24px);
-					font-family: PingFang-SC-Heavy;
-					font-weight: 800;
-					font-style: italic;
-					color: rgba(255, 236, 177, 1);
-					line-height: realSize(26px);
-				}
-			}
-		}
+	.ph-banner-item {
+		border-radius: 10px;
 	}
 
-	.slider {
-		white-space: nowrap;
+	.phm-item {
 		width: 100%;
-		background-color: white;
+		height: 100%;
+		margin: 0 auto;
+	}
 
-		.item {
-			display: inline-block;
-			margin-left: 15px;
-			margin-top: 13px;
-			margin-bottom: 13px;
-			width: 60%;
-			height: 125px;
-			border-radius: 10px;
+	.phm-item-image {
+		width: 56px;
+		height: 56px;
+		margin: 0 auto;
+		position: relative;
+	}
 
-			.item_content {
-				display: flex;
-				flex-direction: row;
+	.phm-item-txt {
+		width: 56px;
+		height: 56px;
+		margin: 0 auto;
+		position: relative;
+		display: block;
+	}
 
-				.title {
-					width: 36%;
-					margin: 20px;
-					display: flex;
-					flex-direction: column;
-					
-					.first {
-						font-size: 16px;
-						color:rgba(46,65,69,1);
-					}
-					.main {
-						font-size: 13px;
-						color:rgba(79,103,101,1);
-						margin-top: 5px;
-					}
-					.sub {
-						width: 60px;
-						font-size: 10px;
-						margin-top: 20px;
-						background:rgba(255,255,255,0.4);
-						border-radius:5px;
-						display: flex;
-						align-items: center;
-						justify-content: center;
-					}
-				}
+	.phm-zx-item {
+		height: 50px;
+		margin-top: 10px;
+	}
 
-				.image {
-					margin-top: 35px;
-					width: 80px;
-					height: 80px;
-				}
+	.phm-zx-content {
+		position: absolute;
+		left: 15px;
+		right: 15px;
+	}
 
-				.free {
-					background: rgba(11, 147, 252, 1);
-					border-radius: 0px 0px 22px 22px;
-					width: 25px;
-					height: 50px;
-					display: flex;
-					align-items: center;
-					justify-content: center;
-					color: #FFFFFF;
-					font-size: 14px;
-				}
-			}
-		}
+	.phm-zx-view {
+		margin-left: 50rpx;
 	}
 </style>

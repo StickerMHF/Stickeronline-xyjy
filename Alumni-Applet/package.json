@@ -4,14 +4,19 @@
   "description": "<p style=\"text-align: center;\"><img src=\"https://image.weilanwl.com/uni/UniAppReadme.jpg\" alt=\"ColorUI简介\"></img></p>",
   "main": "main.js",
   "dependencies": {
+    "fibers": "^5.0.0",
+    "mockjs": "^1.1.0",
     "prettier": "^1.12.1",
+    "query-string": "^6.13.6",
     "sass": "^1.27.0",
     "scss": "^0.2.4",
-    "uview-ui": "^1.7.6"
+    "uview-ui": "^1.7.6",
+    "webpack": "^5.0.0"
   },
   "devDependencies": {
     "node-sass": "^4.14.1",
-    "sass-loader": "^10.0.3"
+    "sass-loader": "^10.0.3",
+    "sass-resources-loader": "^2.1.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

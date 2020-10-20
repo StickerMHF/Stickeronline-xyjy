@@ -1,0 +1,244 @@
+<template>
+	<view style="overflow-x: hidden;">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
+			<block slot="backText">返回</block>
+			<block slot="content">
+				<ul class="discover-ul">
+					<li class="discover-li discover-li-cur" @click="selectHandler('1')"><span>关注</span>
+						<text v-if="currentSelect=='1'" class="lg text-gray " :class="isSelect?'cuIcon-triangleupfill':'cuIcon-triangledownfill'"></text>
+						<text v-if="currentSelect=='2'" class="lg text-gray cuIcon-title" style="color: #f85c0e;"></text>
+					</li>
+					<li class="discover-li" @tap="selectHandler('2')"><span>推荐</span></li>
+				</ul>
+			</block>
+		</cu-custom>
+		<view class="discover-group " v-if="isSelect">
+			<ul>
+				<li>sss</li>
+				<li>sss</li>
+				<li>sss</li>
+				<li>sss</li>
+			</ul>
+		</view>
+		<view class="discover-content">
+			<moments :list="momentsList"></moments>
+		</view>
+
+		<view class="qiun-charts">
+			<!--#ifdef MP-ALIPAY -->
+			<canvas canvas-id="canvasMap" id="canvasMap" class="charts" :width="cWidth*pixelRatio" :height="cHeight*pixelRatio"
+			 :style="{'width':cWidth+'px','height':cHeight+'px'}" @touchstart="touchMap"></canvas>
+			<!--#endif-->
+			<!--#ifndef MP-ALIPAY -->
+			<canvas canvas-id="canvasMap" id="canvasMap" class="charts" @touchstart="touchMap"></canvas>
+			<!--#endif-->
+		</view>
+
+	</view>
+</template>
+
+<script>
+	import uCharts from '@/components/u-charts/u-charts.js';
+	import moments from '@/components/moments/moments.vue';
+	import {getUserInfo1} from '@/api/user.js'
+	var _self='';
+	export default {
+		data() {
+			return {
+				cWidth: '',
+				cHeight: '',
+				pixelRatio:1,
+				canvaMap:null,
+				currentfromSelect: '1',
+				currentSelect: '1',
+				isSelect: false,
+				momentsList: [{
+					username: "凯尔",
+					publishDate: "2019年12月3日",
+					photo: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg",
+					content: "折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！",
+					images: [{
+						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
+					}, {
+						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
+					}, {
+						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
+					}, {
+						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
+					}, {
+						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
+					}, {
+						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
+					}, {
+						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
+					}, {
+						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
+					}, {
+						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
+					}],
+					viewCount:20,
+					likeCount:10,
+					commentCount:5,
+					commentList:[{
+						url:"https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png",
+						name:"莫甘娜",
+						content:"凯尔，你被自己的光芒变的盲目。",
+						userId:"1",
+						commentTime:"2018年12月4日",
+						replyList:[{
+							name:"凯尔",
+							content:"妹妹，你在帮他们给黑暗找借口吗?",
+							userId:"",
+							replyTime:""
+						}]
+					},{
+						url:"https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg",
+						name:"凯尔",
+						content:"妹妹，如果不是为了飞翔，我们要这翅膀有什么用?",
+						userId:"2",
+						commentTime:"2018年12月4日",
+						replyList:[]
+					}]
+				}]
+			}
+		},
+		onLoad() {
+			_self = this;
+			//#ifdef MP-ALIPAY
+			uni.getSystemInfo({
+				success: function(res) {
+					if (res.pixelRatio > 1) {
+						//正常这里给2就行，如果pixelRatio=3性能会降低一点
+						//_self.pixelRatio =res.pixelRatio;
+						_self.pixelRatio = 2;
+					}
+				}
+			});
+			//#endif
+			this.cWidth = uni.upx2px(750);
+			this.cHeight = uni.upx2px(750);
+			// this.getServerData();
+			getUserInfo1().then(data=>{
+				var [error, res]  = data;
+			})
+			
+		},
+		methods: {
+			selectHandler(value) {
+				this.currentSelect = value;
+				if (this.currentSelect == '1') {
+					if (this.currentSelect == this.currentfromSelect) {
+						this.isSelect = !this.isSelect;
+					}
+					this.currentfromSelect = value;
+				}
+				if (this.currentSelect == '2') {
+					this.isSelect = false;
+					this.currentfromSelect = value;
+				}
+			},
+			getServerData() {
+				uni.request({
+					url: 'https://www.ucharts.cn/map.json',
+					// url: 'http://db.mapwaycloud.com:10082/rest/v1/newdip/platform/dm/commondatas/provinces/preview?isgeom=true&f=geojson&outSr=4326&returnGeometry=true&uid=c881f5ef5de54f689b4bd0bb66af09ac',
+					data: {},
+					success: function(res) {
+						console.log(res.data.features)
+						let cMap = {
+							series: []
+						};
+						//这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
+						cMap.series = res.data.features;
+						// cMap.series.forEach(item=>{
+						// 	item.color="#1890ff";
+						// })
+						_self.showMap("canvasMap", cMap);
+					},
+					fail: () => {
+						_self.tips = "网络错误，小程序端请检查合法域名";
+					},
+				});
+			},
+			showMap(canvasId, chartData) {
+				this.canvaMap = new uCharts({
+					$this: _self,
+					canvasId: canvasId,
+					type: 'map',
+					fontSize: 11,
+					padding: [0, 0, 0, 0],
+					legend: {
+						show: false
+					},
+					background: '#FFFFFF',
+					pixelRatio: _self.pixelRatio,
+					series: chartData.series,
+					dataLabel: true,
+					width: _self.cWidth * _self.pixelRatio,
+					height: _self.cHeight * _self.pixelRatio,
+					extra: {
+						map: {
+							border: true,
+							borderWidth: 0.1,
+							borderColor: '#666666',
+							fillOpacity: 0.6
+						}
+					}
+				});
+			},
+			touchMap(e) {
+				this.canvaMap.showToolTip(e, {
+					format: function(item) {
+						console.log(item);
+						return item
+					}
+				});
+			}
+		}
+	}
+</script>
+
+<style>
+	.qiun-charts {
+		width: 750upx;
+		height: 750upx;
+		background-color: #FFFFFF;
+	}
+	
+	.charts {
+		width: 750upx;
+		height: 750upx;
+		background-color: #FFFFFF;
+	}
+	.discover-ul {
+		white-space: nowrap;
+		list-style: none;
+	}
+
+	.discover-li {
+		display: inline-block;
+		margin: 0 .75rem;
+	}
+
+	.discover-li span {
+		border-bottom: 2px solid #ff5b3600;
+		margin: 0px -5px;
+		line-height: 30px;
+	}
+
+	.discover-li-cur span {
+		border-bottom: 2px solid #ff5b36;
+	}
+
+	.discover-li-cur text {
+		padding-left: 10px;
+
+	}
+
+	.discover-group {
+		position: absolute;
+		width: 100%;
+		z-index: 1;
+		background: white;
+
+	}
+</style>

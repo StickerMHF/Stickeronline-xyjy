@@ -168,10 +168,7 @@
 				<view class="title">头像</view>
 				<view class="cu-avatar radius bg-gray"></view>
 			</view>
-			<!-- !!!!! placeholder 在ios表现有偏移 建议使用 第一种样式 -->
-			<view class="cu-form-group margin-top">
-				<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaAInput" placeholder="多行文本输入框"></textarea>
-			</view>
+			
 			<view class="cu-form-group align-start">
 				<view class="title">文本框</view>
 				<textarea maxlength="-1" :disabled="modalName!=null" @input="textareaBInput" placeholder="多行文本输入框"></textarea>

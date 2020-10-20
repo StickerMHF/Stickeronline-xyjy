@@ -1,10 +1,48 @@
 {
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		
+		{
+		    "path" : "pages/discover/discover",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},{
+		    "path" : "pages/alumnus/details",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
 		{
 			"path": "pages/home/home",
 			"style": {}
 		},
+		{
+			"path": "pages/home/home1",
+			"style": {}
+		},
+		{
+			"path": "pages/alumnus/alumnus",
+			"style": {
+				
+			}
+
+		},
+		{
+			"path": "pages/personal/personal",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+
+		},
+		
 		{
 			"path": "pages/index/index",
 			"style": {}
@@ -105,7 +143,114 @@
 			"path": "pages/plugin/verticalnav",
 			"style": {}
 		}
-	],
+        
+        ,{
+            "path" : "pages/home/map/map",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/news/news",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/newsDetail/newsDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        } ,{
+            "path" : "pages/schoolHistory/schoolHistory",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
+            "path" : "pages/teachers/teachers",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+       
+        ,{
+            "path" : "pages/donations/donations",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/cooperation/cooperation",
+            "style" : {
+                "enablePullDownRefresh": true,
+                "navigationBarTitleText": "垂直排列，无略缩图，主标题+副标题显示"
+            }
+            
+        }
+        ,{
+            "path" : "pages/cooperation/add",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/alumnus/news",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/alumnus/member",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/alumnus/photo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/alumnus/activity",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"mp-alipay": {
 			/* 支付宝小程序特有相关 */
@@ -118,46 +263,47 @@
 		"navigationBarTextStyle": "white"
 	},
 	"usingComponts": true,
-		"condition": { //模式配置，仅开发期间生效
+	"condition": { //模式配置，仅开发期间生效
 		"current": 0, //当前激活的模式(list 的索引项)
 		"list": [{
-				"name": "表单", //模式名称
-				"path": "pages/component/form", //启动页面
-				"query": "" //启动参数
-			}
-		]
+			"name": "表单", //模式名称
+			"path": "pages/component/form", //启动页面
+			"query": "" //启动参数
+		}]
 	},
 	"tabBar": {
-	    "color": "#7A7E83",
-	    "selectedColor": "#3cc51f",
-	    "borderStyle": "black",
-	    "backgroundColor": "#ffffff",
-	    "list": [{
-	        "pagePath": "pages/home/home",
-	        "iconPath": "static/tabbar/about.png",
-	        "selectedIconPath": "static/tabbar/about.png",
-	        "text": "首页"
-	    }, {
-	        "pagePath": "pages/component/nav",
-	        "iconPath": "static/tabbar/about.png",
-	        "selectedIconPath": "static/tabbar/about.png",
-	        "text": "校友"
-	    }, {
-	        "pagePath": "pages/index/index",
-	        "iconPath": "static/tabbar/add.png",
-	        "selectedIconPath": "static/tabbar/add_cur.png",
-	        "text": ""
-	    }, {
-	        "pagePath": "pages/component/nav",
-	        "iconPath": "static/tabbar/about.png",
-	        "selectedIconPath": "static/tabbar/about.png",
-	        "text": "发现"
-	    }, {
-	        "pagePath": "pages/component/nav",
-	        "iconPath": "static/tabbar/about.png",
-	        "selectedIconPath": "static/tabbar/about.png",
-	        "text": "我"
-	    }]
+		"color": "#7A7E83",
+		"selectedColor": "#3cc51f",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"iconWidth":"12px",
+		"spacing":"5px",
+		"list": [{
+			"pagePath": "pages/home/home",
+			"iconPath": "static/nav/sy2x.png",
+			"selectedIconPath": "static/nav/sy_cur2x.png",
+			"text": "首页"
+		}, {
+			"pagePath": "pages/alumnus/alumnus",
+			"iconPath": "static/nav/zz2x.png",
+			"selectedIconPath": "static/nav/zz_cur2x.png",
+			"text": "组织"
+		}, {
+			"pagePath": "pages/discover/discover",
+			"iconPath": "static/nav/fx2x.png",
+			"selectedIconPath": "static/nav/fx_cur2x.png",
+			"text": "发现"
+		}, {
+			"pagePath": "pages/index/index",
+			"iconPath": "static/nav/ys2x.png",
+			"selectedIconPath": "static/nav/ys_cur2x.png",
+			"text": "院史"
+		}, {
+			"pagePath": "pages/personal/personal",//pages/personal/personal
+			"iconPath": "static/nav/wd2x.png",
+			"selectedIconPath": "static/nav/wd_cur2x.png",
+			"text": "我"
+		}]
 	}
 
 }
