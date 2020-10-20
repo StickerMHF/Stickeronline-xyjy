@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://121.36.87.178:3306/tb_ksgjpt?useUnicode=true&characterEncoding=utf-8&useSSL=false&nullCatalogMeansCurrent=true
+    username: root
+    password: tb-mysql123456
+    hikari:
+      minimum-idle: 5
+      idle-timeout: 600000
+      maximum-pool-size: 10
+      auto-commit: true
+      pool-name: MyHikariCp
+      max-lifetime: 60000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  jpa:
+    database: mysql
+    show-sql: true
+  redis:
+    database: 0
+    host: 192.168.0.4
+    lettuce.pool.max-active: 8
+    lettuce.pool.max-idle: 8
+    lettuce.pool.max-wait: -1ms
+    lettuce.pool.min-idle: 0
+    lettuce.shutdown-timeout: 5000ms
+    password: 123456
+    port: 6379
+
+#webApi扫描包路径
+web-api-packages: com.xby.lcdata.sso.handler
+#异步服务扫描包路径
+async-service-impl-packages: com.xby.lcdata.sso.service.impl
+#Http服务器端口号
+http-server-port: 8089
+#工作线程池大小
+worker-pool-size: 40
+#异步服务实例数，建议与CPU核数相同
+async-service-instances: 2

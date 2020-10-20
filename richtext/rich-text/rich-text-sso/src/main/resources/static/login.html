@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SSO</title>
+</head>
+
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        background: url('http://www.imapway.cn:8082/static/media/background.e8c8e329.jpg') no-repeat;
+
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    input::-webkit-input-placeholder { /* WebKit browsers */
+        color: #ccc;
+        font-size: 18px;
+
+    }
+
+    input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+
+        color: #ccc;
+        font-size: 18px;
+
+    }
+
+    input::-moz-placeholder { /* Mozilla Firefox 19+ */
+
+        color: #ccc;
+        font-size: 18px;
+
+    }
+
+    input:-ms-input-placeholder { /* Internet Explorer 10+ */
+
+        color: #ccc;
+        font-size: 18px;
+
+    }
+
+    .cont {
+
+    }
+
+    .login-cont {
+        height: 540px;
+        width: 980px;
+        border-radius: 8px;
+        font-family: Microsoft YaHei;
+        background: #fff;
+        position: relative;
+
+
+    }
+
+    .login-cont .left {
+        background: url('http://www.imapway.cn:8082/static/media/main.1b066a1c.png') no-repeat;
+        width: 340px;
+        height: 100%;
+        position: absolute;
+        text-align: center;
+
+    }
+
+    .login-cont .right {
+        width: 640px;
+        position: absolute;
+        right: 0;
+
+    }
+
+    .login-cont h1 {
+        margin-top: 40%;
+    }
+
+    .btn {
+        width: 194px;
+        height: 49px;
+        border: 1px solid #fff;
+        border-radius: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-size: 18px;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+
+    .left .title {
+        text-align: center;
+        font-weight: 700;
+        font-size: 38px;
+        color: #fff;
+        margin-top: 130px;
+    }
+
+    .left_login {
+        display: none;
+    }
+
+    .main_right_regist {
+        display: none;
+    }
+
+    .left p {
+        text-align: center;
+        margin-top: 45px;
+        font-size: 18px;
+        margin-bottom: 85px;
+        color: #fff;
+    }
+
+    .right-header {
+        margin-top: 37px;
+        text-align: center;
+        margin-bottom: 59px;
+    }
+
+    .right-main {
+        text-align: center;
+        margin: 0 auto 38px;
+        width: 420px;
+    }
+
+    .right-main .right-main-item input, .phoneBtn {
+        border: none;
+        border-radius: 5px;
+        width: 430px;
+        height: 55px;
+        background: #f5f5f5;
+        margin-top: 18px;
+        padding-left: 50px;
+    }
+
+    .right-main .right-main-item {
+        position: relative;
+    }
+
+    .right-main .right-main-item img:first-child, .phoneImg {
+        position: absolute;
+        bottom: 23px;
+        left: 23px;
+
+        transform: scale(1.2);
+    }
+
+    .loginBtn, .registerBtn {
+        cursor: pointer;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        width: 194px;
+        height: 49px;
+        background: #2ab2e7;
+        border-radius: 30px;
+        color: #fff;
+        margin-top: 20px;
+        transition: background .6s;
+        border: 1px solid #fff;
+        cursor: pointer;
+        outline: none;
+    }
+
+</style>
+<body>
+<div class="login-cont">
+    <div class="left" id="mask">
+        <div class="  left_regist">
+            <div class="title">你好，欢迎您！</div>
+            <p>还没有账号，去注册</p>
+            <div class="regist-btn btn">注册</div>
+        </div>
+        <div class=" left_login">
+            <div class="title">欢迎回来</div>
+            <p>已有账号，去登陆</p>
+            <div class="login-btn btn">登录</div>
+        </div>
+    </div>
+    <div class="right">
+        <div class="right-header">
+            <img src="data:image/png;base64,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">
+        </div>
+        <div class="right-main  main_right_login">
+            <form class="form">
+                <div class="right-main-item">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAWCAYAAADwza0nAAAA0klEQVQ4je3UMUpDQRDG8d9b9yFJI+gJbKwESWcliHsAr+A5JGdJZW3v2yNYBJLWNlXQSomiaJGVPEF5MXU+GBiW+c/OFN9UTdPc4gwf1lPAOOIce/hE1QF915xG3OMGL6VbF1jjMmKSUhqtOSbIOR8E7PwHKopB916/qera6U9twS24Ofi+AfcWcZRzvsCTlVMi+iV/LcHSjxGDiBPcYWHllAVGlua+wn4LrPEYShLKD70Sc1ynlIaYtN77pb6OmOLYz2O1i2HO+RmHmLWmCXj4AjRYKuKJEForAAAAAElFTkSuQmCC"
+                         alt="">
+                    <input type="text" value="" name="username" id="user-id" placeholder="账号">
+                </div>
+                <div class="right-main-item">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAPCAYAAADUFP50AAABPklEQVQokY3SMUjVURTH8c//zxPBChoaRFsCR4MaI6Ll4JqWjkVDQ+DQUBC1CYLgXCLuSgguikv/W9EQBEFbNLe8RYg3ifGKf8P7P7g+H/h+y72c8/vee885t6jr2qBSStexhYt4FhEfBz1FH0wpXcAtLOAxJjLfLnbwLSLaUFRVtYx7mMG1M9efVgc/cdjCK0yfA/R1uXnVbInuiBD8a9Y/JcoRgGMs4mk/UKJo9n/xfQj0G3NIeNTEujnYwR08yaBfejW18bXJQ7fVAFdxBdt4gDE8xBImcYCp7MCjEh+ywDz2I2IzIm5jFp8HIPhUVFU109R2KUsc4AtWMD4AneBmUde1lNIy3gxpzDCtRcTrEiLiLdZHgN5jlWyGEfESz/VmNkzvcD8ijsk+eV8ppRt4gbt63f2BjYjYy33/AQ3PUoqWrJcAAAAAAElFTkSuQmCC"
+                         alt="">
+                    <input type="password" value="" name="password" id="password" placeholder="密码">
+                </div>
+                <!-- <div class="right-main-item"> -->
+                <!-- <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAPCAYAAADUFP50AAABHUlEQVQokZXSPUtcQRjF8d9eFyMWChaCBCwEwS5f4sEishY2oo2NooWVnY3lFoEgKa3SpfMNJM2Obcp0fgDZXhQRYha9Fnsjm8us4KmGc+Y/nHl4GmVZGlRKaRW7+IQSv/EtIs4G7zX+gSmlAkfYxAkuUWARLRxGxF4O3EcbERGXtRbLOMdORBy9gimlGXRxEBFtGaWUvmILsxFxW1T+QvWfHzmo0neMYw6aldnFEnoppekh4B0+4xYanU7nCzbwhDE0hoAl/mAUx01sY+KNijmtFfg7JPyJUzxnsseiqlDXNVoRsYKr3KtFzsTDwPn+PaAhTf4Dc1OcxHi1hlM5sKk/3ro+4hd6+stR14em/kasY6QWzldtbmr+My5eAADkUnZ2giB1AAAAAElFTkSuQmCC" alt=""> -->
+                <!-- 	<input type="button" value="登录" id="login">
+                    <img src="" alt="">
+                </div> -->
+                <input type="button" value="登录" id="login" class="loginBtn">
+            </form>
+        </div>
+        <div class="right-main main_right_regist">
+            <form class="form2">
+                <div style="position: relative;">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAWCAYAAADwza0nAAAA0klEQVQ4je3UMUpDQRDG8d9b9yFJI+gJbKwESWcliHsAr+A5JGdJZW3v2yNYBJLWNlXQSomiaJGVPEF5MXU+GBiW+c/OFN9UTdPc4gwf1lPAOOIce/hE1QF915xG3OMGL6VbF1jjMmKSUhqtOSbIOR8E7PwHKopB916/qera6U9twS24Ofi+AfcWcZRzvsCTlVMi+iV/LcHSjxGDiBPcYWHllAVGlua+wn4LrPEYShLKD70Sc1ynlIaYtN77pb6OmOLYz2O1i2HO+RmHmLWmCXj4AjRYKuKJEForAAAAAElFTkSuQmCC"
+                         alt="" class="phoneImg">
+                    <input type="text" value="" name="phone" id="user-id" placeholder="手机号" class="phoneBtn">
+                </div>
+                <input type="button" value="注册" id="login" class="registerBtn">
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script>
+    let baseUrl = "http://192.168.0.4:8035/stickeronline/sso";
+    $(function () {
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null)
+                return unescape(r[2]);
+            return null; //返回参数值
+        }
+
+        let redirect = getUrlParam('redirect');
+        let invalid = getUrlParam('invalid');
+        if ($.cookie("token") != null && invalid === null) {
+            $.ajax({
+                url: baseUrl + "/verifyToken?token=" + $.cookie("token"),
+                type: "get",
+                headers: {
+                    "X-Access-Token": $.cookie("token")
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.result.data == true) {
+                        location.href = redirect + "?token=" + $.cookie("token");
+                    }
+                    if (data.result.data == false) {
+                        $.cookie("token", null);
+                    }
+                },
+                error: function () {
+                }
+            });
+        } else {
+            $.cookie("token", null);
+        }
+
+        $("#login").click(function () {
+            $.ajax({
+                url: baseUrl + "/login",
+                type: "post",
+                data: {
+                    username: $("#user-id").val().trim(),
+                    password: $("#password").val().trim()
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data.success == true) {
+                        let date = new Date();
+                        date.setTime(date.getTime() + 120 * 60 * 1000);
+                        $.cookie("token", data.result.token, {expires: date});
+                        // alert("登录成功!");
+                        location.href = redirect + "?token=" + data.result.token;
+                    } else {
+                        alert("登录失败");
+                    }
+                },
+                error: function () {
+                    alert("登录失败!请检查账户密码是否输入正确!");
+                }
+            });
+        });
+
+        var mask = document.getElementById("mask");
+        $('.regist-btn').click(function () {
+            $('.left').css({
+                "-webkit-transform": "translate(640px,0)",
+                "border-radius": "0px   10px   10px  0px",
+                "transition": "transform 1.5s",
+                "z-index": "2",
+
+            })
+            $(".left_regist").hide('fast')
+            $(".left_login").delay(1000).show('slow')
+
+            $(".main_right_regist").delay(1000).show('slow')
+            $(".main_right_login").hide('fast')
+
+            $('.right').css({
+                "-webkit-transform": "translate(-340px,0)",
+                "transition": "transform 1.5s",
+            })
+        })
+        $('.login-btn').click(function () {
+            $('.left').css({
+                "-webkit-transform": "translate(0px,0)",
+                "border-radius": "10px 0px 0px 10px",
+                "transition": "transform 1.5s",
+                "z-index": "2",
+
+            })
+            $(".left_regist").delay(1000).show('slow')
+            $(".left_login").hide('fast')
+
+            $(".main_right_login").delay(1000).show('slow')
+            $(".main_right_regist").hide('fast')
+
+
+            $('.right').css({
+                "-webkit-transform": "translate(0px,0)",
+                "transition": "transform 1.5s",
+            })
+        })
+    });
+</script>
+</body>
+
+</html>

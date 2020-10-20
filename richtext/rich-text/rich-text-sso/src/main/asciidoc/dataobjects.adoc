@@ -1,0 +1,99 @@
+= Cheatsheets
+
+[[SysLoginLog]]
+== SysLoginLog
+
+++++
+++++
+'''
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[id]]`@id`|`String`|-
+|[[ip]]`@ip`|`String`|-
+|[[loginResult]]`@loginResult`|`String`|-
+|[[loginTime]]`@loginTime`|`String`|-
+|[[username]]`@username`|`String`|-
+|===
+
+[[SysRoles]]
+== SysRoles
+
+++++
+++++
+'''
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[description]]`@description`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[roleCode]]`@roleCode`|`String`|-
+|[[roleName]]`@roleName`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[SysUser]]
+== SysUser
+
+++++
+++++
+'''
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[activitiSync]]`@activitiSync`|`String`|-
+|[[avatar]]`@avatar`|`String`|-
+|[[birthday]]`@birthday`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[createTime]]`@createTime`|`String`|-
+|[[delFlag]]`@delFlag`|`Number (Integer)`|-
+|[[email]]`@email`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[orgCode]]`@orgCode`|`String`|-
+|[[password]]`@password`|`String`|-
+|[[phone]]`@phone`|`String`|-
+|[[realname]]`@realname`|`String`|-
+|[[salt]]`@salt`|`String`|-
+|[[sex]]`@sex`|`Number (Integer)`|-
+|[[status]]`@status`|`Number (Integer)`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[updateTime]]`@updateTime`|`String`|-
+|[[username]]`@username`|`String`|-
+|===
+
+[[SysUsersRoles]]
+== SysUsersRoles
+
+++++
+++++
+'''
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[id]]`@id`|`String`|-
+|[[roleId]]`@roleId`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|===
+
+[[WWechatUser]]
+== WWechatUser
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[id]]`@id`|`String`|-
+|[[openId]]`@openId`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|===
+
