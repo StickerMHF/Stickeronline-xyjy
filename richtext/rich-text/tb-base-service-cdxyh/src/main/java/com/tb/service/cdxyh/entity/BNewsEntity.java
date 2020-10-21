@@ -47,6 +47,12 @@ public class BNewsEntity extends BaseEntity {
      */
     @Column(name = "contents")
     private String contents;
+    /**
+     * 新闻缩略图
+     */
+    @Column(name = "thumb")
+    private String thumb;
+
 
     public String getId() {
         return id;
@@ -70,5 +76,13 @@ public class BNewsEntity extends BaseEntity {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
 }

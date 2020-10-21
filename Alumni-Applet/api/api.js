@@ -1,10 +1,10 @@
-const baseurl='http://192.168.0.118:8084';
+const baseurl='http://localhost:8084/stickeronline'
 const api = {
 	test:baseurl+'/rich/text/list',
 	/**
 	 * 新闻接口
 	 */
-    getNewsList: baseurl+'/sys/login',
+    getNewsList: baseurl+'/news/list',
 	getNewsById: baseurl+'/sys/login',
     addNews: baseurl+'/sys/logout',
     updateNews: baseurl+'/auth/forge-password',
@@ -21,6 +21,6 @@ const api = {
 	/**
 	 * 组织
 	 */
-	getAlumnusList: baseurl+'/stickeronline/organization/list',
+	getAlumnusList: baseurl+'/organization/list',
 }
 export default api
