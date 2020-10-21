@@ -7,6 +7,7 @@
         <module>rich-text-main</module>
         <module>rich-text-sso</module>
         <module>rich-text-system</module>
+        <module>tb-base-service-cdxyh</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
