@@ -3,6 +3,7 @@
 		<cu-custom bgColor="bg-gradual-green1" :isBack="false">
 			<block slot="content">首页</block>
 		</cu-custom>
+		
 		<!-- banner -->
 		<view class="ph-menu">
 			<swiper class="ph-banner screen-swiper square-dot" :indicator-dots="true" :circular="true" :autoplay="true" interval="5000"
@@ -19,7 +20,7 @@
 				<view class="grid col-4 grid-square">
 
 					<view @click="menuClickHandler(item.id)" class="bg-img" v-for="(item,index) in menus" :style="[{ backgroundImage:'url(' + menus[index] + ')' }]">
-						<navigator :url="item.page+'?title='+item.txt" >
+						<navigator :url="item.page+'?title='+item.txt">
 							<view class="phm-item">
 								<view class="img_view phm-item-image">
 									<image :src="item.icon" class="image"></image>
@@ -32,7 +33,7 @@
 				</view>
 			</view>
 		</view>
-
+		
 		<view class="ph-menu">
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
@@ -40,7 +41,11 @@
 				</view>
 			</view>
 			<view>
-				sss
+				<navigator url="/pages/index/index">
+					<view class="test">
+						test
+					</view>
+				</navigator>
 			</view>
 		</view>
 
@@ -51,7 +56,7 @@
 					{{item.name}}
 				</view>
 			</scroll-view>
-			<view  class="phm-card cu-card case no-card" v-for="(item,index) in newsList">
+			<view class="phm-card cu-card case no-card" v-for="(item,index) in newsList">
 				<view class="cu-item shadow">
 					<view class="image">
 						<image :src="item.image" mode="widthFix"></image>
@@ -132,7 +137,7 @@
 						page: '/pages/home/news/news'
 					},
 					{
-						id:'xyjz',
+						id: 'xyjz',
 						icon: '/static/home/xyjz2x.png',
 						txt: '校友捐赠',
 						page: '/pages/donations/donations1'
@@ -169,16 +174,16 @@
 			tabSelect(e) {
 				this.tabCur = e.currentTarget.dataset.id;
 			},
-			menuClickHandler(value){
-				if(value&&value=='xyjz'){
+			menuClickHandler(value) {
+				if (value && value == 'xyjz') {
 					uni.navigateToMiniProgram({
-					  appId: 'wx57ef5751ef32a454',
-					  success(res) {
-					    // 打开成功
-					  }
+						appId: 'wx57ef5751ef32a454',
+						success(res) {
+							// 打开成功
+						}
 					})
 				}
-				
+
 			}
 		}
 	}

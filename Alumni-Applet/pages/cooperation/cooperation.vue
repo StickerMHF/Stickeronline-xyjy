@@ -10,7 +10,7 @@
 		<!-- 基于 uni-list 的页面布局 -->
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-titles text-green1"></text> 校友分布
+				<text class="cuIcon-titles text-green1"></text> 校友合作
 				<navigator url="/pages/cooperation/add" open-type="redirect">
 				<span class="cooperation-pub">
 					<text class="lg text-gray cuIcon-roundadd" ></text>

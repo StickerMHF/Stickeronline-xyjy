@@ -1,9 +1,9 @@
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://121.36.87.178:3306/tb_ksgjpt?useUnicode=true&characterEncoding=utf-8&useSSL=false&nullCatalogMeansCurrent=true
-    username: root
-    password: tb-mysql123456
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://124.70.47.134:5432/rich_text?stringtype=unspecified
+    username: postgres
+    password: postgres
     hikari:
       minimum-idle: 5
       idle-timeout: 600000
