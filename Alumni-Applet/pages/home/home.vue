@@ -40,7 +40,7 @@
 				</view>
 			</view>
 			<view>
-				sss
+				<e-map></e-map>
 			</view>
 		</view>
 
@@ -77,9 +77,10 @@
 </template>
 
 <script>
+	import eMap from "../component/map/index"
 	export default {
 		components: {
-
+			eMap
 		},
 		data() {
 			return {
