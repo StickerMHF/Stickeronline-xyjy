@@ -11,6 +11,7 @@
 |[[contents]]`@contents`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
 |[[id]]`@id`|`String`|-
+|[[thumb]]`@thumb`|`String`|-
 |[[title]]`@title`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |===

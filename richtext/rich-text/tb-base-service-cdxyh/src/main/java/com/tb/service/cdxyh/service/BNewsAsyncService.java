@@ -49,4 +49,11 @@ public interface BNewsAsyncService {
      * @param handler
      */
     void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+    /**
+     * 根据ID查询新闻详情
+     *
+     * @param params
+     * @param handler
+     */
+    void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 }
