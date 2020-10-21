@@ -20,7 +20,18 @@ export default {
       ec: {
         option: { // 进行相关配置
           backgroundColor: "#ffffff",
-          tooltip: {}, // 鼠标移到图里面的浮动提示框
+          tooltip: {
+			  trigger: "item",
+			  formatter: p =>{
+				  let val = p.value;
+				  if (window.isNaN(val)) {
+					  val = 0;
+				  }
+				  let txtCon =
+					  "<div style='text-align:center'>" + p.name + ":<br />台量：" + val.toFixed(2) + '</div>';
+				  return txtCon;
+			  }
+		  }, // 鼠标移到图里面的浮动提示框
           dataRange: {
             show: false,
             min: 0,
@@ -39,7 +50,14 @@ export default {
                 textStyle: {
                   color: 'rgba(0,0,0,0.4)'
                 }
-              }
+              },
+			  emphasis: {
+				  //对应的鼠标悬浮效果
+				  show: true,
+				  textStyle: {
+					  color: "#000"
+				  }
+			  }
             },
             itemStyle: {
               normal: {
@@ -55,12 +73,13 @@ export default {
               }
             }
           },
-          series: [{
+          series: [
+			 {
               type: 'scatter',
               coordinateSystem: 'geo' // 对应上方配置
             },
             {
-              name: '启动次数', // 浮动框的标题
+              name: '数量', // 浮动框的标题
               type: 'map',
               geoIndex: 0,
               data: [{

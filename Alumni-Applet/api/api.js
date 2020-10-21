@@ -1,4 +1,4 @@
-const baseurl='http://192.168.0.50:8084';
+const baseurl='http://192.168.0.118:8084';
 const api = {
 	test:baseurl+'/rich/text/list',
 	/**
@@ -17,5 +17,10 @@ const api = {
 	addCooperation: baseurl+'/sys/logout',
 	updateCooperation: baseurl+'/auth/forge-password',
 	deleteCooperation: baseurl+'/auth/register',
+	
+	/**
+	 * 组织
+	 */
+	getAlumnusList: baseurl+'/stickeronline/organization/list',
 }
 export default api

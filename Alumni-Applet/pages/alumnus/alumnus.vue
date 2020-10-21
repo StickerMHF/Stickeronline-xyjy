@@ -59,6 +59,7 @@
 </template>
 
 <script>
+	import {getAlumnusList} from '@/api/cooperation.js'
 	export default {
 		components: {},
 		data() {
@@ -132,6 +133,13 @@
 		onLoad(options) {
 			// 初始化页面数据
 			this.title=options.title;
+			getAlumnusList().then(data=>{
+				console.log(data)
+				var [error, res] = data;
+				if (res&&res.data&&res.data.result) {
+					this.list = res.data.result;
+				}
+			})
 		},
 		methods: {
 			tabSelect(e) {

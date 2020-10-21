@@ -10,22 +10,21 @@ import javax.persistence.*;
 @Entity
 @DataObject(generateConverter = true)
 @Table(name = "b_organization")
-public class OrganizationEntity extends BaseEntity {
-    public OrganizationEntity() {
+public class BOrganizationEntity extends BaseEntity {
+    public BOrganizationEntity() {
     }
 
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
         json = super.toJson();
-        BOrgan.toJson(this, json);
+        BOrganizationEntityConverter.toJson(this, json);
         return json;
     }
 
-    public OrganizationEntity(JsonObject jsonObject) {
+    public BOrganizationEntity(JsonObject jsonObject) {
         super(jsonObject);
-        BNewsEntityConverter.fromJson(jsonObject, this);
+        BOrganizationEntityConverter.fromJson(jsonObject, this);
     }
-
 
     /**
      * id
@@ -36,17 +35,35 @@ public class OrganizationEntity extends BaseEntity {
     @Column(name = "id",length = 32)
     private String id;
 
+    /**
+     * 组织标题
+     */
+    @Column(name = "name")
+    private String name;
 
     /**
-     * 新闻标题
+     * 组织活动
      */
-    @Column(name = "title")
-    private String title;
+    @Column(name = "activity")
+    private String activity;
+
     /**
-     * 新闻内容
+     * 组织成员数量
      */
-    @Column(name = "contents")
-    private String contents;
+    @Column(name = "member")
+    private Integer member;
+
+    /**
+     * 活跃度
+     */
+    @Column(name = "liveness")
+    private Integer liveness;
+
+    /**
+     * 会标
+     */
+    @Column(name = "thumb")
+    private String thumb;
 
     public String getId() {
         return id;
@@ -56,19 +73,43 @@ public class OrganizationEntity extends BaseEntity {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getContents() {
-        return contents;
+    public String getActivity() {
+        return activity;
     }
 
-    public void setContents(String contents) {
-        this.contents = contents;
+    public void setActivity(String activity) {
+        this.activity = activity;
+    }
+
+    public Integer getMember() {
+        return member;
+    }
+
+    public void setMember(Integer member) {
+        this.member = member;
+    }
+
+    public Integer getLiveness() {
+        return liveness;
+    }
+
+    public void setLiveness(Integer liveness) {
+        this.liveness = liveness;
+    }
+
+    public String getThumb() {
+        return thumb;
+    }
+
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
 }
