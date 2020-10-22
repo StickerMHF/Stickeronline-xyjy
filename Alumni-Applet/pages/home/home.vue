@@ -36,7 +36,7 @@
 
 		<view class="ph-menu">
 			<scroll-view scroll-x class="bg-white nav" scroll-with-animation>
-				<view class="cu-item" :class="index==tabCur?'text-green cur':''" v-for="(item,index) in tabList" :key="index" @tap="tabSelect"
+				<view  class="cu-item" :class="index==tabCur?'text-green cur':''" v-for="(item,index) in tabList" :key="index" @tap="tabSelect"
 				 :data-id="item.id">
 					{{item.name}}
 				</view>
@@ -45,7 +45,7 @@
 				<navigator :url="'/pages/home/newsDetail/newsDetail?id='+item.id">
 				<view class="cu-item shadow">
 					<view class="image">
-						<image :src="item.thumb" mode="widthFix"></image>
+						<image :src="test[0]" mode="widthFix"></image>
 						<view class="cu-bar bg-shadeBottom"> <text class="text-cut">{{item.contents}}</text></view>
 					</view>
 					<view class="cu-list ">
@@ -153,6 +153,7 @@
 					name: '推荐',
 					id: 1
 				}],
+				test:["http://cdxyh.stickeronline.cn/banner12x.png"],
 				newsList: [{
 					thumb: '/static/home/banner22x.png',
 					title: '学生工作业务能力专题培训举办',
@@ -170,24 +171,34 @@
 
 		},
 		onLoad() {
-			let param = {
-				pageNo: 1,
-				pageSize: 2
-			};
-			getNewsList(param).then(data => {
-				var [error, res] = data;
-				if (res && res.data.success) {
-					let ss = res.data.result.content;
-					this.newsList = res.data.result.content;
-				}
-			});
+			this.getNewsListData();
 		},
 		methods: {
+			getNewsListData(sort){
+				let param = {
+					pageNo: 1,
+					pageSize: 2,
+					sort:sort?sort:'createTime'
+				};
+				getNewsList(param).then(data => {
+					var [error, res] = data;
+					if (res && res.data.success) {
+						let ss = res.data.result.content;
+						this.newsList = res.data.result.content;
+					}
+				});
+			},
 			formatDate(date){
 				return dateUtil.formatDate(date);
 			},
 			tabSelect(e) {
+				debugger
 				this.tabCur = e.currentTarget.dataset.id;
+				if(this.tabCur==1){
+					this.getNewsList("viewCount");
+				}else{
+					this.getNewsList();
+				}
 			},
 			menuClickHandler(value) {
 				if (value && value == 'xyjz') {
