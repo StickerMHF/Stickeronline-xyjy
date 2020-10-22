@@ -53,6 +53,11 @@ public class BNewsEntity extends BaseEntity {
     @Column(name = "thumb")
     private String thumb;
 
+    /**
+     * 浏览量
+     */
+    @Column(name = "view_count")
+    private Integer viewCount;
 
     public String getId() {
         return id;
@@ -84,5 +89,13 @@ public class BNewsEntity extends BaseEntity {
 
     public void setThumb(String thumb) {
         this.thumb = thumb;
+    }
+
+    public Integer getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
     }
 }

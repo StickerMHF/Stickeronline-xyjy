@@ -18,22 +18,22 @@
 				<template v-slot:body>
 					<view class="uni-list-box">
 						<view class="uni-thumb">
-							<image :src="item.avatar" mode="aspectFill"></image>
+							<image :src="item.thumb" mode="aspectFill"></image>
 						</view>
 						<view class="uni-content">
-							<view class="uni-title-sub uni-ellipsis-2">{{item.excerpt}}</view>
-							<view class="uni-note">{{ item.user_name }} {{ item.last_modify_date }}</view>
+							<view class="uni-title-sub uni-ellipsis-2">{{item.contents}}</view>
+							<view class="uni-note">{{ item.createBy }} {{ formatDate(item.createTime) }}</view>
 						</view>
 					</view>
 				</template>
 				<!-- 同步footer插槽定义列表底部的显示效果 -->
-				<template v-slot:footer>
+				<!-- <template v-slot:footer>
 					<view class="uni-footer">
 						<text class="uni-footer-text">评论</text>
 						<text class="uni-footer-text">点赞</text>
 						<text class="uni-footer-text">分享</text>
 					</view>
-				</template>
+				</template> -->
 				
 			</uni-list-item>
 		</uni-list>
@@ -43,10 +43,20 @@
 </template>
 
 <script>
+	import {dateUtil} from '@/utils/dateUtil.js'
+	import {
+		getNewsList
+	} from '@/api/news.js'
 	export default {
 		data() {
 			return {
 				lists: [{
+					thumb: '/static/home/banner22x.png',
+					title: '学生工作业务能力专题培训举办',
+					contents: '我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。',
+					createTime: '2020-10-18',
+					viewCount: 23
+				},{
 					"id": '123',
 					"avatar": "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg",
 					"title": "创业路上的“格桑”姐妹",
@@ -77,7 +87,7 @@
 				}], // 列表数据
 				status: 'more', // 加载状态
 				tipShow: false, // 是否显示顶部提示框
-				pageSize: 20, // 每页显示的数据条数
+				pageSize: 10, // 每页显示的数据条数
 				current: 1 // 当前页数			
 			};
 		},
@@ -87,7 +97,9 @@
 			this.getNewsList(true);
 		},
 		methods: {
-			
+			formatDate(date){
+				return dateUtil.formatDate(date);
+			},
 			/**
 			 * 下拉刷新回调函数
 			 */
@@ -107,6 +119,17 @@
 			 */
 			getNewsList(reload) {
 				this.status = 'loading'
+				let param = {
+					pageNo: this.current,
+					pageSize: this.pageSize
+				};
+				getNewsList(param).then(data => {
+					var [error, res] = data;
+					if (res && res.data.success) {
+						let ss = res.data.result.content;
+						this.lists = res.data.result.content;
+					}
+				});
 				// 通过 clientDB 请求后台数据
 				// 	db.collection('opendb-news-articles')
 				// 		.where({

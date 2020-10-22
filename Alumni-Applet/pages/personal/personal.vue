@@ -5,9 +5,9 @@
 				<view class="box">
 					<view class="box-hd">
 						<view class="avator">
-							<img src="../../static/user/face.jpg">
+							<img :src="userInfo.avatarUrl">
 						</view>
-						<view class="phone-number">18909XXXX67</view>
+						<view class="phone-number">{{userInfo.nickName}}</view>
 					</view>
 					<view class="box-bd">
 						<view class="item">
@@ -42,6 +42,15 @@
 	export default {
 		data() {
 			return {
+				userInfo:{
+					nickName: "游客",
+					gender: 1,
+					language: "zh_CN",
+					city: "Xian",
+					province: "Shannxi",
+					country: "China",
+					avatarUrl: "../../static/user/face.jpg"
+				},
 				menuList:[{
 					name:"个人信息",
 					icon:"../../static/personal/grxx2x.png"
@@ -64,6 +73,14 @@
 			};
 		},
 		onLoad() {
+			let userInfo=uni.getStorageSync('userInfo');
+			if(userInfo){
+				this.userInfo=userInfo;
+			}
+			// if(userInfo){
+			// 	getApp().wxGetUserInfo();
+			// }
+			
 		},
 		methods: {
 			changeSkin(){

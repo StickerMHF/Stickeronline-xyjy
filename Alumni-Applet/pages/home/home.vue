@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-gradual-green1" :isBack="false">
 			<block slot="content">首页</block>
 		</cu-custom>
-		
+
 		<!-- banner -->
 		<view class="ph-menu">
 			<swiper class="ph-banner screen-swiper square-dot" :indicator-dots="true" :circular="true" :autoplay="true" interval="5000"
@@ -33,7 +33,7 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="ph-menu">
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
@@ -53,25 +53,27 @@
 				</view>
 			</scroll-view>
 			<view class="phm-card cu-card case no-card" v-for="(item,index) in newsList">
+				<navigator :url="'/pages/home/newsDetail/newsDetail?id='+item.id">
 				<view class="cu-item shadow">
 					<view class="image">
-						<image :src="item.image" mode="widthFix"></image>
-						<view class="cu-bar bg-shadeBottom"> <text class="text-cut">{{item.desc}}</text></view>
+						<image :src="item.thumb" mode="widthFix"></image>
+						<view class="cu-bar bg-shadeBottom"> <text class="text-cut">{{item.contents}}</text></view>
 					</view>
 					<view class="cu-list ">
 						<view class="cu-item phm-zx-item">
 							<view class="phm-zx-content">
-								<view class="text-grey">{{item.name}}</view>
+								<view class="text-grey">{{item.title}}</view>
 								<view class="text-gray text-sm flex justify-between">
-									{{item.publishData}}
+									{{formatDate(item.createTime)}}
 									<view class="phm-zx-view text-gray text-sm">
-										<text class="cuIcon-attentionfill margin-lr-xs"></text> {{item.viewCount}}
+										<text class="cuIcon-attentionfill margin-lr-xs"></text> {{item.viewCount?item.viewCount:0}}
 									</view>
 								</view>
 							</view>
 						</view>
 					</view>
 				</view>
+				</navigator>
 			</view>
 		</view>
 	</view>
@@ -79,6 +81,10 @@
 
 <script>
 	import eMap from "../component/map/index"
+	import {dateUtil} from '@/utils/dateUtil.js'
+	import {
+		getNewsList
+	} from '@/api/news.js'
 	export default {
 		components: {
 			eMap
@@ -149,25 +155,38 @@
 					id: 1
 				}],
 				newsList: [{
-					image: '/static/home/banner22x.png',
-					name: '学生工作业务能力专题培训举办',
-					desc: '我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。',
-					publishData: '2020-10-18',
+					thumb: '/static/home/banner22x.png',
+					title: '学生工作业务能力专题培训举办',
+					contents: '我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。',
+					createTime: '2020-10-18',
 					viewCount: 23
 				}, {
-					image: '/static/home/banner32x.png',
-					name: '正义天使 凯尔',
-					desc: '',
-					publishData: '2020-10-18',
+					thumb: '/static/home/banner32x.png',
+					title: '正义天使 凯尔',
+					contents: '',
+					createTime: '2020-10-18',
 					viewCount: 23
 				}]
 			}
 
 		},
 		onLoad() {
-
+			let param = {
+				pageNo: 1,
+				pageSize: 2
+			};
+			getNewsList(param).then(data => {
+				var [error, res] = data;
+				if (res && res.data.success) {
+					let ss = res.data.result.content;
+					this.newsList = res.data.result.content;
+				}
+			});
 		},
 		methods: {
+			formatDate(date){
+				return dateUtil.formatDate(date);
+			},
 			tabSelect(e) {
 				this.tabCur = e.currentTarget.dataset.id;
 			},

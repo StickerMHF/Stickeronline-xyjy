@@ -10,6 +10,10 @@ export const getUserInfo = (params) => {
 export const getUserInfo1 = (params) => {
     return getAction(api.test, params)
 }
+// 获取微信用户openid
+export const getUserOpenid = (params) => {
+    return getAction(api.getUserOpenid, params)
+}
 
 
 

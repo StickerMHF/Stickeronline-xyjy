@@ -43,7 +43,8 @@ public class BNewsAsyncServiceImpl implements BNewsAsyncService, BaseAsyncServic
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
         BNewsEntity bNewsEntity = new BNewsEntity();
-        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        String sorts=params.getString("sort","createTime");
+        Sort sort = new Sort(Sort.Direction.DESC, sorts);
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
 //        matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());

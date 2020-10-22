@@ -14,5 +14,6 @@
 |[[thumb]]`@thumb`|`String`|-
 |[[title]]`@title`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 
