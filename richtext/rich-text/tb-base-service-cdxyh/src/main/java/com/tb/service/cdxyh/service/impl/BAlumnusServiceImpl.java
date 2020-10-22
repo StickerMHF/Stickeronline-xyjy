@@ -39,7 +39,7 @@ public class BAlumnusServiceImpl implements BAlumnusService, BaseAsyncService {
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-        if (oConvertUtils.isNotEmpty(type)) {
+        if (oConvertUtils.isNotEmpty(type) && !type.equals("all")) {
             bAlumnusEntity.setType(type);
             exampleMatcher.withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains());
         }

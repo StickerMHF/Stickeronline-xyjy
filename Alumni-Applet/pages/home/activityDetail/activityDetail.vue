@@ -12,7 +12,7 @@
 <script>
 	import newsDetail from '@/components/news-detail/index.vue';
 	import {dateUtil} from "@/utils/dateUtil.js"
-	import {getAlumnusNewsById} from '@/api/alumnus.js'
+	import {getAlumnusActivityById} from '@/api/alumnus.js'
 	export default {
 		components: {
 			newsDetail
@@ -38,11 +38,11 @@
 		onLoad(options) {
 			// 初始化页面数据
 			this.params.id = options.id;
-			this.getAlumnusNewsById();
+			this.getAlumnusActivityById();
 		},
 		methods: {
-			getAlumnusNewsById(){
-				getAlumnusNewsById(this.params).then(data=>{
+			getAlumnusActivityById(){
+				getAlumnusActivityById(this.params).then(data=>{
 					console.log(data)
 					let [error, res] = data;
 					if(res&&res.data&&res.data.result){

@@ -1,13 +1,11 @@
 package com.tb.service.cdxyh.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
-import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
-import com.tb.service.cdxyh.entity.BAlumnusPhotoEntity;
-import com.tb.service.cdxyh.repository.BAlumnusPhotoRepository;
-import com.tb.service.cdxyh.service.BAlumnusPhotoService;
+import com.tb.service.cdxyh.entity.BAlumnusActivityEntity;
+import com.tb.service.cdxyh.repository.BAlumnusActivityRepository;
+import com.tb.service.cdxyh.service.BAlumnusActivityService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -19,12 +17,13 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @AsyncServiceHandler
-public class BAlumnusPhotoServiceImpl implements BAlumnusPhotoService, BaseAsyncService {
+public class BAlumnusActivityServiceImpl implements BAlumnusActivityService, BaseAsyncService {
     @Autowired
-    private BAlumnusPhotoRepository bAlumnusPhotoRepository;
+    private BAlumnusActivityRepository bAlumnusActivityRepository;
     @Override
     public void add(JsonObject params, Handler<AsyncResult<String>> handler) {
 
@@ -34,19 +33,15 @@ public class BAlumnusPhotoServiceImpl implements BAlumnusPhotoService, BaseAsync
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
-        String type = params.getString("type");
-        BAlumnusPhotoEntity bAlumnusPhotoEntity = new BAlumnusPhotoEntity();
+        BAlumnusActivityEntity bAlumnusActivityEntity = new BAlumnusActivityEntity();
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-//        if (oConvertUtils.isNotEmpty(type)) {
-//            bAlumnusPhotoEntity.setType(type);
-//            exampleMatcher.withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains());
-//        }
-        //创建实例
-        Example<BAlumnusPhotoEntity> ex = Example.of(bAlumnusPhotoEntity, exampleMatcher);
 
-        Page<BAlumnusPhotoEntity> plist = bAlumnusPhotoRepository.findAll(ex,pageable);
+        //创建实例
+        Example<BAlumnusActivityEntity> ex = Example.of(bAlumnusActivityEntity, exampleMatcher);
+
+        Page<BAlumnusActivityEntity> plist = bAlumnusActivityRepository.findAll(ex,pageable);
         future.complete(new JsonObject(Json.encode(plist)));
         handler.handle(future);
     }
@@ -65,11 +60,11 @@ public class BAlumnusPhotoServiceImpl implements BAlumnusPhotoService, BaseAsync
     public void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler) {
         Future<JsonArray> future = Future.future();
         ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
-        BAlumnusPhotoEntity bAlumnusPhotoEntity = new BAlumnusPhotoEntity();
+        BAlumnusActivityEntity bAlumnusActivityEntity = new BAlumnusActivityEntity();
         matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建实例
-        Example<BAlumnusPhotoEntity> ex = Example.of(bAlumnusPhotoEntity, matcher);
-        List<BAlumnusPhotoEntity> newsList = bAlumnusPhotoRepository.findAll(ex);
+        Example<BAlumnusActivityEntity> ex = Example.of(bAlumnusActivityEntity, matcher);
+        List<BAlumnusActivityEntity> newsList = bAlumnusActivityRepository.findAll(ex);
         if (newsList == null || newsList.size() <= 0) {
             future.complete(new JsonArray());
         } else {
@@ -79,16 +74,15 @@ public class BAlumnusPhotoServiceImpl implements BAlumnusPhotoService, BaseAsync
     }
 
     @Override
-    public void getList(JsonObject params, Handler<AsyncResult<JsonArray>> handler) {
-
+    public void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        BAlumnusActivityEntity bAlumnusActivityEntity = new BAlumnusActivityEntity(params);
+        Optional<BAlumnusActivityEntity> res = bAlumnusActivityRepository.findById(bAlumnusActivityEntity.getId());
+        if (res.isPresent()) {
+            future.complete(new JsonObject(Json.encode(res.get())));
+        }else{
+            future.complete(new JsonObject());
+        }
+        handler.handle(future);
     }
-
-//    @Override
-//    public void getList(JSONObject params, Handler<AsyncResult<JsonArray>> handler){
-//       Future<JsonArray> future = Future.future();
-//       ExampleMatcher matcher = ExampleMatcher.matching();
-//       BAlumnusPhotoEntity bAlumnusPhotoEntity = new BAlumnusPhotoEntity();
-//        bAlumnusPhotoRepository.
-//
-//    }
 }

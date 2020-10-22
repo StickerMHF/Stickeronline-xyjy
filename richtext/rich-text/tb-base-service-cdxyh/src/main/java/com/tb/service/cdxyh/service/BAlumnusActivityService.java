@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 @ProxyGen
-public interface BAlumnusNewsService {
+public interface BAlumnusActivityService {
     /**
      * 新增
      *
@@ -49,6 +49,7 @@ public interface BAlumnusNewsService {
      * @param handler
      */
     void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+
 
     /**
      * 根据ID查询资讯

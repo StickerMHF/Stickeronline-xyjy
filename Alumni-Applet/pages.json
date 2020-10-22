@@ -171,7 +171,16 @@
                 "enablePullDownRefresh": false
             }
             
-        } ,{
+        } 
+		,{
+            "path" : "pages/home/activityDetail/activityDetail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        },{
             "path" : "pages/schoolHistory/schoolHistory",
             "style" :                                                                                    
             {

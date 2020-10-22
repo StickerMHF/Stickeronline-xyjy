@@ -66,10 +66,10 @@
 		components: {},
 		data() {
 			return {
-				tabCur:1,
+				tabCur:'all',
 				current: 0,
 				tabList: [{
-					id: '1',
+					id: 'all',
 					name: '全部'
 				}, {
 					id: 2,
@@ -99,7 +99,7 @@
 				params: {
 					pageNo: 1,// 当前页数
 					pageSize: 10,// 每页显示的数据条数
-					type: 1
+					type: 'all'
 				}
 			};
 		},
@@ -128,8 +128,7 @@
 						}else{
 							this.status = 'noMore';
 						}
-					}
-					
+					}					
 				})
 			},
 			tabSelect(e) {

@@ -25,7 +25,7 @@ public class BAlumnusNewsHandler {
             AsyncServiceUtil.getAsyncServiceInstance(BAlumnusNewsService.class);
 
     @RouteMapping(value = "/add", method = RouteMethod.POST, order = 1)
-    @ApiOperation(value = "新增组织")
+    @ApiOperation(value = "新增")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "roleName", value = "角色名称", dataType = "String", paramType = "body", required = true),
             @ApiImplicitParam(name = "description", value = "描述", dataType = "String", paramType = "body"),
@@ -45,15 +45,34 @@ public class BAlumnusNewsHandler {
     }
 
     @RouteMapping(value = "/list", method = RouteMethod.GET, order = 1)
-    @ApiOperation(value = "查询组织列表")
+    @ApiOperation(value = "查询资讯列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
             @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true),
-            @ApiImplicitParam(name = "type", value = "组织类型", dataType = "String", paramType = "query", required = true)
+            @ApiImplicitParam(name = "fid", value = "分会ID", dataType = "String", paramType = "query", required = true)
     })
     public Handler<RoutingContext> queryPageList() {
         return ctx -> {
             bAlumnusNewsService.queryPageList(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
+
+    @RouteMapping(value = "/queryById", method = RouteMethod.GET, order = 1)
+    @ApiOperation(value = "根据ID查询资讯")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "ID", dataType = "String", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> queryById() {
+        return ctx -> {
+            bAlumnusNewsService.queryById(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
                 if (res.succeeded()) {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));

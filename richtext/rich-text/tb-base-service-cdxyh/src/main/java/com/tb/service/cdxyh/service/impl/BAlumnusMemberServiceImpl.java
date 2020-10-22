@@ -15,7 +15,6 @@ import io.vertx.core.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
-
 import java.util.List;
 
 @Component

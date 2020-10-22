@@ -49,4 +49,13 @@ public interface BAlumnusPhotoService {
      * @param handler
      */
     void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+
+    /**
+     * 获取相册列表
+     * @param params
+     * @param handler
+     */
+    void getList(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+
+
 }

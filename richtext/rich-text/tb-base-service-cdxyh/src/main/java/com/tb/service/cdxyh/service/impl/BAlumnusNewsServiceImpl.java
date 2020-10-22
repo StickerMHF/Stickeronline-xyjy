@@ -2,6 +2,7 @@ package com.tb.service.cdxyh.service.impl;
 
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
+import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BAlumnusNewsEntity;
 import com.tb.service.cdxyh.repository.BAlumnusNewsRepository;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @AsyncServiceHandler
@@ -32,21 +34,22 @@ public class BAlumnusNewsServiceImpl implements BAlumnusNewsService, BaseAsyncSe
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
-        String type = params.getString("type");
-        System.out.println(type);
+        String fid = params.getString("fid");
         BAlumnusNewsEntity bAlumnusNewsEntity = new BAlumnusNewsEntity();
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-//        if (oConvertUtils.isNotEmpty(type)) {
-//            bAlumnusNewsEntity.setType(type);
-//            exampleMatcher.withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains());
-//        }
-        //创建实例
-        Example<BAlumnusNewsEntity> ex = Example.of(bAlumnusNewsEntity, exampleMatcher);
+        if (oConvertUtils.isNotEmpty(fid)) {
+            bAlumnusNewsEntity.setFid(fid);
+            exampleMatcher.withMatcher("fid", ExampleMatcher.GenericPropertyMatchers.contains());
+            //创建实例
+            Example<BAlumnusNewsEntity> ex = Example.of(bAlumnusNewsEntity, exampleMatcher);
 
-        Page<BAlumnusNewsEntity> plist = bAlumnusNewsRepository.findAll(ex,pageable);
-        future.complete(new JsonObject(Json.encode(plist)));
+            Page<BAlumnusNewsEntity> plist = bAlumnusNewsRepository.findAll(ex,pageable);
+            future.complete(new JsonObject(Json.encode(plist)));
+        } else {
+            future.complete(new JsonObject("请输入有效fid"));
+        }
         handler.handle(future);
     }
 
@@ -73,6 +76,19 @@ public class BAlumnusNewsServiceImpl implements BAlumnusNewsService, BaseAsyncSe
             future.complete(new JsonArray());
         } else {
             future.complete(new JsonArray(Json.encode(newsList)));
+        }
+        handler.handle(future);
+    }
+
+    @Override
+    public void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        BAlumnusNewsEntity bAlumnusNewsEntity = new BAlumnusNewsEntity(params);
+        Optional<BAlumnusNewsEntity> res = bAlumnusNewsRepository.findById(bAlumnusNewsEntity.getId());
+        if (res.isPresent()) {
+            future.complete(new JsonObject(Json.encode(res.get())));
+        }else{
+            future.complete(new JsonObject());
         }
         handler.handle(future);
     }

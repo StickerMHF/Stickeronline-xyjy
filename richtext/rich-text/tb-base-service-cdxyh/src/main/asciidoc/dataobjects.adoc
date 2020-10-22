@@ -1,40 +1,7 @@
 = Cheatsheets
 
-[[BCooperationEntity]]
-== BCooperationEntity
-
-
-[cols=">25%,25%,50%"]
-[frame="topbot"]
-|===
-^|Name | Type ^| Description
-|[[contact]]`@contact`|`String`|-
-|[[contents]]`@contents`|`String`|-
-|[[createBy]]`@createBy`|`String`|-
-|[[id]]`@id`|`String`|-
-|[[title]]`@title`|`String`|-
-|[[updateBy]]`@updateBy`|`String`|-
-|===
-
-[[BMemberEntity]]
-== BMemberEntity
-
-
-[cols=">25%,25%,50%"]
-[frame="topbot"]
-|===
-^|Name | Type ^| Description
-|[[contact]]`@contact`|`String`|-
-|[[createBy]]`@createBy`|`String`|-
-|[[desc]]`@desc`|`String`|-
-|[[id]]`@id`|`String`|-
-|[[name]]`@name`|`String`|-
-|[[sex]]`@sex`|`String`|-
-|[[updateBy]]`@updateBy`|`String`|-
-|===
-
-[[BNewsEntity]]
-== BNewsEntity
+[[BAlummunsMemberEntity]]
+== BAlummunsMemberEntity
 
 
 [cols=">25%,25%,50%"]
@@ -51,6 +18,23 @@
 |[[sex]]`@sex`|`String`|-
 |[[telephone]]`@telephone`|`String`|-
 |[[trade]]`@trade`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusActivityEntity]]
+== BAlumnusActivityEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[img]]`@img`|`String`|-
+|[[title]]`@title`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |===
 
@@ -108,6 +92,39 @@
 |[[updateBy]]`@updateBy`|`String`|-
 |===
 
+[[BCooperationEntity]]
+== BCooperationEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[contact]]`@contact`|`String`|-
+|[[contents]]`@contents`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BMemberEntity]]
+== BMemberEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[contact]]`@contact`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[desc]]`@desc`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
 [[BNewsEntity]]
 == BNewsEntity
 
@@ -121,6 +138,29 @@
 |[[id]]`@id`|`String`|-
 |[[thumb]]`@thumb`|`String`|-
 |[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|===
+
+[[BTeachersEntity]]
+== BTeachersEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[bgdd]]`@bgdd`|`String`|-
+|[[byyx]]`@byyx`|`String`|-
+|[[college]]`@college`|`String`|-
+|[[contact]]`@contact`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[education]]`@education`|`String`|-
+|[[email]]`@email`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[rank]]`@rank`|`String`|-
+|[[sex]]`@sex`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
