@@ -29,8 +29,8 @@ export function putAction(url,parameter) {
 export function getAction(url,parameter) {
   return uni.request({
     url: url,
-    method: 'get',
-    params: parameter
+    method: 'GET',
+    data: parameter
   })
 }
 
@@ -39,7 +39,7 @@ export function deleteAction(url,parameter) {
   return uni.request({
     url: url,
     method: 'delete',
-    params: parameter
+    data: parameter
   })
 }
 

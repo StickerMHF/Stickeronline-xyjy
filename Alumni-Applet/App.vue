@@ -1,6 +1,24 @@
 <script>
 	import Vue from 'vue'
+	import {
+		getUserOpenid
+	} from '@/api/user.js'
 	export default {
+		data() {
+			return {
+				globalData: {
+					userInfo: {
+						nickName: 'Hi,游客',
+						userName: '点击登录',
+						avatarUrl: 'https://platform-wxmall.oss-cn-beijing.aliyuncs.com/upload/20180727/150547696d798c.png'
+					},
+					goodId: 0,
+					userId: 0,
+					token: '',
+				},
+				isLogin: false
+			}
+		},
 		onLaunch: function() {
 			uni.getSystemInfo({
 				success: function(e) {
@@ -103,13 +121,82 @@
 					color: '#ffffff'
 				},
 			]
-
+			this.getUserInfo();
+			this.wxGetUserInfo();
 		},
 		onShow: function() {
 			console.log('App Show')
 		},
 		onHide: function() {
 			console.log('App Hide')
+		},
+		methods: {
+			getUserInfo() {
+				const that = this
+				this.openid = uni.getStorageSync('openid')
+				if (!this.openid) {
+					uni.login({
+						provider: 'weixin',
+						success(res) {
+							let params = {
+								appid: 'wx464bab72d25e1a1f',
+								code: res.code
+							}
+							getUserOpenid(params).then(data => {
+								var [error, res] = data;
+								if (res && res.data.success && res.data.data.openid) {
+									that.openid = res.data.data.openid
+									uni.setStorage({
+										key: 'openid',
+										data: res.data.openid,
+										success: function() {
+											console.log('openid已存储')
+										}
+									})
+								} else {
+									uni.showToast({
+										title: '登录失败'
+									})
+								}
+							})
+						},
+						fail(e) {
+							console.log(e)
+						}
+					})
+				} else {
+					if (uni.getStorageSync('token')) {
+						return true
+					} else {
+						let params = {
+							openId: this.openid
+						}
+						that.getBindingUser(params)
+					}
+
+				}
+			},
+			wxGetUserInfo() {
+				let that = this;
+				this.isLogin=uni.getStorageSync('isLogin');
+				if (!this.isLogin) {
+					uni.getUserInfo({
+						provider: 'weixin',
+						success: function(res) {
+							try {
+								uni.setStorageSync('isLogin', true);
+								uni.setStorageSync('userInfo', res.userInfo); //记录是否第一次授权  false:表示不是第一次授权
+								// _this.updateUserInfo();
+							} catch (e) {
+								console.log(e)
+							}
+						},
+						fail(e) {
+							console.log(e)
+						}
+					});
+				}
+			}
 		}
 
 	}
@@ -118,6 +205,7 @@
 <style lang="scss">
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
+
 	.nav-list {
 		display: flex;
 		flex-wrap: wrap;

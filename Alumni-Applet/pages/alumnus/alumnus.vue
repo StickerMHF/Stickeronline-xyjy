@@ -125,7 +125,6 @@
 					pageSize: this.pageSize,
 					type: this.tabCur
 				}
-				debugger
 				this.getAlumnusList(params);
 			},
 			/**

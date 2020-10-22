@@ -1,14 +1,15 @@
 const baseurl='http://localhost:8084'
 const api = {
-	test:baseurl+'/rich/text/list',
+	test:baseurl+'/stickeronline/rich/text/list',
+	getUserOpenid:baseurl+'/tb/wechat/getAppletUserInfo',
 	/**
 	 * 新闻接口
 	 */
-    getNewsList: baseurl+'/news/list',
-	getNewsById: baseurl+'/sys/login',
-    addNews: baseurl+'/sys/logout',
-    updateNews: baseurl+'/auth/forge-password',
-    deleteNews: baseurl+'/auth/register',
+    getNewsList: baseurl+'/stickeronline/news/list',
+	getNewsById: baseurl+'/stickeronline/news/queryById',
+    addNews: baseurl+'/stickeronline/news/sdd',
+    updateNews: baseurl+'/stickeronline/news/edit',
+    deleteNews: baseurl+'/stickeronline/news/delete',
 	/**
 	 * 校友合作
 	 */
