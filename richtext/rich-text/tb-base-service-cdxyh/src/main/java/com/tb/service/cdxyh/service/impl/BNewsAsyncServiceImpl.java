@@ -42,6 +42,7 @@ public class BNewsAsyncServiceImpl implements BNewsAsyncService, BaseAsyncServic
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
+
         BNewsEntity bNewsEntity = new BNewsEntity();
         String sorts=params.getString("sort","createTime");
         Sort sort = new Sort(Sort.Direction.DESC, sorts);

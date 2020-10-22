@@ -50,26 +50,22 @@
 |[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 
-[[BTeachersEntity]]
-== BTeachersEntity
+[[BOrganizationEntity]]
+== BOrganizationEntity
 
 
 [cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[bgdd]]`@bgdd`|`String`|-
-|[[byyx]]`@byyx`|`String`|-
-|[[college]]`@college`|`String`|-
-|[[contact]]`@contact`|`String`|-
+|[[activity]]`@activity`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
-|[[education]]`@education`|`String`|-
-|[[email]]`@email`|`String`|-
 |[[id]]`@id`|`String`|-
+|[[liveness]]`@liveness`|`Number (Integer)`|-
+|[[member]]`@member`|`Number (Integer)`|-
 |[[name]]`@name`|`String`|-
-|[[rank]]`@rank`|`String`|-
-|[[sex]]`@sex`|`String`|-
+|[[thumb]]`@thumb`|`String`|-
+|[[type]]`@type`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
-|[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 

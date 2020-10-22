@@ -1,6 +1,5 @@
 import Vue from 'vue'
-// import uView from "uview-ui";
-// Vue.use(uView);
+
 import App from './App'
 import '@/mock'
 import basics from './pages/basics/home.vue'
