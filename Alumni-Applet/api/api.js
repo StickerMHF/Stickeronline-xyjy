@@ -13,10 +13,15 @@ const api = {
 	/**
 	 * 校友合作
 	 */
-	getCooperationList:baseurl+'/stickeronline/cooperation/list',
-	getCooperationById: baseurl+'/stickeronline/sys/login',
-	addCooperation: baseurl+'/stickeronline/sys/logout',
-	updateCooperation: baseurl+'/stickeronline/auth/forge-password',
-	deleteCooperation: baseurl+'/stickeronline/auth/register',
+	getCooperationList:baseurl+'/cooperation/list',
+	getCooperationById: baseurl+'/sys/login',
+	addCooperation: baseurl+'/sys/logout',
+	updateCooperation: baseurl+'/auth/forge-password',
+	deleteCooperation: baseurl+'/auth/register',
+	
+	/**
+	 * 组织
+	 */
+	getAlumnusList: baseurl+'/stickeronline/organization/list',
 }
 export default api

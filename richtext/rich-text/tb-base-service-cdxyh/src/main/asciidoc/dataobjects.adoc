@@ -17,3 +17,22 @@
 |[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 
+[[BOrganizationEntity]]
+== BOrganizationEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[activity]]`@activity`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[liveness]]`@liveness`|`Number (Integer)`|-
+|[[member]]`@member`|`Number (Integer)`|-
+|[[name]]`@name`|`String`|-
+|[[thumb]]`@thumb`|`String`|-
+|[[type]]`@type`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
