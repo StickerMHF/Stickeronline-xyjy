@@ -22,6 +22,6 @@ const api = {
 	/**
 	 * 组织
 	 */
-	getAlumnusList: baseurl+'/stickeronline/organization/list',
+	getAlumnusList: baseurl+'/stickeronline/alumnus/list',
 }
 export default api

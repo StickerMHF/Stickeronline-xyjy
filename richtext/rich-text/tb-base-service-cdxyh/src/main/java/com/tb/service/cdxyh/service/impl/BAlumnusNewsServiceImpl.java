@@ -2,11 +2,10 @@ package com.tb.service.cdxyh.service.impl;
 
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
-import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
-import com.tb.service.cdxyh.entity.BOrganizationEntity;
-import com.tb.service.cdxyh.repository.BOrganizationRepository;
-import com.tb.service.cdxyh.service.BOrganizationService;
+import com.tb.service.cdxyh.entity.BAlumnusNewsEntity;
+import com.tb.service.cdxyh.repository.BAlumnusNewsRepository;
+import com.tb.service.cdxyh.service.BAlumnusNewsService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -21,9 +20,9 @@ import java.util.List;
 
 @Component
 @AsyncServiceHandler
-public class BOrganizationServiceImpl implements BOrganizationService, BaseAsyncService {
+public class BAlumnusNewsServiceImpl implements BAlumnusNewsService, BaseAsyncService {
     @Autowired
-    private BOrganizationRepository bOrganizationRepository;
+    private BAlumnusNewsRepository bAlumnusNewsRepository;
     @Override
     public void add(JsonObject params, Handler<AsyncResult<String>> handler) {
 
@@ -35,18 +34,18 @@ public class BOrganizationServiceImpl implements BOrganizationService, BaseAsync
         PageVo pageVo = new PageVo(params);
         String type = params.getString("type");
         System.out.println(type);
-        BOrganizationEntity bOrganizationEntity = new BOrganizationEntity();
+        BAlumnusNewsEntity bAlumnusNewsEntity = new BAlumnusNewsEntity();
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-        if (oConvertUtils.isNotEmpty(type)) {
-            bOrganizationEntity.setType(type);
-            exampleMatcher.withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains());
-        }
+//        if (oConvertUtils.isNotEmpty(type)) {
+//            bAlumnusNewsEntity.setType(type);
+//            exampleMatcher.withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains());
+//        }
         //创建实例
-        Example<BOrganizationEntity> ex = Example.of(bOrganizationEntity, exampleMatcher);
+        Example<BAlumnusNewsEntity> ex = Example.of(bAlumnusNewsEntity, exampleMatcher);
 
-        Page<BOrganizationEntity> plist = bOrganizationRepository.findAll(ex,pageable);
+        Page<BAlumnusNewsEntity> plist = bAlumnusNewsRepository.findAll(ex,pageable);
         future.complete(new JsonObject(Json.encode(plist)));
         handler.handle(future);
     }
@@ -65,11 +64,11 @@ public class BOrganizationServiceImpl implements BOrganizationService, BaseAsync
     public void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler) {
         Future<JsonArray> future = Future.future();
         ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
-        BOrganizationEntity bOrganizationEntity = new BOrganizationEntity();
+        BAlumnusNewsEntity bAlumnusEntity = new BAlumnusNewsEntity();
         matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建实例
-        Example<BOrganizationEntity> ex = Example.of(bOrganizationEntity, matcher);
-        List<BOrganizationEntity> newsList = bOrganizationRepository.findAll(ex);
+        Example<BAlumnusNewsEntity> ex = Example.of(bAlumnusEntity, matcher);
+        List<BAlumnusNewsEntity> newsList = bAlumnusNewsRepository.findAll(ex);
         if (newsList == null || newsList.size() <= 0) {
             future.complete(new JsonArray());
         } else {

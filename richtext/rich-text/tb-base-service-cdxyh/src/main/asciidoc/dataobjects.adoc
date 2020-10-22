@@ -1,24 +1,28 @@
 = Cheatsheets
 
-[[BNewsEntity]]
-== BNewsEntity
+[[BAlummunsMemberEntity]]
+== BAlummunsMemberEntity
 
 
 [cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[contents]]`@contents`|`String`|-
+|[[activity]]`@activity`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
+|[[email]]`@email`|`String`|-
+|[[fid]]`@fid`|`String`|-
 |[[id]]`@id`|`String`|-
-|[[thumb]]`@thumb`|`String`|-
-|[[title]]`@title`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[organization]]`@organization`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[telephone]]`@telephone`|`String`|-
+|[[trade]]`@trade`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
-|[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 
-[[BOrganizationEntity]]
-== BOrganizationEntity
+[[BAlumnusEntity]]
+== BAlumnusEntity
 
 
 [cols=">25%,25%,50%"]
@@ -34,5 +38,57 @@
 |[[thumb]]`@thumb`|`String`|-
 |[[type]]`@type`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusNewsEntity]]
+== BAlumnusNewsEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[author]]`@author`|`String`|-
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[img]]`@img`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusPhotoEntity]]
+== BAlumnusPhotoEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[author]]`@author`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[img]]`@img`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BNewsEntity]]
+== BNewsEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[contents]]`@contents`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[thumb]]`@thumb`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 

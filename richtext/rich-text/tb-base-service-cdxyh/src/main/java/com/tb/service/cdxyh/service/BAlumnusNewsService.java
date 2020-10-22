@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 @ProxyGen
-public interface BOrganizationService {
+public interface BAlumnusNewsService {
     /**
      * 新增
      *

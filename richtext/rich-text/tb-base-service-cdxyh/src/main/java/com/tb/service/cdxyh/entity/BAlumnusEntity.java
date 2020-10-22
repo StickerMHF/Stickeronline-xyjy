@@ -9,21 +9,21 @@ import javax.persistence.*;
 
 @Entity
 @DataObject(generateConverter = true)
-@Table(name = "b_organization")
-public class BOrganizationEntity extends BaseEntity {
-    public BOrganizationEntity() {
+@Table(name = "b_alumnus")
+public class BAlumnusEntity extends BaseEntity {
+    public BAlumnusEntity() {
     }
 
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
         json = super.toJson();
-        BOrganizationEntityConverter.toJson(this, json);
+        BAlumnusEntityConverter.toJson(this, json);
         return json;
     }
 
-    public BOrganizationEntity(JsonObject jsonObject) {
+    public BAlumnusEntity(JsonObject jsonObject) {
         super(jsonObject);
-        BOrganizationEntityConverter.fromJson(jsonObject, this);
+        BAlumnusEntityConverter.fromJson(jsonObject, this);
     }
 
     /**
