@@ -1,7 +1,10 @@
 {
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		
+		{
+			"path": "pages/home/home",
+			"style": {}
+		},
 		{
 		    "path" : "pages/discover/discover",
 		    "style" :                                                                                    
@@ -19,10 +22,7 @@
 		    }
 		    
 		},
-		{
-			"path": "pages/home/home",
-			"style": {}
-		},
+		
 		{
 			"path": "pages/home/home1",
 			"style": {}

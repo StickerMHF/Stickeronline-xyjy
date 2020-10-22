@@ -127,7 +127,32 @@
 					var [error, res] = data;
 					if (res && res.data.success) {
 						let ss = res.data.result.content;
-						this.lists = res.data.result.content;
+						const tempList =  res.data.result.content;
+						// this.lists = res.data.result.content;
+									// 判断是否可翻页
+									if (tempList.length === this.pageSize) {
+										this.status = 'more'
+									} else {
+										this.status = 'noMore'
+									}
+						
+									if (reload) {
+										// 处理下拉加载提示框
+										this.tipShow = true;
+										clearTimeout(this.timer);
+										this.timer = setTimeout(() => {
+											this.tipShow = false;
+										}, 2000);
+										this.lists = tempList
+										// 停止刷新
+										uni.stopPullDownRefresh()
+									} else {
+										// 上拉加载后合并数据
+										this.lists = this.lists.concat(tempList)
+									}
+									if (tempList.length) {
+										this.current++
+									}
 					}
 				});
 				// 通过 clientDB 请求后台数据
