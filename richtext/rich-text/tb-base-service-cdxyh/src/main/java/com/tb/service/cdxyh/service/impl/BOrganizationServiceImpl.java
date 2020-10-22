@@ -2,6 +2,8 @@ package com.tb.service.cdxyh.service.impl;
 
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
+import com.sticker.online.core.utils.oConvertUtils;
+import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BOrganizationEntity;
 import com.tb.service.cdxyh.repository.BOrganizationRepository;
 import com.tb.service.cdxyh.service.BOrganizationService;
@@ -12,8 +14,7 @@ import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -30,7 +31,24 @@ public class BOrganizationServiceImpl implements BOrganizationService, BaseAsync
 
     @Override
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
+        String type = params.getString("type");
+        System.out.println(type);
+        BOrganizationEntity bOrganizationEntity = new BOrganizationEntity();
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
+        ExampleMatcher exampleMatcher = ExampleMatcher.matching();
+        if (oConvertUtils.isNotEmpty(type)) {
+            bOrganizationEntity.setType(type);
+            exampleMatcher.withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains());
+        }
+        //创建实例
+        Example<BOrganizationEntity> ex = Example.of(bOrganizationEntity, exampleMatcher);
 
+        Page<BOrganizationEntity> plist = bOrganizationRepository.findAll(ex,pageable);
+        future.complete(new JsonObject(Json.encode(plist)));
+        handler.handle(future);
     }
 
     @Override
@@ -47,10 +65,10 @@ public class BOrganizationServiceImpl implements BOrganizationService, BaseAsync
     public void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler) {
         Future<JsonArray> future = Future.future();
         ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
-        BOrganizationEntity bNewsEntity = new BOrganizationEntity();
-//        matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
+        BOrganizationEntity bOrganizationEntity = new BOrganizationEntity();
+        matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建实例
-        Example<BOrganizationEntity> ex = Example.of(bNewsEntity, matcher);
+        Example<BOrganizationEntity> ex = Example.of(bOrganizationEntity, matcher);
         List<BOrganizationEntity> newsList = bOrganizationRepository.findAll(ex);
         if (newsList == null || newsList.size() <= 0) {
             future.complete(new JsonArray());

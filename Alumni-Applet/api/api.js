@@ -1,4 +1,4 @@
-const baseurl='http://localhost:8084/stickeronline'
+const baseurl='http://localhost:8084'
 const api = {
 	test:baseurl+'/rich/text/list',
 	/**
@@ -21,6 +21,6 @@ const api = {
 	/**
 	 * 组织
 	 */
-	getAlumnusList: baseurl+'/organization/list',
+	getAlumnusList: baseurl+'/stickeronline/organization/list',
 }
 export default api

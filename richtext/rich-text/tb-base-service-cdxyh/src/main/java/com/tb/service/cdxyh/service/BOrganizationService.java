@@ -9,7 +9,7 @@ import io.vertx.core.json.JsonObject;
 @ProxyGen
 public interface BOrganizationService {
     /**
-     * 新增新闻
+     * 新增
      *
      * @param params
      * @param handler
@@ -17,7 +17,7 @@ public interface BOrganizationService {
     void add(JsonObject params, Handler<AsyncResult<String>> handler);
 
     /**
-     * 分页查询新闻列表
+     * 分页查询
      *
      * @param params
      * @param handler
@@ -25,7 +25,7 @@ public interface BOrganizationService {
     void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
-     * 编辑新闻
+     * 编辑
      *
      * @param params
      * @param handler
@@ -43,7 +43,7 @@ public interface BOrganizationService {
 
 
     /**
-     * 查询所有新闻
+     * 查询所有
      *
      * @param params
      * @param handler

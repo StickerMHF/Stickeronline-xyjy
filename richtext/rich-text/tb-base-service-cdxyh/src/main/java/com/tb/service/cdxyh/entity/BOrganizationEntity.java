@@ -60,10 +60,16 @@ public class BOrganizationEntity extends BaseEntity {
     private Integer liveness;
 
     /**
-     * 会标
+     * 会标/图片
      */
     @Column(name = "thumb")
     private String thumb;
+
+    /**
+     * 组织类型
+     */
+    @Column(name = "type")
+    private String type;
 
     public String getId() {
         return id;
@@ -111,5 +117,13 @@ public class BOrganizationEntity extends BaseEntity {
 
     public void setThumb(String thumb) {
         this.thumb = thumb;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

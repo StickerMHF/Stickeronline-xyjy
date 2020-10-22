@@ -42,6 +42,7 @@ public class BNewsAsyncServiceImpl implements BNewsAsyncService, BaseAsyncServic
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
+
         BNewsEntity bNewsEntity = new BNewsEntity();
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);

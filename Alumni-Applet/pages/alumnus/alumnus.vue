@@ -48,8 +48,10 @@
 								</view>
 							</view>
 						</view>
-					</view>
-					
+						<view>
+							<!-- <u-rate :count="count" v-model="value"></u-rate> -->
+						</view>
+					</view>					
 				</view>
 			</uni-list-item>
 		</uni-list>
@@ -59,7 +61,7 @@
 </template>
 
 <script>
-	import {getAlumnusList} from '@/api/cooperation.js'
+	import {getAlumnusList} from '@/api/alumnus.js'
 	export default {
 		components: {},
 		data() {
@@ -87,63 +89,44 @@
 					thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
 					member:30,
 					activity:2
-				},{
-					name:"北京分会",
-					thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					member:30,
-					activity:2
-				},{
-					name:"浙江分会",
-					thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					member:30,
-					activity:2
-				},{
-					name:"地测分会",
-					thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					member:30,
-					activity:2
-				},{
-					name:"桥梁分会",
-					thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					member:30,
-					activity:2
-				},{
-					name:"公路分会",
-					thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					member:30,
-					activity:2
-				},{
-					name:"车辆分会",
-					thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					member:30,
-					activity:2
-				},{
-					name:"经管分会",
-					thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					member:30,
-					activity:2
 				}], // 列表数据
 				waterfall: false, // 布局方向切换
 				status: 'more', // 加载状态
 				tipShow: false, // 是否显示顶部提示框
 				pageSize: 20, // 每页显示的数据条数
-				current: 1 // 当前页数	
+				current: 1 // 当前页数
 			};
 		},
 		onLoad(options) {
 			// 初始化页面数据
 			this.title=options.title;
-			getAlumnusList().then(data=>{
-				console.log(data)
-				var [error, res] = data;
-				if (res&&res.data&&res.data.result) {
-					this.list = res.data.result;
-				}
-			})
+			let params = {
+				pageNo: this.current,
+				pageSize: this.pageSize,
+				type: ''
+			}
+			this.getAlumnusList(params);
 		},
 		methods: {
+			getAlumnusList(params){
+				getAlumnusList(params).then(data=>{
+					console.log(data)
+					var [error, res] = data;
+					if (res&&res.data&&res.data.result) {
+						this.lists = res.data.result.content;
+						// console.log(this.lists)
+					}
+				})
+			},
 			tabSelect(e) {
 				this.tabCur = e.currentTarget.dataset.id;
+				var params = {
+					pageNo: this.current,
+					pageSize: this.pageSize,
+					type: this.tabCur
+				}
+				debugger
+				this.getAlumnusList(params);
 			},
 			/**
 			 * 切换商品列表布局方向
@@ -358,5 +341,16 @@
 	.alumnus-btn{
 		position: absolute;
 		right: 10px;
+	}
+
+	.star-pos {
+ 		margin: 10rpx;
+		display: flex;
+		flex-direction: row;		
+	}	
+	.stars{
+		width: 40rpx;
+		height: 40rpx;
+		margin-left: 30rpx;	
 	}
 </style>

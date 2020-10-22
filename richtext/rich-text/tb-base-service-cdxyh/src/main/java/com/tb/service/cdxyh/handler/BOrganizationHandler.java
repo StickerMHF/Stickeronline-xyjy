@@ -47,11 +47,13 @@ public class BOrganizationHandler {
     @RouteMapping(value = "/list", method = RouteMethod.GET, order = 1)
     @ApiOperation(value = "查询组织列表")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true)
+            @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "type", value = "组织类型", dataType = "String", paramType = "query", required = true)
     })
     public Handler<RoutingContext> queryPageList() {
         return ctx -> {
-            bOrganizationService.queryall(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+            bOrganizationService.queryPageList(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
                 if (res.succeeded()) {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
