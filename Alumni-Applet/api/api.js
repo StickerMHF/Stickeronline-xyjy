@@ -38,7 +38,13 @@ const api = {
 	getAlumnusPhotoById: baseurl+'/stickeronline/alumnusPhoto/queryById',
 	
 	//获取组织成员信息
-	getAlumnusMemberById: baseurl+'/stickeronline/alumnusMember/queryById'
+	getAlumnusMemberById: baseurl+'/stickeronline/alumnusMember/queryById',
+	
+	/**
+	 * 发现
+	 */
+	//获取发现列表
+	getDiscoverList: baseurl+'/stickeronline/moments/list'
 	
 }
 export default api
