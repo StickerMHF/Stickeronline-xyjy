@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
-			<block slot="content">首页</block>
+			<block slot="content">校友统计</block>
 		</cu-custom>
 		<!-- banner -->
 		<view class="al-desc" style="padding-bottom: 0px;">
@@ -26,7 +26,7 @@
 					<text class="cuIcon-titles text-green1"></text> 组织资讯
 				</view>
 			</view>
-			<listMessage v-bind:lists="newsList"></listMessage>
+			<listNews v-bind:lists="newsList"></listNews>
 			<view class="view_more" @click="switchMenu" data-cur="news">
 				<uni-load-more :status="more" :contentText="contentText"></uni-load-more>
 			</view>
@@ -59,7 +59,7 @@
 </template>
 
 <script>
-	import listMessage from "@/components/list-message/list-message.vue"
+	import listNews from "@/components/list-news/list-news.vue"
 	import listActivity from "@/components/list-activity/list-activity.vue"
 	import {
 		dateUtil
@@ -71,7 +71,7 @@
 	} from '@/api/alumnus.js'
 	export default {
 		components: {
-			listMessage,
+			listNews,
 			listActivity
 		},
 		data() {

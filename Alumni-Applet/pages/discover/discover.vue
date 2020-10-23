@@ -25,26 +25,12 @@
 		<view class="discover-content">
 			<moments :list="momentsList"></moments>
 		</view>
-
-		<view class="qiun-charts">
-			<!--#ifdef MP-ALIPAY -->
-			<canvas canvas-id="canvasMap" id="canvasMap" class="charts" :width="cWidth*pixelRatio" :height="cHeight*pixelRatio"
-			 :style="{'width':cWidth+'px','height':cHeight+'px'}" @touchstart="touchMap"></canvas>
-			<!--#endif-->
-			<!--#ifndef MP-ALIPAY -->
-			<canvas canvas-id="canvasMap" id="canvasMap" class="charts" @touchstart="touchMap"></canvas>
-			<!--#endif-->
-		</view>
-
 	</view>
 </template>
 
-<script>
-	import uCharts from '@/components/u-charts/u-charts.js';
+<script>	
 	import moments from '@/components/moments/moments.vue';
-	import {
-		getUserInfo1
-	} from '@/api/user.js'
+	import {getDiscoverList} from '@/api/discover.js'
 	var _self = '';
 	export default {
 		data() {
@@ -154,28 +140,17 @@
 						commentTime: "2018年12月4日",
 						replyList: []
 					}]
-				}]
+				}],
+				params: {
+					pageNo:1,
+					pageSize:2
+				}
 			}
 		},
 		onLoad() {
-			_self = this;
-			//#ifdef MP-ALIPAY
-			uni.getSystemInfo({
-				success: function(res) {
-					if (res.pixelRatio > 1) {
-						//正常这里给2就行，如果pixelRatio=3性能会降低一点
-						//_self.pixelRatio =res.pixelRatio;
-						_self.pixelRatio = 2;
-					}
-				}
-			});
-			//#endif
-			this.cWidth = uni.upx2px(750);
-			this.cHeight = uni.upx2px(750);
-			// this.getServerData();
-			getUserInfo1().then(data => {
-				var [error, res] = data;
-			})
+	
+			//获取朋友圈列表
+			this.getDiscoverList();
 
 		},
 		methods: {
@@ -191,63 +166,31 @@
 					this.isSelect = false;
 					this.currentfromSelect = value;
 				}
-			},
-			getServerData() {
-				uni.request({
-					url: 'https://www.ucharts.cn/map.json',
-					// url: 'http://db.mapwaycloud.com:10082/rest/v1/newdip/platform/dm/commondatas/provinces/preview?isgeom=true&f=geojson&outSr=4326&returnGeometry=true&uid=c881f5ef5de54f689b4bd0bb66af09ac',
-					data: {},
-					success: function(res) {
-						console.log(res.data.features)
-						let cMap = {
-							series: []
-						};
-						//这里我后台返回的是数组，所以用等于，如果您后台返回的是单条数据，需要push进去
-						cMap.series = res.data.features;
-						// cMap.series.forEach(item=>{
-						// 	item.color="#1890ff";
-						// })
-						_self.showMap("canvasMap", cMap);
-					},
-					fail: () => {
-						_self.tips = "网络错误，小程序端请检查合法域名";
-					},
-				});
-			},
-			showMap(canvasId, chartData) {
-				this.canvaMap = new uCharts({
-					$this: _self,
-					canvasId: canvasId,
-					type: 'map',
-					fontSize: 11,
-					padding: [0, 0, 0, 0],
-					legend: {
-						show: false
-					},
-					background: '#FFFFFF',
-					pixelRatio: _self.pixelRatio,
-					series: chartData.series,
-					dataLabel: true,
-					width: _self.cWidth * _self.pixelRatio,
-					height: _self.cHeight * _self.pixelRatio,
-					extra: {
-						map: {
-							border: true,
-							borderWidth: 0.1,
-							borderColor: '#666666',
-							fillOpacity: 0.6
-						}
+			},			
+			//获取朋友圈列表
+			getDiscoverList(){
+				getDiscoverList(this.params).then(data =>{
+					let [error, res] = data;
+					if(res&&res.data&&res.data.result){
+						let content = res.data.result.content;
+						this.transformData(content);
 					}
 				});
 			},
-			touchMap(e) {
-				this.canvaMap.showToolTip(e, {
-					format: function(item) {
-						console.log(item);
-						return item
+			transformData(list){
+				debugger
+				list = list.map(item =>{
+					return {
+						username: "凯尔",
+						publishDate: "2019年12月3日",
+						photo: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg",
+						content: item.content,
+						images: item.photos
 					}
-				});
+					
+				})
 			}
+			
 		}
 	}
 </script>
