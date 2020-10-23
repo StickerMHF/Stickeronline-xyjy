@@ -6,8 +6,8 @@ import { Modal, notification } from 'ant-design-vue'
 import { ACCESS_TOKEN } from "@/store/mutation-types"
 
 const URL = {
-    loginUrl:"http://localhost:8089",//登录IP
-    baseUrl:'http://localhost:8084',//业务IP
+    loginUrl:"http://121.36.73.167:8089",//登录IP
+    baseUrl:'http://121.36.73.167:8084',//业务IP
 }
 export function getFileUrl() {
     return URL.FileUrl

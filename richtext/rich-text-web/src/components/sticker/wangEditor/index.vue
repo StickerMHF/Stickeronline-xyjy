@@ -56,7 +56,7 @@
         // http://192.168.2.125:8080/admin/storage/create
         this.editor = new E(this.$refs.toolbar, this.$refs.editor)
         this.editor.customConfig.uploadImgShowBase64 = false // base 64 存储图片
-        this.editor.customConfig.uploadImgServer = 'http://otp.cdinfotech.top/file/upload_images'// 配置服务器端地址
+        this.editor.customConfig.uploadImgServer = 'http://121.36.73.167:8084/file/upload'// 配置服务器端地址
         this.editor.customConfig.uploadImgHeaders = { }// 自定义 header
         this.editor.customConfig.uploadFileName = 'file' // 后端接受上传文件的参数名
         this.editor.customConfig.uploadImgMaxSize = 2 * 1024 * 1024 // 将图片大小限制为 2M
@@ -102,6 +102,7 @@
             // 图片上传错误的回调
           },
           customInsert: (insertImg, result, editor) => {
+            debugger
             // 图片上传成功，插入图片的回调
             //result为上传图片成功的时候返回的数据，这里我打印了一下发现后台返回的是data：[{url:"路径的形式"},...]
             // console.log(result.data[0].url)
@@ -109,7 +110,7 @@
              //循环插入图片
             // for (let i = 0; i < 1; i++) {
               // console.log(result)
-              let url = "http://otp.cdinfotech.top"+result.url
+              let url =result.result[0].url;
               insertImg(url)
             // }
           }
