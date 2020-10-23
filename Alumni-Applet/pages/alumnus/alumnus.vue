@@ -5,6 +5,7 @@
 		<view >
 			<scroll-view scroll-x class="bg-white nav text-center" scroll-with-animation>
 				<view class="cu-item" :class="item.id==p.type?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect"
+				
 				 :data-id="item.id">
 					{{item.name}}
 				</view>
@@ -82,7 +83,9 @@
 					name: '行业校友'
 				}, {
 					id: 5,
-					name: '校友统计'
+					name: '校友统计',
+					//:to="'/pages/home/newsDetail/newsDetail?id='+item.id"
+					uri: '/pages/alumnus/statistics'
 				}],
 				lists: [{
 					name:"校友总会",

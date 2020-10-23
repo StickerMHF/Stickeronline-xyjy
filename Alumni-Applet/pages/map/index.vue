@@ -20,7 +20,7 @@
 							show: false,  //是否显示控制按钮
 							min: 0,
 							max: 300,
-							text: ['High', 'Low'],
+							text: ['高', '低'],
 							realtime: true,
 							calculable: true,
 							color: ['orangered', 'yellow', 'lightskyblue']

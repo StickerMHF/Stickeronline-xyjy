@@ -55,6 +55,14 @@
 
 		},
 		{
+			"path":"pages/home/messageDetail/messageDetail",
+			"style":{}
+		},
+		{
+			"path":"pages/alumnus/statistics",
+			"style":{}
+		},
+		{
 			"path": "pages/personal/personal",
 			"style": {
 				"navigationBarTitleText": "",
