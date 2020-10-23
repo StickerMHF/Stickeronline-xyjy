@@ -38,8 +38,8 @@ public class BAlumnusPhotoEntity extends BaseEntity {
     /**
      * 标题
      */
-    @Column(name = "title")
-    private String title;
+    @Column(name = "context")
+    private String context;
 
     /**
      * 作者
@@ -50,15 +50,38 @@ public class BAlumnusPhotoEntity extends BaseEntity {
     /**
      * 照片
      */
-    @Column(name = "img")
-    private String img;
+    @Column(name = "imgs")
+    private String imgs;
 
     /**
-     * 所属分会
+     * 发布者ID
      */
-    @Column(name = "fid")
-    private String fid;
+    @Column(name = "user_id")
+    private String userId;
 
+    /**
+     * 点赞次数
+     */
+    @Column(name = "like_count")
+    private String likeCount;
+
+    /**
+     * 评论次数
+     */
+    @Column(name = "comment_count")
+    private String commentCount;
+
+    /**
+     * 浏览次数
+     */
+    @Column(name = "view_count")
+    private String viewCount;
+
+    /**
+     * 发布者头像
+     */
+    @Column(name = "photo")
+    private String photo;
 
     public String getId() {
         return id;
@@ -68,12 +91,12 @@ public class BAlumnusPhotoEntity extends BaseEntity {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getContext() {
+        return context;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setContext(String context) {
+        this.context = context;
     }
 
     public String getAuthor() {
@@ -84,19 +107,51 @@ public class BAlumnusPhotoEntity extends BaseEntity {
         this.author = author;
     }
 
-    public String getImg() {
-        return img;
+    public String getImgs() {
+        return imgs;
     }
 
-    public void setImg(String img) {
-        this.img = img;
+    public void setImgs(String imgs) {
+        this.imgs = imgs;
     }
 
-    public String getFid() {
-        return fid;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setFid(String fid) {
-        this.fid = fid;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(String likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public String getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(String commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public String getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(String viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

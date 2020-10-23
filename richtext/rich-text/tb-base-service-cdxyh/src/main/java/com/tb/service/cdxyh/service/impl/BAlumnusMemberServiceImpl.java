@@ -15,7 +15,9 @@ import io.vertx.core.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
+
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @AsyncServiceHandler
@@ -72,6 +74,20 @@ public class BAlumnusMemberServiceImpl implements BAlumnusMemberService, BaseAsy
             future.complete(new JsonArray());
         } else {
             future.complete(new JsonArray(Json.encode(newsList)));
+        }
+        handler.handle(future);
+    }
+
+    @Override
+    public void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler){
+        Future<JsonObject> future = Future.future();
+        ExampleMatcher matcher = ExampleMatcher.matching();
+        BAlummunsMemberEntity bAlummunsMemberEntity = new BAlummunsMemberEntity(params);
+        Optional<BAlummunsMemberEntity> res = bAlumnusMemberRepository.findById(bAlummunsMemberEntity.getId());
+        if (res.isPresent()){
+            future.complete(new JsonObject(Json.encode(res.get())));
+        } else {
+            future.complete(new JsonObject());
         }
         handler.handle(future);
     }

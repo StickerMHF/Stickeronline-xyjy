@@ -19,13 +19,13 @@ import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 @RouteHandler("stickeronline/alumnusMember")
-@Api(tags = "组织")
+@Api(tags = "组织成员")
 public class BAlumnusMemberHandler {
     private BAlumnusMemberService bAlumnusMemberService =
             AsyncServiceUtil.getAsyncServiceInstance(BAlumnusMemberService.class);
 
     @RouteMapping(value = "/add", method = RouteMethod.POST, order = 1)
-    @ApiOperation(value = "新增组织")
+    @ApiOperation(value = "新增组织成员")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "roleName", value = "角色名称", dataType = "String", paramType = "body", required = true),
             @ApiImplicitParam(name = "description", value = "描述", dataType = "String", paramType = "body"),
@@ -45,7 +45,7 @@ public class BAlumnusMemberHandler {
     }
 
     @RouteMapping(value = "/list", method = RouteMethod.GET, order = 1)
-    @ApiOperation(value = "查询组织列表")
+    @ApiOperation(value = "查询组织成员")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
             @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true),
@@ -62,6 +62,25 @@ public class BAlumnusMemberHandler {
                             ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
                 }
             });
+        };
+    }
+
+    @RouteMapping(value = "queryById", method = RouteMethod.GET, order = 1)
+    @ApiOperation(value = "查询成员详情")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "成员ID", dataType = "String", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> queryById(){
+        return ctx -> {
+          bAlumnusMemberService.queryById(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+              if (res.succeeded()){
+                  HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                          ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+              } else {
+                  HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                          ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+              }
+          });
         };
     }
 }

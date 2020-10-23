@@ -25,6 +25,17 @@ export const getAlumnusActivityById = (params) => {
 	return getAction(api.getAlumnusActivityById, params);
 }
 
+//获取相册列表
 export const getAlumnusPhotoList = (params) => {
 	return getAction(api.getAlumnusPhotoList, params);
+}
+
+//获取相册详情
+export const getAlumnusPhotoById = (params) => {
+	return getAction(api.getAlumnusPhotoById, params);
+}
+
+//获取成员信息
+export const getAlumnusMemberById = (params) => {
+	return getAction(api.getAlumnusMemberById, params);
 }

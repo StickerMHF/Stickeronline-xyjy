@@ -57,5 +57,11 @@ public interface BAlumnusPhotoService {
      */
     void getList(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
 
+    /**
+     * 根据ID获取数据
+     * @param params
+     * @param handler
+     */
+    void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
 }

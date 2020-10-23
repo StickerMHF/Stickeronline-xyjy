@@ -48,7 +48,7 @@
 					if(res&&res.data&&res.data.result){
 						let result = res.data.result
 						this.detail = {
-								yunshu: '/static/hm-news-detail/images/img_22946_0_0.png',
+								yunshu: result.img,
 								author: result.author,
 								like: '/static/hm-news-detail/images/img_22946_0_1.png',
 								share: '/static/hm-news-detail/images/img_22946_0_2.png',

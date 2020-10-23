@@ -48,12 +48,6 @@ public class BAlummunsMemberEntity extends BaseEntity {
     private String sex;
 
     /**
-     * 组织活动
-     */
-    @Column(name = "activity")
-    private String activity;
-
-    /**
      * 电话
      */
     @Column(name = "telephone")
@@ -82,6 +76,11 @@ public class BAlummunsMemberEntity extends BaseEntity {
      */
     @Column(name = "fid")
     private String fid;
+    /**
+     * 用户头像
+     */
+    @Column(name = "photo")
+    private String photo;
 
     public String getId() {
         return id;
@@ -105,14 +104,6 @@ public class BAlummunsMemberEntity extends BaseEntity {
 
     public void setSex(String sex) {
         this.sex = sex;
-    }
-
-    public String getActivity() {
-        return activity;
-    }
-
-    public void setActivity(String activity) {
-        this.activity = activity;
     }
 
     public String getTelephone() {
@@ -153,5 +144,13 @@ public class BAlummunsMemberEntity extends BaseEntity {
 
     public void setFid(String fid) {
         this.fid = fid;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

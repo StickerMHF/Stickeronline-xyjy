@@ -1,9 +1,7 @@
 package com.tb.service.cdxyh.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
-import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BAlumnusPhotoEntity;
 import com.tb.service.cdxyh.repository.BAlumnusPhotoRepository;
@@ -19,6 +17,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 @Component
 @AsyncServiceHandler
@@ -83,12 +82,19 @@ public class BAlumnusPhotoServiceImpl implements BAlumnusPhotoService, BaseAsync
 
     }
 
-//    @Override
-//    public void getList(JSONObject params, Handler<AsyncResult<JsonArray>> handler){
-//       Future<JsonArray> future = Future.future();
-//       ExampleMatcher matcher = ExampleMatcher.matching();
-//       BAlumnusPhotoEntity bAlumnusPhotoEntity = new BAlumnusPhotoEntity();
-//        bAlumnusPhotoRepository.
-//
-//    }
+    @Override
+    public void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        BAlumnusPhotoEntity bAlumnusPhotoEntity = new BAlumnusPhotoEntity(params);
+        Optional<BAlumnusPhotoEntity> res = bAlumnusPhotoRepository.findById(bAlumnusPhotoEntity.getId());
+        if (res.isPresent()) {
+            future.complete(new JsonObject(Json.encode(res.get())));
+        }else{
+            future.complete(new JsonObject());
+        }
+        handler.handle(future);
+    }
+
+
+
 }
