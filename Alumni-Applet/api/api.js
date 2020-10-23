@@ -7,17 +7,33 @@ const api = {
 	 */
     getNewsList: baseurl+'/stickeronline/news/list',
 	getNewsById: baseurl+'/stickeronline/news/queryById',
-    addNews: baseurl+'/stickeronline/news/sdd',
+    addNews: baseurl+'/stickeronline/news/add',
     updateNews: baseurl+'/stickeronline/news/edit',
     deleteNews: baseurl+'/stickeronline/news/delete',
 	/**
+	 * 师资力量
+	 */
+	getTeachersList: baseurl+'/stickeronline/teachers/list',
+	getTeachersById: baseurl+'/stickeronline/teachers/queryById',
+	addTeachers: baseurl+'/stickeronline/teachers/add',
+	updateTeachers: baseurl+'/stickeronline/teachers/edit',
+	deleteTeachers: baseurl+'/stickeronline/teachers/delete',
+	/**
+	 * 优秀校友
+	 */
+	getMemberList: baseurl+'/stickeronline/member/list',
+	getMemberById: baseurl+'/stickeronline/member/queryById',
+	addMember: baseurl+'/stickeronline/member/add',
+	updateMember: baseurl+'/stickeronline/member/edit',
+	deleteMember: baseurl+'/stickeronline/member/delete',
+	/**
 	 * 校友合作
 	 */
-	getCooperationList:baseurl+'/cooperation/list',
-	getCooperationById: baseurl+'/sys/login',
-	addCooperation: baseurl+'/sys/logout',
-	updateCooperation: baseurl+'/auth/forge-password',
-	deleteCooperation: baseurl+'/auth/register',
+	getCooperationList:baseurl+'/stickeronline/cooperation/list',
+	getCooperationById: baseurl+'/stickeronline/cooperation/queryById',
+	addCooperation: baseurl+'/stickeronline/cooperation/add',
+	updateCooperation: baseurl+'/stickeronline/cooperation/edit',
+	deleteCooperation: baseurl+'/stickeronline/cooperation/delete',
 	
 	/**
 	 * 组织

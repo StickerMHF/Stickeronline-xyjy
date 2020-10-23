@@ -4,7 +4,32 @@
 		{
 			"path": "pages/home/home",
 			"style": {}
+		},{
+		    "path" : "pages/anniversary/index",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
 		},
+		{
+		    "path" : "pages/cooperation/cooperation",
+		    "style" : {
+		        "enablePullDownRefresh": true,
+		        "navigationBarTitleText": ""
+		    }
+		    
+		},{
+		    "path" : "pages/teachers/teachers",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},
+		
 		{
 		    "path" : "pages/discover/discover",
 		    "style" :                                                                                    
@@ -22,10 +47,7 @@
 		    }
 		    
 		},
-		{
-			"path": "pages/index/index",
-			"style": {}
-		},
+		
 		
 		{
 			"path": "pages/home/home1",
@@ -197,29 +219,11 @@
             }
             
         },{
-            "path" : "pages/teachers/teachers",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-       
-        ,{
             "path" : "pages/donations/donations",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/cooperation/cooperation",
-            "style" : {
-                "enablePullDownRefresh": true,
-                "navigationBarTitleText": "垂直排列，无略缩图，主标题+副标题显示"
             }
             
         }
@@ -267,7 +271,16 @@
                 "enablePullDownRefresh": false
             }
             
+        } ,{
+            "path" : "pages/alumnus/goodMember",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
+        
     ],
 	"globalStyle": {
 		"mp-alipay": {
@@ -294,8 +307,6 @@
 		"selectedColor": "#3cc51f",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
-		"iconWidth":"12px",
-		"spacing":"5px",
 		"list": [{
 			"pagePath": "pages/home/home",
 			"iconPath": "static/nav/sy2x.png",

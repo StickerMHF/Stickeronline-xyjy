@@ -1,25 +1,25 @@
 <template>
-	
+
 	<view>
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
-		<!-- 刷新页面后的顶部提示框 -->
-		<view class="tips" :class="{ 'tips-ani': tipShow }">为您更新了10条最新新闻动态</view>
+
 		<!-- 基于 uni-list 的页面布局 -->
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-titles text-green1"></text> 校友合作
 				<navigator url="/pages/cooperation/add" open-type="redirect">
-				<span class="cooperation-pub">
-					<text class="lg text-gray cuIcon-roundadd" ></text>
-					<text>发布合作</text>
-				</span>
+					<span class="cooperation-pub">
+						<text class="lg text-gray cuIcon-roundadd"></text>
+						<text>发布合作</text>
+					</span>
 				</navigator>
 			</view>
 		</view>
-		
+		<!-- 刷新页面后的顶部提示框 -->
+		<view class="tips" :class="{ 'tips-ani': tipShow }">为您更新了10条最新新闻动态</view>
 		<uni-list>
 			<uni-list-item direction="column" v-for="item in lists" :key="item.id">
 				<!-- 通过header插槽定义列表的标题 -->
@@ -30,8 +30,8 @@
 				<template v-slot:body>
 					<view class="uni-list-box">
 						<view class="uni-content">
-							<view class="uni-title-sub uni-ellipsis-2">{{item.desc}}</view>
-							<view class="uni-note">{{item.useName + ' '+item.lastModifyDate}}</view>
+							<view class="uni-title-sub uni-ellipsis-2">{{item.contents}}</view>
+							<view class="uni-note">{{item.createBy?item.createBy:'管理员' + ' '+formatDate(item.createTime)}}</view>
 						</view>
 					</view>
 				</template>
@@ -43,7 +43,9 @@
 </template>
 
 <script>
-	import {getCooperationList} from '@/api/cooperation.js'
+	import {
+		getCooperationList
+	} from '@/api/cooperation.js'
 	export default {
 		data() {
 			return {
@@ -56,14 +58,13 @@
 		},
 		onLoad(options) {
 			// 初始化页面数据
-			this.title=options.title;
-			getCooperationList().then(data=>{
-				var [error, res]  = data;
-				if(res&&res.data&&res.data.data)
-				 this.lists=res.data.data;
-			})
+			this.title = options.title;
+			this.getNewsList();
 		},
 		methods: {
+			formatDate(date){
+				return getApp().formatDate(date);
+			},
 			/**
 			 * 下拉刷新回调函数
 			 */
@@ -83,6 +84,37 @@
 			 */
 			getNewsList(reload) {
 				this.status = 'loading'
+				getCooperationList().then(data => {
+					var [error, res] = data;
+					if (res && res.data.success) {
+						const tempList = res.data.result.content;
+						// this.lists = res.data.result.content;
+						// 判断是否可翻页
+						if (tempList.length === this.pageSize) {
+							this.status = 'more'
+						} else {
+							this.status = 'noMore'
+						}
+
+						if (reload) {
+							// 处理下拉加载提示框
+							this.tipShow = true;
+							clearTimeout(this.timer);
+							this.timer = setTimeout(() => {
+								this.tipShow = false;
+							}, 2000);
+							this.lists = tempList
+							// 停止刷新
+							uni.stopPullDownRefresh()
+						} else {
+							// 上拉加载后合并数据
+							this.lists = this.lists.concat(tempList)
+						}
+						if (tempList.length) {
+							this.current++
+						}
+					}
+				})
 				// 通过 clientDB 请求后台数据
 				// db.collection('opendb-news-articles')
 				// 	.where({
@@ -195,9 +227,10 @@
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
 	}
-	.cooperation-pub{
+
+	.cooperation-pub {
 		position: absolute;
 		right: 10px;
 		top: 15px;
-		}
+	}
 </style>

@@ -8,34 +8,38 @@
 		<!-- 刷新页面后的顶部提示框 -->
 		<!-- 当前弹出内容没有实际逻辑 ，可根据当前业务修改弹出提示 -->
 		<view class="tips" :class="{ 'tips-ani': tipShow }">为您更新了10条最新新闻动态</view>
-		<!-- 页面分类标题 -->
-		<uni-section title="师资力量" type="line"><button class="button-box" @click="select">切换视图</button></uni-section>
+		<view class="cu-bar bg-white solid-bottom" >
+			<view class="action">
+				<text class="cuIcon-titles text-green1"></text> 师资力量
+				<text class="lg text-gray teachers-btn" :class="waterfall?'cuIcon-sort':'cuIcon-apps'" @click="select"></text>
+			</view>
+		</view>
 		<!-- 基于 uni-list 的页面布局 -->
-		<uni-list :class="{ 'uni-list--waterfall': waterfall }">
+		<uni-list class="teachers-list" :class="{ 'uni-list--waterfall': waterfall }">
 			<!-- 通过 uni-list--waterfall 类决定页面布局方向 -->
-			<uni-list-item :border="!waterfall" class="uni-list-item--waterfall" title="自定义商品列表" v-for="item in lists" :key="item._id">
+			<uni-list-item :border="!waterfall" class="uni-list-item--waterfall teachers-item" title="自定义商品列表" v-for="item in lists" :key="item._id">
 				<!-- 通过header插槽定义列表左侧图片 -->
 				<template v-slot:header>
 					<view class="uni-thumb shop-picture" :class="{ 'shop-picture-column': waterfall }">
-						<image :src="item.goods_thumb" ></image>
+						<image :src="item.photos" ></image>
 					</view>
 				</template>
 				<!-- 通过body插槽定义商品布局 -->
 				<view slot="body" class="shop">
-					<view>
+					
 						<view class="uni-title">
 							<text class="uni-ellipsis-2">{{ item.name }}</text>
 						</view>
-						<view>
-							<text class="uni-tag hot-tag">{{ item.goods_tip }}</text>
-							<text v-for="tag in item.tag" :key="tag" class="uni-tag">{{ tag }}</text>
-						</view>
-					</view>
 					<view>
 						<view class="shop-price">
-							<text class="shop-price-text">{{ item.rank }}</text>
+						<text class="shop-price-text" style="font-size: 14px;">{{ item.rank }}</text>
+						<text class="shop-price-text" style="margin: 0 5px;">|</text>
+						<text class="shop-price-text"> {{ item.college }}</text>
 						</view>
-						<view class="uni-note">{{ item.comment_count }}访问</view>
+						<view class="uni-note">
+						<text class="shop-price-text" style="color: red;">{{ item.viewCount }}</text>
+						<text class="shop-price-text" style="margin: 0 5px;"></text>
+						访问</view>
 						
 					</view>
 				</view>
@@ -48,46 +52,19 @@
 
 <script>
 	// 引入 clientDB 相关文件
-	
+	import {
+		getTeachersList
+	} from '@/api/teachers.js'
 	export default {
 		components: {},
 		data() {
 			return {
 				lists: [{
 					name:"白琳",
-					goods_thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					goods_tip:"地质工程与测绘学院",
-					tag:[],
+					photos:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
+					college:"地质工程与测绘学院",
 					rank:"副教授",
-					comment_count:20
-				},{
-					name:"白琳",
-					goods_thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					goods_tip:"地质工程与测绘学院",
-					tag:[],
-					rank:"副教授",
-					comment_count:20
-				},{
-					name:"白琳",
-					goods_thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					goods_tip:"地质工程与测绘学院",
-					tag:[],
-					rank:"副教授",
-					comment_count:20
-				},{
-					name:"白琳",
-					goods_thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					goods_tip:"地质工程与测绘学院",
-					tag:[],
-					rank:"副教授",
-					comment_count:20
-				},{
-					name:"白琳",
-					goods_thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					goods_tip:"地质工程与测绘学院",
-					tag:[],
-					rank:"副教授",
-					comment_count:20
+					viewCount:20
 				}], // 列表数据
 				waterfall: false, // 布局方向切换
 				status: 'more', // 加载状态
@@ -99,8 +76,23 @@
 		onLoad(options) {
 			// 初始化页面数据
 			this.title=options.title;
+			this.getTeachersListData();
 		},
 		methods: {
+			getTeachersListData(sort){
+				let param = {
+					pageNo: 1,
+					pageSize: 2,
+					sort:sort?sort:'createTime'
+				};
+				getTeachersList(param).then(data => {
+					var [error, res] = data;
+					if (res && res.data.success) {
+						let ss = res.data.result.content;
+						this.lists = res.data.result.content;
+					}
+				});
+			},
 			/**
 			 * 切换商品列表布局方向
 			 */
@@ -176,7 +168,6 @@
 
 <style lang="scss">
 	@import '@/common/uni-ui.scss';
-
 	page {
 		display: flex;
 		flex-direction: column;
@@ -212,8 +203,8 @@
 	}
 
 	.shop-picture {
-		width: 110px;
-		height: 110px;
+		width: 70px;
+		height: 90px;
 	}
 
 	.shop-picture-column {
@@ -224,12 +215,12 @@
 
 	.shop-price {
 		margin-top: 5px;
-		font-size: 12px;
-		color: #ff5a5f;
+		font-size: 14px;
+		color: #a8a7a7;
 	}
 
 	.shop-price-text {
-		font-size: 16px;
+		font-size: 12px;
 	}
 
 	.hot-tag {
@@ -303,5 +294,15 @@
 
 			/* #endif */
 		}
+	}
+	.teachers-btn{
+		position: absolute;
+		    right: 10px;
+	}
+	.teachers-list{
+		background-color: transparent;
+	}
+	.teachers-item{
+		margin: 5px 0;
 	}
 </style>

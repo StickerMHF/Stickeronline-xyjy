@@ -41,12 +41,12 @@
 					{{item.name}}
 				</view>
 			</scroll-view>
-			<view class="phm-card cu-card case no-card" v-for="(item,index) in newsList">
+			<view class="phm-card cu-card case no-card" v-for="(item,index) in newsList" >
 				<navigator :url="'/pages/home/newsDetail/newsDetail?id='+item.id">
 				<view class="cu-item shadow">
 					<view class="image">
-						<image :src="test[0]" mode="widthFix"></image>
-						<view class="cu-bar bg-shadeBottom"> <text class="text-cut">{{item.contents}}</text></view>
+						<image :src="JSON.parse(item.thumb)[0]" mode="widthFix"></image>
+						<view class="cu-bar bg-shadeBottom"> <text class="text-cut">{{item.desc}}</text></view>
 					</view>
 					<view class="cu-list ">
 						<view class="cu-item phm-zx-item">
@@ -111,9 +111,10 @@
 					{
 						icon: '/static/home/xqzt2x.png',
 						txt: '校庆专题',
-						page: '/pages/home/news/news'
+						page: '/pages/anniversary/index'
 					},
 					{
+						id: 'ysjs',
 						icon: '/static/home/ysjs2x.png',
 						txt: '院史介绍',
 						page: '/pages/schoolHistory/schoolHistory'
@@ -131,7 +132,7 @@
 					{
 						icon: '/static/home/yxxy2x.png',
 						txt: '优秀校友',
-						page: '/pages/home/news/news'
+						page: '/pages/alumnus/goodMember'
 					},
 					{
 						icon: '/static/home/dlqq2x.png',
@@ -153,15 +154,14 @@
 					name: '推荐',
 					id: 1
 				}],
-				test:["http://cdxyh.stickeronline.cn/banner12x.png"],
 				newsList: [{
-					thumb: '/static/home/banner22x.png',
+					thumb: '["/static/home/banner22x.png"]',
 					title: '学生工作业务能力专题培训举办',
 					contents: '我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。',
 					createTime: '2020-10-18',
 					viewCount: 23
 				}, {
-					thumb: '/static/home/banner32x.png',
+					thumb: '["/static/home/banner32x.png"]',
 					title: '正义天使 凯尔',
 					contents: '',
 					createTime: '2020-10-18',
@@ -195,9 +195,9 @@
 				debugger
 				this.tabCur = e.currentTarget.dataset.id;
 				if(this.tabCur==1){
-					this.getNewsList("viewCount");
+					this.getNewsListData("viewCount");
 				}else{
-					this.getNewsList();
+					this.getNewsListData();
 				}
 			},
 			menuClickHandler(value) {
@@ -207,6 +207,11 @@
 						success(res) {
 							// 打开成功
 						}
+					})
+				}
+				if (value && value == 'ysjs') {
+					uni.switchTab({
+						url: '/pages/schoolHistory/schoolHistory'
 					})
 				}
 
