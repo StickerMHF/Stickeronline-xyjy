@@ -75,6 +75,7 @@
 		methods: {
 			isLoading(e) {
 				this.isLoad = e.detail.value;
+				console.log(this.isLoad)
 			},
 			LoadModal(e) {
 				this.loadModal = true;

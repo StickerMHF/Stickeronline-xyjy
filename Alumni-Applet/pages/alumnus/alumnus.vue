@@ -4,7 +4,7 @@
 		<cu-custom bgColor="bg-gradual-green1" :isBack="false"><block slot="content">校友</block></cu-custom>
 		<view >
 			<scroll-view scroll-x class="bg-white nav text-center" scroll-with-animation>
-				<view class="cu-item" :class="item.id==tabCur?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect"
+				<view class="cu-item" :class="item.id==p.type?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect"
 				 :data-id="item.id">
 					{{item.name}}
 				</view>
@@ -66,10 +66,10 @@
 		components: {},
 		data() {
 			return {
-				tabCur:1,
+				tabCur:'all',
 				current: 0,
 				tabList: [{
-					id: 1,
+					id: 'all',
 					name: '全部'
 				}, {
 					id: 2,
@@ -93,39 +93,48 @@
 				waterfall: false, // 布局方向切换
 				status: 'more', // 加载状态
 				tipShow: false, // 是否显示顶部提示框
-				pageSize: 20, // 每页显示的数据条数
-				current: 1 // 当前页数
+				// pageSize: 10, // 每页显示的数据条数
+				// current: 1, // 当前页数
+				totalPages: null,  //总页数
+				params: {
+					pageNo: 1,// 当前页数
+					pageSize: 10,// 每页显示的数据条数
+					type: 'all'
+				}
 			};
 		},
 		onLoad(options) {
 			// 初始化页面数据
 			this.title=options.title;
-			let params = {
-				pageNo: this.current,
-				pageSize: this.pageSize,
-				type: ''
-			}
-			this.getAlumnusList(params);
+			// let params = {
+			// 	pageNo: this.current,
+			// 	pageSize: this.pageSize,
+			// 	type: ''
+			// }
+			this.getAlumnusList(this.params);
 		},
 		methods: {
 			getAlumnusList(params){
+				console.log(params)
 				getAlumnusList(params).then(data=>{
-					console.log(data)
 					var [error, res] = data;
 					if (res&&res.data&&res.data.result) {
 						this.lists = res.data.result.content;
-						// console.log(this.lists)
-					}
+						let pageable = res.data.result.pageable;
+						this.params.pageNo = pageable.pageNumber + 1;
+						this.totalPages = res.data.result.totalPages;
+						if(this.totalPages>this.params.pageNo){
+							this.status = 'more';
+						}else{
+							this.status = 'noMore';
+						}
+					}					
 				})
 			},
 			tabSelect(e) {
-				this.tabCur = e.currentTarget.dataset.id;
-				var params = {
-					pageNo: this.current,
-					pageSize: this.pageSize,
-					type: this.tabCur
-				}
-				this.getAlumnusList(params);
+				this.params.type = e.currentTarget.dataset.id;
+				this.params.pageNo = 1;
+				this.getAlumnusList(this.params);
 			},
 			/**
 			 * 切换商品列表布局方向
@@ -144,14 +153,20 @@
 			 * 上拉加载回调函数
 			 */
 			onReachBottom() {
-				// this.getNewsList();
+				this.getNewsList();
 			},
 			/**
 			 * 获取页面数据
 			 * @param {Object} reload 参数reload值为true时执行列表初始化逻辑，值为false时执行追加下一页数据的逻辑。默认为false
 			 */
-			getNewsList(reload) {
-				this.status = 'loading'
+			getNewsList(reload) {				
+				if(this.totalPages>this.params.pageNo){
+					this.status = 'loading';
+					this.params.pageNo += 1;
+					this.getAlumnusList(this.params);					
+				}else{
+					this.status = 'noMore';
+				}			
 
 				// db.collection('opendb-mall-goods')
 				// 	.where({

@@ -7,7 +7,7 @@ import com.sticker.online.core.model.ReplyObj;
 import com.sticker.online.core.utils.AsyncServiceUtil;
 import com.sticker.online.core.utils.HttpUtil;
 import com.sticker.online.tools.common.utils.CommonUtil;
-import com.tb.service.cdxyh.service.BOrganizationService;
+import com.tb.service.cdxyh.service.BAlumnusService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -18,11 +18,11 @@ import io.vertx.ext.web.RoutingContext;
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
 
-@RouteHandler("stickeronline/organization")
+@RouteHandler("stickeronline/alumnus")
 @Api(tags = "组织")
-public class BOrganizationHandler {
-    private BOrganizationService bOrganizationService =
-            AsyncServiceUtil.getAsyncServiceInstance(BOrganizationService.class);
+public class BAlumnusHandler {
+    private BAlumnusService bAlumnusService =
+            AsyncServiceUtil.getAsyncServiceInstance(BAlumnusService.class);
 
     @RouteMapping(value = "/add", method = RouteMethod.POST, order = 1)
     @ApiOperation(value = "新增组织")
@@ -32,7 +32,7 @@ public class BOrganizationHandler {
     })
     public Handler<RoutingContext> add() {
         return ctx -> {
-            bOrganizationService.add(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+            bAlumnusService.add(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
                 if (res.succeeded()) {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
@@ -53,7 +53,7 @@ public class BOrganizationHandler {
     })
     public Handler<RoutingContext> queryPageList() {
         return ctx -> {
-            bOrganizationService.queryPageList(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+            bAlumnusService.queryPageList(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
                 if (res.succeeded()) {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
