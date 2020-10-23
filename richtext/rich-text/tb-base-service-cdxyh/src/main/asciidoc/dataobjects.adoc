@@ -1,57 +1,5 @@
 = Cheatsheets
 
-[[BCooperationEntity]]
-== BCooperationEntity
-
-
-[cols=">25%,25%,50%"]
-[frame="topbot"]
-|===
-^|Name | Type ^| Description
-|[[contact]]`@contact`|`String`|-
-|[[contents]]`@contents`|`String`|-
-|[[createBy]]`@createBy`|`String`|-
-|[[id]]`@id`|`String`|-
-|[[title]]`@title`|`String`|-
-|[[updateBy]]`@updateBy`|`String`|-
-|===
-
-[[BMemberEntity]]
-== BMemberEntity
-
-
-[cols=">25%,25%,50%"]
-[frame="topbot"]
-|===
-^|Name | Type ^| Description
-|[[contact]]`@contact`|`String`|-
-|[[createBy]]`@createBy`|`String`|-
-|[[desc]]`@desc`|`String`|-
-|[[id]]`@id`|`String`|-
-|[[name]]`@name`|`String`|-
-|[[sex]]`@sex`|`String`|-
-|[[updateBy]]`@updateBy`|`String`|-
-|===
-
-[[BOrganizationEntity]]
-== BOrganizationEntity
-
-
-[cols=">25%,25%,50%"]
-[frame="topbot"]
-|===
-^|Name | Type ^| Description
-|[[activity]]`@activity`|`String`|-
-|[[createBy]]`@createBy`|`String`|-
-|[[id]]`@id`|`String`|-
-|[[liveness]]`@liveness`|`Number (Integer)`|-
-|[[member]]`@member`|`Number (Integer)`|-
-|[[name]]`@name`|`String`|-
-|[[thumb]]`@thumb`|`String`|-
-|[[type]]`@type`|`String`|-
-|[[updateBy]]`@updateBy`|`String`|-
-|===
-
 [[BTeachersEntity]]
 == BTeachersEntity
 
@@ -69,6 +17,7 @@
 |[[email]]`@email`|`String`|-
 |[[id]]`@id`|`String`|-
 |[[name]]`@name`|`String`|-
+|[[photos]]`@photos`|`String`|-
 |[[rank]]`@rank`|`String`|-
 |[[sex]]`@sex`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-

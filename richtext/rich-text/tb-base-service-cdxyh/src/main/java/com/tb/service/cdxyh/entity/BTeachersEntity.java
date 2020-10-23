@@ -82,7 +82,11 @@ public class BTeachersEntity extends BaseEntity {
      */
     @Column(name = "bgdd")
     private String bgdd;
-
+    /**
+     * 照片
+     */
+    @Column(name = "photos")
+    private String photos;
     /**
      * 浏览量
      */
@@ -175,5 +179,13 @@ public class BTeachersEntity extends BaseEntity {
 
     public void setViewCount(Integer viewCount) {
         this.viewCount = viewCount;
+    }
+
+    public String getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String photos) {
+        this.photos = photos;
     }
 }

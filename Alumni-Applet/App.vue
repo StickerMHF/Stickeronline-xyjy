@@ -3,6 +3,7 @@
 	import {
 		getUserOpenid
 	} from '@/api/user.js'
+	import {dateUtil} from '@/utils/dateUtil.js'
 	export default {
 		data() {
 			return {
@@ -146,6 +147,7 @@
 								var [error, res] = data;
 								if (res && res.data.success && res.data.data.openid) {
 									that.openid = res.data.data.openid
+									uni.setStorageSync('openid', that.openid);
 									uni.setStorage({
 										key: 'openid',
 										data: res.data.openid,
@@ -196,6 +198,9 @@
 						}
 					});
 				}
+			},
+			formatDate(date){
+				return dateUtil.formatDate(date);
 			}
 		}
 
