@@ -13,12 +13,14 @@
 			</block>
 		</cu-custom>
 		<view class="discover-group " v-if="isSelect">
-			<ul>
-				<li>sss</li>
-				<li>sss</li>
-				<li>sss</li>
-				<li>sss</li>
-			</ul>
+			<view class="cu-bar bg-white solid-bottom">
+				<view class='action'>
+					<text class='cuIcon-title text-blue'></text>默认分组
+				</view>
+			</view>
+			<view class="padding bg-white solid-bottom">
+				<view :class="item.active?'cu-tag radius attention active':'cu-tag radius attention'" v-for="(item, i) in attentionList">{{item.name}}</view>
+			</view>
 		</view>
 		<view class="discover-content">
 			<moments :list="momentsList"></moments>
@@ -40,18 +42,71 @@
 <script>
 	import uCharts from '@/components/u-charts/u-charts.js';
 	import moments from '@/components/moments/moments.vue';
-	import {getUserInfo1} from '@/api/user.js'
-	var _self='';
+	import {
+		getUserInfo1
+	} from '@/api/user.js'
+	var _self = '';
 	export default {
 		data() {
 			return {
 				cWidth: '',
 				cHeight: '',
-				pixelRatio:1,
-				canvaMap:null,
+				pixelRatio: 1,
+				canvaMap: null,
 				currentfromSelect: '1',
 				currentSelect: '1',
 				isSelect: false,
+				attentionList: [{
+						name: "道路桥梁与渡河工程",
+						active: true
+					},
+					{
+						name: "车辆工程",
+						active: false
+					}, {
+						name: "能源与动力工程",
+						active: true
+					}, {
+						name: "物流工程",
+						active: false
+					}, {
+						name: "汽车服务工程",
+						active: true
+					}, {
+						name: "机械工程",
+						active: false
+					}, {
+						name: "工商管理",
+						active: true
+					},  {
+						name: "市场营销",
+						active: true
+					}, {
+						name: "会计学",
+						active: true
+					},{
+						name: "工程管理",
+						active: true
+					},{
+						name: "信息管理与信息系统",
+						active: true
+					}, {
+						name: "经济统计学",
+						active: true
+					}, {
+						name: "国际经济与贸易",
+						active: true
+					}, {
+						name: "电气工程及其自动化",
+						active: true
+					}, {
+						name: "机器人工程",
+						active: true
+					}, {
+						name: "电子信息工程",
+						active: true
+					}
+				],
 				momentsList: [{
 					username: "凯尔",
 					publishDate: "2019年12月3日",
@@ -76,28 +131,28 @@
 					}, {
 						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
 					}],
-					viewCount:20,
-					likeCount:10,
-					commentCount:5,
-					commentList:[{
-						url:"https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png",
-						name:"莫甘娜",
-						content:"凯尔，你被自己的光芒变的盲目。",
-						userId:"1",
-						commentTime:"2018年12月4日",
-						replyList:[{
-							name:"凯尔",
-							content:"妹妹，你在帮他们给黑暗找借口吗?",
-							userId:"",
-							replyTime:""
+					viewCount: 20,
+					likeCount: 10,
+					commentCount: 5,
+					commentList: [{
+						url: "https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png",
+						name: "莫甘娜",
+						content: "凯尔，你被自己的光芒变的盲目。",
+						userId: "1",
+						commentTime: "2018年12月4日",
+						replyList: [{
+							name: "凯尔",
+							content: "妹妹，你在帮他们给黑暗找借口吗?",
+							userId: "",
+							replyTime: ""
 						}]
-					},{
-						url:"https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg",
-						name:"凯尔",
-						content:"妹妹，如果不是为了飞翔，我们要这翅膀有什么用?",
-						userId:"2",
-						commentTime:"2018年12月4日",
-						replyList:[]
+					}, {
+						url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg",
+						name: "凯尔",
+						content: "妹妹，如果不是为了飞翔，我们要这翅膀有什么用?",
+						userId: "2",
+						commentTime: "2018年12月4日",
+						replyList: []
 					}]
 				}]
 			}
@@ -118,10 +173,10 @@
 			this.cWidth = uni.upx2px(750);
 			this.cHeight = uni.upx2px(750);
 			// this.getServerData();
-			getUserInfo1().then(data=>{
-				var [error, res]  = data;
+			getUserInfo1().then(data => {
+				var [error, res] = data;
 			})
-			
+
 		},
 		methods: {
 			selectHandler(value) {
@@ -198,17 +253,26 @@
 </script>
 
 <style>
+	.attention {
+		margin: 5px 5px 5px 5px;
+	}
+
+	.attention.active {
+		color: darkorange;
+	}
+
 	.qiun-charts {
 		width: 750upx;
 		height: 750upx;
 		background-color: #FFFFFF;
 	}
-	
+
 	.charts {
 		width: 750upx;
 		height: 750upx;
 		background-color: #FFFFFF;
 	}
+
 	.discover-ul {
 		white-space: nowrap;
 		list-style: none;

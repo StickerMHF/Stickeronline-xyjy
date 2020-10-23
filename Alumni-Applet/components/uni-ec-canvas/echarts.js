@@ -48207,7 +48207,7 @@ var MapSeries = SeriesModel.extend({
             }
         }
 
-        return seriesNames.join(', ') + '<br />'
+        return seriesNames.join(', ') + '\n'
             + encodeHTML(name + ' : ' + formattedValue);
     },
 
@@ -87143,7 +87143,7 @@ var MarkerModel = extendComponentModel({
         var name = data.getName(dataIndex);
         var html = encodeHTML$1(this.name);
         if (value != null || name) {
-            html += '<br />';
+            html += '\n';
         }
         if (name) {
             html += encodeHTML$1(name);
