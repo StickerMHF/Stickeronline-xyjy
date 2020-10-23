@@ -38,6 +38,23 @@ const api = {
 	/**
 	 * 组织
 	 */
-	getAlumnusList: baseurl+'/stickeronline/organization/list',
+	getAlumnusList: baseurl+'/stickeronline/alumnus/list',
+	//资讯
+	getAlumnusNewsList: baseurl+'/stickeronline/alumnusNews/list',
+	//资讯详情
+	getAlumnusNewsById: baseurl+'/stickeronline/alumnusNews/queryById',
+	//获取活动列表
+	getAlumnusActivityList: baseurl+'/stickeronline/alumnusActivity/list',
+	//获取活动详情
+	getAlumnusActivityById: baseurl+'/stickeronline/alumnusActivity/queryById',
+	
+	//获取相册列表
+	getAlumnusPhotoList: baseurl+'/stickeronline/alumnusPhoto/list',
+	//获取相册详情
+	getAlumnusPhotoById: baseurl+'/stickeronline/alumnusPhoto/queryById',
+	
+	//获取组织成员信息
+	getAlumnusMemberById: baseurl+'/stickeronline/alumnusMember/queryById'
+	
 }
 export default api
