@@ -125,21 +125,23 @@
 |[[updateBy]]`@updateBy`|`String`|-
 |===
 
-[[BNewsEntity]]
-== BNewsEntity
+[[BOrganizationEntity]]
+== BOrganizationEntity
 
 
 [cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[contents]]`@contents`|`String`|-
+|[[activity]]`@activity`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
 |[[id]]`@id`|`String`|-
+|[[liveness]]`@liveness`|`Number (Integer)`|-
+|[[member]]`@member`|`Number (Integer)`|-
+|[[name]]`@name`|`String`|-
 |[[thumb]]`@thumb`|`String`|-
-|[[title]]`@title`|`String`|-
+|[[type]]`@type`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
-|[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 
 [[BTeachersEntity]]
