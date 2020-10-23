@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="header">
-			<view class="bg" style="background-image:url(../../static/personal/background.png);">
+			<view class="bg" style="background-image:url(http://www.imapway.cn/Alumni/static/personal/background.png);">
 				<view class="box">
 					<view class="box-hd">
 						<view class="avator">
@@ -11,15 +11,15 @@
 					</view>
 					<view class="box-bd">
 						<view class="item">
-							<view class="icon"><img src="../../static/personal/wdgz2x.png"></view>
+							<view class="icon"><img src="http://www.imapway.cn/Alumni/static/personal/wdgz2x.png"></view>
 							<view class="text">我的关注</view>
 						</view>
 						<view class="item">
-							<view class="icon"><img src="../../static/personal/sc2x.png"></view>
+							<view class="icon"><img src="http://www.imapway.cn/Alumni/static/personal/sc2x.png"></view>
 							<view class="text">我的收藏</view>
 						</view>
 						<view class="item">
-							<view class="icon"><img src="../../static/personal/wdzz2x.png"></view>
+							<view class="icon"><img src="http://www.imapway.cn/Alumni/static/personal/wdzz2x.png"></view>
 							<view class="text">我的圈子</view>
 						</view>
 					</view>
@@ -31,7 +31,7 @@
 				<view class="li noborder" >
 					<view class="icon"><image :src="item.icon"></image></view>
 					<view class="text">{{item.name}}</view>
-					<image class="to" src="../../static/user/to.png"></image>
+					<image class="to" src="http://www.imapway.cn/Alumni/static/user/to.png"></image>
 				</view>
 			</view>
 			
@@ -49,26 +49,26 @@
 					city: "Xian",
 					province: "Shannxi",
 					country: "China",
-					avatarUrl: "../../static/user/face.jpg"
+					avatarUrl: "http://www.imapway.cn/Alumni/static/user/face.jpg"
 				},
 				menuList:[{
 					name:"个人信息",
-					icon:"../../static/personal/grxx2x.png"
+					icon:"http://www.imapway.cn/Alumni/static/personal/grxx2x.png"
 				},{
 					name:"我的组织",
-					icon:"../../static/personal/wdzz2x.png"
+					icon:"http://www.imapway.cn/Alumni/static/personal/wdzz2x.png"
 				},{
 					name:"我的关注",
-					icon:"../../static/personal/wdgz2x.png"
+					icon:"http://www.imapway.cn/Alumni/static/personal/wdgz2x.png"
 				},{
 					name:"我的评论",
-					icon:"../../static/personal/wdpl2x.png"
+					icon:"http://www.imapway.cn/Alumni/static/personal/wdpl2x.png"
 				},{
 					name:"收藏",
-					icon:"../../static/personal/sc2x.png"
+					icon:"http://www.imapway.cn/Alumni/static/personal/sc2x.png"
 				},{
 					name:"设置",
-					icon:"../../static/personal/sz2x.png"
+					icon:"http://www.imapway.cn/Alumni/static/personal/sz2x.png"
 				}]
 			};
 		},

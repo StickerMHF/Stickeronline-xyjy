@@ -10,11 +10,11 @@
 							<view class="time">{{ item.create_time }}</view>
 						</view>
 						<view class="right" v-if="item.comment_count > 0">
-							<image src="/static/images/icon_comment.png"></image>
+							<image src="http://www.imapway.cn/Alumni/static/images/icon_comment.png"></image>
 							<text>{{ item.comment_count }}</text>
 						</view>
 						<view class="right view" v-else>
-							<image src="/static/images/icon_view.png"></image>
+							<image src="http://www.imapway.cn/Alumni/static/images/icon_view.png"></image>
 							<text>{{ item.read }}</text>
 						</view>
 					</view>

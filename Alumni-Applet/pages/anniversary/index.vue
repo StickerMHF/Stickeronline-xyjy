@@ -4,14 +4,16 @@
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
-		<view class="anniversary_content" style="background-image:url(../../static/anniversary/background.png);">
+		<view class="anniversary_content" style="background-image:url(http://www.imapway.cn/Alumni/static/anniversary/background.png);">
 			<view class="anniversary_menu">
 				<view class="grid col-3 grid-square">
 					<view class="anniversary_item" v-for="(item,index) in menu" :key="index" >
+						<navigator :url="item.page+'?title='+item.title">
 						<view class="anniversary_item_img" :style="'background-image:url('+item.url+');'"></view>
 						<view class="anniversary_item_text">
 							{{item.title}}
 						</view>
+						</navigator>
 					</view>
 				</view>
 			</view>
@@ -25,28 +27,34 @@
 			return {
 				title: "",
 				menu:[{
-					url:"/static/anniversary/xqzx2x.png",
-					title:"校庆资讯"
+					url:"http://www.imapway.cn/Alumni/static/anniversary/xqzx2x.png",
+					title:"校庆资讯",
+					page:"/pages/anniversary/news/news"
 				},
 				{
-					url:"/static/anniversary/xqhd2x.png",
-					title:"校庆活动"
+					url:"http://www.imapway.cn/Alumni/static/anniversary/xqhd2x.png",
+					title:"校庆活动",
+					page:"/pages/anniversary/activity/activity"
 				},
 				{
-					url:"/static/anniversary/xqzf2x.png",
-					title:"校庆祝福"
+					url:"http://www.imapway.cn/Alumni/static/anniversary/xqzf2x.png",
+					title:"校庆祝福",
+					page:"/pages/anniversary/wish/wish"
 				},
 				{
-					url:"/static/anniversary/xqtx2x.png",
-					title:"校庆头像"
+					url:"http://www.imapway.cn/Alumni/static/anniversary/xqtx2x.png",
+					title:"校庆头像",
+					page:"/pages/anniversary/headLogo/headLogo"
 				},
 				{
-					url:"/static/anniversary/dlqq2x.png",
-					title:"点亮全球"
+					url:"http://www.imapway.cn/Alumni/static/anniversary/dlqq2x.png",
+					title:"点亮全球",
+					page:"/pages/anniversary/footprint/footprint"
 				},
 				{
-					url:"/static/anniversary/zpzj2x.png",
-					title:"照片征集"
+					url:"http://www.imapway.cn/Alumni/static/anniversary/zpzj2x.png",
+					title:"照片征集",
+					page:"/pages/anniversary/photos/photos"
 				}]
 			}
 		},

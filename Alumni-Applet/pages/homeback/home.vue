@@ -2,12 +2,12 @@
 	<view class="page_edu">
 		<view class="page_edu_header">
 			<view class="header">
-				<image src="/static/icon_main.png" class="btn"></image>
+				<image src="http://www.imapway.cn/Alumni/static/icon_main.png" class="btn"></image>
 				<view class="input">
-					<image src="/static/search.png" class="search"></image>
+					<image src="http://www.imapway.cn/Alumni/static/search.png" class="search"></image>
 					<input type="text" value="" placeholder="搜索" />
 				</view>
-				<image src="/static/msg.png" class="btn"></image>
+				<image src="http://www.imapway.cn/Alumni/static/msg.png" class="btn"></image>
 			</view>
 			<view class="header_content">
 				<view class="left">
@@ -15,7 +15,7 @@
 					<text class="sub_title">读懂考官套路，轻松备考面试</text>
 				</view>
 				<view>
-					<image src="/static/right.png" style="width: 131px;height: 122px;"></image>
+					<image src="http://www.imapway.cn/Alumni/static/right.png" style="width: 131px;height: 122px;"></image>
 				</view>
 			</view>
 		</view>
@@ -43,7 +43,7 @@
 					<text class="title">教资面试课上线</text>
 					<text class="sub_title">老用户现实立减100元</text>
 				</view>
-				<image src="/static/tag.png" class="bg"></image>
+				<image src="http://www.imapway.cn/Alumni/static/tag.png" class="bg"></image>
 			</view>
 		</view>
 		<scroll-view scroll-x="true" class="slider">
@@ -70,43 +70,43 @@
 			return {
 				menus: [{
 						bg: 'linear-gradient(0deg,rgba(9,216,162,1),rgba(90,242,217,1))',
-						icon: '/static/graduation.png',
+						icon: 'http://www.imapway.cn/Alumni/static/graduation.png',
 						txt: '同伴管',
 						isFree: true
 					},
 					{
 						bg: 'linear-gradient(0deg,rgba(251,184,35,1),rgba(255,228,40,1))',
-						icon: '/static/live.png',
+						icon: 'http://www.imapway.cn/Alumni/static/live.png',
 						txt: '直播课',
 						isFree: false
 					},
 					{
 						bg: 'linear-gradient(0deg,rgba(255,126,34,1),rgba(240,184,27,1))',
-						icon: '/static/emblem.png',
+						icon: 'http://www.imapway.cn/Alumni/static/emblem.png',
 						txt: '优选课',
 						isFree: true
 					},
 					{
 						bg: 'linear-gradient(0deg,rgba(9,177,252,1),rgba(24,200,255,1))',
-						icon: '/static/question_bank.png',
+						icon: 'http://www.imapway.cn/Alumni/static/question_bank.png',
 						txt: '智能题库',
 						isFree: true
 					}
 				],
 				second_menus: [{
-						icon: '/static/exam.png',
+						icon: 'http://www.imapway.cn/Alumni/static/exam.png',
 						txt: '考试教案'
 					},
 					{
-						icon: '/static/textbook.png',
+						icon: 'http://www.imapway.cn/Alumni/static/textbook.png',
 						txt: '教材教案',
 					},
 					{
-						icon: '/static/book_ticket.png',
+						icon: 'http://www.imapway.cn/Alumni/static/book_ticket.png',
 						txt: '青书券'
 					},
 					{
-						icon: '/static/more.png',
+						icon: 'http://www.imapway.cn/Alumni/static/more.png',
 						txt: '全部课程'
 					}
 				],
@@ -116,7 +116,7 @@
 						mainTeacher: '小A',
 						subTitle: '标题名称',
 						subColor: '#15639F',
-						icon: '/static/test2.png',
+						icon: 'http://www.imapway.cn/Alumni/static/test2.png',
 						isFree: true
 					},
 					{
@@ -125,7 +125,7 @@
 						mainTeacher: '小B',
 						subTitle: '标题名称',
 						subColor: '#07B77B',
-						icon: '/static/test.png',
+						icon: 'http://www.imapway.cn/Alumni/static/test.png',
 						isFree: false
 					},
 					{
@@ -134,7 +134,7 @@
 						mainTeacher: '小A',
 						subTitle: '标题名称',
 						subColor: '#15639F',
-						icon: '/static/test2.png',
+						icon: 'http://www.imapway.cn/Alumni/static/test2.png',
 						isFree: true
 					}
 				]

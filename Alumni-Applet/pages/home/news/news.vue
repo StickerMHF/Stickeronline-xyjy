@@ -51,7 +51,7 @@
 		data() {
 			return {
 				lists: [{
-					thumb: "['/static/home/banner22x.png']",
+					thumb: "['http://www.imapway.cn/Alumni/static/home/banner22x.png']",
 					title: '学生工作业务能力专题培训举办',
 					contents: '我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。',
 					createBy: "sticker",

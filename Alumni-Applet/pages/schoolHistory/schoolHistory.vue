@@ -6,7 +6,7 @@
 		</cu-custom>
 
 		<view class="sch-his">
-			<view class="bg-img bg-mask flex align-center" style="background-image: url('/static/home/banner22x.png');height: 300upx;background-size: 100% 100%;"></view>
+			<view class="bg-img bg-mask flex align-center" style="background-image: url('http://www.imapway.cn/Alumni/static/home/banner22x.png');height: 300upx;background-size: 100% 100%;"></view>
 			<scroll-view scroll-x class="bg-white nav text-center">
 				<view class="cu-item" :class="index==tabCur?'text-green1 cur':''" v-for="(item,index) in tabList" :key="item.id" @tap="tabSelect"
 				 :data-id="item.id">

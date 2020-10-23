@@ -79,7 +79,7 @@
 </template>
 
 <script>
-	import eMap from "../component/map/index"
+	import eMap from "@/pages/map/index.vue"
 	import {dateUtil} from '@/utils/dateUtil.js'
 	import {
 		getNewsList
@@ -93,55 +93,55 @@
 				swiperList: [{
 					id: 0,
 					type: 'image',
-					url: '/static/home/banner12x.png'
+					url: 'http://www.imapway.cn/Alumni/static/home/banner12x.png'
 				}, {
 					id: 1,
 					type: 'image',
-					url: '/static/home/banner22x.png',
+					url: 'http://www.imapway.cn/Alumni/static/home/banner22x.png',
 				}, {
 					id: 2,
 					type: 'image',
-					url: '/static/home/banner32x.png'
+					url: 'http://www.imapway.cn/Alumni/static/home/banner32x.png'
 				}],
 				menus: [{
-						icon: '/static/home/dcxw2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/dcxw2x.png',
 						txt: '地测新闻',
 						page: '/pages/home/news/news'
 					},
 					{
-						icon: '/static/home/xqzt2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/xqzt2x.png',
 						txt: '校庆专题',
 						page: '/pages/anniversary/index'
 					},
 					{
 						id: 'ysjs',
-						icon: '/static/home/ysjs2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/ysjs2x.png',
 						txt: '院史介绍',
 						page: '/pages/schoolHistory/schoolHistory'
 					},
 					{
-						icon: '/static/home/szll2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/szll2x.png',
 						txt: '师资力量',
 						page: '/pages/teachers/teachers'
 					},
 					{
-						icon: '/static/home/xyhz2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/xyhz2x.png',
 						txt: '校友合作',
 						page: '/pages/cooperation/cooperation'
 					},
 					{
-						icon: '/static/home/yxxy2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/yxxy2x.png',
 						txt: '优秀校友',
 						page: '/pages/alumnus/goodMember'
 					},
 					{
-						icon: '/static/home/dlqq2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/dlqq2x.png',
 						txt: '点亮全球',
-						page: '/pages/home/news/news'
+						page: '/pages/anniversary/footprint/footprint'
 					},
 					{
 						id: 'xyjz',
-						icon: '/static/home/xyjz2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/xyjz2x.png',
 						txt: '校友捐赠',
 						page: '/pages/donations/donations1'
 					}
@@ -155,13 +155,13 @@
 					id: 1
 				}],
 				newsList: [{
-					thumb: '["/static/home/banner22x.png"]',
+					thumb: '["http://www.imapway.cn/Alumni/static/home/banner22x.png"]',
 					title: '学生工作业务能力专题培训举办',
 					contents: '我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。',
 					createTime: '2020-10-18',
 					viewCount: 23
 				}, {
-					thumb: '["/static/home/banner32x.png"]',
+					thumb: '["http://www.imapway.cn/Alumni/static/home/banner32x.png"]',
 					title: '正义天使 凯尔',
 					contents: '',
 					createTime: '2020-10-18',
