@@ -19,7 +19,7 @@
 						dataRange: {
 							show: false,  //是否显示控制按钮
 							min: 0,
-							max: 1000,
+							max: 300,
 							text: ['High', 'Low'],
 							realtime: true,
 							calculable: true,
@@ -65,28 +65,43 @@
 								coordinateSystem: 'geo' // 对应上方配置
 							},
 							{
-								name: '数量', // 浮动框的标题
+								name: '签约人数', // 浮动框的标题
 								type: 'map',
 								geoIndex: 0,
-								data: [{
-									"name": "北京",
-									"value": 999
-								}, {
-									"name": "上海",
-									"value": 142
-								}, {
-									"name": "黑龙江",
-									"value": 44
-								}, {
-									"name": "深圳",
-									"value": 92
-								}, {
-									"name": "湖北",
-									"value": 810
-								}, {
-									"name": "四川",
-									"value": 453
-								}]
+								data: [{name:"陕西",value:211},
+										{name:"湖北",value:57},
+										{name:"北京",value:37},
+										{name:"广东",value:34},
+										{name:"四川",value:26},
+										{name:"江苏",value:21},
+										{name:"山东",value:21},
+										{name:"上海",value:17},
+										{name:"浙江",value:15},
+										{name:"河南",value:15},
+										{name:"湖南",value:15},
+										{name:"广西",value:12},
+										{name:"重庆",value:11},
+										{name:"河北",value:10},
+										{name:"安徽",value:10},
+										{name:"天津",value:9},
+										{name:"甘肃",value:9},
+										{name:"贵州",value:8},
+										{name:"云南",value:7},
+										{name:"新疆",value:6},
+										{name:"辽宁",value:5},
+										{name:"山西",value:4},
+										{name:"吉林",value:3},
+										{name:"黑龙江",value:3},
+										{name:"江西",value:3},
+										{name:"西藏",value:3},
+										{name:"内蒙古",value:2},
+										{name:"福建",value:2},
+										{name:"青海",value:1},
+										{name:"宁夏",value:1},
+										{name:"海南",value:0},
+										{name:"台湾",value:0},
+										{name:"香港",value:0},
+										{name:"澳门",value:0}]
 							}
 						]
 					}
