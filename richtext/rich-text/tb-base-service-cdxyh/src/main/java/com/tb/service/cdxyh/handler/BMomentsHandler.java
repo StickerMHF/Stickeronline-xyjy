@@ -22,14 +22,16 @@ import static java.net.HttpURLConnection.HTTP_OK;
 @RouteHandler("stickeronline/moments")
 @Api(tags = "朋友圈动态表")
 public class BMomentsHandler {
-    private BMomentsService bMomentsService =
-            AsyncServiceUtil.getAsyncServiceInstance(BMomentsService.class);
+    private BMomentsService bMomentsService = AsyncServiceUtil.getAsyncServiceInstance(BMomentsService.class);
 
     @RouteMapping(value = "/add", method = RouteMethod.POST, order = 1)
-    @ApiOperation(value = "新增组织成员")
+    @ApiOperation(value = "发布朋友圈")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "roleName", value = "角色名称", dataType = "String", paramType = "body", required = true),
-            @ApiImplicitParam(name = "description", value = "描述", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userName", value = "发布者姓名", dataType = "String", paramType = "body", required = true),
+            @ApiImplicitParam(name = "photos", value = "照片列表", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "content", value = "发布内容", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userPhoto", value = "发布者头像", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userId", value = "发布者ID", dataType = "String", paramType = "body")
     })
     public Handler<RoutingContext> add() {
         return ctx -> {
@@ -49,8 +51,7 @@ public class BMomentsHandler {
     @ApiOperation(value = "查询组织成员")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
-            @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true),
-            @ApiImplicitParam(name = "type", value = "组织类型", dataType = "String", paramType = "query", required = true)
+            @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true)
     })
     public Handler<RoutingContext> queryPageList() {
         return ctx -> {

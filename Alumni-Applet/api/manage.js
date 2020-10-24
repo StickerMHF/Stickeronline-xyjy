@@ -43,7 +43,26 @@ export function deleteAction(url,parameter) {
   })
 }
 
-
+/**
+ * 上传文件
+ * uni.uploadFile({
+            url: 'https://www.example.com/upload', //仅为示例，非真实的接口地址
+            filePath: tempFilePaths[0],
+            name: 'file',
+            formData: {
+                'user': 'test'
+            },
+            success: (uploadFileRes) => {
+                console.log(uploadFileRes.data);
+            }
+        });
+ */
+// export function uploadFile(url,parameter){
+// 	return uni.request({
+// 		url:url,
+		
+// 	})
+// }
 
 
 /**

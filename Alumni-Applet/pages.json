@@ -40,10 +40,17 @@
 		        "enablePullDownRefresh": false
 		    }
 		    
-		},
-		
+		},		
 		{
 		    "path" : "pages/discover/discover",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},{
+		    "path" : "pages/discover/publishData/publishData",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
