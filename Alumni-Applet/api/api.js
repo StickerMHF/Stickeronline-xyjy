@@ -1,4 +1,5 @@
-const baseurl='http://localhost:8084'
+const baseurl='https://www.imapway.cn/alumni'
+// const baseurl='http://localhost:8084'
 const api = {
 	test:baseurl+'/stickeronline/rich/text/list',
 	getUserOpenid:baseurl+'/tb/wechat/getAppletUserInfo',

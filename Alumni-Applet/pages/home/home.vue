@@ -46,12 +46,12 @@
 				<view class="cu-item shadow">
 					<view class="image">
 						<image :src="JSON.parse(item.thumb)[0]" mode="widthFix"></image>
-						<view class="cu-bar bg-shadeBottom"> <text class="text-cut">{{item.desc}}</text></view>
+						<!-- <view class="cu-bar bg-shadeBottom"> <text class="text-cut">{{item.desc}}</text></view> -->
 					</view>
 					<view class="cu-list ">
 						<view class="cu-item phm-zx-item">
 							<view class="phm-zx-content">
-								<view class="text-grey">{{item.title}}</view>
+								<view class="text-grey news-title">{{item.title}}</view>
 								<view class="text-gray text-sm flex justify-between">
 									{{formatDate(item.createTime)}}
 									<view class="phm-zx-view text-gray text-sm">
@@ -65,27 +65,27 @@
 				</navigator>
 			</view>
 		</view>	
-		<view class="ph-menu">
+		<!-- <view class="ph-menu">
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					<text class="cuIcon-titles text-green1"></text> 校友分布
 				</view>
 			</view>
 			<view style="width: 80%;margin: 0 auto;">
-				<image src="http://cdxyh.stickeronline.cn/FpMuIcxpTRIRZKqxAmUBgzVtECxx"></image>
+				
 			</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 
 <script>
-	// import eMap from "@/pages/map/index.vue"
 	import {dateUtil} from '@/utils/dateUtil.js'
 	import {
 		getNewsList
 	} from '@/api/news.js'
 	export default {
 		components: {
+		
 		},
 		data() {
 			return {
@@ -258,6 +258,7 @@
 		margin: 0 auto;
 		position: relative;
 		display: block;
+		font-size: 14px;
 	}
 
 	.phm-zx-item {
@@ -273,5 +274,11 @@
 
 	.phm-zx-view {
 		margin-left: 50rpx;
+	}
+	.news-title{
+		 width: 100%;
+		 overflow:hidden;
+		 text-overflow: ellipsis;
+		 white-space: nowrap;
 	}
 </style>

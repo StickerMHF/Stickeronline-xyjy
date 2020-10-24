@@ -13,15 +13,14 @@
         <span class="time">{{ formatDate(options.createTime) }}</span>
       </div>
     </div>
-    <span class="title">{{ options.title }}</span>
-    <div class="main" v-for="photo in photos">
+    <view class="news-title">{{ options.title }}</view>
+  <!--  <div class="main" v-for="photo in photos">
       <div class="entryPicWrap">
-		  <!-- <img class="img" :src="JSON.parse(options.thumb)[0]" /> -->
 		  <image class="img" :src="photo" mode="aspectFill"></image>
 		  </div>
-    </div>
+    </div> -->
     <div class="ft">
-      <view class="content" v-html="options.contents"></view>
+      <view class="new-content" v-html="options.contents"></view>
     </div>
   </div>
 </template>
@@ -68,10 +67,30 @@ export default {
 	};
   },
   methods: {
-   
+   formatDate(data){
+	   return getApp().formatDate(data);
+   }
   }
 };
 </script>
 <style>
 @import './index.response.css';
+.new-content{
+	width: 100%;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	    line-height: 62rpx;
+	    letter-spacing: 0px;
+	    white-space: pre-wrap;
+	    color: #000000;
+	    font-size: 36rpx;
+	    font-weight: 400;
+		padding: 0 20px;
+}
+.news-title{
+	font-size: 24px;
+	    font-weight: bold;
+	    text-align: center;
+	    padding: 10px 30px;
+}
 </style>
