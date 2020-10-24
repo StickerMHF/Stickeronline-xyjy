@@ -91,4 +91,15 @@ public class BMomentsCommentServiceImpl implements BMomentsCommentService, BaseA
         }
         handler.handle(future);
     }
+
+    @Override
+    public void queryByMomentId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonArray> future = Future.future();
+        ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
+        BMomentsCommentEntity bMomentsCommentEntity = new BMomentsCommentEntity();
+        matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
+        //创建实例
+        Example<BMomentsCommentEntity> ex = Example.of(bMomentsCommentEntity, matcher);
+        List<BMomentsCommentEntity> list = bMomentsCommentRepository.findAll(ex);
+    }
 }

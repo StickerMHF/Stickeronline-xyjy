@@ -1,7 +1,7 @@
 = Cheatsheets
 
-[[BMomentsCommentEntity]]
-== BMomentsCommentEntity
+[[BMomentsEntity]]
+== BMomentsEntity
 
 
 [cols=">25%,25%,50%"]
@@ -10,12 +10,52 @@
 ^|Name | Type ^| Description
 |[[content]]`@content`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
-|[[fid]]`@fid`|`String`|-
 |[[id]]`@id`|`String`|-
-|[[momentsId]]`@momentsId`|`String`|-
+|[[photos]]`@photos`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
-|[[userId]]`@userId`|`String`|-
 |[[userName]]`@userName`|`String`|-
 |[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BNewsEntity]]
+== BNewsEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[contents]]`@contents`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[desc]]`@desc`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[thumb]]`@thumb`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|===
+
+[[BTeachersEntity]]
+== BTeachersEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[bgdd]]`@bgdd`|`String`|-
+|[[byyx]]`@byyx`|`String`|-
+|[[college]]`@college`|`String`|-
+|[[contact]]`@contact`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[education]]`@education`|`String`|-
+|[[email]]`@email`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[photos]]`@photos`|`String`|-
+|[[rank]]`@rank`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 
