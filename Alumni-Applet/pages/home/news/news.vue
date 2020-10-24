@@ -11,9 +11,9 @@
 			
 			<uni-list-item :to="'/pages/home/newsDetail/newsDetail?id='+item.id" direction="column" v-for="item in lists" :key="item.id">
 				
-				<template v-slot:header>
+				<!-- <template v-slot:header>
 					<view class="uni-title">{{item.title}}</view>
-				</template>
+				</template> -->
 				<!-- 通过body插槽定义列表内容显示 -->
 				<template v-slot:body>
 					<view class="uni-list-box">
@@ -21,7 +21,7 @@
 							<image :src="JSON.parse(item.thumb)[0]" mode="aspectFill"></image>
 						</view>
 						<view class="uni-content">
-							<view class="uni-title-sub uni-ellipsis-2">{{item.desc}}</view>
+							<view class="uni-title-sub uni-ellipsis-2">{{item.title}}</view>
 							<view class="uni-note">{{ item.createBy }} {{ formatDate(item.createTime) }}</view>
 						</view>
 					</view>

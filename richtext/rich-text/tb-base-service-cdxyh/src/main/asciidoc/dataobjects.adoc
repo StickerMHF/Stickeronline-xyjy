@@ -19,3 +19,19 @@
 |[[userPhoto]]`@userPhoto`|`String`|-
 |===
 
+[[BMomentsEntity]]
+== BMomentsEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[content]]`@content`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[photos]]`@photos`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+

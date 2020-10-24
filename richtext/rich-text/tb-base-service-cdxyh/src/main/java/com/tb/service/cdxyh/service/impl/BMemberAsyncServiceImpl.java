@@ -7,6 +7,7 @@ import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BMemberEntity;
 import com.tb.service.cdxyh.repository.BMemberRepository;
 import com.tb.service.cdxyh.service.BMemberAsyncService;
+import com.tb.service.cdxyh.utils.HttpUtil;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -48,9 +49,34 @@ public class BMemberAsyncServiceImpl implements BMemberAsyncService, BaseAsyncSe
         //创建实例
         Example<BMemberEntity> ex = Example.of(bMemberEntity, matcher);
         Page<BMemberEntity> plist = bMemberRepository.findAll(ex,pageable);
-        future.complete(new JsonObject(Json.encode(plist)));
+        JsonObject res=new JsonObject(Json.encode(plist));
+        this.queryPageListOfChdEdu(r->{
+            if(r.succeeded()){
+                future.complete(res);
+            }else {
+                future.fail(r.cause());
+            }
+        });
+
         handler.handle(future);
     }
+
+    /**
+     * 从长大官网查询
+     * @param handler
+     */
+    public void queryPageListOfChdEdu(Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        try{
+            String res=HttpUtil.sendGet("https://xyhxt.chd.edu.cn/association-api/api/common/content/anon/list?filterUnPublish=true&classId=4B12699BDF7A426581B50CF516684AE3&labelId=&limit=100&offset=0");
+            JsonObject json=new JsonObject(res);
+            future.complete(json);
+        }catch (Exception e){
+            future.fail(e);
+        }
+        handler.handle(future);
+    }
+
 
     @Override
     public void edit(JsonObject params, Handler<AsyncResult<String>> handler) {
