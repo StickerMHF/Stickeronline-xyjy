@@ -59,6 +59,31 @@ public class BMomentsEntity extends BaseEntity {
     @Column(name = "user_photo")
     private String userPhoto;
 
+    /**
+     * 浏览量
+     */
+    @Column(name = "view_count")
+    private Integer viewCount;
+
+    /**
+     * 点赞
+     */
+    @Column(name = "like_count")
+    private Integer likeCount;
+
+    /**
+     * 评论次数
+     */
+    @Column(name = "comment_count")
+    private Integer commentCount;
+
+    /**
+     * 评论次数
+     */
+    @Column(name = "user_id")
+    private String userId;
+
+
 
     public String getId() {
         return id;
@@ -98,5 +123,37 @@ public class BMomentsEntity extends BaseEntity {
 
     public void setUserPhoto(String userPhoto) {
         this.userPhoto = userPhoto;
+    }
+
+    public Integer getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
+    }
+
+    public Integer getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public Integer getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(Integer commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

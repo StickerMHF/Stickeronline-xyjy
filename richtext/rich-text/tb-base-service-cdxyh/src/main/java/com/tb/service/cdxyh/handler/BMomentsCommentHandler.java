@@ -21,8 +21,7 @@ import static java.net.HttpURLConnection.HTTP_OK;
 @RouteHandler("stickeronline/momentsComment")
 @Api(tags = "朋友圈动态表")
 public class BMomentsCommentHandler {
-    private BMomentsCommentService bMomentsCommentService =
-            AsyncServiceUtil.getAsyncServiceInstance(BMomentsCommentService.class);
+    private BMomentsCommentService bMomentsCommentService = AsyncServiceUtil.getAsyncServiceInstance(BMomentsCommentService.class);
 
     @RouteMapping(value = "/add", method = RouteMethod.POST, order = 1)
     @ApiOperation(value = "新增组织成员")

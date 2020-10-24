@@ -135,7 +135,7 @@
 			getUserInfo() {
 				const that = this
 				this.openid = uni.getStorageSync('openid')
-				if (!this.openid) {
+				if (!this.openid||this.openid=="") {
 					uni.login({
 						provider: 'weixin',
 						success(res) {
@@ -148,13 +148,13 @@
 								if (res && res.data.success && res.data.data.openid) {
 									that.openid = res.data.data.openid
 									uni.setStorageSync('openid', that.openid);
-									uni.setStorage({
-										key: 'openid',
-										data: res.data.openid,
-										success: function() {
-											console.log('openid已存储')
-										}
-									})
+									// uni.setStorage({
+									// 	key: 'openid',
+									// 	data: res.data.openid,
+									// 	success: function() {
+									// 		console.log('openid已存储')
+									// 	}
+									// })
 								} else {
 									uni.showToast({
 										title: '登录失败'
@@ -173,7 +173,7 @@
 						let params = {
 							openId: this.openid
 						}
-						that.getBindingUser(params)
+						// that.getBindingUser(params)
 					}
 
 				}
@@ -181,7 +181,7 @@
 			wxGetUserInfo() {
 				let that = this;
 				this.isLogin=uni.getStorageSync('isLogin');
-				if (!this.isLogin) {
+				if (!this.isLogin||this.isLogin=="") {
 					uni.getUserInfo({
 						provider: 'weixin',
 						success: function(res) {
@@ -208,6 +208,7 @@
 </script>
 
 <style lang="scss">
+	@import './common/uni.css';
 	@import "colorui/main.css";
 	@import "colorui/icon.css";
 

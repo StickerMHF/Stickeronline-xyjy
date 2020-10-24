@@ -65,7 +65,7 @@
 				</navigator>
 			</view>
 		</view>	
-		<view class="ph-menu">
+		<!-- <view class="ph-menu">
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					<text class="cuIcon-titles text-green1"></text> 校友分布
@@ -74,7 +74,7 @@
 			<view style="width: 80%;margin: 0 auto;">
 				
 			</view>
-		</view>
+		</view> -->
 	</view>
 </template>
 

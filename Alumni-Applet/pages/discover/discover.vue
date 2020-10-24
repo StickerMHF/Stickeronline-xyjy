@@ -1,6 +1,6 @@
 <template>
 	<view style="overflow-x: hidden;">
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="false">
 			<block slot="backText">返回</block>
 			<block slot="content">
 				<ul class="discover-ul">
@@ -182,14 +182,47 @@
 				list = list.map(item =>{
 					return {
 						username: item.userName,
-						publishDate: dateUtil.formatDate(item.createTime),
+						publishDate: dateUtil.formatTime(item.createTime),
 						photo: item.userPhoto,
 						content: item.content,
-						images: JSON.parse(item.photos)
+						images: JSON.parse(item.photos),
+						commentList: this.listToTree(item.commentList),
+						viewCount: item.viewCount,
+						likeCount: item.likeCount,
+						commentCount: item.commentCount
 					}					
 				});
 				return list;
-			}			
+			},
+			listToTree(list){
+				var data = list.map(item =>{
+					return {
+						id: item.id,
+						url: item.userPhoto,
+						name: item.userName,
+						content: item.content,
+						userId: item.userId,
+						commentTime: dateUtil.formatTime(item.createTime),
+						parent: item.fid
+					}
+				});
+				
+				var tree = [];
+				var dataMap = data.reduce(function(map, node) {
+				    map[node.id] = node;
+				    return map;
+				}, {});
+				data.forEach(function(node) {
+				    var parent = dataMap[node.parent];
+				    if (parent) {
+				        (parent.replyList || (parent.replyList = []))
+				            .push(node);
+				    } else {
+				        tree.push(node);
+				    }
+				});
+				return tree;
+			}
 		}
 	}
 </script>

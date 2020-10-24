@@ -61,7 +61,10 @@ const api = {
 	 * 发现
 	 */
 	//获取发现列表
-	getDiscoverList: baseurl+'/stickeronline/moments/list'
+	getDiscoverList: baseurl+'/stickeronline/moments/list',
+	publishMoment: baseurl+'/stickeronline/moments/add',
+	
+	uploadFile: baseurl+'/file/upload'
 	
 }
 export default api
