@@ -1,5 +1,134 @@
 = Cheatsheets
 
+[[BAlummunsMemberEntity]]
+== BAlummunsMemberEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[email]]`@email`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[organization]]`@organization`|`String`|-
+|[[photo]]`@photo`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[telephone]]`@telephone`|`String`|-
+|[[trade]]`@trade`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusActivityEntity]]
+== BAlumnusActivityEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[img]]`@img`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusEntity]]
+== BAlumnusEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[activity]]`@activity`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[liveness]]`@liveness`|`Number (Integer)`|-
+|[[member]]`@member`|`Number (Integer)`|-
+|[[name]]`@name`|`String`|-
+|[[thumb]]`@thumb`|`String`|-
+|[[type]]`@type`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusNewsEntity]]
+== BAlumnusNewsEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[author]]`@author`|`String`|-
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[img]]`@img`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusPhotoEntity]]
+== BAlumnusPhotoEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[author]]`@author`|`String`|-
+|[[commentCount]]`@commentCount`|`String`|-
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[imgs]]`@imgs`|`String`|-
+|[[likeCount]]`@likeCount`|`String`|-
+|[[photo]]`@photo`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[viewCount]]`@viewCount`|`String`|-
+|===
+
+[[BCooperationEntity]]
+== BCooperationEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[contact]]`@contact`|`String`|-
+|[[contents]]`@contents`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BMemberEntity]]
+== BMemberEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[contact]]`@contact`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[desc]]`@desc`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
 [[BMomentsCommentEntity]]
 == BMomentsCommentEntity
 
@@ -33,5 +162,47 @@
 |[[name]]`@name`|`String`|-
 |[[photos]]`@photos`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BNewsEntity]]
+== BNewsEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[contents]]`@contents`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[desc]]`@desc`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[thumb]]`@thumb`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|===
+
+[[BTeachersEntity]]
+== BTeachersEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[bgdd]]`@bgdd`|`String`|-
+|[[byyx]]`@byyx`|`String`|-
+|[[college]]`@college`|`String`|-
+|[[contact]]`@contact`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[education]]`@education`|`String`|-
+|[[email]]`@email`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[photos]]`@photos`|`String`|-
+|[[rank]]`@rank`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 

@@ -50,14 +50,14 @@ public class BMemberAsyncServiceImpl implements BMemberAsyncService, BaseAsyncSe
         Example<BMemberEntity> ex = Example.of(bMemberEntity, matcher);
         Page<BMemberEntity> plist = bMemberRepository.findAll(ex,pageable);
         JsonObject res=new JsonObject(Json.encode(plist));
-        this.queryPageListOfChdEdu(r->{
-            if(r.succeeded()){
-                future.complete(res);
-            }else {
-                future.fail(r.cause());
-            }
-        });
-
+//        this.queryPageListOfChdEdu(r->{
+//            if(r.succeeded()){
+//                future.complete(res);
+//            }else {
+//                future.fail(r.cause());
+//            }
+//        });
+        future.complete(res);
         handler.handle(future);
     }
 
