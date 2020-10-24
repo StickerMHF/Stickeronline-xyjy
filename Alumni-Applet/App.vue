@@ -180,25 +180,25 @@
 			},
 			wxGetUserInfo() {
 				debugger
-				let that = this;
-				this.isLogin=uni.getStorageSync('isLogin');
-				if (!this.isLogin) {
-					uni.getUserInfo({
-						provider: 'weixin',
-						success: function(res) {
-							try {
-								uni.setStorageSync('isLogin', true);
-								uni.setStorageSync('userInfo', res.userInfo); //记录是否第一次授权  false:表示不是第一次授权
-								// _this.updateUserInfo();
-							} catch (e) {
-								console.log(e)
-							}
-						},
-						fail(e) {
-							console.log(e)
-						}
-					});
-				}
+				// let that = this;
+				// this.isLogin=uni.getStorageSync('isLogin');
+				// if (!this.isLogin) {
+				// 	uni.getUserInfo({
+				// 		provider: 'weixin',
+				// 		success: function(res) {
+				// 			try {
+				// 				uni.setStorageSync('isLogin', true);
+				// 				uni.setStorageSync('userInfo', res.userInfo); //记录是否第一次授权  false:表示不是第一次授权
+				// 				// _this.updateUserInfo();
+				// 			} catch (e) {
+				// 				console.log(e)
+				// 			}
+				// 		},
+				// 		fail(e) {
+				// 			console.log(e)
+				// 		}
+				// 	});
+				// }
 			},
 			formatDate(date){
 				return dateUtil.formatDate(date);
