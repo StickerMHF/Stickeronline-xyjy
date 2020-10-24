@@ -12,12 +12,15 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Component
@@ -116,6 +119,17 @@ public class BMemberAsyncServiceImpl implements BMemberAsyncService, BaseAsyncSe
         }else{
             future.complete(new JsonObject());
         }
+        handler.handle(future);
+    }
+
+    @Override
+    public void queryAllByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        BMemberEntity bMemberEntity = new BMemberEntity(params);
+        String userId=params.getString("userId");
+        List<Map<String,Object>> res = bMemberRepository.findAllListByUserId(userId);
+        JsonArray array=new JsonArray(res);
+        future.complete(new JsonObject().put("content",array));
         handler.handle(future);
     }
 }

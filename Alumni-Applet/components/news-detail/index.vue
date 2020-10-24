@@ -6,8 +6,9 @@
         <div class="outer">
           <span class="author">{{ options.createBy }}</span>
           <div class="wrap">
-            <img class="like" :src="like" />
-            <img class="share" :src="share" />
+            <view class="like  hm-btn" :class="islike?'cuIcon-likefill':'cuIcon-like'"  @click="likeHandler"></view>
+			<!-- <button open-type="share">s </button> -->
+            <view class="share cuIcon-share hm-btn"  @click="shareHandler"></view>
           </div>
         </div>
         <span class="time">{{ formatDate(options.createTime) }}</span>
@@ -40,35 +41,34 @@ export default {
       type: Object,
       default: function() {
         return {
-          yunshu:
-            'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_0.png',
-          createBy: '天邦科技',
-          like:
-            'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_1.png',
-          share:
-            'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_2.png',
+          createBy: "",
           createTime: 1603468800000,
-          title: '如何用 Python 在笔记本上分析100GB 数据',
-          thumb:
-            "['http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_3.png']",
-          contents:
-            '第 1 种是对数据进行子抽样，但它有一个明显缺点：可能因忽略部分数据而错失关键信息，甚至误解数据表达的含义。第 2 种是使用分布式计算。虽然在某些情况下这是一种有效的方法，但是管理和维护集群会带来巨大开销。想象一下，要为一个刚超出内存大小、大概 30-50GB 的数据集就建立一套集群，对我来说，这似乎有点“用力过猛”。'
+          title: "",
+          thumb:"[]",
+          contents:""
         };
       }
     }
   },
   data() {
     return {
-		yunshu:'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_0.png',
-		like:'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_1.png',
-		share:'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_2.png',
-		thumb:
-		  "['http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_3.png']"
+		yunshu:"http://cdxyh.stickeronline.cn/logo.jpg",
+		like:"http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_1.png",
+		share:"http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_2.png",
+		thumb:"",
+		  islike:false
 	};
   },
   methods: {
    formatDate(data){
 	   return getApp().formatDate(data);
+   },
+   likeHandler(){
+	   this.islike=!this.islike;
+	   this.$emit("likeHandler");
+   },
+   shareHandler(){
+	   this.$emit("shareHandler");
    }
   }
 };
@@ -92,5 +92,11 @@ export default {
 	    font-weight: bold;
 	    text-align: center;
 	    padding: 10px 30px;
+}
+.hm-btn{
+	color: #ff8901;
+}
+.hd{
+	min-height: 40px;
 }
 </style>

@@ -57,6 +57,18 @@ public class BMemberEntity extends BaseEntity {
      */
     @Column(name = "desc")
     private String desc;
+    /**
+     * 照片
+     */
+    @Column(name = "photo")
+    private String photo;
+
+    /**
+     * 是否关注
+     */
+    @Transient
+    private Integer attention=0;
+
 
     public String getId() {
         return id;
@@ -96,5 +108,21 @@ public class BMemberEntity extends BaseEntity {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public Integer getAttention() {
+        return attention;
+    }
+
+    public void setAttention(Integer attention) {
+        this.attention = attention;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

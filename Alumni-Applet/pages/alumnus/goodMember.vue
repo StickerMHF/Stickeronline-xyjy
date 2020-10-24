@@ -35,8 +35,9 @@
 								</view>
 							</view>
 							<view class="margin-tb-sm text-center mem-attention">
-								<button v-if="true" class="cu-btn round bg-gradual-green1">关注</button>
-								<button v-else class="cu-btn round bg-yellow">已关注</button>
+								<button @click="payHandler(item)" v-if="item.attention&&item.attention==1" class="cu-btn round bg-yellow">已关注</button>
+								<button @click="payHandler(item)" v-else class="cu-btn round bg-gradual-green1">关注</button>
+
 							</view>
 						</view>
 					</view>
@@ -48,7 +49,9 @@
 
 <script>
 	import {
-		getMemberList
+		getMemberList,
+		addMemberAttention,
+		deleteMemberAttention
 	} from '@/api/member.js'
 	export default {
 		data() {
@@ -58,11 +61,7 @@
 				CustomBar: this.CustomBar,
 				hidden: true,
 				listCurID: '',
-				lists: [{
-					name: "张三",
-					photo: "http://js.chd.edu.cn/_upload/article/images/df/42/4ad7726f43dfb1815313acc22675/740fe51e-61c5-4cfe-a160-9064c54cee06_s.png",
-
-				}],
+				lists: [],
 				listCur: '',
 			};
 		},
@@ -72,17 +71,70 @@
 		},
 		onReady() {
 			let that = this;
-			
+
 		},
 		methods: {
+			payHandler(item) {
+				debugger
+				if (item.attention == 0||!item.attention) {
+					this.addMemberAttention(item);
+				} else {
+					this.deleteMemberAttention(item);
+				}
+
+			},
+			addMemberAttention(item) {
+				let openid = uni.getStorageSync('openid');
+				if (openid&&openid!="") {
+					let param = {
+						userId: openid,
+						memberId: item.id
+					};
+					addMemberAttention(param).then(data => {
+						var [error, res] = data;
+						debugger
+						if (res && res.data.success) {
+							item.attention = 1;
+							// this.content = res.data.result;
+						}
+					});
+				} else {
+					getApp().getUserInfo();
+				}
+
+			},
+			deleteMemberAttention(item) {
+				let openid = uni.getStorageSync('openid');
+				if (openid) {
+					let param = {
+						userId: openid,
+						memberId: item.id
+					};
+					deleteMemberAttention(param).then(data => {
+						var [error, res] = data;
+						debugger
+						if (res && res.data.success) {
+							item.attention = 0;
+							// this.content = res.data.result;
+						}
+					});
+				} else {
+					getApp().getUserInfo();
+				}
+
+			},
 			/**
 			 * 获取页面数据
 			 * @param {Object} reload 参数reload值为true时执行列表初始化逻辑，值为false时执行追加下一页数据的逻辑。默认为false
 			 */
 			getMemberList(reload) {
-				let that=this;
+				let that = this;
 				this.status = 'loading'
-				getMemberList().then(data => {
+				let openid = uni.getStorageSync('openid');
+					let param = {
+						userId: openid
+					};
+				getMemberList(param).then(data => {
 					var [error, res] = data;
 					if (res && res.data.success) {
 						const tempList = res.data.result.content;

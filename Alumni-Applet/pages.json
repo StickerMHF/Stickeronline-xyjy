@@ -1,11 +1,23 @@
 {
 	"pages": [
 		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		
 		{
 			"path": "pages/home/home",
 			"style": {}
 		},{
+			"path": "pages/login/login",
+			"style": {}
+		},{
 		    "path" : "pages/anniversary/index",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		},{
+		    "path" : "pages/teachers/detail/detail",
 		    "style" :                                                                                    
 		    {
 		        "navigationBarTitleText": "",
@@ -213,6 +225,61 @@
         }
         ,{
             "path" : "pages/anniversary/footprint/footprint",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        
+        ,{
+            "path" : "pages/personal/alumnus/alumnus",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/personal/basicInfo/basicInfo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/personal/attention/attention",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/personal/fans/fans",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/personal/collect/collect",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/personal/setting/setting",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

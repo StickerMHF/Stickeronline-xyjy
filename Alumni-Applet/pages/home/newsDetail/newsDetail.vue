@@ -4,36 +4,51 @@
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
-		<newsDetail :options="detail" :photos="JSON.parse(detail.thumb)"></newsDetail>
+		<newsDetail :options="detail" :photos="JSON.parse(detail.thumb)" @likeHandler="likeHandler" @shareHandler="shareHandler"></newsDetail>
+	<!-- 分享弹窗 -->
+	<uni-popup ref="sharepopup" type="bottom">
+		<share-btn :sharedataTemp="sharedata"></share-btn>
+	</uni-popup>
 	</view>
 </template>
 
 <script>
 	import newsDetail from '@/components/news-detail/index.vue';
+	import uniPopup from '@/components/uni-popup/uni-popup.vue';
+	import shareBtn from '@/components/share-btn/share-btn.vue';
 	import {
 		getNewsById
 	} from '@/api/news.js'
 	import {dateUtil} from '@/utils/dateUtil.js'
 	export default {
 		components: {
-			newsDetail
+			newsDetail,
+			uniPopup,
+			shareBtn
 		},
 		data() {
 			return {
 				detail: {
 					yunshu:
-					  'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_0.png',
-					createBy: '天邦科技',
+					  "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_0.png",
+					createBy: "天邦科技",
 					like:
-					  'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_1.png',
+					  "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_1.png",
 					share:
-					  'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_2.png',
+					  "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_2.png",
 					createTime: 1603468800000,
-					title: '',
+					title: "",
 					thumb:
 					  "",
 					contents:
-					  ''
+					  ""
+				},
+				sharedata: {
+					type: 1,
+					strShareUrl: "http://www.baidu.com",
+					strShareTitle: "分享标题",
+					strShareSummary: "分享总结",
+					strShareImageUrl: "http://www.xuelejia.com/xljapp/h5/static/aboutUsLogo.png"
 				},
 				id: ''
 			}
@@ -46,6 +61,11 @@
 		methods: {
 			formatDate(date){
 				return dateUtil.formatDate(date);
+			},
+			likeHandler(){
+			},
+			shareHandler(){
+				this.$refs.sharepopup.open();
 			},
 			getNewsById(id) {
 				let param = {

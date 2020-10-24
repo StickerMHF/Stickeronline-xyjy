@@ -50,22 +50,7 @@
 	export default {
 		data() {
 			return {
-				lists: [{
-					thumb: "['http://www.imapway.cn/Alumni/static/home/banner22x.png']",
-					title: '学生工作业务能力专题培训举办',
-					contents: '我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。我已天理为凭，踏入这片荒芜，不再受凡人的枷锁遏制。',
-					createBy: "sticker",
-					createTime: '2020-10-18',
-					viewCount: 23
-				},{
-					"id": '123',
-					"thumb": "['https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg']",
-					"title": "创业路上的“格桑”姐妹",
-					"contents": "白朗县位于西藏日喀则市，是西藏主要蔬菜生产基地之一。今年26岁的藏族女孩格桑旺姆是该县巴扎乡彭仓村人，2018年从西藏职业技术学院毕业后返乡创业，和姐姐德吉卓玛一起进行果蔬种植。2019年，在政府援藏资金的帮扶下，姐妹俩通过土地置换在彭仓村建成13个温室大棚，经过引进果蔬新品种和技术积累，实现大棚种植收入大幅提升。同年8月，格桑旺姆申领了大学生创业补贴资助，两人又在白朗县城开了一家蔬菜销售店。姐姐管理大棚、培训雇工，妹妹负责果蔬销售和店铺运营，两人密切合作，事业蒸蒸日上。",
-					"createBy": "sticker",
-					"createTime": "2020-10-19 12:12:11",
-					"viewCount": 23
-				}], // 列表数据
+				lists: [], // 列表数据
 				status: 'more', // 加载状态
 				tipShow: false, // 是否显示顶部提示框
 				pageSize: 10, // 每页显示的数据条数

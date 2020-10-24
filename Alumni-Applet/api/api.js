@@ -1,5 +1,5 @@
-const baseurl='https://www.imapway.cn/alumni'
-// const baseurl='http://localhost:8084'
+// const baseurl='https://www.imapway.cn/alumniapi'
+const baseurl='http://localhost:8084'
 const api = {
 	test:baseurl+'/stickeronline/rich/text/list',
 	getUserOpenid:baseurl+'/tb/wechat/getAppletUserInfo',
@@ -22,11 +22,20 @@ const api = {
 	/**
 	 * 优秀校友
 	 */
-	getMemberList: baseurl+'/stickeronline/member/list',
+	getMemberList: baseurl+'/stickeronline/member/queryAllByUserId',
 	getMemberById: baseurl+'/stickeronline/member/queryById',
 	addMember: baseurl+'/stickeronline/member/add',
 	updateMember: baseurl+'/stickeronline/member/edit',
 	deleteMember: baseurl+'/stickeronline/member/delete',
+	/**
+	 * 关注校友
+	 */
+	getMemberAttentionList: baseurl+'/stickeronline/member/attention/list',
+	getMemberAttentionById: baseurl+'/stickeronline/member/attention/queryById',
+	addMemberAttention: baseurl+'/stickeronline/member/attention/add',
+	updateMemberAttention: baseurl+'/stickeronline/member/attention/edit',
+	deleteMemberAttention: baseurl+'/stickeronline/member/attention/delete',
+	
 	/**
 	 * 校友合作
 	 */

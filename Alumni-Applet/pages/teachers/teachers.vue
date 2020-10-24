@@ -17,7 +17,7 @@
 		<!-- 基于 uni-list 的页面布局 -->
 		<uni-list class="teachers-list" :class="{ 'uni-list--waterfall': waterfall }">
 			<!-- 通过 uni-list--waterfall 类决定页面布局方向 -->
-			<uni-list-item :border="!waterfall" class="uni-list-item--waterfall teachers-item" title="自定义商品列表" v-for="item in lists" :key="item._id">
+			<uni-list-item :to="'/pages/teachers/detail/detail?id='+item.id" :border="!waterfall" class="uni-list-item--waterfall teachers-item" title="自定义商品列表" v-for="item in lists" :key="item._id">
 				<!-- 通过header插槽定义列表左侧图片 -->
 				<template v-slot:header>
 					<view class="uni-thumb shop-picture" :class="{ 'shop-picture-column': waterfall }">

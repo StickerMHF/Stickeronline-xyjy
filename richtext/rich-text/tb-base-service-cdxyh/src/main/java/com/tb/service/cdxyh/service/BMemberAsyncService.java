@@ -48,4 +48,6 @@ public interface BMemberAsyncService {
      * @param handler
      */
     void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+
+    void queryAllByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 }

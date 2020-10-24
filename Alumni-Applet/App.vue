@@ -123,7 +123,7 @@
 				},
 			]
 			this.getUserInfo();
-			this.wxGetUserInfo();
+			// this.wxGetUserInfo();
 		},
 		onShow: function() {
 			console.log('App Show')
@@ -173,12 +173,13 @@
 						let params = {
 							openId: this.openid
 						}
-						that.getBindingUser(params)
+						that.wxGetUserInfo(params)
 					}
 
 				}
 			},
 			wxGetUserInfo() {
+				debugger
 				let that = this;
 				this.isLogin=uni.getStorageSync('isLogin');
 				if (!this.isLogin) {
