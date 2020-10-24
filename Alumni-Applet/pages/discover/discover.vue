@@ -31,6 +31,7 @@
 <script>	
 	import moments from '@/components/moments/moments.vue';
 	import {getDiscoverList} from '@/api/discover.js'
+	import {dateUtil } from "@/utils/dateUtil.js"
 	var _self = '';
 	export default {
 		data() {
@@ -143,7 +144,7 @@
 				}],
 				params: {
 					pageNo:1,
-					pageSize:2
+					pageSize:5
 				}
 			}
 		},
@@ -173,24 +174,22 @@
 					let [error, res] = data;
 					if(res&&res.data&&res.data.result){
 						let content = res.data.result.content;
-						this.transformData(content);
+						this.momentsList = this.transformData(content);
 					}
 				});
 			},
 			transformData(list){
-				debugger
 				list = list.map(item =>{
 					return {
-						username: "凯尔",
-						publishDate: "2019年12月3日",
-						photo: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg",
+						username: item.userName,
+						publishDate: dateUtil.formatDate(item.createTime),
+						photo: item.userPhoto,
 						content: item.content,
-						images: item.photos
-					}
-					
-				})
-			}
-			
+						images: JSON.parse(item.photos)
+					}					
+				});
+				return list;
+			}			
 		}
 	}
 </script>

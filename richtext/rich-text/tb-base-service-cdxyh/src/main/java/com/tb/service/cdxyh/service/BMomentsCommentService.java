@@ -56,4 +56,6 @@ public interface BMomentsCommentService {
      * @param handler
      */
     void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+
+    void queryByMomentId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 }
