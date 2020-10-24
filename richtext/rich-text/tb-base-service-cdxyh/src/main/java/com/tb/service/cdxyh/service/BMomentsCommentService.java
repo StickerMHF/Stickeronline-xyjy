@@ -1,10 +1,13 @@
 package com.tb.service.cdxyh.service;
 
+import com.tb.service.cdxyh.entity.BMomentsCommentEntity;
 import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+
+import java.util.List;
 
 @ProxyGen
 public interface BMomentsCommentService {
@@ -57,5 +60,10 @@ public interface BMomentsCommentService {
      */
     void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
-    void queryByMomentId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    /**
+     * 根据朋友圈ID查询评论
+     * @param params
+     * @return
+     */
+    void queryByMomentId(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
 }

@@ -1,10 +1,15 @@
 package com.tb.service.cdxyh.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
+import com.sticker.online.core.utils.AsyncServiceUtil;
 import com.tb.base.common.vo.PageVo;
+import com.tb.service.cdxyh.entity.BMomentsCommentEntity;
 import com.tb.service.cdxyh.entity.BMomentsEntity;
+import com.tb.service.cdxyh.repository.BMomentsCommentRepository;
 import com.tb.service.cdxyh.repository.BMomentsRepository;
+import com.tb.service.cdxyh.service.BMomentsCommentService;
 import com.tb.service.cdxyh.service.BMomentsService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -16,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,30 +30,38 @@ import java.util.Optional;
 public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
     @Autowired
     private BMomentsRepository bMomentsRepository;
-    @Override
-    public void add(JsonObject params, Handler<AsyncResult<String>> handler) {
 
+    @Autowired
+    private BMomentsCommentRepository bMomentsCommentRepository;
+
+    @Override
+    public void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        BMomentsEntity bMomentsEntity = new BMomentsEntity(params);
+        bMomentsEntity.setCreateTime(new Date());
+        BMomentsEntity save = bMomentsRepository.save(bMomentsEntity);
+        future.complete(new JsonObject(Json.encode(save)));
+        handler.handle(future);
     }
 
     @Override
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
-        String type = params.getString("type");
-        System.out.println(type);
         BMomentsEntity bMomentsEntity = new BMomentsEntity();
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-//        if (oConvertUtils.isNotEmpty(type)) {
-//            bAlummunsMemberEntity.setType(type);
-//            exampleMatcher.withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains());
-//        }
         //创建实例
         Example<BMomentsEntity> ex = Example.of(bMomentsEntity);
-
         Page<BMomentsEntity> plist = bMomentsRepository.findAll(ex,pageable);
-        future.complete(new JsonObject(Json.encode(plist)));
+        JsonObject resObj = new JsonObject(Json.encode(plist));
+        JsonArray content = resObj.getJsonArray("content");
+        for (int i = 0; i < content.size(); i++) {
+            String commentId = content.getJsonObject(i).getString("id");
+            List<BMomentsCommentEntity> commentList = bMomentsCommentRepository.queryByCommentId(commentId);
+            resObj.getJsonArray("content").getJsonObject(i).put("commentList", new JsonArray(Json.encode(commentList)));
+        }
+        future.complete(resObj);
         handler.handle(future);
     }
 
@@ -64,17 +78,20 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
     @Override
     public void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler) {
         Future<JsonArray> future = Future.future();
-        ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
-        BMomentsEntity bAlummunsMemberEntity = new BMomentsEntity();
-        matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
+//        ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
+        BMomentsEntity bMomentsEntity = new BMomentsEntity(params);
+//        matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建实例
-        Example<BMomentsEntity> ex = Example.of(bAlummunsMemberEntity, matcher);
+        Example<BMomentsEntity> ex = Example.of(bMomentsEntity);
         List<BMomentsEntity> newsList = bMomentsRepository.findAll(ex);
-        if (newsList == null || newsList.size() <= 0) {
-            future.complete(new JsonArray());
-        } else {
-            future.complete(new JsonArray(Json.encode(newsList)));
+        JsonArray resList = new JsonArray(Json.encode(newsList));
+       for (int i = 0; i < resList.size(); i++) {
+            String commentId = resList.getJsonObject(i).getString("id");
+            List<BMomentsCommentEntity> commentList = bMomentsCommentRepository.queryByCommentId(commentId);
+            System.out.println(i);
+           resList.getJsonObject(i).put("commentList", commentList);
         }
+       future.complete(resList);
         handler.handle(future);
     }
 

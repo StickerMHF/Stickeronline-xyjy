@@ -72,21 +72,20 @@
 				</view>
 			</view>
 			<view style="width: 80%;margin: 0 auto;">
-				<e-map></e-map>
+				<image src="http://cdxyh.stickeronline.cn/FpMuIcxpTRIRZKqxAmUBgzVtECxx"></image>
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import eMap from "@/pages/map/index.vue"
+	// import eMap from "@/pages/map/index.vue"
 	import {dateUtil} from '@/utils/dateUtil.js'
 	import {
 		getNewsList
 	} from '@/api/news.js'
 	export default {
 		components: {
-			eMap
 		},
 		data() {
 			return {

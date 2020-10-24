@@ -14,7 +14,7 @@ public interface BMomentsService {
      * @param params
      * @param handler
      */
-    void add(JsonObject params, Handler<AsyncResult<String>> handler);
+    void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
      * 分页查询

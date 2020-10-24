@@ -5,3 +5,13 @@ import api from '@/api/api'
 export const getDiscoverList = (params) => {
     return getAction(api.getDiscoverList, params)
 }
+
+//发布接口
+export const publishMoment = (params) => {
+	return postAction(api.publishMoment, params);
+}
+
+//上传文件
+export const uploadFile = (params) => {
+	return postAction(api.uploadFile, params)
+}
