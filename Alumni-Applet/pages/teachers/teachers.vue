@@ -69,7 +69,7 @@
 				waterfall: false, // 布局方向切换
 				status: 'more', // 加载状态
 				tipShow: false, // 是否显示顶部提示框
-				pageSize: 20, // 每页显示的数据条数
+				pageSize: 10, // 每页显示的数据条数
 				current: 1 // 当前页数	
 			};
 		},
@@ -81,8 +81,8 @@
 		methods: {
 			getTeachersListData(sort){
 				let param = {
-					pageNo: 1,
-					pageSize: 2,
+					pageNo: this.current,
+					pageSize: this.pageSize,
 					sort:sort?sort:'createTime'
 				};
 				getTeachersList(param).then(data => {
