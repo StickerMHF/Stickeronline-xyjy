@@ -10,13 +10,14 @@
 </template>
 
 <script>
-	import newsDetail from '@/components/news-detail/index.vue';
+	import newsDetail from '@/components/alumnus-details/index.vue';
 	import {dateUtil} from "@/utils/dateUtil.js"
 	import {getAlumnusActivityById} from '@/api/alumnus.js'
 	export default {
 		components: {
 			newsDetail
 		},
+		// pages/alumnus/details
 		data() {
 			return {
 				detail: {
@@ -46,17 +47,17 @@
 					console.log(data)
 					let [error, res] = data;
 					if(res&&res.data&&res.data.result){
-						let result = res.data.result
+						let result = res.data.result;
 						this.detail = {
-								yunshu: result.img,
-								author: result.author,
-								like: 'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_1.png',
-								share: 'http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_2.png',
-								time: dateUtil.formatDate(result.createTime),
-								title: result.title,
-								img: result.img,
-								content: result.context
-							}
+							yunshu: result.img,
+							createBy: result.author,
+							like: '/static/hm-news-detail/images/img_22946_0_1.png',
+							share: '/static/hm-news-detail/images/img_22946_0_2.png',
+							createTime: dateUtil.formatDate(result.createTime),
+							title: result.title,
+							thumb: result.img,
+							contents: result.context
+						}
 					}
 				})
 			},
