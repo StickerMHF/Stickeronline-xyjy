@@ -174,13 +174,17 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[commentCount]]`@commentCount`|`Number (Integer)`|-
 |[[content]]`@content`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
 |[[id]]`@id`|`String`|-
+|[[likeCount]]`@likeCount`|`Number (Integer)`|-
 |[[photos]]`@photos`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
 |[[userName]]`@userName`|`String`|-
 |[[userPhoto]]`@userPhoto`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 
 [[BNewsEntity]]
