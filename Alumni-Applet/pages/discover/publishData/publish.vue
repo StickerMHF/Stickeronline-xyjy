@@ -66,13 +66,17 @@
 				movedX: 0, //横向移动的距离
 				endX: 0, //接触屏幕后移开时的位置
 				//end
+				photosArray:[],
 				//发布参数
 				publishData:{
-					content: '',
-					photos:[],
+					content: '',					
+					photos: '',
 					userId: '',
 					userName: '',
-					userPhoto: ''
+					userPhoto: '',
+					viewCount: 0,
+					likeCount: 0,
+					commentCount: 0
 				}
 			}
 		},
@@ -106,18 +110,17 @@
 				
 				//获取用户信息
 				this.publishData.userId = uni.getStorageSync('openid');
-				// this.publishData.userId = uni.getStorageSync('openid');
-				console.log(uni.getStorageSync('openid'))
-				console.log(uni.getStorageSync('userInfo'))
-				if(uni.getStorageSync('userInfo')){
+				let userInfo = uni.getStorageSync('userInfo');
+				console.log(userInfo)
+				if(userInfo){
 					console.log(uni.getStorageSync('userInfo'));
+					this.publishData.userName = userInfo.nickName;
+					this.publishData.userPhoto = userInfo.avatarUrl;
 				} else {
-					getApp().getUserInfo();
-					setTimeout(function(){
-						console.log(uni.getStorageSync('userInfo'));
-					},2000)   
+					//跳转页面  
 				}
 				
+				this.publishData.photos = JSON.stringify(this.photosArray);
 				
 				publishMoment(this.publishData).then(data =>{
 					console.log(data);
@@ -125,37 +128,6 @@
 								url:"/pages/discover/discover"
 							});
 				});
-				
-				// uni.uploadFile({//该上传仅为示例,可根据自己业务修改或封装,注意:统一上传可能会导致服务器压力过大
-				// 	url: 'moment/moments', //仅为示例，非真实的接口地址
-				// 	files:images,//有files时,会忽略filePath和name
-				// 	filePath: '',
-				// 	name: '',
-				// 	formData: {//后台以post方式接收
-				// 		'user_id':'1',//自己系统中的用户id
-				// 		'text': this.publishData.content,//moment文字部分
-				// 		'longitude':location.longitude,//经度
-				// 		'latitude':location.latitude//纬度
-				// 	},
-				// 	success: (uploadFileRes) => {
-				// 		uni.hideLoading();
-				// 		uni.showToast({
-				// 			icon:'success',
-				// 			title:"发布成功"
-				// 		})
-				// 		uni.navigateBack({//可根据实际情况使用其他路由方式
-				// 			delta:1
-				// 		});
-				// 	},
-				// 	fail: (e) => {
-				// 		console.log("e: " + JSON.stringify(e));
-				// 		uni.hideLoading();
-				// 		uni.showToast({
-				// 			icon:'none',
-				// 			title:"发布失败,请检查网络"
-				// 		})
-				// 	}
-				// });
 			},
 			
 			getLocation(){//h5中可能不支持,自己选择
@@ -173,7 +145,7 @@
 			},			
 			close(e){
 			    this.imageList.splice(e,1);
-				this.publishData.photos.splice(e,1);
+				this.photosArray.splice(e,1);
 			},
 			chooseImage: async function() {
 				if (this.imageList.length === 9) {
@@ -241,31 +213,34 @@
 				}
 			},
 			uploadFile: function (files){
-				uni.uploadFile({
-				            url: 'http://localhost:8084/file/upload', //仅为示例，非真实的接口地址
-				            // files:files,
-				            name: 'file',
-							fileType:'image',
-							filePath: files[0].path,
-							// header: {"Content-Type": "multipart/form-data; boundary=<calculated when request is sent>"},
-				            // formData: {
-				            //     'file': files[0]
-				            // },
-				            success: (uploadFileRes) => {
-				                console.log(uploadFileRes.data);
-								let res = JSON.parse(uploadFileRes.data);
-								this.publishData.photos.push({
-									url: res.result[0].url,
-									fileName:  res.result[0].fileName
-								});
-				            },
-							fail:()=>{
-								uni.showToast({  
-									title: '请求错误',  
-									duration: 2000  
-								});  
-							}
-				        });
+				files.map(file =>{
+					uni.uploadFile({
+					            url: 'https://www.imapway.cn/alumniapi/file/upload', //仅为示例，非真实的接口地址
+					            // files:files,
+					            name: 'file',
+								fileType:'image',
+								filePath: file.path,
+								// header: {"Content-Type": "multipart/form-data; boundary=<calculated when request is sent>"},
+					            // formData: {
+					            //     'file': files[0]
+					            // },
+					            success: (uploadFileRes) => {
+					                console.log(uploadFileRes.data);
+									let res = JSON.parse(uploadFileRes.data);
+									this.photosArray.push({
+										url: res.result[0].url,
+										fileName:  res.result[0].fileName
+									});
+					            },
+								fail:()=>{
+									uni.showToast({  
+										title: '请求错误',  
+										duration: 2000  
+									});  
+								}
+					        });
+				});
+				
 			
 			}
 		}
