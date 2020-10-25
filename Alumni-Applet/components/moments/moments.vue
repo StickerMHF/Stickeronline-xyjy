@@ -1,10 +1,8 @@
 <template>
 	<view>
 		<view class="publishData">
-			<navigator url="/pages/discover/publishData/publishData">
-				<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG"></image>
-			</navigator>
-			</view>
+			<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="navigatorTo"></image>
+		</view>
 		<view class="cu-card dynamic" :class="isCard?'no-card':''" v-for="(moment,i) in list" :key="i">
 			<view class="cu-item shadow">
 				<view class="cu-list menu-avatar">
@@ -42,7 +40,7 @@
 							</view>
 							<view v-for="reply in comment.replyList" class="bg-grey padding-sm radius margin-top-sm  text-sm">
 								<view class="flex" >
-									<view>{{reply.name}}：  </view>
+									<view>{{reply.name}}</view>
 									<view class="flex-sub">  {{reply.content}}</view>
 								</view>
 							</view>
@@ -138,7 +136,13 @@
 		methods:{
 			publishData(){
 				console.log('发布数据')
+			},
+			navigatorTo(){
+				wx.navigateTo({
+					url:'/pages/discover/publishData/publishData'
+				})
 			}
+			
 		},
 		
 	}
@@ -149,9 +153,13 @@
 		    position: absolute;
 		    z-index: 99;
 			right: 10px;
+			margin-top: 5px;
 	}
 	.image{
-		height: 50px;
-		width: 50px;
+		height: 40px;
+		width: 40px;
+	}
+	.navigator-hover {
+	  color:blue;
 	}
 </style>

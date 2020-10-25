@@ -29,7 +29,7 @@ public class BMomentsHandler {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "userName", value = "发布者姓名", dataType = "String", paramType = "body", required = true),
             @ApiImplicitParam(name = "photos", value = "照片列表", dataType = "String", paramType = "body"),
-            @ApiImplicitParam(name = "content", value = "发布内容", dataType = "JsonArray", paramType = "body"),
+            @ApiImplicitParam(name = "content", value = "发布内容", dataType = "String", paramType = "body"),
             @ApiImplicitParam(name = "userPhoto", value = "发布者头像", dataType = "String", paramType = "body"),
             @ApiImplicitParam(name = "userId", value = "发布者ID", dataType = "String", paramType = "body")
     })

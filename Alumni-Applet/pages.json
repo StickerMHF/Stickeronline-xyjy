@@ -45,8 +45,8 @@
 		    "path" : "pages/discover/discover",
 		    "style" :                                                                                    
 		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
+		        "navigationBarTitleText": "数据加载中",
+		        "enablePullDownRefresh": true
 		    }
 		    
 		},{
