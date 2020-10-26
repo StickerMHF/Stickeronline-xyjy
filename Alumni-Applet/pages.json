@@ -45,8 +45,8 @@
 		    "path" : "pages/discover/discover",
 		    "style" :                                                                                    
 		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
+		        "navigationBarTitleText": "数据加载中",
+		        "enablePullDownRefresh": true
 		    }
 		    
 		},{
@@ -293,8 +293,13 @@
                 "enablePullDownRefresh": false
             }
             
-        }
-       
+        },
+		{
+		    "path" : "pages/imgPreview/imgPreview",
+		    "style" : {
+				"navigationBarTitleText": "查看图片"
+			}
+		}
     ],
 	"globalStyle": {
 		"mp-alipay": {

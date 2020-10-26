@@ -148,11 +148,13 @@
 				}
 			}
 		},
-		onLoad() {
-	
+		onLoad() {	
 			//获取朋友圈列表
 			this.getDiscoverList();
 
+		},
+		onPullDownRefresh (){
+			this.getDiscoverList();
 		},
 		methods: {
 			selectHandler(value) {
@@ -171,6 +173,7 @@
 			//获取朋友圈列表
 			getDiscoverList(){
 				getDiscoverList(this.params).then(data =>{
+					uni.stopPullDownRefresh();
 					let [error, res] = data;
 					if(res&&res.data&&res.data.result){
 						let content = res.data.result.content;

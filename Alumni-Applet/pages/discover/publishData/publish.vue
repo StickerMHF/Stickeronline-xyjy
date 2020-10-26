@@ -113,18 +113,28 @@
 				let userInfo = uni.getStorageSync('userInfo');
 				console.log(userInfo)
 				if(userInfo){
-					console.log(uni.getStorageSync('userInfo'));
 					this.publishData.userName = userInfo.nickName;
 					this.publishData.userPhoto = userInfo.avatarUrl;
 				} else {
-					//跳转页面  
+					//跳转页面 
+					 wx.navigateTo({
+					 	url:'pages/login/login'
+					 })
 				}
 				
 				this.publishData.photos = JSON.stringify(this.photosArray);
 				
 				publishMoment(this.publishData).then(data =>{
-					console.log(data);
-					uni.navigateBack({
+					// console.log(data);
+					 // let pages = getCurrentPages() // 获取加载的页面
+					 // console.log(pages,'UUUUUUUU')
+					 //  let currentPage = pages[pages.length - 2] // 获取当前页面的对象
+					 //  let url = currentPage.route // 当前页面url
+
+					// uni.navigateBack({
+					// 			url:"/pages/discover/discover"
+					// 		});
+					uni.navigateTo({
 								url:"/pages/discover/discover"
 							});
 				});
