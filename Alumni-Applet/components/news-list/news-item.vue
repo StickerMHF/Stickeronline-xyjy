@@ -88,6 +88,11 @@
 		font-size: 14px;
 		font-weight: bold;
 		color: #000000;
+		.news-title{
+			overflow:hidden;
+			text-overflow: ellipsis;
+			// white-space: nowrap;
+		}
 	}
 
 	.news-item-images {

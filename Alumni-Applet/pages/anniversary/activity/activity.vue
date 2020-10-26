@@ -4,14 +4,18 @@
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
-		<view class="ann_news_content" style="background-image: url(http://www.imapway.cn/Alumni/static/anniversary/xqhd.png);">
-			
+		<view class="ann_news_content" style="background-image: url(http://www.imapway.cn/Alumni/static/anniversary/xqhd.png1);">
+			<activityDetails></activityDetails>
 		</view>
 	</view>
 </template>
 
 <script>
+	import activityDetails from "@/components/list-activity/activity-details.vue"
 	export default {
+		components:{
+			activityDetails
+		},
 		data() {
 			return {
 				

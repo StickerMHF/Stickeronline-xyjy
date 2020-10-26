@@ -87,7 +87,8 @@
 				this.status = 'loading'
 				let param = {
 					pageNo: this.current,
-					pageSize: this.pageSize
+					pageSize: this.pageSize,
+					type:0
 				};
 				getNewsList(param).then(data => {
 					var [error, res] = data;

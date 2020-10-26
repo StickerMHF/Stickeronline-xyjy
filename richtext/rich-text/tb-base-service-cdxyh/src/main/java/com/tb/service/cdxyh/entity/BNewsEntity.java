@@ -62,6 +62,16 @@ public class BNewsEntity extends BaseEntity {
      */
     @Column(name = "view_count")
     private Integer viewCount;
+    /**
+     * 是否顶置
+     */
+    @Column(name = "istop")
+    private Integer istop;
+    /**
+     * 资讯类型 0:组织资讯;1:校庆资讯;2:校友会资讯
+     */
+    @Column(name = "type")
+    private Integer type;
 
     public String getId() {
         return id;
@@ -109,5 +119,21 @@ public class BNewsEntity extends BaseEntity {
 
     public void setDesc(String desc) {
         this.desc = desc;
+    }
+
+    public Integer getIstop() {
+        return istop;
+    }
+
+    public void setIstop(Integer istop) {
+        this.istop = istop;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 }

@@ -5,27 +5,85 @@
 			<block slot="content">{{title}}</block>
 		</cu-custom>
 		<view class="ann_news_content" style="background-image: url(http://www.imapway.cn/Alumni/static/anniversary/xqzx.png1);">
-			<view class="ann">
-				
-			</view>
-			<newsItem></newsItem>
+			<newsList :newsList="lists"></newsList>
 		</view>
 	</view>
 </template>
 
 <script>
 	import newsItem from "@/components/news-list/news-item.vue"
+	import newsList from "@/components/news-list/news-list.vue"
+	import {
+		getNewsList
+	} from '@/api/news.js'
 	export default {
 		components: {
-		newsItem
+		newsItem,
+		newsList
 		},
+		
 		data() {
 			return {
-				
+				lists:[],
+				status: 'more', // 加载状态
+				tipShow: false, // 是否显示顶部提示框
+				pageSize: 10, // 每页显示的数据条数
+				current: 1 // 当前页数		
 			}
 		},
+		onLoad(options) {
+			// 初始化页面数据
+			this.title=options.title;
+			this.getNewsList(true);
+		},
 		methods: {
-			
+			formatDate(date){
+				return getApp().formatDate(date);
+			},
+			/**
+			 * 获取页面数据
+			 * @param {Object} reload 参数reload值为true时执行列表初始化逻辑，值为false时执行追加下一页数据的逻辑。默认为false
+			 */
+			getNewsList(reload) {
+				this.status = 'loading'
+				let param = {
+					pageNo: this.current,
+					pageSize: this.pageSize,
+					type:0
+				};
+				getNewsList(param).then(data => {
+					var [error, res] = data;
+					if (res && res.data.success) {
+						let ss = res.data.result.content;
+						const tempList =  res.data.result.content;
+						// this.lists = res.data.result.content;
+									// 判断是否可翻页
+									if (tempList.length === this.pageSize) {
+										this.status = 'more'
+									} else {
+										this.status = 'noMore'
+									}
+						
+									if (reload) {
+										// 处理下拉加载提示框
+										this.tipShow = true;
+										clearTimeout(this.timer);
+										this.timer = setTimeout(() => {
+											this.tipShow = false;
+										}, 2000);
+										this.lists = tempList
+										// 停止刷新
+										uni.stopPullDownRefresh()
+									} else {
+										// 上拉加载后合并数据
+										this.lists = this.lists.concat(tempList)
+									}
+									if (tempList.length) {
+										this.current++
+									}
+					}
+				});
+			}
 		}
 	}
 </script>

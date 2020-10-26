@@ -48,7 +48,10 @@ public class BNewsAsyncServiceImpl implements BNewsAsyncService, BaseAsyncServic
         Sort sort = new Sort(Sort.Direction.DESC, sorts);
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
-//        matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
+        if (params.getString("type")!=null) {
+            bNewsEntity.setType(Integer.parseInt(params.getString("type")));
+            matcher.withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains());
+        }
         //创建实例
         Example<BNewsEntity> ex = Example.of(bNewsEntity, matcher);
         Page<BNewsEntity> plist = bNewsRepository.findAll(ex,pageable);

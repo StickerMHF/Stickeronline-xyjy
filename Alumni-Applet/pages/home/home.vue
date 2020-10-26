@@ -162,6 +162,7 @@
 				let param = {
 					pageNo: 1,
 					pageSize: 2,
+					type:0,
 					sort:sort?sort:'createTime'
 				};
 				getNewsList(param).then(data => {
@@ -176,7 +177,6 @@
 				return dateUtil.formatDate(date);
 			},
 			tabSelect(e) {
-				debugger
 				this.tabCur = e.currentTarget.dataset.id;
 				if(this.tabCur==1){
 					this.getNewsListData("viewCount");
