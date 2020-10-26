@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<view class="publishData">
+		<!-- <view class="publishData">
 			<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="navigatorTo"></image>
-		</view>
+		</view> -->
 		<view class="cu-card dynamic" :class="isCard?'no-card':''" v-for="(moment,i) in list" :key="i">
 			<view class="cu-item shadow">
 				<view class="cu-list menu-avatar">
@@ -137,14 +137,14 @@
 			uni.removeStorageSync("currentImgIndex");
 		},
 		methods:{
-			publishData(){
-				console.log('发布数据')
-			},
-			navigatorTo(){
-				wx.navigateTo({
-					url:'/pages/discover/publishData/publishData'
-				})
-			},
+			// publishData(){
+			// 	console.log('发布数据')
+			// },
+			// navigatorTo(){
+			// 	wx.navigateTo({
+			// 		url:'/pages/discover/publishData/publishData'
+			// 	})
+			// },
 			clickPic(imgPreviewPicList, index) {
 				uni.removeStorageSync("imgPreviewPicList");
 				uni.removeStorageSync("currentImgIndex");
@@ -160,17 +160,14 @@
 </script>
 
 <style  lang="scss">
-	.publishData{
-		    position: absolute;
-		    z-index: 99;
-			right: 10px;
-			margin-top: 5px;
-	}
-	.image{
-		height: 40px;
-		width: 40px;
-	}
-	.navigator-hover {
-	  color:blue;
-	}
+	// .publishData{
+	// 	    position: absolute;
+	// 	    z-index: 99;
+	// 		right: 10px;
+	// 		margin-top: 5px;
+	// }
+	// .image{
+	// 	height: 40px;
+	// 	width: 40px;
+	// }
 </style>

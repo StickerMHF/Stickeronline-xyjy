@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<uni-list>
-			<uni-list-item :to="'/pages/home/messageDetail/messageDetail?id='+item.id" direction="column" v-for="item in lists" :key="item.id">
+			<uni-list-item :to="'/pages/alumnus/messageDetails?id='+item.id" direction="column" v-for="item in lists" :key="item.id">
 				
 				<template v-slot:body>
 					<view class="uni-list-box">
@@ -48,7 +48,15 @@
 		    }
 		  },
 		methods: {
+			//关注
+			payHandler(item) {
+				if (item.attention == 0||!item.attention) {
+					// this.addMemberAttention(item);
+				} else {
+					// this.deleteMemberAttention(item);
+				}
 			
+			},
 		}
 	};
 </script>

@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<uni-list>
-			<uni-list-item :to="'/pages/home/activityDetail/activityDetail?id='+item.id" direction="column" v-for="item in lists" :key="item.id">
+			<uni-list-item :to="'/pages/alumnus/activityDetails?id='+item.id" direction="column" v-for="item in lists" :key="item.id">
 				
 				<template v-slot:body>
 					<view class="uni-list-box">
