@@ -63,6 +63,8 @@ const api = {
 	//获取相册详情
 	getAlumnusPhotoById: baseurl+'/stickeronline/alumnusPhoto/queryById',
 	
+	//获取组织成员列表
+	gitAlumnusMemberList: baseurl+'/stickeronline/alumnusMember/list',
 	//获取组织成员信息
 	getAlumnusMemberById: baseurl+'/stickeronline/alumnusMember/queryById',
 	
