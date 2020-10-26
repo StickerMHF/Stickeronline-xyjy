@@ -56,7 +56,7 @@ export default {
 		like:"http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_1.png",
 		share:"http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_2.png",
 		thumb:"",
-		  islike:false
+		islike:false
 	};
   },
   methods: {

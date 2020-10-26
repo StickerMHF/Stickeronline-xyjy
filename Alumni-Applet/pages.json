@@ -71,11 +71,21 @@
 			"style": {
 				
 			}
-
+		
 		},
 		{
-			"path":"pages/home/messageDetail/messageDetail",
-			"style":{}
+			"path": "pages/alumnus/activityDetails",
+			"style": {
+				
+			}
+		
+		},
+		{
+			"path": "pages/alumnus/messageDetails",
+			"style": {
+				
+			}
+		
 		},
 		{
 			"path":"pages/alumnus/statistics",
@@ -99,17 +109,7 @@
         }
         ,{
             "path" : "pages/home/newsDetail/newsDetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        } 
-		,{
-            "path" : "pages/home/activityDetail/activityDetail",
-            "style" :                                                                                    
-            {
+            "style" : {
                 "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }

@@ -27,9 +27,9 @@
 				</view>
 			</view>
 			<listMessage v-bind:lists="newsList"></listMessage>
-			<view class="view_more" @click="switchMenu" data-cur="news">
+			<!-- <view class="view_more" @click="switchMenu" data-cur="news">
 				<uni-load-more :status="more" :contentText="contentText"></uni-load-more>
-			</view>
+			</view> -->
 		</view>
 		<view class="al-desc-title" v-show="showActivity">
 			<view class="cu-bar bg-white solid-bottom">
@@ -38,9 +38,9 @@
 				</view>
 			</view>
 			<listActivity v-bind:lists="activityList"></listActivity>
-			<view class="view_more" @click="switchMenu" data-cur="activity">
+			<!-- <view class="view_more" @click="switchMenu" data-cur="activity">
 				<uni-load-more :status="more" :contentText="contentText"></uni-load-more>
-			</view>
+			</view> -->
 		</view>
 		<view class="al-desc-title" v-show="showPhoto">
 			<view class="cu-bar bg-white solid-bottom">
@@ -50,10 +50,18 @@
 			</view>
 			<view class="discover-content">
 				<moments v-bind:list="photoList"></moments>
+			</view>			
+		</view>
+		<view class="al-desc-title" v-show="showMember">
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					<text class="cuIcon-titles text-green1"></text> 组织成员
+				</view>
 			</view>
-			<view class="view_more" @click="switchMenu" data-cur="photo">
-				<uni-load-more :status="more" :contentText="contentText"></uni-load-more>
-			</view>
+			<list-member v-bind:list="memberList"></list-member>
+		</view>
+		<view class="view_more" @click="switchMenu" data-cur="photo">
+			<uni-load-more :status="more" :contentText="contentText"></uni-load-more>
 		</view>
 	</view>
 </template>
@@ -61,18 +69,21 @@
 <script>
 	import listMessage from "@/components/list-message/list-message.vue"
 	import listActivity from "@/components/list-activity/list-activity.vue"
+	import listMember from "@/components/list-member/list-member.vue"
 	import {
 		dateUtil
 	} from "@/utils/dateUtil.js"
 	import {
 		getAlumnusNewsList,
 		getAlumnusActivityList,
-		getAlumnusPhotoList
+		getAlumnusPhotoList,
+		gitAlumnusMemberList
 	} from '@/api/alumnus.js'
 	export default {
 		components: {
 			listMessage,
-			listActivity
+			listActivity,
+			listMember
 		},
 		data() {
 			return {
@@ -84,10 +95,12 @@
 				newsList: [],
 				activityList: [],
 				photoList: [],
+				memberList:[],
 				meanu: 'intro', //当前菜单
 				showNews: true,
 				showActivity: true,
 				showPhoto: true,
+				showMember: false,
 				swiperList: [{
 					id: 0,
 					type: 'image',
@@ -156,6 +169,7 @@
 						this.showNews = true;
 						this.showActivity = true;
 						this.showPhoto = true;
+						this.showMember = false;
 						break;
 					case 'news':
 						this.params.pageSize = 10;
@@ -163,6 +177,7 @@
 						this.showNews = true;
 						this.showActivity = false;
 						this.showPhoto = false;
+						this.showMember = false;
 						break;
 					case 'activity':
 						this.params.pageSize = 10;
@@ -170,6 +185,7 @@
 						this.showNews = false;
 						this.showActivity = true;
 						this.showPhoto = false;
+						this.showMember = false;
 						break;
 					case 'photo':
 						this.params.pageSize = 10;
@@ -177,11 +193,15 @@
 						this.showNews = false;
 						this.showActivity = false;
 						this.showPhoto = true;
+						this.showMember = false;
 						break;
 					case 'member':
-						// this.showNews = false;
-						// this.showActivity = false;
-						// this.showPhoto = false;
+						this.params.pageSize = 10;
+						this.gitAlumnusMemberList();
+						this.showNews = false;
+						this.showActivity = false;
+						this.showPhoto = false;
+						this.showMember = true;
 						break;
 					default:
 						break;
@@ -216,6 +236,14 @@
 					if (res && res.data && res.data.result) {
 						let list = res.data.result.content;
 						this.photoList = this.converMomentsData(list);
+					}
+				});
+			},
+			gitAlumnusMemberList(){
+				gitAlumnusMemberList(this.params).then(data => {
+					let [error, res] = data;
+					if(res&& res.data&&res.data.result){
+						this.memberList = res.data.result.content;
 					}
 				});
 			},

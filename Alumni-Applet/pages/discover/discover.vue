@@ -22,6 +22,9 @@
 				<view :class="item.active?'cu-tag radius attention active':'cu-tag radius attention'" v-for="(item, i) in attentionList">{{item.name}}</view>
 			</view>
 		</view>
+		<view class="publishData">
+			<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="navigatorTo"></image>
+		</view>
 		<view class="discover-content">
 			<moments :list="momentsList"></moments>
 		</view>
@@ -225,7 +228,12 @@
 				    }
 				});
 				return tree;
-			}
+			},
+			navigatorTo(){
+				wx.navigateTo({
+					url:'/pages/discover/publishData/publishData'
+				})
+			},
 		}
 	}
 </script>
@@ -281,6 +289,15 @@
 		width: 100%;
 		z-index: 1;
 		background: white;
-
+	}
+	.publishData{
+		    position: absolute;
+		    z-index: 99;
+			right: 10px;
+			margin-top: 5px;
+	}
+	.image{
+		height: 40px;
+		width: 40px;
 	}
 </style>
