@@ -4,14 +4,21 @@
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
-		<view class="ann_news_content" style="background-image: url(http://www.imapway.cn/Alumni/static/anniversary/xqzx.png);">
-			
+		<view class="ann_news_content" style="background-image: url(http://www.imapway.cn/Alumni/static/anniversary/xqzx.png1);">
+			<view class="ann">
+				
+			</view>
+			<newsItem></newsItem>
 		</view>
 	</view>
 </template>
 
 <script>
+	import newsItem from "@/components/news-list/news-item.vue"
 	export default {
+		components: {
+		newsItem
+		},
 		data() {
 			return {
 				
@@ -30,7 +37,7 @@
 }
 .ann_news_content{
 	position: absolute;
-	top: 45px;
+	top: 60px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;

@@ -43,25 +43,7 @@
 			</scroll-view>
 			<view class="phm-card cu-card case no-card" v-for="(item,index) in newsList" >
 				<navigator :url="'/pages/home/newsDetail/newsDetail?id='+item.id">
-				<view class="cu-item shadow">
-					<view class="image">
-						<image :src="JSON.parse(item.thumb)[0]" mode="widthFix"></image>
-						<!-- <view class="cu-bar bg-shadeBottom"> <text class="text-cut">{{item.desc}}</text></view> -->
-					</view>
-					<view class="cu-list ">
-						<view class="cu-item phm-zx-item">
-							<view class="phm-zx-content">
-								<view class="text-grey news-title">{{item.title}}</view>
-								<view class="text-gray text-sm flex justify-between">
-									{{formatDate(item.createTime)}}
-									<view class="phm-zx-view text-gray text-sm">
-										<text class="cuIcon-attentionfill margin-lr-xs"></text> {{item.viewCount?item.viewCount:0}}
-									</view>
-								</view>
-							</view>
-						</view>
-					</view>
-				</view>
+					<newsItem :opts="item"></newsItem>
 				</navigator>
 			</view>
 		</view>	
@@ -84,9 +66,11 @@
 		getNewsList
 	} from '@/api/news.js'
 	import umap from "./map/map.vue"
+	import newsItem from "@/components/news-list/news-item.vue"
 	export default {
 		components: {
-		umap
+		umap,
+		newsItem
 		},
 		data() {
 			return {

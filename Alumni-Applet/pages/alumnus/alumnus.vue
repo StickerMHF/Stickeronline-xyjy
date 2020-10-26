@@ -12,8 +12,6 @@
 			</scroll-view>
 		</view>
 		<view v-if="tabCur==5" >
-			<!-- <iframe></iframe> -->
-			<!-- <iframe class="webviewStyles" src="https://www.imapway.cn/Alumni/echarts/test.html"></iframe> -->
 			<web-view class="webviewStyles" src="https://www.imapway.cn/Alumni/echarts/test.html"></web-view>
 		</view>
 		<view v-else class="">
@@ -89,12 +87,12 @@
 				}, {
 					id: 4,
 					name: '行业校友'
-				}, {
-					id: 5,
-					name: '校友统计',
-					//:to="'/pages/home/newsDetail/newsDetail?id='+item.id"
-					uri: '/pages/alumnus/statistics'
 				}],
+				// , {
+				// 	id: 5,
+				// 	name: '校友统计',
+				// 	uri: '/pages/alumnus/statistics'
+				// }
 				lists: [{
 					name:"校友总会",
 					thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",

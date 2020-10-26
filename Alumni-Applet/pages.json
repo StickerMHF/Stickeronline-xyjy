@@ -300,6 +300,15 @@
 				"navigationBarTitleText": "查看图片"
 			}
 		}
+        ,{
+            "path" : "components/news-list/news-list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"mp-alipay": {
