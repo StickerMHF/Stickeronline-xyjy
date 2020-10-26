@@ -293,7 +293,13 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+		    "path" : "pages/imgPreview/imgPreview",
+		    "style" : {
+				"navigationBarTitleText": "查看图片"
+			}
+		}
     ],
 	"globalStyle": {
 		"mp-alipay": {

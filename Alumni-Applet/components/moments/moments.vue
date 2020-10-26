@@ -21,7 +21,7 @@
 				</view>
 				<view class="grid flex-sub padding-lr" :class="isCard?'col-3 grid-square':'col-1'">
 					<view class="bg-img" :class="isCard?'':'only-img'" :style="'background-image:url('+item.url+');'"
-					 v-for="(item,index) in moment.images" :key="index">
+						@tap="clickPic(moment.images, index)"  v-for="(item,index) in moment.images" :key="index">
 					</view>
 				</view>
 				<view class="text-gray text-sm text-right padding">
@@ -52,8 +52,7 @@
 								</view>
 							</view>
 						</view>
-					</view>
-					
+					</view>					
 				</view>
 			</view>
 		</view>
@@ -133,6 +132,10 @@
 				}
 			}
 		},
+		onUnload() {
+			uni.removeStorageSync("imgPreviewPicList");
+			uni.removeStorageSync("currentImgIndex");
+		},
 		methods:{
 			publishData(){
 				console.log('发布数据')
@@ -141,8 +144,16 @@
 				wx.navigateTo({
 					url:'/pages/discover/publishData/publishData'
 				})
-			}
-			
+			},
+			clickPic(imgPreviewPicList, index) {
+				uni.removeStorageSync("imgPreviewPicList");
+				uni.removeStorageSync("currentImgIndex");
+				uni.setStorageSync("currentImgIndex",index);
+				uni.setStorageSync("imgPreviewPicList",imgPreviewPicList);
+				uni.navigateTo({
+					url: '/pages/imgPreview/imgPreview'
+				});
+			}			
 		},
 		
 	}
