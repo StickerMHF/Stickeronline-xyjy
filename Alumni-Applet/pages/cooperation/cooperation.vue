@@ -115,50 +115,7 @@
 						}
 					}
 				})
-				// 通过 clientDB 请求后台数据
-				// db.collection('opendb-news-articles')
-				// 	.where({
-				// 		// 查询字段是否存在
-				// 		_id: dbCmd.exists(true)
-				// 	})
-				// 	// 跳过对应数量的文档，输出剩下的文档
-				// 	.skip(this.pageSize * (this.current - 1))
-				// 	// 限制输出到下一阶段的记录数
-				// 	.limit(this.pageSize)
-				// 	// 获取集合中的记录
-				// 	.get()
-				// 	.then((res) => {
-				// 		const tempList = res.result.data
-				// 		// 判断是否可翻页
-				// 		if (tempList.length === this.pageSize) {
-				// 			this.status = 'more'
-				// 		} else {
-				// 			this.status = 'noMore'
-				// 		}
-
-				// 		if (reload) {
-				// 			// 处理下拉加载提示框
-				// 			this.tipShow = true;
-				// 			clearTimeout(this.timer);
-				// 			this.timer = setTimeout(() => {
-				// 				this.tipShow = false;
-				// 			}, 2000);
-				// 			this.lists = tempList
-				// 			// 停止刷新
-				// 			uni.stopPullDownRefresh()
-				// 		} else {
-				// 			// 上拉加载后合并数据
-				// 			this.lists = this.lists.concat(tempList)
-				// 		}
-				// 		if (tempList.length) {
-				// 			this.current++
-				// 		}
-				// 	}).catch((err) => {
-				// 		uni.showModal({
-				// 			content: '请求失败，请稍后再试：' + err,
-				// 			showCancel: false
-				// 		})
-				// 	})
+			
 			}
 		}
 	};

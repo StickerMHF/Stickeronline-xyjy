@@ -36,7 +36,6 @@ function onMore(item, shareInfo,callback) {
 }
 // 分享
 function onShare(item, shareInfo,callback) {
-	debugger
 	if (shareInfo.type == undefined) {
 		shareInfo.type = item.type;
 	}

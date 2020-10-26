@@ -4,60 +4,68 @@
 		<cu-custom bgColor="bg-gradual-green1" :isBack="false"><block slot="content">校友</block></cu-custom>
 		<view >
 			<scroll-view scroll-x class="bg-white nav text-center" scroll-with-animation>
-				<view class="cu-item" :class="item.id==p.type?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect"
+				<view class="cu-item" :class="item.id==tabCur?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect"
 				
 				 :data-id="item.id">
 					{{item.name}}
 				</view>
 			</scroll-view>
 		</view>
-		<!-- 刷新页面后的顶部提示框 -->
-		<!-- 当前弹出内容没有实际逻辑 ，可根据当前业务修改弹出提示 -->
-		<view class="tips" :class="{ 'tips-ani': tipShow }">为您更新了10条最新新闻动态</view>
-		<!-- 基于 uni-list 的页面布局 -->
-		<uni-list :class="{ 'uni-list--waterfall': waterfall }">
-			<!-- 通过 uni-list--waterfall 类决定页面布局方向 -->
-			<uni-list-item :to="'/pages/alumnus/details?id='+item.id+'&name='+item.name" :border="!waterfall" class="uni-list-item--waterfall" title="自定义商品列表" v-for="item in lists" :key="item._id">
-				<!-- 通过header插槽定义列表左侧图片 -->
-				<template v-slot:header>
-					<view class="uni-thumb shop-picture" :class="{ 'shop-picture-column': waterfall }">
-						<image :src="item.thumb" ></image>
+		<view v-if="tabCur==5" >
+			<!-- <iframe></iframe> -->
+			<!-- <iframe class="webviewStyles" src="https://www.imapway.cn/Alumni/echarts/test.html"></iframe> -->
+			<web-view class="webviewStyles" src="https://www.imapway.cn/Alumni/echarts/test.html"></web-view>
+		</view>
+		<view v-else class="">
+			<!-- 刷新页面后的顶部提示框 -->
+			<!-- 当前弹出内容没有实际逻辑 ，可根据当前业务修改弹出提示 -->
+			<view class="tips" :class="{ 'tips-ani': tipShow }">为您更新了10条最新新闻动态</view>
+			<!-- 基于 uni-list 的页面布局 -->
+			<uni-list :class="{ 'uni-list--waterfall': waterfall }">
+				<!-- 通过 uni-list--waterfall 类决定页面布局方向 -->
+				<uni-list-item :to="'/pages/alumnus/details?id='+item.id+'&name='+item.name" :border="!waterfall" class="uni-list-item--waterfall" title="自定义商品列表" v-for="item in lists" :key="item._id">
+					<!-- 通过header插槽定义列表左侧图片 -->
+					<template v-slot:header>
+						<view class="uni-thumb shop-picture" :class="{ 'shop-picture-column': waterfall }">
+							<image :src="item.thumb" ></image>
+						</view>
+					</template>
+					<!-- 通过body插槽定义商品布局 -->
+					<view slot="body" class="shop">
+						<view>
+							<view class="uni-title">
+								<text class="uni-ellipsis-2">{{ item.name }}</text>
+								<button class="alumnus-btn cu-btn round sm bg-orange" >加入</button>
+							</view>
+							<view>
+								<view class="cu-capsule radius">
+									<view class='cu-tag bg-blue sm'>
+										活动
+									</view>
+									<view class="cu-tag line-blue sm">
+										{{item.activity}}
+									</view>
+								</view>
+								<view class="cu-capsule radius">
+									<view class='cu-tag bg-gradual-green1 sm'>
+										成员
+									</view>
+									<view class="cu-tag line-green sm">
+										{{item.member}}
+									</view>
+								</view>
+							</view>
+							<view>
+								<!-- <u-rate :count="count" v-model="value"></u-rate> -->
+							</view>
+						</view>					
 					</view>
-				</template>
-				<!-- 通过body插槽定义商品布局 -->
-				<view slot="body" class="shop">
-					<view>
-						<view class="uni-title">
-							<text class="uni-ellipsis-2">{{ item.name }}</text>
-							<button class="alumnus-btn cu-btn round sm bg-orange" >加入</button>
-						</view>
-						<view>
-							<view class="cu-capsule radius">
-								<view class='cu-tag bg-blue sm'>
-									活动
-								</view>
-								<view class="cu-tag line-blue sm">
-									{{item.activity}}
-								</view>
-							</view>
-							<view class="cu-capsule radius">
-								<view class='cu-tag bg-gradual-green1 sm'>
-									成员
-								</view>
-								<view class="cu-tag line-green sm">
-									{{item.member}}
-								</view>
-							</view>
-						</view>
-						<view>
-							<!-- <u-rate :count="count" v-model="value"></u-rate> -->
-						</view>
-					</view>					
-				</view>
-			</uni-list-item>
-		</uni-list>
-		<!-- 通过 loadMore 组件实现上拉加载效果，如需自定义显示内容，可参考：https://ext.dcloud.net.cn/plugin?id=29 -->
-		<uni-load-more v-if="lists.length > 0" :status="status" />
+				</uni-list-item>
+			</uni-list>
+			<!-- 通过 loadMore 组件实现上拉加载效果，如需自定义显示内容，可参考：https://ext.dcloud.net.cn/plugin?id=29 -->
+			<uni-load-more v-if="lists.length > 0" :status="status" />
+		</view>
+		
 	</view>
 </template>
 
@@ -135,6 +143,7 @@
 				})
 			},
 			tabSelect(e) {
+				this.tabCur=e.currentTarget.dataset.id;
 				this.params.type = e.currentTarget.dataset.id;
 				this.params.pageNo = 1;
 				this.getAlumnusList(this.params);
@@ -212,7 +221,7 @@
 				// 			content: '请求失败，请稍后再试：' + err,
 				// 			showCancel: false
 				// 		})
-				// 	})
+				// 	})s
 			}
 		}
 	};
@@ -369,5 +378,12 @@
 		width: 40rpx;
 		height: 40rpx;
 		margin-left: 30rpx;	
+	}
+	.webviewStyles{
+		position: absolute;
+		left: 0xp;
+		right: 0px;
+		bottom: 0px;
+		top: 90px;
 	}
 </style>

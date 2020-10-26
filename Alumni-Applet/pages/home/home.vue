@@ -65,16 +65,16 @@
 				</navigator>
 			</view>
 		</view>	
-		<!-- <view class="ph-menu">
+		<view class="ph-menu">
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					<text class="cuIcon-titles text-green1"></text> 校友分布
 				</view>
 			</view>
-			<view style="width: 80%;margin: 0 auto;">
-				
+			<view class="ph-menu-map">
+				<umap class="phm-map"></umap>
 			</view>
-		</view> -->
+		</view>
 	</view>
 </template>
 
@@ -83,9 +83,10 @@
 	import {
 		getNewsList
 	} from '@/api/news.js'
+	import umap from "./map/map.vue"
 	export default {
 		components: {
-		
+		umap
 		},
 		data() {
 			return {
@@ -280,5 +281,11 @@
 		 overflow:hidden;
 		 text-overflow: ellipsis;
 		 white-space: nowrap;
+	}
+	.ph-menu-map{
+		width: 100%;
+	}
+	.phm-map{
+		width: 100%;
 	}
 </style>

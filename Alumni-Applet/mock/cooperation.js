@@ -3,7 +3,7 @@ import queryString from 'query-string'
 const cooperation = {
 	CooperationList: [{
 		title: 'ss',
-		desc:"合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作",
+		contents:"合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作合作",
 		lastModifyDate:"2020-10-15",
 		useName:"1985级stickeronline"
 	}]
