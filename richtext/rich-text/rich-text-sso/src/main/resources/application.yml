@@ -1,9 +1,10 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://124.70.47.134:5432/rich_text?stringtype=unspecified
+#    url: jdbc:postgresql://124.70.47.134:5432/rich_text?stringtype=unspecified
+    url: jdbc:postgresql://pgm-8vbo3d9po58lqa1t8o.pgsql.zhangbei.rds.aliyuncs.com:3433/rich_text?stringtype=unspecified
     username: postgres
-    password: postgres
+    password: postgres!@#
     hikari:
       minimum-idle: 5
       idle-timeout: 600000
