@@ -3,11 +3,12 @@ package com.tb.service.cdxyh.service;
 import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 @ProxyGen
-public interface BMomentsService {
+public interface BMomentsLikeService {
     /**
      * 新增
      *
@@ -58,9 +59,9 @@ public interface BMomentsService {
     void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
-     * 点赞
+     * 根据朋友圈ID查询评论
      * @param params
-     * @param handler
+     * @return
      */
-    void likeClick(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    void queryByMomentId(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
 }
