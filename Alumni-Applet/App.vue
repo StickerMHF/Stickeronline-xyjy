@@ -202,6 +202,9 @@
 			},
 			formatDate(date){
 				return dateUtil.formatDate(date);
+			},
+			formatTime(date){
+				return dateUtil.formatTime(date);
 			}
 		}
 

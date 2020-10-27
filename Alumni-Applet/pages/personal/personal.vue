@@ -39,7 +39,7 @@
 						<view class="icon">
 							<image :src="item.icon"></image>
 						</view>
-						<view class="text">{{item.name}}</view>
+						<view class="text">{{item.name}}{{isCertification&&item.pageInfo?'(已认证)':''}}</view>
 						<image class="to" src="http://www.imapway.cn/Alumni/static/user/to.png"></image>
 					</view>
 				</navigator>

@@ -125,11 +125,14 @@ public class BMemberAsyncServiceImpl implements BMemberAsyncService, BaseAsyncSe
     @Override
     public void queryAllByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
         BMemberEntity bMemberEntity = new BMemberEntity(params);
         String userId=params.getString("userId");
-        List<Map<String,Object>> res = bMemberRepository.findAllListByUserId(userId);
+        Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+        List<Map<String,Object>> res = bMemberRepository.findAllListByUserId(userId,pageVo.getPageSize(),offset);
+        Long zoom=bMemberRepository.count();
         JsonArray array=new JsonArray(res);
-        future.complete(new JsonObject().put("content",array));
+        future.complete(new JsonObject().put("content",array).put("total",zoom));
         handler.handle(future);
     }
 }

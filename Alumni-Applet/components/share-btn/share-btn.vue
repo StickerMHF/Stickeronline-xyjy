@@ -22,16 +22,16 @@
 						icon: '/static/index/weixin.png',
 						name: 'wx'
 					},
-					{
-						text: '朋友圈',
-						icon: '/static/index/pengyouquan.png',
-						name: 'copy'
-					},
-					{
-						text: 'QQ',
-						icon: '/static/index/qq.png',
-						name: 'qq'
-					},
+					// {
+					// 	text: '朋友圈',
+					// 	icon: '/static/index/pengyouquan.png',
+					// 	name: 'copy'
+					// },
+					// {
+					// 	text: 'QQ',
+					// 	icon: '/static/index/qq.png',
+					// 	name: 'qq'
+					// },
 					{
 						text: '复制',
 						icon: '/static/index/copy.png',
