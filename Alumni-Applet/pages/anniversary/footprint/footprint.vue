@@ -14,7 +14,7 @@
 	export default {
 		data() {
 			return {
-				
+				title:'1230'
 			}
 		},
 		methods: {
