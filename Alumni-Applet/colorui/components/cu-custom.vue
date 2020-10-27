@@ -45,6 +45,10 @@
 				type: [Boolean, String],
 				default: false
 			},
+			isCallBack: {
+				type: Boolean,
+				default: false
+			},
 			bgImage: {
 				type: String,
 				default: ''
@@ -52,9 +56,14 @@
 		},
 		methods: {
 			BackPage() {
-				uni.navigateBack({
-					delta: 1
-				});
+				if(this.isCallBack){
+					this.$emit("callBack");
+				}else{
+					uni.navigateBack({
+						delta: 1
+					});
+				}
+				
 			}
 		}
 	}

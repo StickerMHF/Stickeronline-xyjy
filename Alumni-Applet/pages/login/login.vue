@@ -1,6 +1,6 @@
 <template>
 	<view class="content" style="margin-top: 150px;">
-		<cu-custom bgColor="bg-gradual-green1" :isBack="false">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" @callBack="callBackHandler" isCallBack=true>
 			<block slot="content">登录</block>
 		</cu-custom>
 		<view class="header">
@@ -55,6 +55,11 @@
 					delta: 1
 				});
 
+			},
+			callBackHandler(){
+				uni.switchTab({
+					url: "/pages/home/home"
+				});
 			}
 		}
 	}

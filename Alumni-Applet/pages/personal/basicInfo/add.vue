@@ -1,0 +1,226 @@
+<template>
+	<view>
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
+			<block slot="backText">返回</block>
+			<block slot="content">{{title}}</block>
+		</cu-custom>
+		<bjx-form labelType="inline" :rules="rules" labelWidth="150" :form="form" ref="form">
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="姓名" prop="name">
+					<input class="basicinfo_name input" v-model="form.name"  name="input" placeholder="姓名" />
+				</bjx-form-item>
+			</view>
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="性别" prop="sex">
+					<input v-model="form.sex" class="input" name="input" placeholder="性别" />
+				</bjx-form-item>
+			</view>
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="身份证" label-right="left" prop='identityCard'>
+					<input v-model="form.identityCard" class="input" name="input" placeholder="身份证号" />
+				</bjx-form-item>
+			</view>
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="所属学院" label-right="left" prop='college'>
+					<input v-model="form.college" class="input" name="input" placeholder="所属学院" />
+				</bjx-form-item>
+			</view>
+			<!-- 不是教师 -->
+			<view v-if="type!='3'" class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="所在专业" label-right="right" prop='profession'>
+					<input v-model="form.profession" class="input" name="input" placeholder="所在专业" />
+				</bjx-form-item>
+			</view>
+
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="学历" label-right="right" prop='education'>
+					<picker @change="eduChange" :value="form.education" :range="eduPicker">
+						<view class="picker">
+							{{form.education}}
+						</view>
+					</picker>
+				</bjx-form-item>
+			</view>
+			<!-- 曾经在校 -->
+			<view v-if="type=='1'" class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="入校时间" label-right="right" prop='startDate'>
+					<picker mode="date" :value="form.startDate" start="1970-09-01" end="2030-09-01" @change="startDateChange">
+						<view class="picker">
+							{{form.startDate}}
+						</view>
+					</picker>
+				</bjx-form-item>
+			</view>
+			<!-- 在校学生 -->
+			<view v-else-if="type=='2'" class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="入学时间" label-right="right" prop='startDate'>
+					<picker mode="date" :value="form.startDate" start="1970-09-01" end="2030-09-01" @change="startDateChange">
+						<view class="picker">
+							{{form.startDate}}
+						</view>
+					</picker>
+				</bjx-form-item>
+			</view>
+			<!-- 在职教师 -->
+			<view v-else class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="入职时间" label-right="right" prop='startDate'>
+					<picker mode="date" :value="form.startDate" start="1970-09-01" end="2030-09-01" @change="startDateChange">
+						<view class="picker">
+							{{form.startDate}}
+						</view>
+					</picker>
+				</bjx-form-item>
+			</view>
+
+			<!-- 曾经在校 -->
+			<view v-if="type=='1'" class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="离校时间" label-right="right" prop='endtDate'>
+					<picker mode="date" :value="form.endtDate" start="1970-09-01" end="2030-09-01" @change="endDateChange">
+						<view class="picker">
+							{{form.endtDate}}
+						</view>
+					</picker>
+				</bjx-form-item>
+			</view>
+
+
+			<button class="bg-gradual-green1 margin" type="primary" @tap="submit">提交</button>
+		</bjx-form>
+	</view>
+</template>
+
+<script>
+	import bjxForm from '@/components/bjx-form/bjx-form.vue'
+	import bjxFormItem from '@/components/bjx-form/bjx-form-item.vue'
+	import {
+		addWechatUser
+	} from '@/api/user.js'
+	export default {
+		components: {
+			bjxForm,
+			bjxFormItem
+		},
+		data() {
+			return {
+				type: "1",
+				form: {
+					openid: '',
+					name: '',
+					sex: '',
+					identityCard: "",
+					college: '',
+					profession: '',
+					education: '请选择',
+					startDate: '2018-12-25',
+					endtDate: '2018-12-25',
+				},
+				index: -1,
+				eduIndex: -1,
+				picker: ['喵喵喵', '汪汪汪', '哼唧哼唧'],
+				eduPicker: ['大专', '本科', '硕士', '博士'],
+				rules: {
+					name: {
+						required: true,
+						rule: 'type:string|length:~,20'
+					},
+					identityCard: {
+						required: true,
+						rule: 'type:string|length:0,18'
+					},
+					college:{
+						required: true,
+						rule: 'type:string|length:~,50'
+					},
+					education:{
+						required: true,
+						rule: 'type:string|length:~,50'
+					},
+					startDate:{
+						required: true,
+						rule: 'type:string|date'
+					}
+				}
+
+			}
+		},
+		onLoad(options) {
+			// 初始化页面数据
+			this.title = options.title;
+			this.type = options.type;
+			if (!this.type) {
+				// debugger
+			}
+		},
+		methods: {
+			submit() {
+				let that=this;
+				this.$refs.form.validate(val => {
+					if(val){
+						this.save(that.form);
+					}
+				})
+			},
+			textareaInput(e) {
+				this.contents = e.detail.value
+			},
+			pickerChange(e) {
+				this.index = e.detail.value
+			},
+			eduChange(e) {
+				this.eduIndex = e.detail.value;
+				this.form.education = this.eduPicker[this.eduIndex];
+			},
+			startDateChange(e) {
+				this.form.startDate = e.detail.value
+			},
+			endDateChange(e) {
+				this.form.endDate = e.detail.value
+			},
+			inputContactChange(e) {
+				this.contact = e.detail.value
+			},
+			inputTitleChange(e) {
+				this.name = e.detail.value
+			},
+			save(formData) {
+				let that=this;
+				let userInfo = uni.getStorageSync('userInfo');
+				let params =Object.assign(userInfo, formData); 
+				let openid = uni.getStorageSync('openid');
+				if (openid&&openid!="") {
+					params.openid=openid;
+					params.type=that.type;
+					addWechatUser(params).then(data => {
+						var [error, res] = data;
+						debugger
+						if (res && res.data && res.data.success) {
+							uni.redirectTo({
+								url: '/pages/personal/personal'
+							})
+						} else {
+							uni.showModal({
+								content: '保存失败，请稍后再试：' + JSON.stringify(res.data),
+								showCancel: false
+							})
+						}
+						this.lists = res.data.data;
+					})
+				} else {
+					getApp().getUserInfo();
+				}
+			}
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.basicinfo_item {
+		width: 100% !important;
+	}
+	.basicinfo_name{
+		display: inline-block;
+		.renzheng{
+			float: right;
+		}
+	}
+</style>

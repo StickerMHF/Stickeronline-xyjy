@@ -34,7 +34,7 @@
 		</view>
 		<view class="list-content">
 			<view class="list" v-for="item in menuList">
-				<navigator :url="item.page">
+				<navigator :url="isCertification&&item.pageInfo?item.pageInfo:item.page">
 					<view class="li noborder">
 						<view class="icon">
 							<image :src="item.icon"></image>
@@ -49,6 +49,9 @@
 	</view>
 </template>
 <script>
+	import {
+		getWechatUserById
+	} from '@/api/user.js'
 	export default {
 		data() {
 			return {
@@ -61,10 +64,13 @@
 					country: "China",
 					avatarUrl: "http://www.imapway.cn/Alumni/static/user/face.jpg"
 				},
+				isCertification:false,//是否认证
 				menuList: [{
-					name: "个人信息",
+					name: "校友认证",
 					icon: "http://www.imapway.cn/Alumni/static/personal/grxx2x.png",
-					page: "/pages/personal/basicInfo/basicInfo"
+					page: "/pages/personal/basicInfo/certification",
+					pageInfo:"/pages/personal/basicInfo/basicInfo"
+					
 				}, {
 					name: "我的组织",
 					icon: "http://www.imapway.cn/Alumni/static/personal/wdzz2x.png",
@@ -88,11 +94,11 @@
 				}]
 			};
 		},
-		onShow() {//
-		debugger
+		onShow() {
 			let userInfo = uni.getStorageSync('userInfo');
 			if (userInfo&&userInfo!="") {
 				this.userInfo = userInfo;
+				this.getWechatUserInfo();
 			}else{
 				uni.navigateTo({
 				    url: "/pages/login/login"
@@ -104,6 +110,30 @@
 
 		},
 		methods: {
+			getWechatUserInfo(){
+				let that=this;
+				let openid = uni.getStorageSync('openid');
+				if (openid&&openid!="") {
+					let param = {
+						openid:openid
+					};
+					getWechatUserById(param).then(data => {
+						var [error, res] = data;
+						if (res && res.data.success) {
+							let ss = res.data.result;
+							if(ss!=null){
+								that.isCertification=true;
+							}else{
+								that.isCertification=false;
+							}
+						}
+					});
+				} else {
+					getApp().getUserInfo();
+				}
+
+				
+			},
 			changeSkin() {
 				uni.navigateTo({
 					url: '../skin-change/skin-change'

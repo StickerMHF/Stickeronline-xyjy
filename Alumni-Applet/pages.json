@@ -230,6 +230,14 @@
                 "enablePullDownRefresh": false
             }
             
+        },{
+            "path" : "pages/personal/basicInfo/certification",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
         }
         ,{
             "path" : "pages/personal/attention/attention",
@@ -275,6 +283,15 @@
 		}
         ,{
             "path" : "components/news-list/news-list",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/personal/basicInfo/add",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
