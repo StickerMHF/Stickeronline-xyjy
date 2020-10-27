@@ -4,6 +4,14 @@ const api = {
 	test:baseurl+'/stickeronline/rich/text/list',
 	getUserOpenid:baseurl+'/tb/wechat/getAppletUserInfo',
 	/**
+	 * 微信用户接口
+	 */
+	getWechatUserList: baseurl+'/stickeronline/wechat/users/list',
+	getWechatUserById: baseurl+'/stickeronline/wechat/users/queryById',
+	addWechatUser: baseurl+'/stickeronline/wechat/users/add',
+	updateWechatUser: baseurl+'/stickeronline/wechat/users/edit',
+	deletetWechatUser: baseurl+'/stickeronline/wechat/users/delete',
+	/**
 	 * 新闻接口
 	 */
     getNewsList: baseurl+'/stickeronline/news/list',

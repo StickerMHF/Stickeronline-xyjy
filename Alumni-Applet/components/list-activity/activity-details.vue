@@ -28,7 +28,7 @@
 		<view class="actd_content" v-html="item.content"></view>
 		<view class="actd_foot">
 			<view class="actd_foot_btn bg-white">
-				已报
+				已报{{item.joinNum}}人
 			</view>
 			<view class="actd_foot_btn bg-gradual-green1">
 				报名已截止
@@ -41,69 +41,99 @@
 	export default {
 		data() {
 			return {
-				item: {
-					url:"http://cdxyh.stickeronline.cn/banner12x.png",
-					title:"长安大学70周年校庆公告（第二号）发布仪式暨校友代表座谈会举行",
-					startTime:"2020年11月11日",
-					endTime:"2020年12月12日",
-					address:"长安大学渭水校区",
-					deadline:"2020年10月10日",
-					content:"<h1>长安大学70周年校庆公告（第二号）发布仪式暨校友代表座谈会举行</h1>"
+				item: {}
+			}
+		},
+		props: {
+			opts: {
+				type: Object,
+				default: function() {
+					return {
+						url: "http://cdxyh.stickeronline.cn/banner12x.png",
+						title: "长安大学70周年校庆公告（第二号）发布仪式暨校友代表座谈会举行",
+						startTime: "2020年11月11日",
+						endTime: "2020年12月12日",
+						address: "长安大学渭水校区",
+						deadline: "2020年10月10日",
+						content: "<h1>长安大学70周年校庆公告（第二号）发布仪式暨校友代表座谈会举行</h1>",
+						joinNum: 23
+					}
 				}
 			}
 		},
+		watch: {
+			opts() {
+				this.formatData();
+			}
+		},
 		mounted() {
-			
+			this.formatData();
 		},
 		methods: {
-
+			formatData() {
+				let that = this;
+				that.item = that.opts;
+			}
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
-	.activity_details{
+	.activity_details {
 		width: 100%;
 		height: 100%;
 	}
-	.actd_heade{
+
+	.actd_heade {
 		width: 100%;
 		border-radius: 0;
-		image{
+
+		image {
 			width: 100%;
 			border-radius: 0;
 		}
 	}
-	.actd_addr{
+
+	.actd_addr {
 		padding: 5px 15px;
 		border-bottom: 1px solid #eaeaea;
-		.actd_addr_title{
+
+		.actd_addr_title {
 			color: #000000;
 			font-weight: bold;
 		}
-		.actd_addr_item{
+
+		.actd_addr_item {
 			line-height: 35px;
-			.aiicon{
+
+			.aiicon {
 				padding-right: 10px;
 			}
 		}
 	}
-	.actd_content_title{
+
+	.actd_content_title {
 		border-bottom: 1px solid #eaeaea;
 	}
-	.actd_content{
+
+	.actd_content {
 		padding: 10px 20px;
+		padding-bottom: 60px;
 	}
-	.actd_foot{
-		height: 70px;
-		position: absolute;
+
+	.actd_foot {
+		height: 60px;
+		position: fixed;
 		bottom: 0px;
 		left: 0px;
 		right: 0px;
 		display: flex;
-		.actd_foot_btn{
-			display: flex;
+
+		.actd_foot_btn {
 			width: 50%;
+			text-align: center;
+			font-size: 16px;
+			line-height: 70px;
 		}
 	}
 </style>
