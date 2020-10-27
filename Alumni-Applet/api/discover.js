@@ -11,6 +11,11 @@ export const publishMoment = (params) => {
 	return postAction(api.publishMoment, params);
 }
 
+//点赞
+export const momentLike = (params) => {
+	return postAction(api.momentLike, params);
+}
+
 //上传文件
 export const uploadFile = (params) => {
 	return postAction(api.uploadFile, params)

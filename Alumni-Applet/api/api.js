@@ -73,7 +73,10 @@ const api = {
 	 */
 	//获取发现列表
 	getDiscoverList: baseurl+'/stickeronline/moments/list',
+	//发布消息
 	publishMoment: baseurl+'/stickeronline/moments/add',
+	//点赞操作
+	momentLike: baseurl+'/stickeronline/momentsLike/add',
 	
 	uploadFile: baseurl+'/file/upload'
 	

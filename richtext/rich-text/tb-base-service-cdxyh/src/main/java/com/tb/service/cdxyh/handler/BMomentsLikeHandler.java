@@ -7,35 +7,33 @@ import com.sticker.online.core.model.ReplyObj;
 import com.sticker.online.core.utils.AsyncServiceUtil;
 import com.sticker.online.core.utils.HttpUtil;
 import com.sticker.online.tools.common.utils.CommonUtil;
-import com.tb.service.cdxyh.service.BAlumnusMemberService;
-import com.tb.service.cdxyh.service.BMomentsService;
+import com.tb.service.cdxyh.service.BMomentsLikeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
-
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
 
-@RouteHandler("stickeronline/moments")
-@Api(tags = "朋友圈动态表")
-public class BMomentsHandler {
-    private BMomentsService bMomentsService = AsyncServiceUtil.getAsyncServiceInstance(BMomentsService.class);
+@RouteHandler("stickeronline/momentsLike")
+@Api(tags = "朋友圈点赞表")
+public class BMomentsLikeHandler {
+    private BMomentsLikeService bMomentsLikeService = AsyncServiceUtil.getAsyncServiceInstance(BMomentsLikeService.class);
 
     @RouteMapping(value = "/add", method = RouteMethod.POST, order = 1)
-    @ApiOperation(value = "发布朋友圈")
+    @ApiOperation(value = "新增点赞")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "userName", value = "发布者姓名", dataType = "String", paramType = "body", required = true),
-            @ApiImplicitParam(name = "photos", value = "照片列表", dataType = "String", paramType = "body"),
-            @ApiImplicitParam(name = "content", value = "发布内容", dataType = "String", paramType = "body"),
-            @ApiImplicitParam(name = "userPhoto", value = "发布者头像", dataType = "String", paramType = "body"),
-            @ApiImplicitParam(name = "userId", value = "发布者ID", dataType = "String", paramType = "body")
+            @ApiImplicitParam(name = "momentId", value = "朋友圈ID", dataType = "String", paramType = "body", required = true),
+            @ApiImplicitParam(name = "status", value = "操作类型", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userName", value = "用户名", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userPhoto", value = "用户头像", dataType = "String", paramType = "body")
     })
     public Handler<RoutingContext> add() {
         return ctx -> {
-            bMomentsService.add(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+            bMomentsLikeService.add(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
                 if (res.succeeded()) {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
@@ -52,12 +50,11 @@ public class BMomentsHandler {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
             @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true),
-            @ApiImplicitParam(name = "order", value = "排序", dataType = "String", paramType = "query", required = true),
-            @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "String", paramType = "query", required = true)
+            @ApiImplicitParam(name = "type", value = "组织类型", dataType = "String", paramType = "query", required = true)
     })
     public Handler<RoutingContext> queryPageList() {
         return ctx -> {
-            bMomentsService.queryPageList(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+            bMomentsLikeService.queryPageList(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
                 if (res.succeeded()) {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
@@ -76,7 +73,7 @@ public class BMomentsHandler {
     })
     public Handler<RoutingContext> queryById(){
         return ctx -> {
-            bMomentsService.queryById(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+            bMomentsLikeService.queryById(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
               if (res.succeeded()){
                   HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                           ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
@@ -87,5 +84,4 @@ public class BMomentsHandler {
           });
         };
     }
-
 }
