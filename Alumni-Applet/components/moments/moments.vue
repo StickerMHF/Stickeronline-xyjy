@@ -58,7 +58,7 @@
 		<view class="discover-comment" v-show="commentShow">
 			<view class="weui-cells weui-cells_after-title">
 			  <view class="weui-cell weui-cell_input">
-				<input class="weui-input" auto-focus placeholder="评论" bindinput="bindKeyInput" v-model="commentText" confirm-type="send"/>
+				<input ref="commentdom" class="weui-input" type="text" placeholder="评论" @blur="bindBlurEvent" @focus="bindFocusEvent" v-model="commentText" confirm-type="send"/>
 				<button @click="sumbitComment">发送</button>
 			  </view>
 			</view>
@@ -183,6 +183,13 @@
 					url: '/pages/imgPreview/imgPreview'
 				});
 			},
+			bindBlurEvent(){
+				console.log('失去焦点');				
+				this.commentShow = false;
+			},
+			bindFocusEvent(){
+				console.log('获得焦点');
+			},
 			//点赞操作
 			momentLike(index){
 				if(this.list[index].status == 'like'){
@@ -213,7 +220,6 @@
 				}		
 			},
 			commentInput(index){
-				this.commentText = '';
 				this.commentParams.momentId = this.list[index].id;
 				//获取用户信息
 				this.commentParams.userId = uni.getStorageSync('openid');
@@ -222,6 +228,8 @@
 					this.commentParams.userName = userInfo.nickName;
 					this.commentParams.userPhoto = userInfo.avatarUrl;
 					this.commentShow = true;
+					debugger
+					this.$refs.commentdom.focus();
 				} else {
 					//跳转页面 
 					 wx.navigateTo({
@@ -231,7 +239,6 @@
 			},
 			//评论的评论
 			commentInput2(comment){
-				this.commentText = '';
 				this.commentParams.momentId = comment.momentId;
 				this.commentParams.fid = comment.id;
 				//获取用户信息
@@ -241,6 +248,7 @@
 					this.commentParams.userName = userInfo.nickName;
 					this.commentParams.userPhoto = userInfo.avatarUrl;
 					this.commentShow = true;
+					this.$refs.commentdom.focus();
 				} else {
 					//跳转页面 
 					 wx.navigateTo({

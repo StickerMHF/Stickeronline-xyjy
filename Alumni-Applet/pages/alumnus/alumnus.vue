@@ -4,8 +4,7 @@
 		<cu-custom bgColor="bg-gradual-green1" :isBack="false"><block slot="content">校友</block></cu-custom>
 		<view >
 			<scroll-view scroll-x class="bg-white nav text-center" scroll-with-animation>
-				<view class="cu-item" :class="item.id==tabCur?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect"
-				
+				<view class="cu-item" :class="item.id==tabCur?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect"				
 				 :data-id="item.id">
 					{{item.name}}
 				</view>
@@ -33,7 +32,7 @@
 						<view>
 							<view class="uni-title">
 								<text class="uni-ellipsis-2">{{ item.name }}</text>
-								<button class="alumnus-btn cu-btn round sm bg-orange" >加入</button>
+								<button class="alumnus-btn cu-btn round sm bg-orange" @click="alumnusJoin('123')">加入</button>
 							</view>
 							<view>
 								<view class="cu-capsule radius">
@@ -62,13 +61,12 @@
 			</uni-list>
 			<!-- 通过 loadMore 组件实现上拉加载效果，如需自定义显示内容，可参考：https://ext.dcloud.net.cn/plugin?id=29 -->
 			<uni-load-more v-if="lists.length > 0" :status="status" />
-		</view>
-		
+		</view>		
 	</view>
 </template>
 
 <script>
-	import {getAlumnusList} from '@/api/alumnus.js'
+	import {getAlumnusList,addAlumnusJoin} from '@/api/alumnus.js'
 	export default {
 		components: {},
 		data() {
@@ -169,57 +167,40 @@
 			 * 获取页面数据
 			 * @param {Object} reload 参数reload值为true时执行列表初始化逻辑，值为false时执行追加下一页数据的逻辑。默认为false
 			 */
-			getNewsList(reload) {				
+			getNewsList(reload) {
 				if(this.totalPages>this.params.pageNo){
 					this.status = 'loading';
 					this.params.pageNo += 1;
 					this.getAlumnusList(this.params);					
 				}else{
 					this.status = 'noMore';
-				}			
-
-				// db.collection('opendb-mall-goods')
-				// 	.where({
-				// 		// 查询字段是否存在
-				// 		_id: dbCmd.exists(true)
-				// 	})
-				// 	// 跳过对应数量的文档，输出剩下的文档
-				// 	.skip(this.pageSize * (this.current - 1))
-				// 	// 限制输出到下一阶段的记录数
-				// 	.limit(this.pageSize)
-				// 	// 获取集合中的记录
-				// 	.get()
-				// 	.then((res) => {
-				// 		const tempList = res.result.data
-				// 		// 判断是否可翻页
-				// 		if (tempList.length === this.pageSize) {
-				// 			this.status = 'more'
-				// 		} else {
-				// 			this.status = 'noMore'
-				// 		}
-				// 		if (reload) {
-				// 			// 处理下拉加载提示框
-				// 			this.tipShow = true;
-				// 			clearTimeout(this.timer);
-				// 			this.timer = setTimeout(() => {
-				// 				this.tipShow = false;
-				// 			}, 2000);
-				// 			this.lists = tempList
-				// 			// 停止刷新
-				// 			uni.stopPullDownRefresh()
-				// 		} else {
-				// 			// 上拉加载后合并数据
-				// 			this.lists = this.lists.concat(tempList)
-				// 		}
-				// 		if (tempList.length) {
-				// 			this.current++
-				// 		}
-				// 	}).catch((err) => {
-				// 		uni.showModal({
-				// 			content: '请求失败，请稍后再试：' + err,
-				// 			showCancel: false
-				// 		})
-				// 	})s
+				}
+			},
+			alumnusJoin(alumnusId){
+				console.log('触发加入组织按钮')
+				let params = {
+					alumnusId: alumnusId,
+					userId: '',
+					userName: '',
+					userPhoto: '',
+					status: '1'
+				};
+				//获取用户信息
+				params.userId = uni.getStorageSync('openid');
+				let userInfo = uni.getStorageSync('userInfo');
+				if(userInfo){
+					params.userName = userInfo.nickName;
+					params.userPhoto = userInfo.avatarUrl;
+					debugger
+					addAlumnusJoin(params).then(data =>{
+						console.log(data);
+					});
+				} else {
+					//跳转页面 
+					 wx.navigateTo({
+					 	url:'/pages/login/login'
+					 });
+				}				
 			}
 		}
 	};
