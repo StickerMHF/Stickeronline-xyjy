@@ -36,17 +36,17 @@
 
 		<view class="ph-menu">
 			<scroll-view scroll-x class="bg-white nav" scroll-with-animation>
-				<view  class="cu-item" :class="index==tabCur?'text-green cur':''" v-for="(item,index) in tabList" :key="index" @tap="tabSelect"
+				<view class="cu-item" :class="index==tabCur?'text-green cur':''" v-for="(item,index) in tabList" :key="index" @tap="tabSelect"
 				 :data-id="item.id">
 					{{item.name}}
 				</view>
 			</scroll-view>
-			<view class="phm-card cu-card case no-card" v-for="(item,index) in newsList" >
+			<view class="phm-card cu-card case no-card" v-for="(item,index) in newsList">
 				<navigator :url="'/pages/home/newsDetail/newsDetail?id='+item.id">
 					<newsItem :opts="item"></newsItem>
 				</navigator>
 			</view>
-		</view>	
+		</view>
 		<view class="ph-menu">
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
@@ -61,7 +61,9 @@
 </template>
 
 <script>
-	import {dateUtil} from '@/utils/dateUtil.js'
+	import {
+		dateUtil
+	} from '@/utils/dateUtil.js'
 	import {
 		getNewsList
 	} from '@/api/news.js'
@@ -69,8 +71,8 @@
 	import newsItem from "@/components/news-list/news-item.vue"
 	export default {
 		components: {
-		umap,
-		newsItem
+			umap,
+			newsItem
 		},
 		data() {
 			return {
@@ -158,12 +160,12 @@
 			this.getNewsListData();
 		},
 		methods: {
-			getNewsListData(sort){
+			getNewsListData(sort) {
 				let param = {
 					pageNo: 1,
 					pageSize: 2,
-					type:0,
-					sort:sort?sort:'createTime'
+					type: 0,
+					sort: sort ? sort : 'createTime'
 				};
 				getNewsList(param).then(data => {
 					var [error, res] = data;
@@ -173,14 +175,14 @@
 					}
 				});
 			},
-			formatDate(date){
+			formatDate(date) {
 				return dateUtil.formatDate(date);
 			},
 			tabSelect(e) {
 				this.tabCur = e.currentTarget.dataset.id;
-				if(this.tabCur==1){
+				if (this.tabCur == 1) {
 					this.getNewsListData("viewCount");
-				}else{
+				} else {
 					this.getNewsListData();
 				}
 			},
@@ -218,6 +220,10 @@
 
 	.ph-banner {
 		border-radius: 10px;
+	}
+
+	.bg-img {
+		min-height: 80px;
 	}
 
 	.ph-banner-item {
@@ -260,16 +266,19 @@
 	.phm-zx-view {
 		margin-left: 50rpx;
 	}
-	.news-title{
-		 width: 100%;
-		 overflow:hidden;
-		 text-overflow: ellipsis;
-		 white-space: nowrap;
+
+	.news-title {
+		width: 100%;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
-	.ph-menu-map{
+
+	.ph-menu-map {
 		width: 100%;
 	}
-	.phm-map{
+
+	.phm-map {
 		width: 100%;
 	}
 </style>
