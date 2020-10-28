@@ -19,22 +19,22 @@
 			return {
 				bottomData: [{
 						text: '微信',
-						icon: '/static/index/weixin.png',
+						icon: 'http://www.imapway.cn/Alumni/static/index/weixin.png',
 						name: 'wx'
 					},
 					// {
 					// 	text: '朋友圈',
-					// 	icon: '/static/index/pengyouquan.png',
+					// 	icon: 'http://www.imapway.cn/Alumni/static/index/pengyouquan.png',
 					// 	name: 'copy'
 					// },
 					// {
 					// 	text: 'QQ',
-					// 	icon: '/static/index/qq.png',
+					// 	icon: 'http://www.imapway.cn/Alumni/static/index/qq.png',
 					// 	name: 'qq'
 					// },
 					{
 						text: '复制',
-						icon: '/static/index/copy.png',
+						icon: 'http://www.imapway.cn/Alumni/static/index/copy.png',
 						name: 'copy'
 					}
 				],

@@ -4,7 +4,7 @@
 				<view class="ann_news_top_item" v-for="item in top">
 					<navigator :url="'/pages/home/newsDetail/newsDetail?id='+item.id" style="display: flex;width: 100%;">
 					<view class="ann_news_div">
-						<view class="ann_news_top_icon" style="background-image: url(../../../static/images/dingzhi2x.png);width: 15px;height: 15px;"></view>
+						<view class="ann_news_top_icon" style="background-image: url(http://www.imapway.cn/Alumni/static/images/dingzhi2x.png);width: 15px;height: 15px;"></view>
 					</view>
 					<span class="ann_news_top_title">{{item.title}}</span>
 					</navigator>
