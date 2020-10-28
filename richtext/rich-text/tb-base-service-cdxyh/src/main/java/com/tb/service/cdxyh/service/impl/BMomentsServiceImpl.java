@@ -61,9 +61,14 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         Example<BMomentsEntity> ex = Example.of(bMomentsEntity);
         Page<BMomentsEntity> plist = bMomentsRepository.findAll(ex,pageable);
         JsonObject resObj = new JsonObject(Json.encode(plist));
-        JsonArray content = resObj.getJsonArray("content");
-        for (int i = 0; i < content.size(); i++) {
-            String commentId = content.getJsonObject(i).getString("id");
+        JsonArray contents = resObj.getJsonArray("content");
+        for (int i = 0; i < contents.size(); i++) {
+            JsonObject content = contents.getJsonObject(i);
+            String commentId = content.getString("id");
+            //统计浏览量
+            Integer viewCount = content.getInteger("viewCount");
+            content.put("viewCount",viewCount+1);
+            bMomentsRepository.save(new BMomentsEntity(content));
             //获取评论信息
             List<BMomentsCommentEntity> commentList = bMomentsCommentRepository.queryByCommentId(commentId);
             resObj.getJsonArray("content").getJsonObject(i).put("commentList", new JsonArray(Json.encode(commentList)));
