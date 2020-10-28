@@ -26,19 +26,31 @@
 			<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="navigatorTo"></image>
 		</view>
 		<view class="discover-content">
-			<moments :list="momentsList" :fatherMethod="likeClick"></moments>
+			<moments :list="momentsList" :fatherLikeMethod="likeClick" :fatherCommentMethod="commentMethod"></moments>
 		</view>
+		<!-- <view class="discover-comment" v-show="commentShow">
+			<view class="weui-cells weui-cells_after-title">
+			  <view class="weui-cell weui-cell_input">
+				<input class="weui-input" auto-focus placeholder="评论" :value="commentParams.content"/>
+				<button @click="sumbitComment">发送</button>
+			  </view>
+			</view>
+		</view>	 -->	
 	</view>
 </template>
 
 <script>	
-	import moments from '@/components/moments/moments.vue';
-	import {getDiscoverList, momentLike} from '@/api/discover.js'
+	import moments from '@/components/moments/moments.vue'; 
+	import {getDiscoverList, momentLike, momentComment} from '@/api/discover.js'
 	import {dateUtil } from "@/utils/dateUtil.js"
 	var _self = '';
 	export default {
+		components:{
+			// moments
+		},
 		data() {
 			return {
+				// commentShow: true,
 				cWidth: '',
 				cHeight: '',
 				pixelRatio: 1,
@@ -156,23 +168,36 @@
 		onLoad() {			
 			//获取用户ID
 			this.params.userId = uni.getStorageSync('openid');
-			if(!this.params.userId || this.params.userId == ''){
-				wx.navigateTo({
-					url:'/pages/login/login'
-				})
-			}
+			
+			// if(!this.params.userId || this.params.userId == ''){
+			// 	wx.navigateTo({
+			// 		url:'/pages/login/login'
+			// 	})
+			// }
 			//获取朋友圈列表
 			this.getDiscoverList();
 
 		},
+		bindFormSubmit: function(e) {
+		    console.log(e.detail.value.textarea)
+		  },
 		onPullDownRefresh (){
 			this.getDiscoverList();
+		},
+		mounted() {
+			// that = this;
 		},
 		methods: {
 			//点赞
 			likeClick(params){
 				momentLike(params).then(data => {
 					console.log(data)
+				});
+			},
+			commentMethod(params){
+				momentComment(params).then(data => {
+					console.log(data);
+					this.commentShow = false;
 				});
 			},
 			selectHandler(value) {
@@ -229,7 +254,8 @@
 						content: item.content,
 						userId: item.userId,
 						commentTime: dateUtil.formatTime(item.createTime),
-						parent: item.fid
+						parent: item.fid,
+						momentId:item.momentId
 					}
 				});
 				
@@ -254,6 +280,9 @@
 					url:'/pages/discover/publishData/publishData'
 				})
 			},
+			onConfirm(value) {
+			  console.log(value);
+			}
 		}
 	}
 </script>

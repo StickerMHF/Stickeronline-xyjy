@@ -85,6 +85,8 @@ const api = {
 	publishMoment: baseurl+'/stickeronline/moments/add',
 	//点赞操作
 	momentLike: baseurl+'/stickeronline/momentsLike/add',
+	//发现评论
+	momentComment: baseurl+'/stickeronline/momentsComment/add',
 	
 	uploadFile: baseurl+'/file/upload'
 	

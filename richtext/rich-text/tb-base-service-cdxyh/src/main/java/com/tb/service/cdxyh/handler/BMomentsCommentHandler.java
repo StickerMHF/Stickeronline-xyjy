@@ -19,15 +19,19 @@ import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 @RouteHandler("stickeronline/momentsComment")
-@Api(tags = "朋友圈动态表")
+@Api(tags = "朋友圈评论表")
 public class BMomentsCommentHandler {
     private BMomentsCommentService bMomentsCommentService = AsyncServiceUtil.getAsyncServiceInstance(BMomentsCommentService.class);
 
     @RouteMapping(value = "/add", method = RouteMethod.POST, order = 1)
-    @ApiOperation(value = "新增组织成员")
+    @ApiOperation(value = "新增评论")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "roleName", value = "角色名称", dataType = "String", paramType = "body", required = true),
-            @ApiImplicitParam(name = "description", value = "描述", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "momentId", value = "朋友圈ID", dataType = "String", paramType = "body", required = true),
+            @ApiImplicitParam(name = "content", value = "评论内容", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userId", value = "评论人ID", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userName", value = "评论人姓名", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userPhoto", value = "评论人头像", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "fid", value = "评论父ID", dataType = "String", paramType = "body")
     })
     public Handler<RoutingContext> add() {
         return ctx -> {

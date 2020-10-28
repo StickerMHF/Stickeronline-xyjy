@@ -27,9 +27,8 @@
 				<view class="text-gray text-sm text-right padding">
 					<text class="cuIcon-attentionfill margin-lr-xs"></text> {{moment.viewCount}}
 					<text class="cuIcon-appreciatefill margin-lr-xs" :class="moment.status=='like'?' active':''" @click="momentLike(i)"></text> {{moment.likeCount}}
-					<text class="cuIcon-messagefill margin-lr-xs"></text> {{moment.commentCount}}
+					<text class="cuIcon-messagefill margin-lr-xs" @click="commentInput(i)"></text> {{moment.commentCount}}
 				</view>
-		
 				<view class="cu-list menu-avatar comment solids-top">
 					<view class="cu-item" v-for="comment in moment.commentList">
 						<view class="cu-avatar round" :style="'background-image:url('+comment.url+');'"></view>
@@ -40,15 +39,15 @@
 							</view>
 							<view v-for="reply in comment.replyList" class="bg-grey padding-sm radius margin-top-sm  text-sm">
 								<view class="flex" >
-									<view>{{reply.name}}</view>
+									<view>{{reply.name}}:</view>
 									<view class="flex-sub">  {{reply.content}}</view>
 								</view>
 							</view>
 							<view class="margin-top-sm flex justify-between">
 								<view class="text-gray text-df">{{comment.commentTime}}</view>
 								<view>
-									<text class="cuIcon-appreciatefill text-red"></text>
-									<text class="cuIcon-messagefill text-gray margin-left-sm"></text>
+									<!-- <text class="cuIcon-appreciatefill text-red"></text> -->
+									<text class="cuIcon-messagefill text-gray margin-left-sm" @click="commentInput2(comment)"></text>
 								</view>
 							</view>
 						</view>
@@ -56,6 +55,14 @@
 				</view>
 			</view>
 		</view>
+		<view class="discover-comment" v-show="commentShow">
+			<view class="weui-cells weui-cells_after-title">
+			  <view class="weui-cell weui-cell_input">
+				<input class="weui-input" auto-focus placeholder="评论" bindinput="bindKeyInput" v-model="commentText" confirm-type="send"/>
+				<button @click="sumbitComment">发送</button>
+			  </view>
+			</view>
+		</view>	
 	</view>
 </template>
 
@@ -64,6 +71,8 @@
 		name: 'moments',
 		data() {
 			return {
+				commentShow: false,
+				commentText: '',
 				isCard:true,
 				likeParams: {
 					momentId: '',
@@ -72,19 +81,32 @@
 					userPhoto: '',
 					status: 'unlike'
 				},
-				listArray: []
+				commentParams: {
+					content: '',
+					momentId: '',
+					userId: '',
+					userPhoto: '',
+					userName: '',
+					fid: '-1'
+					
+				},
+				listArray: [],
+				inputValue: ''
 			}
 		},
 		watch:{
 			list(){
-				console.log(111);
 				this.listArray = this.list;
 			}
 		},
 		props: {
-			fatherMethod: {
+			fatherLikeMethod: {
 				type: Function,
 				default: null
+			},
+			fatherCommentMethod: {
+				type: Function,
+				dafult: null
 			},
 			list: {
 				type: Array,
@@ -151,14 +173,6 @@
 			}
 		},
 		methods:{
-			// publishData(){
-			// 	console.log('发布数据')
-			// },
-			// navigatorTo(){
-			// 	wx.navigateTo({
-			// 		url:'/pages/discover/publishData/publishData'
-			// 	})
-			// },
 			//点击查看大图
 			clickPic(imgPreviewPicList, index) {
 				uni.removeStorageSync("imgPreviewPicList");
@@ -169,23 +183,23 @@
 					url: '/pages/imgPreview/imgPreview'
 				});
 			},
-			momentLike(moment){
-				if(this.list[moment].status == 'like'){
-					this.list[moment].status = 'unlike';
-					this.list[moment].likeCount = this.list[moment].likeCount-1;
+			//点赞操作
+			momentLike(index){
+				if(this.list[index].status == 'like'){
+					this.list[index].status = 'unlike';
+					this.list[index].likeCount = this.list[index].likeCount-1;
 					this.likeParams.status = 'unlike';
 				} else {
-					this.list[moment].status = 'like';
-					this.list[moment].likeCount = this.list[moment].likeCount+1;
+					this.list[index].status = 'like';
+					this.list[index].likeCount = this.list[index].likeCount+1;
 					this.likeParams.status = 'like';
 				}
 				//提交数据
-				if(this.fatherMethod){
-					this.likeParams.momentId = this.list[moment].id;
+				if(this.fatherLikeMethod){
+					this.likeParams.momentId = this.list[index].id;
 					//获取用户信息
 					this.likeParams.userId = uni.getStorageSync('openid');
-					let userInfo = uni.getStorageSync('userInfo');
-					
+					let userInfo = uni.getStorageSync('userInfo');					
 					if(userInfo){
 						this.likeParams.userName = userInfo.nickName;
 						this.likeParams.userPhoto = userInfo.avatarUrl;
@@ -196,9 +210,49 @@
 						 	url:'/pages/login/login'
 						 })
 					}					
-				}				
-				// console.log("朋友圈ID"+momentId);
-				
+				}		
+			},
+			commentInput(index){
+				this.commentText = '';
+				this.commentParams.momentId = this.list[index].id;
+				//获取用户信息
+				this.commentParams.userId = uni.getStorageSync('openid');
+				let userInfo = uni.getStorageSync('userInfo');
+				if(userInfo){
+					this.commentParams.userName = userInfo.nickName;
+					this.commentParams.userPhoto = userInfo.avatarUrl;
+					this.commentShow = true;
+				} else {
+					//跳转页面 
+					 wx.navigateTo({
+					 	url:'/pages/login/login'
+					 });
+				}								
+			},
+			//评论的评论
+			commentInput2(comment){
+				this.commentText = '';
+				this.commentParams.momentId = comment.momentId;
+				this.commentParams.fid = comment.id;
+				//获取用户信息
+				this.commentParams.userId = uni.getStorageSync('openid');
+				let userInfo = uni.getStorageSync('userInfo');
+				if(userInfo){
+					this.commentParams.userName = userInfo.nickName;
+					this.commentParams.userPhoto = userInfo.avatarUrl;
+					this.commentShow = true;
+				} else {
+					//跳转页面 
+					 wx.navigateTo({
+					 	url:'/pages/login/login'
+					 });
+				}	
+			},
+			sumbitComment(){				
+				if(this.fatherCommentMethod){
+					this.commentParams.content = this.commentText;
+					this.fatherCommentMethod(this.commentParams);
+				}
 			}
 		},
 		
@@ -206,6 +260,13 @@
 </script>
 
 <style  lang="scss">
+	.discover-comment{
+		position: fixed;
+		z-index: 999;
+		bottom: 0;
+		background: #f0f3f2;
+		width: 100%;
+	}
 	.active{
 		    color: red;
 	}

@@ -48,7 +48,7 @@ public class BMomentsHandler {
     }
 
     @RouteMapping(value = "/list", method = RouteMethod.GET, order = 1)
-    @ApiOperation(value = "查询组织成员")
+    @ApiOperation(value = "获取朋友圈列表")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
             @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true),
