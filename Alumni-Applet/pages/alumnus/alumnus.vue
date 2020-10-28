@@ -1,16 +1,18 @@
 <template>
-	
+
 	<view class="list">
-		<cu-custom bgColor="bg-gradual-green1" :isBack="false"><block slot="content">校友</block></cu-custom>
-		<view >
+		<cu-custom bgColor="bg-gradual-green1" :isBack="false">
+			<block slot="content">校友</block>
+		</cu-custom>
+		<view>
 			<scroll-view scroll-x class="bg-white nav text-center" scroll-with-animation>
-				<view class="cu-item" :class="item.id==tabCur?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect"				
+				<view class="cu-item" :class="item.id==tabCur?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect"
 				 :data-id="item.id">
 					{{item.name}}
 				</view>
 			</scroll-view>
 		</view>
-		<view v-if="tabCur==5" >
+		<view v-if="tabCur==5">
 			<web-view class="webviewStyles" src="https://www.imapway.cn/Alumni/echarts/test.html"></web-view>
 		</view>
 		<view v-else class="">
@@ -20,58 +22,62 @@
 			<!-- 基于 uni-list 的页面布局 -->
 			<uni-list :class="{ 'uni-list--waterfall': waterfall }">
 				<!-- 通过 uni-list--waterfall 类决定页面布局方向 -->
-				<uni-list-item :to="'/pages/alumnus/details?id='+item.id+'&name='+item.name" :border="!waterfall" class="uni-list-item--waterfall" title="自定义商品列表" v-for="item in lists" :key="item._id">
+				<uni-list-item :border="!waterfall" class="uni-list-item--waterfall" title="自定义商品列表" v-for="item in lists" :key="item._id">
 					<!-- 通过header插槽定义列表左侧图片 -->
 					<template v-slot:header>
 						<view class="uni-thumb shop-picture" :class="{ 'shop-picture-column': waterfall }">
-							<image :src="item.thumb" ></image>
+							<image :src="item.thumb"></image>
 						</view>
 					</template>
 					<!-- 通过body插槽定义商品布局 -->
 					<view slot="body" class="shop">
+						<navigator :url="'/pages/alumnus/details?id='+item.id+'&name='+item.name">
+							<view class="view-left">
+								<view class="uni-title">
+									<text class="uni-ellipsis-2">{{ item.name }}</text>									
+								</view>
+								<view>
+									<view class="cu-capsule radius">
+										<view class='cu-tag bg-blue sm'>
+											活动
+										</view>
+										<view class="cu-tag line-blue sm">
+											{{item.activity}}
+										</view>
+									</view>
+									<view class="cu-capsule radius">
+										<view class='cu-tag bg-gradual-green1 sm'>
+											成员
+										</view>
+										<view class="cu-tag line-green sm">
+											{{item.member}}
+										</view>
+									</view>
+								</view>
+							</view>
+						</navigator>
 						<view>
-							<view class="uni-title">
-								<text class="uni-ellipsis-2">{{ item.name }}</text>
-								<button class="alumnus-btn cu-btn round sm bg-orange" @click="alumnusJoin('123')">加入</button>
-							</view>
-							<view>
-								<view class="cu-capsule radius">
-									<view class='cu-tag bg-blue sm'>
-										活动
-									</view>
-									<view class="cu-tag line-blue sm">
-										{{item.activity}}
-									</view>
-								</view>
-								<view class="cu-capsule radius">
-									<view class='cu-tag bg-gradual-green1 sm'>
-										成员
-									</view>
-									<view class="cu-tag line-green sm">
-										{{item.member}}
-									</view>
-								</view>
-							</view>
-							<view>
-								<!-- <u-rate :count="count" v-model="value"></u-rate> -->
-							</view>
-						</view>					
+							<button class="alumnus-btn cu-btn round sm bg-orange" @click="alumnusJoin('123')">加入</button>
+						</view>
 					</view>
 				</uni-list-item>
 			</uni-list>
 			<!-- 通过 loadMore 组件实现上拉加载效果，如需自定义显示内容，可参考：https://ext.dcloud.net.cn/plugin?id=29 -->
 			<uni-load-more v-if="lists.length > 0" :status="status" />
-		</view>		
+		</view>
 	</view>
 </template>
 
 <script>
-	import {getAlumnusList,addAlumnusJoin} from '@/api/alumnus.js'
+	import {
+		getAlumnusList,
+		addAlumnusJoin
+	} from '@/api/alumnus.js'
 	export default {
 		components: {},
 		data() {
 			return {
-				tabCur:'all',
+				tabCur: 'all',
 				current: 0,
 				tabList: [{
 					id: 'all',
@@ -92,27 +98,27 @@
 				// 	uri: '/pages/alumnus/statistics'
 				// }
 				lists: [{
-					name:"校友总会",
-					thumb:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					member:30,
-					activity:2
+					name: "校友总会",
+					thumb: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
+					member: 30,
+					activity: 2
 				}], // 列表数据
 				waterfall: false, // 布局方向切换
 				status: 'more', // 加载状态
 				tipShow: false, // 是否显示顶部提示框
 				// pageSize: 10, // 每页显示的数据条数
 				// current: 1, // 当前页数
-				totalPages: null,  //总页数
+				totalPages: null, //总页数
 				params: {
-					pageNo: 1,// 当前页数
-					pageSize: 10,// 每页显示的数据条数
+					pageNo: 1, // 当前页数
+					pageSize: 10, // 每页显示的数据条数
 					type: 'all'
 				}
 			};
 		},
 		onLoad(options) {
 			// 初始化页面数据
-			this.title=options.title;
+			this.title = options.title;
 			// let params = {
 			// 	pageNo: this.current,
 			// 	pageSize: this.pageSize,
@@ -121,25 +127,25 @@
 			this.getAlumnusList(this.params);
 		},
 		methods: {
-			getAlumnusList(params){
+			getAlumnusList(params) {
 				console.log(params)
-				getAlumnusList(params).then(data=>{
+				getAlumnusList(params).then(data => {
 					var [error, res] = data;
-					if (res&&res.data&&res.data.result) {
+					if (res && res.data && res.data.result) {
 						this.lists = res.data.result.content;
 						let pageable = res.data.result.pageable;
 						this.params.pageNo = pageable.pageNumber + 1;
 						this.totalPages = res.data.result.totalPages;
-						if(this.totalPages>this.params.pageNo){
+						if (this.totalPages > this.params.pageNo) {
 							this.status = 'more';
-						}else{
+						} else {
 							this.status = 'noMore';
 						}
-					}					
+					}
 				})
 			},
 			tabSelect(e) {
-				this.tabCur=e.currentTarget.dataset.id;
+				this.tabCur = e.currentTarget.dataset.id;
 				this.params.type = e.currentTarget.dataset.id;
 				this.params.pageNo = 1;
 				this.getAlumnusList(this.params);
@@ -168,15 +174,15 @@
 			 * @param {Object} reload 参数reload值为true时执行列表初始化逻辑，值为false时执行追加下一页数据的逻辑。默认为false
 			 */
 			getNewsList(reload) {
-				if(this.totalPages>this.params.pageNo){
+				if (this.totalPages > this.params.pageNo) {
 					this.status = 'loading';
 					this.params.pageNo += 1;
-					this.getAlumnusList(this.params);					
-				}else{
+					this.getAlumnusList(this.params);
+				} else {
 					this.status = 'noMore';
 				}
 			},
-			alumnusJoin(alumnusId){
+			alumnusJoin(alumnusId) {
 				console.log('触发加入组织按钮')
 				let params = {
 					alumnusId: alumnusId,
@@ -188,19 +194,19 @@
 				//获取用户信息
 				params.userId = uni.getStorageSync('openid');
 				let userInfo = uni.getStorageSync('userInfo');
-				if(userInfo){
+				if (userInfo) {
 					params.userName = userInfo.nickName;
 					params.userPhoto = userInfo.avatarUrl;
 					debugger
-					addAlumnusJoin(params).then(data =>{
+					addAlumnusJoin(params).then(data => {
 						console.log(data);
 					});
 				} else {
 					//跳转页面 
-					 wx.navigateTo({
-					 	url:'/pages/login/login'
-					 });
-				}				
+					wx.navigateTo({
+						url: '/pages/login/login'
+					});
+				}
 			}
 		}
 	};
@@ -336,33 +342,40 @@
 			/* #endif */
 		}
 	}
+
 	.nav .cu-item {
-	    height: 45px;
-	    display: inline-block;
-	    line-height: 45px;
-	    margin: 0 5px;
-	    padding: 0 5px;
+		height: 45px;
+		display: inline-block;
+		line-height: 45px;
+		margin: 0 5px;
+		padding: 0 5px;
 	}
-	.alumnus-btn{
+
+	.alumnus-btn {
 		position: absolute;
 		right: 10px;
 	}
 
 	.star-pos {
- 		margin: 10rpx;
+		margin: 10rpx;
 		display: flex;
-		flex-direction: row;		
-	}	
-	.stars{
+		flex-direction: row;
+	}
+
+	.stars {
 		width: 40rpx;
 		height: 40rpx;
-		margin-left: 30rpx;	
+		margin-left: 30rpx;
 	}
-	.webviewStyles{
+
+	.webviewStyles {
 		position: absolute;
 		left: 0xp;
 		right: 0px;
 		bottom: 0px;
 		top: 90px;
+	}
+	.view-left{
+		width: 140px;
 	}
 </style>

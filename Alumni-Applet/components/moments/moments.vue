@@ -58,7 +58,7 @@
 		<view class="discover-comment" v-show="commentShow">
 			<view class="weui-cells weui-cells_after-title">
 			  <view class="weui-cell weui-cell_input">
-				<input ref="commentdom" class="weui-input" type="text" placeholder="评论" @blur="bindBlurEvent" @focus="bindFocusEvent" v-model="commentText" confirm-type="send"/>
+				<input ref="commentdom" class="weui-input comment-input" type="text" placeholder="评论" @blur="bindBlurEvent" @focus="bindFocusEvent" v-model="commentText" confirm-type="send"/>
 				<button @click="sumbitComment">发送</button>
 			  </view>
 			</view>
@@ -228,8 +228,8 @@
 					this.commentParams.userName = userInfo.nickName;
 					this.commentParams.userPhoto = userInfo.avatarUrl;
 					this.commentShow = true;
-					debugger
-					this.$refs.commentdom.focus();
+					// debugger
+					// this.$refs.commentdom.focus();
 				} else {
 					//跳转页面 
 					 wx.navigateTo({
@@ -248,7 +248,7 @@
 					this.commentParams.userName = userInfo.nickName;
 					this.commentParams.userPhoto = userInfo.avatarUrl;
 					this.commentShow = true;
-					this.$refs.commentdom.focus();
+					// this.$refs.commentdom.focus();
 				} else {
 					//跳转页面 
 					 wx.navigateTo({
@@ -278,6 +278,18 @@
 	.active{
 		    color: red;
 	}
+	.comment-input{
+		    width: 80%;
+		    float: left;
+		    height: 45px;
+		    size: 10px;
+		    font-size: 16px;
+			margin-left: 10px;
+	}
+	.weui-cell_input{
+		height: 100%;
+	}
+	
 	// .publishData{
 	// 	    position: absolute;
 	// 	    z-index: 99;
