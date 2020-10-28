@@ -1,29 +1,39 @@
 = Cheatsheets
 
-[[BWechatUsersEntity]]
-== BWechatUsersEntity
+[[BMomentsCommentEntity]]
+== BMomentsCommentEntity
 
 
 [cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[avatarUrl]]`@avatarUrl`|`String`|-
-|[[city]]`@city`|`String`|-
-|[[college]]`@college`|`String`|-
-|[[country]]`@country`|`String`|-
+|[[content]]`@content`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
-|[[education]]`@education`|`String`|-
-|[[endDate]]`@endDate`|`String`|-
-|[[identityCard]]`@identityCard`|`String`|-
-|[[name]]`@name`|`String`|-
-|[[nickName]]`@nickName`|`String`|-
-|[[openid]]`@openid`|`String`|-
-|[[profession]]`@profession`|`String`|-
-|[[province]]`@province`|`String`|-
-|[[sex]]`@sex`|`String`|-
-|[[startDate]]`@startDate`|`String`|-
-|[[type]]`@type`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[momentId]]`@momentId`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BMomentsLikeEntity]]
+== BMomentsLikeEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[momentId]]`@momentId`|`String`|-
+|[[status]]`@status`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
 |===
 

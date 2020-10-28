@@ -91,42 +91,42 @@
 				swiperList: [{
 					id: 0,
 					type: 'image',
-					url: '/static/home/banner12x.png'
+					url: 'http://www.imapway.cn/Alumni/static/home/banner12x.png'
 				}, {
 					id: 1,
 					type: 'image',
-					url: '/static/home/banner22x.png',
+					url: 'http://www.imapway.cn/Alumni/static/home/banner22x.png',
 				}, {
 					id: 2,
 					type: 'image',
-					url: '/static/home/banner32x.png'
+					url: 'http://www.imapway.cn/Alumni/static/home/banner32x.png'
 				}],
 				menus: [{
-						icon: '/static/home/dcxw2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/dcxw2x.png',
 						txt: '简介',
 						page: '/pages/home/news/news',
 						menu: 'intro'
 					},
 					{
-						icon: '/static/home/xqzt2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/xqzt2x.png',
 						txt: '资讯',
 						page: '/pages/home/news/news',
 						menu: 'news'
 					},
 					{
-						icon: '/static/home/xqzt2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/xqzt2x.png',
 						txt: '成员',
 						page: '/pages/home/news/news',
 						menu: 'member'
 					},
 					{
-						icon: '/static/home/ysjs2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/ysjs2x.png',
 						txt: '相册',
 						page: '/pages/schoolHistory/schoolHistory',
 						menu: 'photo'
 					},
 					{
-						icon: '/static/home/szll2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/home/szll2x.png',
 						txt: '活动',
 						page: '/pages/teachers/teachers',
 						menu: 'activity'

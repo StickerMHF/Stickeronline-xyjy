@@ -3,16 +3,16 @@
     <view class="list">
       <view class="tishi">若您忘记了密码，可在此重新设置新密码。</view>
       <view class="list-call">
-        <image class="img" src="/static/shilu-login/1.png"></image>
+        <image class="img" src="http://www.imapway.cn/Alumni/static/shilu-login/1.png"></image>
         <input class="sl-input" type="number" v-model="phone" maxlength="11" placeholder="请输入手机号" />
       </view>
       <view class="list-call">
-        <image class="img" src="/static/shilu-login/2.png"></image>
+        <image class="img" src="http://www.imapway.cn/Alumni/static/shilu-login/2.png"></image>
         <input class="sl-input" type="text" v-model="password" maxlength="32" placeholder="请输入新密码" :password="!showPassword" />
-        <image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" @tap="display"></image>
+        <image class="img" :src="showPassword?'http://www.imapway.cn/Alumni/static/shilu-login/op.png':'http://www.imapway.cn/Alumni/static/shilu-login/cl.png'" @tap="display"></image>
       </view>
       <view class="list-call">
-        <image class="img" src="/static/shilu-login/3.png"></image>
+        <image class="img" src="http://www.imapway.cn/Alumni/static/shilu-login/3.png"></image>
         <input class="sl-input" type="number" v-model="code" maxlength="4" placeholder="验证码" />
         <view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}</view>
       </view>

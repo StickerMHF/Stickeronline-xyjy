@@ -1,26 +1,26 @@
 <template>
   <view class="content">
     <view class="header">
-      <image src="../../static/shilu-login/logo.png"></image>
+      <image src="http://www.imapway.cn/Alumni/static/shilu-login/logo.png"></image>
     </view>
 
     <view class="list">
       <view class="list-call">
-        <image class="img" src="/static/shilu-login/1.png"></image>
+        <image class="img" src="http://www.imapway.cn/Alumni/static/shilu-login/1.png"></image>
         <input class="sl-input" v-model="phone" type="number" maxlength="11" placeholder="手机号" />
       </view>
       <view class="list-call">
-        <image class="img" src="/static/shilu-login/2.png"></image>
+        <image class="img" src="http://www.imapway.cn/Alumni/static/shilu-login/2.png"></image>
         <input class="sl-input" v-model="password" type="text" maxlength="32" placeholder="登录密码" :password="!showPassword" />
-        <image class="img" :src="showPassword?'/static/shilu-login/op.png':'/static/shilu-login/cl.png'" @tap="display"></image>
+        <image class="img" :src="showPassword?'http://www.imapway.cn/Alumni/static/shilu-login/op.png':'http://www.imapway.cn/Alumni/static/shilu-login/cl.png'" @tap="display"></image>
       </view>
       <view class="list-call">
-        <image class="img" src="/static/shilu-login/3.png"></image>
+        <image class="img" src="http://www.imapway.cn/Alumni/static/shilu-login/3.png"></image>
         <input class="sl-input" v-model="code" type="number" maxlength="4" placeholder="验证码" />
         <view class="yzm" :class="{ yzms: second>0 }" @tap="getcode">{{yanzhengma}}</view>
       </view>
       <view class="list-call">
-        <image class="img" src="/static/shilu-login/4.png"></image>
+        <image class="img" src="http://www.imapway.cn/Alumni/static/shilu-login/4.png"></image>
         <input class="sl-input" v-model="invitation" type="text" maxlength="12" placeholder="邀请码" />
       </view>
 
@@ -31,7 +31,7 @@
     </view>
 
     <view class="agreement">
-      <image @tap="agreementSuccess" :src="agreement==true?'/static/shilu-login/ty1.png':'/static/shilu-login/ty0.png'"></image>
+      <image @tap="agreementSuccess" :src="agreement==true?'http://www.imapway.cn/Alumni/static/shilu-login/ty1.png':'http://www.imapway.cn/Alumni/static/shilu-login/ty0.png'"></image>
       <text @tap="agreementSuccess"> 同意</text>
       <navigator url="agreement?id=1" open-type="navigate">《软件用户协议》</navigator>
     </view>
