@@ -203,7 +203,7 @@
 					if(userInfo){
 						this.likeParams.userName = userInfo.nickName;
 						this.likeParams.userPhoto = userInfo.avatarUrl;
-						this.fatherMethod(this.likeParams);
+						this.fatherLikeMethod(this.likeParams);
 					} else {
 						//跳转页面 
 						 wx.navigateTo({
