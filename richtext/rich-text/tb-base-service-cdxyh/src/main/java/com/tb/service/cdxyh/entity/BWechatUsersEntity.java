@@ -69,7 +69,7 @@ public class BWechatUsersEntity  extends BaseEntity {
      * 入校时间
      */
     @Column(name = "start_date")
-    private String startData;
+    private String startDate;
     /**
      * 离校时间
      */
@@ -162,12 +162,12 @@ public class BWechatUsersEntity  extends BaseEntity {
         this.education = education;
     }
 
-    public String getStartData() {
-        return startData;
+    public String getStartDate() {
+        return startDate;
     }
 
-    public void setStartData(String startData) {
-        this.startData = startData;
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 
     public String getEndDate() {
@@ -225,4 +225,5 @@ public class BWechatUsersEntity  extends BaseEntity {
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
     }
+
 }

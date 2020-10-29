@@ -50,4 +50,19 @@ public interface BWechatUsersAsyncService {
      * @param handler
      */
     void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    void queryAllByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    /**
+     * 根据ID查询粉丝列表
+     *
+     * @param params
+     * @param handler
+     */
+    void queryFansListByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    /**
+     * 根据ID查询我关注的校友
+     *
+     * @param params
+     * @param handler
+     */
+    void queryAttentionListByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 }

@@ -9,20 +9,20 @@ import javax.persistence.*;
 
 @Entity
 @DataObject(generateConverter = true)
-@Table(name = "b_member_attention")
-public class BMemberAttentionEntity  extends BaseEntity {
-public BMemberAttentionEntity() {
+@Table(name = "b_wechat_users_attention")
+public class BWechatUsersAttentionEntity extends BaseEntity {
+public BWechatUsersAttentionEntity() {
         }
         public JsonObject toJson() {
             JsonObject json = new JsonObject();
             json = super.toJson();
-            BMemberAttentionEntityConverter.toJson(this, json);
+            BWechatUsersAttentionEntityConverter.toJson(this, json);
             return json;
         }
 
-        public BMemberAttentionEntity(JsonObject jsonObject) {
+        public BWechatUsersAttentionEntity(JsonObject jsonObject) {
             super(jsonObject);
-            BMemberAttentionEntityConverter.fromJson(jsonObject, this);
+            BWechatUsersAttentionEntityConverter.fromJson(jsonObject, this);
         }
 
 

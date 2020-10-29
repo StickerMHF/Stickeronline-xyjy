@@ -127,13 +127,14 @@
 		bottom: 0px;
 		left: 0px;
 		right: 0px;
-		display: flex;
+		display: inline-block;
 
 		.actd_foot_btn {
 			width: 50%;
 			text-align: center;
 			font-size: 16px;
 			line-height: 70px;
+			display: inline-block;
 		}
 	}
 </style>

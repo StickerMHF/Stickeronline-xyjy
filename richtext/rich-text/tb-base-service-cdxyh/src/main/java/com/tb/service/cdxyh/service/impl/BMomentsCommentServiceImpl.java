@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,12 @@ public class BMomentsCommentServiceImpl implements BMomentsCommentService, BaseA
     private BMomentsCommentRepository bMomentsCommentRepository;
     @Override
     public void add(JsonObject params, Handler<AsyncResult<String>> handler) {
-
+        Future future = Future.future();
+        BMomentsCommentEntity bMomentsCommentEntity = new BMomentsCommentEntity(params);
+        bMomentsCommentEntity.setCreateTime(new Date());
+        BMomentsCommentEntity save = bMomentsCommentRepository.save(bMomentsCommentEntity);
+        future.complete(new JsonObject(Json.encode(save)));
+        handler.handle(future);
     }
 
     @Override

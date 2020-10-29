@@ -1,15 +1,14 @@
 package com.tb.service.cdxyh.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
-import com.sticker.online.core.utils.AsyncServiceUtil;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BMomentsCommentEntity;
 import com.tb.service.cdxyh.entity.BMomentsEntity;
+import com.tb.service.cdxyh.entity.BMomentsLikeEntity;
 import com.tb.service.cdxyh.repository.BMomentsCommentRepository;
+import com.tb.service.cdxyh.repository.BMomentsLikeRepository;
 import com.tb.service.cdxyh.repository.BMomentsRepository;
-import com.tb.service.cdxyh.service.BMomentsCommentService;
 import com.tb.service.cdxyh.service.BMomentsService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -30,9 +29,10 @@ import java.util.Optional;
 public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
     @Autowired
     private BMomentsRepository bMomentsRepository;
-
     @Autowired
     private BMomentsCommentRepository bMomentsCommentRepository;
+    @Autowired
+    private BMomentsLikeRepository bMomentsLikeRepository;
 
     @Override
     public void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
@@ -49,17 +49,41 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
         BMomentsEntity bMomentsEntity = new BMomentsEntity();
-        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        String likeCount = params.getString("order");
+        Sort sort;
+        if (likeCount != null&&!likeCount.isEmpty()){
+            sort =new Sort(Sort.Direction.DESC, likeCount);
+        } else {
+            sort = new Sort(Sort.Direction.DESC, "createTime");
+        }
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         //创建实例
         Example<BMomentsEntity> ex = Example.of(bMomentsEntity);
         Page<BMomentsEntity> plist = bMomentsRepository.findAll(ex,pageable);
         JsonObject resObj = new JsonObject(Json.encode(plist));
-        JsonArray content = resObj.getJsonArray("content");
-        for (int i = 0; i < content.size(); i++) {
-            String commentId = content.getJsonObject(i).getString("id");
+        JsonArray contents = resObj.getJsonArray("content");
+        for (int i = 0; i < contents.size(); i++) {
+            JsonObject content = contents.getJsonObject(i);
+            String commentId = content.getString("id");
+            //统计浏览量
+            Integer viewCount = content.getInteger("viewCount");
+            if (viewCount != null){
+                content.put("viewCount",viewCount+1);
+            } else {
+                content.put("viewCount",1);
+            }
+
+            bMomentsRepository.save(new BMomentsEntity(content));
+            //获取评论信息
             List<BMomentsCommentEntity> commentList = bMomentsCommentRepository.queryByCommentId(commentId);
             resObj.getJsonArray("content").getJsonObject(i).put("commentList", new JsonArray(Json.encode(commentList)));
+            //获取当前用户点赞状态
+            List<BMomentsLikeEntity> likeList = bMomentsLikeRepository.findAllByUserIdAndMomentId(params.getString("userId"),commentId);
+            if(likeList.size()>0){
+                resObj.getJsonArray("content").getJsonObject(i).put("status", likeList.get(0).getStatus());
+            }else {
+                resObj.getJsonArray("content").getJsonObject(i).put("status", "unlike");
+            }
         }
         future.complete(resObj);
         handler.handle(future);
@@ -106,6 +130,29 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         } else {
             future.complete(new JsonObject());
         }
+        handler.handle(future);
+    }
+
+    @Override
+    public void likeClick(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        String type = params.getString("type");  //like unlike
+        String id = params.getString("id");
+        Optional<BMomentsEntity> res =  bMomentsRepository.findById(id);
+        if (res.isPresent()){
+            Integer likeCount = res.get().getLikeCount();
+            BMomentsEntity bMomentsEntity = new BMomentsEntity();
+            if (type.equals("like")){
+                bMomentsEntity.setLikeCount(likeCount+1);
+            } else if (type.equals("unlike") && likeCount<0){
+                bMomentsEntity.setLikeCount(likeCount-1);
+            }
+            BMomentsEntity update = bMomentsRepository.save(bMomentsEntity);
+            future.complete(new JsonObject(Json.encode(res.get())));
+        } else {
+            future.complete(new JsonObject());
+        }
+
         handler.handle(future);
     }
 }

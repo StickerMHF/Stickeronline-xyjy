@@ -218,6 +218,9 @@
 					if (res && res.data && res.data.result) {
 						let list = res.data.result.content;
 						this.newsList = this.convertData(list);
+						if(this.newsList.length == 0){
+							this.showNews = false;
+						}
 					}
 				})
 			},
@@ -227,6 +230,9 @@
 					if (res && res.data && res.data.result) {
 						let list = res.data.result.content;
 						this.activityList = this.convertData(list);
+						if(this.activityList){
+							this.showActivity = false;
+						}
 					}
 				});
 			},

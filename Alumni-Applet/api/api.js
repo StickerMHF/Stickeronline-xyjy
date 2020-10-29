@@ -11,6 +11,18 @@ const api = {
 	addWechatUser: baseurl+'/stickeronline/wechat/users/add',
 	updateWechatUser: baseurl+'/stickeronline/wechat/users/edit',
 	deletetWechatUser: baseurl+'/stickeronline/wechat/users/delete',
+	queryAllByUserId: baseurl+'/stickeronline/wechat/users/queryAllByUserId',
+	queryFansListByUserId: baseurl+'/stickeronline/wechat/users/queryFansListByUserId',
+	queryAttentionListByUserId: baseurl+'/stickeronline/wechat/users/queryAttentionListByUserId',
+	/**
+	 * 关注校友
+	 */
+	getWechatUserAttentionList: baseurl+'/stickeronline/wechat/users/attention/list',
+	getWechatUserAttentionById: baseurl+'/stickeronline/wechat/users/attention/queryById',
+	addWechatUserAttention: baseurl+'/stickeronline/wechat/users/attention/add',
+	updateWechatUserAttention: baseurl+'/stickeronline/wechat/users/attention/edit',
+	deleteWechatUserAttention: baseurl+'/stickeronline/wechat/users/attention/delete',
+	
 	/**
 	 * 新闻接口
 	 */
@@ -30,19 +42,12 @@ const api = {
 	/**
 	 * 优秀校友
 	 */
-	getMemberList: baseurl+'/stickeronline/member/queryAllByUserId',
+	getMemberList: baseurl+'/stickeronline/member/list',
 	getMemberById: baseurl+'/stickeronline/member/queryById',
 	addMember: baseurl+'/stickeronline/member/add',
 	updateMember: baseurl+'/stickeronline/member/edit',
 	deleteMember: baseurl+'/stickeronline/member/delete',
-	/**
-	 * 关注校友
-	 */
-	getMemberAttentionList: baseurl+'/stickeronline/member/attention/list',
-	getMemberAttentionById: baseurl+'/stickeronline/member/attention/queryById',
-	addMemberAttention: baseurl+'/stickeronline/member/attention/add',
-	updateMemberAttention: baseurl+'/stickeronline/member/attention/edit',
-	deleteMemberAttention: baseurl+'/stickeronline/member/attention/delete',
+	
 	
 	/**
 	 * 校友合作
@@ -62,6 +67,8 @@ const api = {
 	 * 组织
 	 */
 	getAlumnusList: baseurl+'/stickeronline/alumnus/list',
+	//加入组织
+	addAlumnusJoin: baseurl+'/stickeronline/alumnusJoin/add',
 	//资讯
 	getAlumnusNewsList: baseurl+'/stickeronline/alumnusNews/list',
 	//资讯详情
@@ -86,7 +93,12 @@ const api = {
 	 */
 	//获取发现列表
 	getDiscoverList: baseurl+'/stickeronline/moments/list',
+	//发布消息
 	publishMoment: baseurl+'/stickeronline/moments/add',
+	//点赞操作
+	momentLike: baseurl+'/stickeronline/momentsLike/add',
+	//发现评论
+	momentComment: baseurl+'/stickeronline/momentsComment/add',
 	
 	uploadFile: baseurl+'/file/upload'
 	

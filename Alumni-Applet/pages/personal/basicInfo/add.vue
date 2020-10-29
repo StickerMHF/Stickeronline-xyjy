@@ -7,7 +7,7 @@
 		<bjx-form labelType="inline" :rules="rules" labelWidth="150" :form="form" ref="form">
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="姓名" prop="name">
-					<input class="basicinfo_name input" v-model="form.name"  name="input" placeholder="姓名" />
+					<input class="basicinfo_name input" v-model="form.name" name="input" placeholder="姓名" />
 				</bjx-form-item>
 			</view>
 			<view class="cu-form-group">
@@ -75,9 +75,9 @@
 			<!-- 曾经在校 -->
 			<view v-if="type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="离校时间" label-right="right" prop='endtDate'>
-					<picker mode="date" :value="form.endtDate" start="1970-09-01" end="2030-09-01" @change="endDateChange">
+					<picker mode="date" :value="form.endDate" start="1970-09-01" end="2030-09-01" @change="endDateChange">
 						<view class="picker">
-							{{form.endtDate}}
+							{{form.endDate}}
 						</view>
 					</picker>
 				</bjx-form-item>
@@ -93,7 +93,9 @@
 	import bjxForm from '@/components/bjx-form/bjx-form.vue'
 	import bjxFormItem from '@/components/bjx-form/bjx-form-item.vue'
 	import {
-		addWechatUser
+		addWechatUser,
+		updateWechatUser,
+		getWechatUserById
 	} from '@/api/user.js'
 	export default {
 		components: {
@@ -103,6 +105,7 @@
 		data() {
 			return {
 				type: "1",
+				isEdit: false,
 				form: {
 					openid: '',
 					name: '',
@@ -111,8 +114,8 @@
 					college: '',
 					profession: '',
 					education: '请选择',
-					startDate: '2018-12-25',
-					endtDate: '2018-12-25',
+					startDate: '2016-9-1',
+					endDate: '2020-6-20',
 				},
 				index: -1,
 				eduIndex: -1,
@@ -127,15 +130,15 @@
 						required: true,
 						rule: 'type:string|length:0,18'
 					},
-					college:{
+					college: {
 						required: true,
 						rule: 'type:string|length:~,50'
 					},
-					education:{
+					education: {
 						required: true,
 						rule: 'type:string|length:~,50'
 					},
-					startDate:{
+					startDate: {
 						required: true,
 						rule: 'type:string|date'
 					}
@@ -147,18 +150,49 @@
 			// 初始化页面数据
 			this.title = options.title;
 			this.type = options.type;
+			this.isEdit = options.isEdit;
 			if (!this.type) {
 				// debugger
+			}
+			if (this.isEdit||this.isEdit=="true") {
+				this.isEdit=true;
+				this.getWechatUserInfo();
 			}
 		},
 		methods: {
 			submit() {
-				let that=this;
+				let that = this;
 				this.$refs.form.validate(val => {
-					if(val){
+					if (val) {
 						this.save(that.form);
 					}
 				})
+			},
+			getWechatUserInfo() {
+				let that = this;
+				let openid = uni.getStorageSync('openid');
+				if (openid && openid != "") {
+					let param = {
+						openid: openid
+					};
+					getWechatUserById(param).then(data => {
+						var [error, res] = data;
+						if (res && res.data.success) {
+							let ss = res.data.result;
+							if (ss != null) {
+								that.form = ss;
+								that.type = that.form.type;
+							} else {
+								debugger
+							}
+						}
+					});
+				} else {
+					getApp().getUserInfo();
+				}
+			},
+			formatTime(date){
+				return getApp().formatTime(date);
 			},
 			textareaInput(e) {
 				this.contents = e.detail.value
@@ -171,6 +205,7 @@
 				this.form.education = this.eduPicker[this.eduIndex];
 			},
 			startDateChange(e) {
+				debugger
 				this.form.startDate = e.detail.value
 			},
 			endDateChange(e) {
@@ -183,31 +218,56 @@
 				this.name = e.detail.value
 			},
 			save(formData) {
-				let that=this;
+				let that = this;
 				let userInfo = uni.getStorageSync('userInfo');
-				let params =Object.assign(userInfo, formData); 
+				let params = Object.assign(userInfo, formData);
 				let openid = uni.getStorageSync('openid');
-				if (openid&&openid!="") {
-					params.openid=openid;
-					params.type=that.type;
-					addWechatUser(params).then(data => {
-						var [error, res] = data;
-						debugger
-						if (res && res.data && res.data.success) {
-							uni.redirectTo({
-								url: '/pages/personal/personal'
-							})
-						} else {
-							uni.showModal({
-								content: '保存失败，请稍后再试：' + JSON.stringify(res.data),
-								showCancel: false
-							})
-						}
-						this.lists = res.data.data;
-					})
+				debugger
+				if (openid && openid != "") {
+					params.openid = openid;
+					params.type = that.type;
+					params.updateTime=that.formatTime(params.updateTime);
+					params.createTime=that.formatTime(params.createTime);
+					if (!this.isEdit) {
+						this.addWechatUser(params);
+					} else {
+						this.updateWechatUser(params);
+					}
+
+
 				} else {
 					getApp().getUserInfo();
 				}
+			},
+			addWechatUser(params) {
+				addWechatUser(params).then(data => {
+					var [error, res] = data;
+					if (res && res.data && res.data.success) {
+						uni.navigateBack({
+							delta: 2
+						});
+					} else {
+						uni.showModal({
+							content: '保存失败，请稍后再试：' + JSON.stringify(res.data),
+							showCancel: false
+						})
+					}
+				})
+			},
+			updateWechatUser(params) {
+				updateWechatUser(params).then(data => {
+					var [error, res] = data;
+					if (res && res.data && res.data.success) {
+						uni.navigateBack({
+							delta: 2
+						});
+					} else {
+						uni.showModal({
+							content: '保存失败，请稍后再试：' + JSON.stringify(res.data),
+							showCancel: false
+						})
+					}
+				})
 			}
 		}
 	}
@@ -217,9 +277,11 @@
 	.basicinfo_item {
 		width: 100% !important;
 	}
-	.basicinfo_name{
+
+	.basicinfo_name {
 		display: inline-block;
-		.renzheng{
+
+		.renzheng {
 			float: right;
 		}
 	}

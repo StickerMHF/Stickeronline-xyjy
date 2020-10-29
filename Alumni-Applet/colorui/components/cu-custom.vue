@@ -9,7 +9,10 @@
 				<view class="content" :style="[{top:StatusBar + 'px'}]" >
 					<slot name="content"></slot>
 				</view>
-				<slot name="right"></slot>
+				<view style="z-index: 1;" @click="rightClickHandler">
+					<slot name="right"></slot>
+				</view>
+				
 			</view>
 		</view>
 	</view>
@@ -64,11 +67,16 @@
 					});
 				}
 				
+			},
+			rightClickHandler(){
+				this.$emit("rightClick");
 			}
 		}
 	}
 </script>
 
 <style>
-
+.cu-bar{
+	/* padding-right: 20px !important; */
+}
 </style>

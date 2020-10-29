@@ -46,8 +46,8 @@ public class BMomentsCommentEntity extends BaseEntity {
     /**
      * 朋友圈ID
      */
-    @Column(name = "moments_id")
-    private String momentsId;
+    @Column(name = "moment_id")
+    private String momentId;
     /**
      * 评论人ID
      */
@@ -85,12 +85,12 @@ public class BMomentsCommentEntity extends BaseEntity {
         this.content = content;
     }
 
-    public String getMomentsId() {
-        return momentsId;
+    public String getMomentId() {
+        return momentId;
     }
 
-    public void setMomentsId(String momentsId) {
-        this.momentsId = momentsId;
+    public void setMomentId(String momentId) {
+        this.momentId = momentId;
     }
 
     public String getUserId() {

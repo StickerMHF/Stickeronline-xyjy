@@ -4,11 +4,11 @@
 			<block slot="backText">返回</block>
 			<block slot="content">
 				<ul class="discover-ul">
-					<li class="discover-li discover-li-cur" @click="selectHandler('1')"><span>关注</span>
-						<text v-if="currentSelect=='1'" class="lg text-gray " :class="isSelect?'cuIcon-triangleupfill':'cuIcon-triangledownfill'"></text>
-						<text v-if="currentSelect=='2'" class="lg text-gray cuIcon-title" style="color: #f85c0e;"></text>
+					<li class="discover-li " :class="currentSelect=='1'?'discover-li-cur': ''" @click="selectHandler('1')"><span>推荐</span>
+						<text class="lg text-gray cuIcon-triangleupfill"></text>
+						<!-- <text v-if="currentSelect=='2'" class="lg text-gray cuIcon-title" style="color: #f85c0e;"></text> -->
 					</li>
-					<li class="discover-li" @tap="selectHandler('2')"><span>推荐</span></li>
+					<li class="discover-li" :class="currentSelect=='2'?'discover-li-cur': ''" @tap="selectHandler('2')"><span>关注</span></li>
 				</ul>
 			</block>
 		</cu-custom>
@@ -26,19 +26,31 @@
 			<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="navigatorTo"></image>
 		</view>
 		<view class="discover-content">
-			<moments :list="momentsList"></moments>
+			<moments :list="momentsList" :fatherLikeMethod="likeClick" :fatherCommentMethod="commentMethod"></moments>
 		</view>
+		<!-- <view class="discover-comment" v-show="commentShow">
+			<view class="weui-cells weui-cells_after-title">
+			  <view class="weui-cell weui-cell_input">
+				<input class="weui-input" auto-focus placeholder="评论" :value="commentParams.content"/>
+				<button @click="sumbitComment">发送</button>
+			  </view>
+			</view>
+		</view>	 -->	
 	</view>
 </template>
 
 <script>	
-	import moments from '@/components/moments/moments.vue';
-	import {getDiscoverList} from '@/api/discover.js'
+	import moments from '@/components/moments/moments.vue'; 
+	import {getDiscoverList, momentLike, momentComment} from '@/api/discover.js'
 	import {dateUtil } from "@/utils/dateUtil.js"
 	var _self = '';
 	export default {
+		components:{
+			// moments
+		},
 		data() {
 			return {
+				// commentShow: true,
 				cWidth: '',
 				cHeight: '',
 				pixelRatio: 1,
@@ -147,31 +159,63 @@
 				}],
 				params: {
 					pageNo:1,
-					pageSize:5
+					pageSize:5,
+					order: '',
+					userId: ''
 				}
 			}
 		},
-		onLoad() {	
+		onLoad() {			
+			//获取用户ID
+			this.params.userId = uni.getStorageSync('openid');
+			
+			// if(!this.params.userId || this.params.userId == ''){
+			// 	wx.navigateTo({
+			// 		url:'/pages/login/login'
+			// 	})
+			// }
 			//获取朋友圈列表
 			this.getDiscoverList();
 
 		},
+		bindFormSubmit: function(e) {
+		    console.log(e.detail.value.textarea)
+		  },
 		onPullDownRefresh (){
 			this.getDiscoverList();
 		},
+		mounted() {
+			// that = this;
+		},
 		methods: {
+			//点赞
+			likeClick(params){
+				momentLike(params).then(data => {
+					console.log(data)
+				});
+			},
+			commentMethod(params){
+				momentComment(params).then(data => {
+					console.log(data);
+					this.commentShow = false;
+					this.commentText = '';
+				});
+			},
 			selectHandler(value) {
 				this.currentSelect = value;
 				if (this.currentSelect == '1') {
-					if (this.currentSelect == this.currentfromSelect) {
-						this.isSelect = !this.isSelect;
-					}
+					// if (this.currentSelect == this.currentfromSelect) {
+					// 	this.isSelect = !this.isSelect;
+					// }
 					this.currentfromSelect = value;
+					this.params.order = "likeCount";
 				}
 				if (this.currentSelect == '2') {
-					this.isSelect = false;
+					// this.isSelect = false;
 					this.currentfromSelect = value;
+					this.params.order = "";
 				}
+				this.getDiscoverList();
 			},			
 			//获取朋友圈列表
 			getDiscoverList(){
@@ -187,6 +231,7 @@
 			transformData(list){
 				list = list.map(item =>{
 					return {
+						id: item.id,
 						username: item.userName,
 						publishDate: dateUtil.formatTime(item.createTime),
 						photo: item.userPhoto,
@@ -195,7 +240,8 @@
 						commentList: this.listToTree(item.commentList),
 						viewCount: item.viewCount,
 						likeCount: item.likeCount,
-						commentCount: item.commentCount
+						commentCount: item.commentCount,
+						status: item.status
 					}					
 				});
 				return list;
@@ -209,7 +255,8 @@
 						content: item.content,
 						userId: item.userId,
 						commentTime: dateUtil.formatTime(item.createTime),
-						parent: item.fid
+						parent: item.fid,
+						momentId:item.momentId
 					}
 				});
 				
@@ -234,6 +281,9 @@
 					url:'/pages/discover/publishData/publishData'
 				})
 			},
+			onConfirm(value) {
+			  console.log(value);
+			}
 		}
 	}
 </script>

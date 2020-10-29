@@ -69,7 +69,7 @@
 		{
 			"path": "pages/alumnus/alumnus",
 			"style": {
-				
+				"enablePullDownRefresh": true
 			}
 		
 		},
@@ -294,6 +294,15 @@
         }
         ,{
             "path" : "pages/personal/basicInfo/add",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/home/address/address",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

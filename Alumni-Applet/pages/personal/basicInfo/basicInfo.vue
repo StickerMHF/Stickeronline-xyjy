@@ -1,10 +1,10 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" >
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
-			<block slot="right">
-				<view style="padding: 0 10px;">编辑</view>
+			<block slot="right" @rightClick="editHandler">
+				<view style="padding: 0 10px;" @click="editHandler">编辑</view>
 			</block>
 		</cu-custom>
 		<bjx-form labelType="inline" :rules="rules" labelWidth="150" :form="form" ref="form">
@@ -63,7 +63,7 @@
 			<!-- 曾经在校 -->
 			<view v-if="form.type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="离校时间" label-right="right" prop='endtDate'>
-					<input v-model="form.endtDate" disabled class="input" name="input" placeholder="离校时间" />
+					<input v-model="form.endDate" disabled class="input" name="input" placeholder="离校时间" />
 				</bjx-form-item>
 			</view>
 		</bjx-form>
@@ -92,7 +92,7 @@
 					profession: '',
 					education: '',
 					startDate: '2018-12-25',
-					endtDate: '2018-12-25',
+					endDate: '2018-12-25',
 					type: "1"
 				},
 				index: -1,
@@ -138,6 +138,11 @@
 				}
 
 
+			},
+			editHandler(){
+				uni.navigateTo({
+					url: "/pages/personal/basicInfo/add?isEdit=true"
+				});
 			},
 			textareaInput(e) {
 				this.contents = e.detail.value

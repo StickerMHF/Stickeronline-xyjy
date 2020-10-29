@@ -1,36 +1,39 @@
 <template>
-	<view class="content" style="margin-top: 150px;">
+	<view class="whole_login">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true" @callBack="callBackHandler" isCallBack=true>
 			<block slot="content">登录</block>
 		</cu-custom>
-		<view class="header">
-			<image src="../../static/shilu-login/logo.jpg"></image>
-		</view>
-
-		<!-- <view class="list">
-      <view class="list-call">
-        <image class="img" src="/static/shilu-login/1.png"></image>
-        <input class="sl-input" v-model="phone" type="number" maxlength="11" placeholder="输入手机号" />
-      </view>
-      <view class="list-call">
-        <image class="img" src="/static/shilu-login/2.png"></image>
-        <input class="sl-input" v-model="password" type="text" maxlength="32" placeholder="输入密码" password="true" />
-      </view>
-
-    </view> -->
-		<button class="button-login" open-type="getUserInfo" @getuserinfo="bindGetUserInfo" withCredentials="true"
-		 hover-class="button-hover" @tap="bindLogin()">一键登录</button>
-		<!-- <view class="button-login" hover-class="button-hover" @tap="bindLogin()">
+		<view class="content" style="margin-top: 150px;">
+			<view class="header">
+				<image src="http://www.imapway.cn/Alumni/static/shilu-login/logo.jpg"></image>
+			</view>
 		
-      <text>一键登录</text>
-    </view> -->
-
-		<!-- <view class="agreenment">
-      <navigator url="forget" open-type="navigate">忘记密码</navigator>
-      <text>|</text>
-      <navigator url="reg" open-type="navigate">注册账户</navigator>
-    </view> -->
+			<!-- <view class="list">
+		  <view class="list-call">
+		    <image class="img" src="/static/shilu-login/1.png"></image>
+		    <input class="sl-input" v-model="phone" type="number" maxlength="11" placeholder="输入手机号" />
+		  </view>
+		  <view class="list-call">
+		    <image class="img" src="/static/shilu-login/2.png"></image>
+		    <input class="sl-input" v-model="password" type="text" maxlength="32" placeholder="输入密码" password="true" />
+		  </view>
+		
+		</view> -->
+			<button class="button-login" open-type="getUserInfo" @getuserinfo="bindGetUserInfo" withCredentials="true"
+			 hover-class="button-hover" @tap="bindLogin()">一键登录</button>
+			<!-- <view class="button-login" hover-class="button-hover" @tap="bindLogin()">
+			
+		  <text>一键登录</text>
+		</view> -->
+		
+			<!-- <view class="agreenment">
+		  <navigator url="forget" open-type="navigate">忘记密码</navigator>
+		  <text>|</text>
+		  <navigator url="reg" open-type="navigate">注册账户</navigator>
+		</view> -->
+		</view>
 	</view>
+	
 </template>
 
 <script>
@@ -65,7 +68,16 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
+	page{
+		width: 100% !important;
+		height: 100% !important;
+		background-color: #00BEB7;
+	}
+	.whole_login{
+		width: 100%;
+		height: 100%;
+	}
 	.content {
 		display: flex;
 		flex-direction: column;

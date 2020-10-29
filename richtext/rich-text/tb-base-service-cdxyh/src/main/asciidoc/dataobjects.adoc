@@ -57,6 +57,24 @@
 |[[updateBy]]`@updateBy`|`String`|-
 |===
 
+[[BAlumnusJoinEntity]]
+== BAlumnusJoinEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[alumnusId]]`@alumnusId`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[status]]`@status`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
 [[BAlumnusNewsEntity]]
 == BAlumnusNewsEntity
 
@@ -155,11 +173,10 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[content]]`@content`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
-|[[fid]]`@fid`|`String`|-
 |[[id]]`@id`|`String`|-
-|[[momentsId]]`@momentsId`|`String`|-
+|[[mark]]`@mark`|`String`|-
+|[[memberId]]`@memberId`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |[[userId]]`@userId`|`String`|-
 |[[userName]]`@userName`|`String`|-
@@ -185,6 +202,24 @@
 |[[userName]]`@userName`|`String`|-
 |[[userPhoto]]`@userPhoto`|`String`|-
 |[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|===
+
+[[BMomentsLikeEntity]]
+== BMomentsLikeEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[momentId]]`@momentId`|`String`|-
+|[[status]]`@status`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
 |===
 
 [[BNewsEntity]]
@@ -253,7 +288,7 @@
 |[[profession]]`@profession`|`String`|-
 |[[province]]`@province`|`String`|-
 |[[sex]]`@sex`|`String`|-
-|[[startData]]`@startData`|`String`|-
+|[[startDate]]`@startDate`|`String`|-
 |[[type]]`@type`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |===

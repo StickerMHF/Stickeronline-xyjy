@@ -148,7 +148,7 @@
 						provider: 'weixin',
 						success(res) {
 							let params = {
-								appid: 'wx464bab72d25e1a1f',
+								appid: 'wx3c10620fb5c8651c',
 								code: res.code
 							}
 							getUserOpenid(params).then(data => {
@@ -210,6 +210,9 @@
 			},
 			formatDate(date){
 				return dateUtil.formatDate(date);
+			},
+			formatTime(date){
+				return dateUtil.formatTime(date);
 			}
 		}
 

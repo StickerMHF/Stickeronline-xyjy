@@ -39,7 +39,7 @@
 						<view class="icon">
 							<image :src="item.icon"></image>
 						</view>
-						<view class="text">{{item.name}}</view>
+						<view class="text">{{item.name}}{{isCertification&&item.pageInfo?'(已认证)':''}}</view>
 						<image class="to" src="http://www.imapway.cn/Alumni/static/user/to.png"></image>
 					</view>
 				</navigator>
@@ -83,15 +83,17 @@
 					name: "我的粉丝",
 					icon: "http://www.imapway.cn/Alumni/static/personal/wdpl2x.png",
 					page: "/pages/personal/fans/fans"
-				}, {
-					name: "收藏",
-					icon: "http://www.imapway.cn/Alumni/static/personal/sc2x.png",
-					page: "/pages/personal/collect/collect"
-				}, {
-					name: "设置",
-					icon: "http://www.imapway.cn/Alumni/static/personal/sz2x.png",
-					page: "/pages/personal/setting/setting"
-				}]
+				}],
+				// ,{
+				// 	name: "收藏",
+				// 	icon: "http://www.imapway.cn/Alumni/static/personal/sc2x.png",
+				// 	page: "/pages/personal/collect/collect"
+				// },
+				//   {
+				// 	name: "设置",
+				// 	icon: "http://www.imapway.cn/Alumni/static/personal/sz2x.png",
+				// 	page: "/pages/personal/setting/setting"
+				// }
 			};
 		},
 		onShow() {

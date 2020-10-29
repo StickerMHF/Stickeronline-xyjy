@@ -5,7 +5,7 @@
 			<block slot="content">{{title}}</block>
 		</cu-custom>
 
-		<view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
+		<!-- <view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
 				<input type="text" placeholder="输入搜索的关键词" confirm-type="search"></input>
@@ -13,12 +13,12 @@
 			<view class="action">
 				<button class="cu-btn bg-gradual-green shadow-blur round">搜索</button>
 			</view>
-		</view>
+		</view> -->
 		<view class="gmember-title cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-titles text-green1"></text> 优秀校友
 				<span class="gmember-count">
-					<text>共263人</text>
+					<text>共{{totalSize}}人</text>
 				</span>
 			</view>
 		</view>
@@ -63,6 +63,7 @@
 				listCurID: '',
 				lists: [],
 				listCur: '',
+				totalSize:0
 			};
 		},
 		onLoad() {
@@ -75,7 +76,6 @@
 		},
 		methods: {
 			payHandler(item) {
-				debugger
 				if (item.attention == 0||!item.attention) {
 					this.addMemberAttention(item);
 				} else {
@@ -92,7 +92,6 @@
 					};
 					addMemberAttention(param).then(data => {
 						var [error, res] = data;
-						debugger
 						if (res && res.data.success) {
 							item.attention = 1;
 							// this.content = res.data.result;
@@ -112,14 +111,13 @@
 					};
 					deleteMemberAttention(param).then(data => {
 						var [error, res] = data;
-						debugger
 						if (res && res.data.success) {
 							item.attention = 0;
 							// this.content = res.data.result;
 						}
 					});
 				} else {
-					getApp().getUserInfo();
+					this.getApp().getUserInfo();
 				}
 
 			},
@@ -138,6 +136,7 @@
 					var [error, res] = data;
 					if (res && res.data.success) {
 						const tempList = res.data.result.content;
+						that.totalSize=res.data.result.total;
 						// this.lists = res.data.result.content;
 						// 判断是否可翻页
 						if (tempList.length === this.pageSize) {
@@ -145,7 +144,6 @@
 						} else {
 							this.status = 'noMore'
 						}
-
 						if (reload) {
 							// 处理下拉加载提示框
 							this.tipShow = true;
@@ -217,7 +215,7 @@
 
 <style>
 	page {
-		padding-top: 100upx;
+		/* padding-top: 100upx; */
 	}
 
 	.indexes {
@@ -289,7 +287,7 @@
 	}
 
 	.gmember-title {
-		margin-top: 10px;
+		/* margin-top: 10px; */
 	}
 
 	.gmember-count {

@@ -56,4 +56,11 @@ public interface BMomentsService {
      * @param handler
      */
     void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+
+    /**
+     * 点赞
+     * @param params
+     * @param handler
+     */
+    void likeClick(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 }
