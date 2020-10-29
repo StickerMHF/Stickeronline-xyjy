@@ -198,6 +198,7 @@
 				momentComment(params).then(data => {
 					console.log(data);
 					this.commentShow = false;
+					this.commentText = '';
 				});
 			},
 			selectHandler(value) {

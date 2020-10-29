@@ -4,7 +4,12 @@ import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
 import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
+import com.tb.service.cdxyh.entity.BAlumnusActivityEntity;
 import com.tb.service.cdxyh.entity.BAlumnusEntity;
+import com.tb.service.cdxyh.entity.BAlumnusJoinEntity;
+import com.tb.service.cdxyh.repository.BAlumnusActivityRepository;
+import com.tb.service.cdxyh.repository.BAlumnusJoinRepository;
+import com.tb.service.cdxyh.repository.BAlumnusMemberRepository;
 import com.tb.service.cdxyh.repository.BAlumnusRepository;
 import com.tb.service.cdxyh.service.BAlumnusService;
 import io.vertx.core.AsyncResult;
@@ -24,6 +29,11 @@ import java.util.List;
 public class BAlumnusServiceImpl implements BAlumnusService, BaseAsyncService {
     @Autowired
     private BAlumnusRepository bAlumnusRepository;
+    @Autowired
+    private BAlumnusJoinRepository bAlumnusJoinRepository;
+    @Autowired
+     private BAlumnusActivityRepository bAlumnusActivityRepository;
+
     @Override
     public void add(JsonObject params, Handler<AsyncResult<String>> handler) {
 
@@ -45,9 +55,28 @@ public class BAlumnusServiceImpl implements BAlumnusService, BaseAsyncService {
         }
         //创建实例
         Example<BAlumnusEntity> ex = Example.of(bAlumnusEntity, exampleMatcher);
-
         Page<BAlumnusEntity> plist = bAlumnusRepository.findAll(ex,pageable);
-        future.complete(new JsonObject(Json.encode(plist)));
+        JsonObject resObj = new JsonObject(Json.encode(plist));
+        JsonArray contents = resObj.getJsonArray("content");
+        String userId = params.getString("userId");
+        for (int i = 0; i < contents.size(); i++) {
+            JsonObject obj = contents.getJsonObject(i);
+            String id = obj.getString("id");
+            //获取关注情况
+            Integer join = bAlumnusJoinRepository.countAllByAlumnusIdAndUserId(id, userId);
+            if (join > 0){
+                obj.put("join", true);
+            } else {
+                obj.put("join", false);
+            }
+            //统计活动数量
+            Integer activity = bAlumnusActivityRepository.countAllByFid(id);
+            obj.put("activity", activity);
+            //统计成员
+            Integer member = bAlumnusJoinRepository.countAllByAlumnusId(id);
+            obj.put("member", member);
+        }
+        future.complete(resObj);
         handler.handle(future);
     }
 

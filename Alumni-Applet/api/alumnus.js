@@ -43,3 +43,8 @@ export const gitAlumnusMemberList = (params) => {
 export const getAlumnusMemberById = (params) => {
 	return getAction(api.getAlumnusMemberById, params);
 }
+
+//加入组织
+export const addAlumnusJoin = (params) => {
+	return postAction(api.addAlumnusJoin, params);
+}

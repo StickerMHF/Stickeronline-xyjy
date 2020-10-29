@@ -69,7 +69,7 @@
 		{
 			"path": "pages/alumnus/alumnus",
 			"style": {
-				
+				"enablePullDownRefresh": true
 			}
 		
 		},
