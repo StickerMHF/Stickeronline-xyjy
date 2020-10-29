@@ -67,7 +67,12 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
             String commentId = content.getString("id");
             //统计浏览量
             Integer viewCount = content.getInteger("viewCount");
-            content.put("viewCount",viewCount+1);
+            if (viewCount != null){
+                content.put("viewCount",viewCount+1);
+            } else {
+                content.put("viewCount",1);
+            }
+
             bMomentsRepository.save(new BMomentsEntity(content));
             //获取评论信息
             List<BMomentsCommentEntity> commentList = bMomentsCommentRepository.queryByCommentId(commentId);

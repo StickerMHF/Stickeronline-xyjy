@@ -2,6 +2,7 @@ package com.tb.service.cdxyh.service.impl;
 
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
+import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BAlumnusPhotoEntity;
 import com.tb.service.cdxyh.repository.BAlumnusPhotoRepository;
@@ -12,11 +13,13 @@ import io.vertx.core.Handler;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Component

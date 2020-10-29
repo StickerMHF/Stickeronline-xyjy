@@ -22,7 +22,7 @@
 			<!-- 基于 uni-list 的页面布局 -->
 			<uni-list :class="{ 'uni-list--waterfall': waterfall }">
 				<!-- 通过 uni-list--waterfall 类决定页面布局方向 -->
-				<uni-list-item :border="!waterfall" class="uni-list-item--waterfall" title="自定义商品列表" v-for="item in lists" :key="item._id">
+				<uni-list-item :border="!waterfall" class="uni-list-item--waterfall" title="自定义商品列表" v-for="(item, i) in lists" :key="i">
 					<!-- 通过header插槽定义列表左侧图片 -->
 					<template v-slot:header>
 						<view class="uni-thumb shop-picture" :class="{ 'shop-picture-column': waterfall }">
@@ -31,34 +31,35 @@
 					</template>
 					<!-- 通过body插槽定义商品布局 -->
 					<view slot="body" class="shop">
-						<navigator :url="'/pages/alumnus/details?id='+item.id+'&name='+item.name">
-							<view class="view-left">
-								<view class="uni-title">
-									<text class="uni-ellipsis-2">{{ item.name }}</text>									
-								</view>
-								<view>
-									<view class="cu-capsule radius">
-										<view class='cu-tag bg-blue sm'>
-											活动
+						<view class="">
+							<navigator :url="'/pages/alumnus/details?id='+item.id+'&name='+item.name">
+								<view class="view-left">
+									<view class="uni-title">
+										<text class="uni-ellipsis-2">{{ item.name }}</text>									
+									</view>
+									<view>
+										<view class="cu-capsule radius">
+											<view class='cu-tag bg-blue sm'>
+												活动
+											</view>
+											<view class="cu-tag line-blue sm">
+												{{item.activity}}
+											</view>
 										</view>
-										<view class="cu-tag line-blue sm">
-											{{item.activity}}
+										<view class="cu-capsule radius">
+											<view class='cu-tag bg-gradual-green1 sm'>
+												成员
+											</view>
+											<view class="cu-tag line-green sm">
+												{{item.member}}
+											</view>
 										</view>
 									</view>
-									<view class="cu-capsule radius">
-										<view class='cu-tag bg-gradual-green1 sm'>
-											成员
-										</view>
-										<view class="cu-tag line-green sm">
-											{{item.member}}
-										</view>
-									</view>
 								</view>
-							</view>
-						</navigator>
-						<view>
-							<button class="alumnus-btn cu-btn round sm bg-orange" @click="alumnusJoin('123')">加入</button>
-						</view>
+							</navigator>
+							<button class="alumnus-btn cu-btn round sm bg-orange" v-if="item.join == true" >已加入</button>
+								<button class="alumnus-btn cu-btn round sm bg-orange" v-else @click="addJoin(item)">加入</button>
+						</view>						
 					</view>
 				</uni-list-item>
 			</uni-list>
@@ -112,7 +113,8 @@
 				params: {
 					pageNo: 1, // 当前页数
 					pageSize: 10, // 每页显示的数据条数
-					type: 'all'
+					type: 'all',
+					userId: ''
 				}
 			};
 		},
@@ -124,11 +126,11 @@
 			// 	pageSize: this.pageSize,
 			// 	type: ''
 			// }
+			this.params.userId = uni.getStorageSync('openid');
 			this.getAlumnusList(this.params);
 		},
 		methods: {
 			getAlumnusList(params) {
-				console.log(params)
 				getAlumnusList(params).then(data => {
 					var [error, res] = data;
 					if (res && res.data && res.data.result) {
@@ -160,13 +162,19 @@
 			 * 下拉刷新回调函数
 			 */
 			onPullDownRefresh() {
-				this.current = 1
-				this.getNewsList(true);
+				console.log('下拉刷新')
+				if (this.params.pageNo>1) {
+					this.status = 'loading';
+					this.params.pageNo -= 1;
+					this.getAlumnusList(this.params);
+				}
+				
 			},
 			/**
 			 * 上拉加载回调函数
 			 */
 			onReachBottom() {
+				console.log('上拉刷新')
 				this.getNewsList();
 			},
 			/**
@@ -182,22 +190,25 @@
 					this.status = 'noMore';
 				}
 			},
-			alumnusJoin(alumnusId) {
-				console.log('触发加入组织按钮')
+			addJoin(alumnu){
+				debugger
 				let params = {
-					alumnusId: alumnusId,
+					alumnusId: alumnu.id,
 					userId: '',
 					userName: '',
 					userPhoto: '',
 					status: '1'
 				};
+				let join = alumnu.join;
+				if(!join){
+					
+				}
 				//获取用户信息
 				params.userId = uni.getStorageSync('openid');
 				let userInfo = uni.getStorageSync('userInfo');
 				if (userInfo) {
 					params.userName = userInfo.nickName;
 					params.userPhoto = userInfo.avatarUrl;
-					debugger
 					addAlumnusJoin(params).then(data => {
 						console.log(data);
 					});
@@ -375,7 +386,7 @@
 		bottom: 0px;
 		top: 90px;
 	}
-	.view-left{
-		width: 140px;
-	}
+	// .view-left{
+	// 	width: 140px;
+	// }
 </style>
