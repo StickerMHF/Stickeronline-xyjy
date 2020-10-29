@@ -64,6 +64,11 @@ const api = {
 	getPositionList: baseurl+'/stickeronline/signin/queryAll',
 	updatePersonnelPosition: baseurl+'/stickeronline/signin/edit',
 	/**
+	 * 校庆祝福
+	 */
+	getBulletChatList: baseurl+'/stickeronline/barrage/list',
+	sendBulletChat: baseurl+'/stickeronline/barrage/add',
+	/**
 	 * 组织
 	 */
 	getAlumnusList: baseurl+'/stickeronline/alumnus/list',

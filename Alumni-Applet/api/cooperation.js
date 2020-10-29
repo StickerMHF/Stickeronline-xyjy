@@ -33,9 +33,18 @@ export const getPositionList = (params) => {
 export const addLightUpPersonnel = (params) => {
     return postAction(api.addLightUpPersonnel, params)
 }
-// 更新人员位置
+//更新人员位置
 export const updatePersonnelPosition = (params) => {
-    return putAction(api.updatePersonnelPosition, params)
+    return postAction(api.updatePersonnelPosition, params)
+}
+
+//获取弹幕列表
+export const getBulletChatList = (params) => {
+    return getAction(api.getBulletChatList, params)
+}
+//发送弹幕
+export const sendBulletChat = (params) => {
+    return postAction(api.sendBulletChat, params)
 }
 
 

@@ -18,7 +18,6 @@
 		<view class="ph-menu">
 			<view class="bg-white">
 				<view class="grid col-4 grid-square">
-
 					<view @click="menuClickHandler(item.id)" class="bg-img" v-for="(item,index) in menus" :style="[{ backgroundImage:'url(' + menus[index] + ')' }]">
 						<navigator :url="item.page+'?title='+item.txt">
 							<view class="phm-item">
@@ -28,7 +27,7 @@
 								<text class="phm-item-txt">{{item.txt}}</text>
 							</view>
 						</navigator>
-
+						
 					</view>
 				</view>
 			</view>
@@ -47,7 +46,7 @@
 				</navigator>
 			</view>
 		</view>
-		<view class="ph-menu">
+		<!-- <view class="ph-menu">
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action">
 					<text class="cuIcon-titles text-green1"></text> 校友分布
@@ -56,7 +55,8 @@
 			<view class="ph-menu-map">
 				<umap class="phm-map"></umap>
 			</view>
-		</view>
+		</view> -->
+		<alumnusDistribution></alumnusDistribution>
 	</view>
 </template>
 
@@ -67,11 +67,13 @@
 	import {
 		getNewsList
 	} from '@/api/news.js'
-	import umap from "./map/map.vue"
+	// import umap from "./map/map.vue"
+	import alumnusDistribution from '../alumnus/alumnusDistribution.vue'
 	import newsItem from "@/components/news-list/news-item.vue"
 	export default {
 		components: {
-			umap,
+			// umap,
+			alumnusDistribution,
 			newsItem
 		},
 		data() {
@@ -123,7 +125,7 @@
 					{
 						icon: 'http://www.imapway.cn/Alumni/static/home/dlqq2x.png',
 						txt: '点亮全球',
-						page: '/pages/home/address/address'
+						page: '/pages/anniversary/footprint/footprint'
 					},
 					{
 						id: 'xyjz',

@@ -45,6 +45,7 @@
 			return {
 				title:'校庆专题-点亮全球',
 				userId:'',
+				userLightUpId:'',
 				lightUpState: true,
 				showState: true,
 				alumnus:4308,
@@ -63,6 +64,17 @@
 		},
 		onLoad() {
 			let that = this;
+			this.userId = uni.getStorageSync('openid');
+			this.userLightUpId = uni.getStorageSync('userLightUpId');
+			if(this.userId !== this.userLightUpId){//点亮
+				this.lightUpState = true;
+				this.showState = true;
+				this.textBtn = '我要点亮';
+			}else{//更新
+				this.lightUpState = true;
+				this.showState = false;
+				this.textBtn = '更新位置';
+			}
 			uni.getLocation({
 				type: 'gcj02',
 				altitude: true,
@@ -73,6 +85,8 @@
 					that.longitude = res.longitude;
 					that.speed = res.speed;
 					that.accuracy = res.accuracy;
+					that.location = res.longitude+','+res.latitude;
+					that.getPositionListData();
 				}, //定位失败回调      
 				fail: function() {
 					uni.hideLoading();
@@ -83,8 +97,6 @@
 					uni.hideLoading()
 				}
 			})
-			this.getPositionListData()
-			// this.getMarkerDatas();
 		},
 		methods: {
 			getPositionListData(){
@@ -92,11 +104,11 @@
 					var [error, res] = data;
 					if (res && res.data.success) {
 						let datas = res.data.result;
+						this.starNums = datas.length;
 						datas.forEach(v => {
-							this.location = v.location;
 							let location = v.location.split(",");
 							this.markers.push({ //赋值数组
-								id: v.userId,
+								id: v.id,
 								latitude: location[1],
 								longitude: location[0],
 								iconPath: '../../../static/images/marker.png', //图标路径
@@ -104,50 +116,84 @@
 								height: 30
 							})
 						})
+						console.log('this.markers',this.markers);
 					}
 				});
 			},
-			lightUpStart(){
-				this.lightUpState = false;
-			},
 			lightUpOrUpdate(){
-				let that = this;
-				if(this.lightUpState){
-					this.userId = uni.getStorageSync('openid');
-					let userInfo = uni.getStorageSync('userInfo');
-					if(userInfo){
-						let param = {
-							userId: this.userId,
-							userName: userInfo.nickName,
-							userPhoto: userInfo.avatarUrl,
-							location: that.location
-						}
-						addLightUpPersonnel(param).then(data => {
-							var [error, res] = data;
-							if (res && res.data.success) {
-								let datas = res.data.result;
-								console.log('data',JSON.stringify(datas));
-								debugger
-								that.starNums = that.starNums+1;
-								that.textBtn = '更新位置';
-								that.lightUpState = false;
-								that.showState = false;
-								setTimeout(() => {
-									that.showState = true;
-								},2000)
-							}
-						});
-					} else {
-						//跳转页面 
-						 wx.navigateTo({
-						 	url:'pages/login/login'
-						 })
-					}
-				}else{
-					uni.showToast({
-					  title: '位置更新成功'
-					});
+				if(this.userId !== this.userLightUpId){//点亮
+					this.addLightUpPersonnel();
+				}else{//更新
+					this.lightUpState = true;
+					this.showState = false;
+					this.textBtn = '更新位置';
+					this.updatePersonnelPosition();
 				}
+			},
+			addLightUpPersonnel(){
+				let that = this;
+				let userInfo = uni.getStorageSync('userInfo');
+				if(userInfo){
+					let param = {
+						userId: that.userId,
+						userName: userInfo.nickName,
+						userPhoto: userInfo.avatarUrl,
+						location: that.location
+					}
+					addLightUpPersonnel(param).then(data => {
+						var [error, res] = data;
+						if (res && res.data.success) {
+							let datas = res.data.result;
+							console.log('点亮',JSON.stringify(datas));
+							let location = datas.location.split(",");
+							this.markers.push({ //赋值数组
+								id: datas.id,
+								latitude: location[1],
+								longitude: location[0],
+								iconPath: '../../../static/images/marker.png', //图标路径
+								width: 30,
+								height: 30
+							})
+							uni.setStorageSync('userLightUpId', res.data.result.userId);
+							that.starNums = that.starNums+1;
+							that.totalStars = that.starNums;
+							that.textBtn = '更新位置';
+							that.lightUpState = false;
+							that.showState = false;
+							setTimeout(() => {
+								that.showState = true;
+							},2000)
+						}
+					});
+				} else {
+					//跳转页面 
+					 wx.navigateTo({
+					 	url:'pages/login/login'
+					 })
+				}
+			},
+			updatePersonnelPosition(){
+				let that = this;
+				let param = {
+					userId: this.userId,
+					location: this.location,
+				}
+				updatePersonnelPosition(param).then(data => {
+					var [error, res] = data;
+					if (res && res.data.success) {
+						let datas = res.data.result;
+						let location = datas.location.split(",");
+						that.markers.forEach( v => {
+							if(v.id === datas.id){
+								v.latitude = location[1];
+								v.longitude = location[0];
+							}
+						})
+						uni.showToast({
+						  title: '位置更新成功'
+						});
+					}
+				});
 			}
 		}
 	}

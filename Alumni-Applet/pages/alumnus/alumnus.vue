@@ -54,21 +54,7 @@
             ></canvas>
           </view>
         </view>
-        <view class="qiun-columns">
-          <view class="qiun-bg-white qiun-title-bar qiun-common-mt">
-            <view class="qiun-title-dot-light"
-              ><text class="cuIcon-titles text-green1"></text>校友分布</view
-            >
-          </view>
-          <view class="qiun-charts">
-            <canvas
-              canvas-id="canvasDistribution"
-              id="canvasDistribution"
-              class="charts"
-              @touchstart="touchDistribution"
-            ></canvas>
-          </view>
-        </view>
+		<alumnusDistribution></alumnusDistribution>
         <view class="qiun-columns">
           <view class="qiun-bg-white qiun-title-bar qiun-common-mt">
             <view class="qiun-title-dot-light"
@@ -152,22 +138,23 @@
                         {{ item.member }}
                       </view>
                     </view>
+					<button
+					  class="alumnus-btn cu-btn round sm bg-orange"
+					  v-if="item.join == true"
+					>
+					  已加入
+					</button>
+					<button
+					  class="alumnus-btn cu-btn round sm bg-orange"
+					  v-else
+					  @click="addJoin(item)"
+					>
+					  加入
+					</button>
                   </view>
                 </view>
               </navigator>
-              <button
-                class="alumnus-btn cu-btn round sm bg-orange"
-                v-if="item.join == true"
-              >
-                已加入
-              </button>
-              <button
-                class="alumnus-btn cu-btn round sm bg-orange"
-                v-else
-                @click="addJoin(item)"
-              >
-                加入
-              </button>
+              
             </view>
           </view>
         </uni-list-item>
@@ -181,16 +168,16 @@
 <script>
 import { getAlumnusList, addAlumnusJoin } from "@/api/alumnus.js";
 import uCharts from "../../js_sdk/u-charts/u-charts.js";
-// import statistics from './statistics.vue'
+import alumnusDistribution from './alumnusDistribution.vue'
 var _self;
 var canvaColumn = null;
 var canvaTrack = null;
 var canvaEmployment = null;
-var canvaDistribution = null;
+// var canvaDistribution = null;
 
 export default {
   components: {
-    // statistics
+    alumnusDistribution
   },
   data() {
     return {
@@ -406,6 +393,7 @@ export default {
       // 	})s
     },
     getServerData() {
+		// _self.$refs.alumnusDistribution.getData();
       uni.request({
         //往期校友统计
         url: "https://www.imapway.cn/Alumni/alumniStatistics.json",
@@ -437,49 +425,6 @@ export default {
         success: function (res) {
           let employmentColumn = res.data.data;
           _self.showEmployment("canvasEmployment", employmentColumn);
-        },
-        fail: () => {
-          _self.tips = "网络错误，小程序端请检查合法域名";
-        },
-      });
-
-      uni.request({
-        //就业地图分布
-        url: "https://www.imapway.cn/Alumni/chinaArea.json",
-        data: {},
-        success: function (res) {
-          uni.request({
-            //就业地图分布
-            url: "https://www.imapway.cn/Alumni/mapDistribution.json",
-            data: {},
-            success: function (mapDistribution) {
-              let datas = mapDistribution.data.data.series;
-              let provinces = res.data.features;
-              let mapData = provinces.map(province => {
-                for (var i = 0; i < datas.length; i++) {
-                  if (datas[i].name === province.properties.name) {
-                    if (datas[i].data >= 100) {
-                      province.color = "#ff0000";
-                    } else if (datas[i].data >= 50) {
-                      province.color = "#ce8900";
-                    } else if (datas[i].data >= 20) {
-                      province.color = "#ffe26b";
-                    } else if (datas[i].data >= 0) {
-                      province.color = "#bdd9d8";
-                    } else {
-                      province.color = "#d3d9d9";
-                    }
-                    return { ...province, ...datas[i] };
-                  }
-                }
-                return province;
-              });
-              let mapColumn = {
-                series: mapData,
-              };
-              _self.showDistribution("canvasDistribution", mapColumn);
-            },
-          });
         },
         fail: () => {
           _self.tips = "网络错误，小程序端请检查合法域名";
@@ -573,31 +518,6 @@ export default {
         },
       });
     },
-    showDistribution(canvasId, chartData) {
-      canvaDistribution = new uCharts({
-        $this: _self,
-        canvasId: canvasId,
-        type: "map",
-        fontSize: 11,
-        padding: [0, 0, 0, 0],
-        legend: {
-          show: false,
-        },
-        background: "#FFFFFF",
-        pixelRatio: _self.pixelRatio,
-        series: chartData.series,
-        width: _self.cWidth * _self.pixelRatio,
-        height: _self.cHeight * _self.pixelRatio,
-        extra: {
-          map: {
-            border: true,
-            borderWidth: 1,
-            borderColor: "#666666",
-            fillOpacity: 0.6,
-          },
-        },
-      });
-    },
     touchColumn(e) {
       canvaColumn.showToolTip(e, {
         format: function (item, category) {
@@ -622,14 +542,7 @@ export default {
           return item.name + ":" + item.data;
         },
       });
-    },
-    touchDistribution(e) {
-      canvaDistribution.showToolTip(e, {
-        format: function (item) {
-          return `${item.properties.name}: ${item.data}`;
-        },
-      });
-    },
+    }
   },
 };
 </script>
