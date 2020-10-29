@@ -142,6 +142,52 @@
 			}).exec()
 		},
 		methods: {
+			payHandler(item) {
+				if (item.attention == 0||!item.attention) {
+					this.addMemberAttention(item);
+				} else {
+					this.deleteMemberAttention(item);
+				}
+			
+			},
+			addMemberAttention(item) {
+				let openid = uni.getStorageSync('openid');
+				if (openid&&openid!="") {
+					let param = {
+						userId: openid,
+						memberId: item.id
+					};
+					addMemberAttention(param).then(data => {
+						var [error, res] = data;
+						if (res && res.data.success) {
+							item.attention = 1;
+							// this.content = res.data.result;
+						}
+					});
+				} else {
+					getApp().getUserInfo();
+				}
+			
+			},
+			deleteMemberAttention(item) {
+				let openid = uni.getStorageSync('openid');
+				if (openid) {
+					let param = {
+						userId: openid,
+						memberId: item.id
+					};
+					deleteMemberAttention(param).then(data => {
+						var [error, res] = data;
+						if (res && res.data.success) {
+							item.attention = 0;
+							// this.content = res.data.result;
+						}
+					});
+				} else {
+					this.getApp().getUserInfo();
+				}
+			
+			},
 			//获取文字信息
 			getCur(e) {
 				this.hidden = false;
@@ -190,7 +236,7 @@
 	}
 </script>
 
-<style >
+<style lang="scss" scoped>
 	page {
 		padding-top: 100upx;
 	}

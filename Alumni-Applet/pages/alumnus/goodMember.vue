@@ -25,6 +25,7 @@
 		<scroll-view scroll-y class="indexes" :scroll-into-view="'indexes-'+ listCurID" :style="[{height:'calc(100vh - '+ CustomBar + 'px - 50px)'}]"
 		 :scroll-with-animation="true" :enable-back-to-top="true">
 			<block v-for="(item,index) in lists" :key="index">
+				<navigator :url="'/pages/alumnus/goodMemberDetails?id='+item.id">
 				<view :class="'indexItem-' + item.name" :id="'indexes-' + item.name" :data-index="item.name">
 					<view class="cu-list menu-avatar no-padding">
 						<view class="cu-item">
@@ -35,13 +36,14 @@
 								</view>
 							</view>
 							<view class="margin-tb-sm text-center mem-attention">
-								<button @click="payHandler(item)" v-if="item.attention&&item.attention==1" class="cu-btn round bg-yellow">已关注</button>
-								<button @click="payHandler(item)" v-else class="cu-btn round bg-gradual-green1">关注</button>
+								<text class="lg text-gray cuIcon-right" ></text>
+								<!-- <button @click="payHandler(item)" v-if="item.attention&&item.attention==1" class="cu-btn round bg-yellow">已关注</button>
+								<button @click="payHandler(item)" v-else class="cu-btn round bg-gradual-green1">关注</button> -->
 
 							</view>
 						</view>
 					</view>
-				</view>
+				</view></navigator>
 			</block>
 		</scroll-view>
 	</view>
@@ -49,9 +51,7 @@
 
 <script>
 	import {
-		getMemberList,
-		addMemberAttention,
-		deleteMemberAttention
+		getMemberList
 	} from '@/api/member.js'
 	export default {
 		data() {
@@ -75,52 +75,7 @@
 
 		},
 		methods: {
-			payHandler(item) {
-				if (item.attention == 0||!item.attention) {
-					this.addMemberAttention(item);
-				} else {
-					this.deleteMemberAttention(item);
-				}
-
-			},
-			addMemberAttention(item) {
-				let openid = uni.getStorageSync('openid');
-				if (openid&&openid!="") {
-					let param = {
-						userId: openid,
-						memberId: item.id
-					};
-					addMemberAttention(param).then(data => {
-						var [error, res] = data;
-						if (res && res.data.success) {
-							item.attention = 1;
-							// this.content = res.data.result;
-						}
-					});
-				} else {
-					getApp().getUserInfo();
-				}
-
-			},
-			deleteMemberAttention(item) {
-				let openid = uni.getStorageSync('openid');
-				if (openid) {
-					let param = {
-						userId: openid,
-						memberId: item.id
-					};
-					deleteMemberAttention(param).then(data => {
-						var [error, res] = data;
-						if (res && res.data.success) {
-							item.attention = 0;
-							// this.content = res.data.result;
-						}
-					});
-				} else {
-					this.getApp().getUserInfo();
-				}
-
-			},
+			
 			/**
 			 * 获取页面数据
 			 * @param {Object} reload 参数reload值为true时执行列表初始化逻辑，值为false时执行追加下一页数据的逻辑。默认为false
@@ -136,7 +91,7 @@
 					var [error, res] = data;
 					if (res && res.data.success) {
 						const tempList = res.data.result.content;
-						that.totalSize=res.data.result.total;
+						that.totalSize=res.data.result.totalElements;
 						// this.lists = res.data.result.content;
 						// 判断是否可翻页
 						if (tempList.length === this.pageSize) {
@@ -213,7 +168,7 @@
 	}
 </script>
 
-<style>
+<style lang="scss" scoped>
 	page {
 		/* padding-top: 100upx; */
 	}
