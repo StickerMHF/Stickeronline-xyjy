@@ -57,6 +57,8 @@ const api = {
 	 * 组织
 	 */
 	getAlumnusList: baseurl+'/stickeronline/alumnus/list',
+	//加入组织
+	addAlumnusJoin: baseurl+'/stickeronline/alumnusJoin/add',
 	//资讯
 	getAlumnusNewsList: baseurl+'/stickeronline/alumnusNews/list',
 	//资讯详情

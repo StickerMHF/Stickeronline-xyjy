@@ -2,6 +2,7 @@ package com.tb.service.cdxyh.service.impl;
 
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
+import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BAlumnusActivityEntity;
 import com.tb.service.cdxyh.repository.BAlumnusActivityRepository;
@@ -33,16 +34,22 @@ public class BAlumnusActivityServiceImpl implements BAlumnusActivityService, Bas
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
-        BAlumnusActivityEntity bAlumnusActivityEntity = new BAlumnusActivityEntity();
+        BAlumnusActivityEntity bAlumnusActivityEntity = new BAlumnusActivityEntity(params);
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
+        String fid = params.getString("fid");
+        if (oConvertUtils.isNotEmpty(fid) && !fid.equals("")) {
+            exampleMatcher.withMatcher("fid", ExampleMatcher.GenericPropertyMatchers.contains());
+            //创建实例
+            Example<BAlumnusActivityEntity> ex = Example.of(bAlumnusActivityEntity, exampleMatcher);
 
-        //创建实例
-        Example<BAlumnusActivityEntity> ex = Example.of(bAlumnusActivityEntity, exampleMatcher);
+            Page<BAlumnusActivityEntity> plist = bAlumnusActivityRepository.findAll(ex,pageable);
 
-        Page<BAlumnusActivityEntity> plist = bAlumnusActivityRepository.findAll(ex,pageable);
-        future.complete(new JsonObject(Json.encode(plist)));
+            future.complete(new JsonObject(Json.encode(plist)));
+        } else {
+            future.complete(new JsonObject());
+        }
         handler.handle(future);
     }
 
