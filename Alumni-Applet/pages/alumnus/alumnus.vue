@@ -191,7 +191,6 @@
 				}
 			},
 			addJoin(alumnu){
-				debugger
 				let params = {
 					alumnusId: alumnu.id,
 					userId: '',

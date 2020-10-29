@@ -129,7 +129,6 @@
 							if (ss != null) {
 								that.form=ss;
 							} else {
-								debugger
 							}
 						}
 					});
@@ -172,7 +171,6 @@
 				}
 				addCooperation(params).then(data => {
 					var [error, res] = data;
-					debugger
 					if (res && res.data && res.data.success) {
 						uni.redirectTo({
 							url: '/pages/cooperation/cooperation'
@@ -185,9 +183,6 @@
 					}
 					this.lists = res.data.data;
 				})
-				debugger
-
-
 			}
 		}
 	}

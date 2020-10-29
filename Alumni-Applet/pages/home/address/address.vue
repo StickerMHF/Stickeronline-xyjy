@@ -25,7 +25,7 @@
 								<navigator url="">
 								<view class="text-grey">{{items.name}}<text class="text-abc">{{items.name}}</text></view>
 								<view class="text-gray text-sm">
-									{{items.email}}
+									{{items.email||''}}
 								</view>
 							</navigator>
 							</view>
@@ -129,7 +129,6 @@
 				}]
 			}];
 			this.list = list;
-			debugger
 			this.listCur = list[0];
 		},
 		onReady() {
@@ -245,6 +244,7 @@
 }
 	.indexes {
 		position: relative;
+		top: 60px;
 	}
 
 	.indexBar {

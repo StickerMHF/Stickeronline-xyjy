@@ -228,7 +228,6 @@
 					this.commentParams.userName = userInfo.nickName;
 					this.commentParams.userPhoto = userInfo.avatarUrl;
 					this.commentShow = true;
-					// debugger
 					// this.$refs.commentdom.focus();
 				} else {
 					//跳转页面 

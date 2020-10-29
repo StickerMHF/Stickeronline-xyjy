@@ -67,7 +67,6 @@
 		},
 		methods: {
 			payHandler(item) {
-				debugger
 				if (item.attention == 0) {
 					item.attention = 1;
 				} else {
