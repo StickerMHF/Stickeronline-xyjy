@@ -124,4 +124,62 @@ public class BWechatUsersHandler {
             });
         };
     }
+
+    @RouteMapping(value = "/queryAllByUserId", method = RouteMethod.GET, order = 1)
+    @ApiOperation(value = "查询所有校友列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> queryAllByUserId() {
+        return ctx -> {
+            bWechatUsersAsyncService.queryAllByUserId(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
+    @RouteMapping(value = "/queryFansListByUserId", method = RouteMethod.GET, order = 1)
+    @ApiOperation(value = "查询关注我的校友列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> queryFansListByUserId() {
+        return ctx -> {
+            bWechatUsersAsyncService.queryFansListByUserId(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
+    @RouteMapping(value = "/queryAttentionListByUserId", method = RouteMethod.GET, order = 1)
+    @ApiOperation(value = "查询我关注的校友列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> queryAttentionListByUserId() {
+        return ctx -> {
+            bWechatUsersAsyncService.queryAttentionListByUserId(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
 }

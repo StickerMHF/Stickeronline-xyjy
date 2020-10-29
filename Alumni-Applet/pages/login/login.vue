@@ -72,7 +72,7 @@
 	page{
 		width: 100% !important;
 		height: 100% !important;
-		background-color: red;
+		background-color: #00BEB7;
 	}
 	.whole_login{
 		width: 100%;

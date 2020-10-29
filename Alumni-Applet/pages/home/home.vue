@@ -123,7 +123,7 @@
 					{
 						icon: 'http://www.imapway.cn/Alumni/static/home/dlqq2x.png',
 						txt: '点亮全球',
-						page: '/pages/anniversary/footprint/footprint'
+						page: '/pages/home/address/address'
 					},
 					{
 						id: 'xyjz',

@@ -4,17 +4,21 @@
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
-		<view class="ann_news_content" style="background-image: url(http://www.imapway.cn/Alumni/static/anniversary/xqtx.png);">
-			
+		<view class="ann_news_content">
+			<wechatAvatar :imgList="sources"></wechatAvatar>
 		</view>
 	</view>
 </template>
 
 <script>
+	import wechatAvatar from "@/components/wechat-avatar/wechat-avatar.vue";
 	export default {
+		components:{
+			wechatAvatar
+		},
 		data() {
 			return {
-				
+				sources:["../../static/anniversary/head0.png","../../static/anniversary/head1.png","../../static/anniversary/head2.png","../../static/anniversary/head3.png","../../static/anniversary/head0.png","../../static/anniversary/head1.png"]
 			}
 		},
 		methods: {

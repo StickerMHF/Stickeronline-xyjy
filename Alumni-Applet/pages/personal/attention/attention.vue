@@ -4,14 +4,14 @@
 			<block slot="backText">返回</block>
 			<block slot="content">我的关注</block>
 		</cu-custom>
-		<view class="gmember-title cu-bar bg-white solid-bottom">
+		<!-- <view class="gmember-title cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-titles text-green1"></text> 我关注的
 				<span class="gmember-count">
 					<text>共263人</text>
 				</span>
 			</view>
-		</view>
+		</view> -->
 		<scroll-view scroll-y class="indexes" :scroll-into-view="'indexes-'+ listCurID" :style="[{height:'calc(100vh - '+ CustomBar + 'px - 50px)'}]"
 		 :scroll-with-animation="true" :enable-back-to-top="true">
 			<block v-for="(item,index) in lists" :key="index">
@@ -39,8 +39,8 @@
 
 <script>
 	import {
-		getMemberList
-	} from '@/api/member.js'
+		queryAttentionListByUserId
+	} from '@/api/user.js'
 	export default {
 		data() {
 			return {
@@ -58,7 +58,7 @@
 			};
 		},
 		onLoad() {
-			this.getMemberList();
+			this.queryAttentionListByUserId(true);
 			// this.list = list;
 		},
 		onReady() {
@@ -66,53 +66,62 @@
 
 		},
 		methods: {
-			payHandler(item){
+			payHandler(item) {
 				debugger
-				if(item.attention==0){
-					item.attention=1;
-				}else{
-					item.attention=0;
+				if (item.attention == 0) {
+					item.attention = 1;
+				} else {
+					item.attention = 0;
 				}
-				
+
 			},
 			/**
 			 * 获取页面数据
 			 * @param {Object} reload 参数reload值为true时执行列表初始化逻辑，值为false时执行追加下一页数据的逻辑。默认为false
 			 */
-			getMemberList(reload) {
+			queryAttentionListByUserId(reload) {
 				let that = this;
 				this.status = 'loading'
-				getMemberList().then(data => {
-					var [error, res] = data;
-					if (res && res.data.success) {
-						const tempList = res.data.result.content;
-						// this.lists = res.data.result.content;
-						// 判断是否可翻页
-						if (tempList.length === this.pageSize) {
-							this.status = 'more'
-						} else {
-							this.status = 'noMore'
+				let openid = uni.getStorageSync('openid');
+				if (openid && openid != "") {
+					let param = {
+						openid: openid
+					};
+					queryAttentionListByUserId(param).then(data => {
+						var [error, res] = data;
+						if (res && res.data.success) {
+							const tempList = res.data.result.content;
+							// this.lists = res.data.result.content;
+							// 判断是否可翻页
+							if (tempList.length === this.pageSize) {
+								this.status = 'more'
+							} else {
+								this.status = 'noMore'
+							}
+					
+							if (reload) {
+								// 处理下拉加载提示框
+								this.tipShow = true;
+								clearTimeout(this.timer);
+								this.timer = setTimeout(() => {
+									this.tipShow = false;
+								}, 2000);
+								that.lists = tempList
+								// 停止刷新
+								uni.stopPullDownRefresh()
+							} else {
+								// 上拉加载后合并数据
+								that.lists = that.lists.concat(tempList)
+							}
+							if (tempList.length) {
+								this.current++
+							}
 						}
-
-						if (reload) {
-							// 处理下拉加载提示框
-							this.tipShow = true;
-							clearTimeout(this.timer);
-							this.timer = setTimeout(() => {
-								this.tipShow = false;
-							}, 2000);
-							that.lists = tempList
-							// 停止刷新
-							uni.stopPullDownRefresh()
-						} else {
-							// 上拉加载后合并数据
-							that.lists = that.lists.concat(tempList)
-						}
-						if (tempList.length) {
-							this.current++
-						}
-					}
-				})
+					})
+				} else {
+					getApp().getUserInfo();
+				}
+				
 
 			},
 			//获取文字信息
@@ -164,7 +173,6 @@
 </script>
 
 <style>
-	
 	.indexes {
 		position: relative;
 	}
@@ -233,8 +241,7 @@
 		font-size: 48upx;
 	}
 
-	.gmember-title {
-	}
+	.gmember-title {}
 
 	.gmember-count {
 		position: absolute;

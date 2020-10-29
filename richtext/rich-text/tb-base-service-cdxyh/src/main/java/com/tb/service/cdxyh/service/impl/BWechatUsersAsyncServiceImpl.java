@@ -4,6 +4,7 @@ import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
 import com.sticker.online.core.utils.TimeUtil;
 import com.tb.base.common.vo.PageVo;
+import com.tb.service.cdxyh.entity.BMemberEntity;
 import com.tb.service.cdxyh.entity.BWechatUsersEntity;
 import com.tb.service.cdxyh.repository.BWechatUsersRepository;
 import com.tb.service.cdxyh.service.BWechatUsersAsyncService;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Component
@@ -97,6 +99,68 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
         }else{
             future.complete(null);
         }
+        handler.handle(future);
+    }
+
+    @Override
+    public void queryAllByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
+        BWechatUsersEntity bWechatUsersEntity = new BWechatUsersEntity(params);
+        String userId=params.getString("userId");
+        if(userId!=null){
+        Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+        List<Map<String,Object>> res = bWechatUsersRepository.findAllListByUserId(userId,pageVo.getPageSize(),offset);
+        Long zoom=bWechatUsersRepository.count();
+        JsonArray array=new JsonArray(res);
+        future.complete(new JsonObject().put("content",array).put("total",zoom));
+        }else{
+            future.complete(new JsonObject().put("content",new JsonArray()).put("total",0));
+        }
+        handler.handle(future);
+    }
+
+    @Override
+    public void queryFansListByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
+        BWechatUsersEntity bWechatUsersEntity = new BWechatUsersEntity(params);
+        String userId=params.getString("userId");
+        if(userId!=null){
+            Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+            List<BWechatUsersEntity> res = bWechatUsersRepository.queryFansListByUserId(userId,pageVo.getPageSize(),offset);
+//        Long zoom=bWechatUsersRepository.count();
+            JsonArray array=new JsonArray();
+            res.forEach(item->{
+                array.add(item.toJson());
+            });
+            future.complete(new JsonObject().put("content",array).put("total",0));
+        }else{
+            future.complete(new JsonObject().put("content",new JsonArray()).put("total",0));
+        }
+
+        handler.handle(future);
+    }
+
+    @Override
+    public void queryAttentionListByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
+        BWechatUsersEntity bWechatUsersEntity = new BWechatUsersEntity(params);
+        String userId=params.getString("userId");
+        if(userId!=null){
+            Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+            List<BWechatUsersEntity> res = bWechatUsersRepository.queryAttentionListByUserId(userId,pageVo.getPageSize(),offset);
+//        Long zoom=bWechatUsersRepository.count();
+            JsonArray array=new JsonArray();
+            res.forEach(item->{
+                array.add(item.toJson());
+            });
+            future.complete(new JsonObject().put("content",array).put("total",0));
+        }else{
+            future.complete(new JsonObject().put("content",new JsonArray()).put("total",0));
+        }
+
         handler.handle(future);
     }
 }

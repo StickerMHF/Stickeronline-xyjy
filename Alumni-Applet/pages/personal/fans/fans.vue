@@ -4,14 +4,14 @@
 			<block slot="backText">返回</block>
 			<block slot="content">我的粉丝</block>
 		</cu-custom>
-		<view class="gmember-title cu-bar bg-white solid-bottom">
+		<!-- <view class="gmember-title cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-titles text-green1"></text> 关注我的
 				<span class="gmember-count">
 					<text>共263人</text>
 				</span>
 			</view>
-		</view>
+		</view> -->
 		<scroll-view scroll-y class="indexes" :scroll-into-view="'indexes-'+ listCurID" :style="[{height:'calc(100vh - '+ CustomBar + 'px - 50px)'}]"
 		 :scroll-with-animation="true" :enable-back-to-top="true">
 			<block v-for="(item,index) in lists" :key="index">
@@ -39,8 +39,8 @@
 
 <script>
 	import {
-		getMemberList
-	} from '@/api/member.js'
+		queryFansListByUserId
+	} from '@/api/user.js'
 	export default {
 		data() {
 			return {
@@ -58,7 +58,7 @@
 			};
 		},
 		onLoad() {
-			this.getMemberList();
+			this.getMemberList(true);
 			// this.list = list;
 		},
 		onReady() {
@@ -82,7 +82,12 @@
 			getMemberList(reload) {
 				let that = this;
 				this.status = 'loading'
-				getMemberList().then(data => {
+				let openid = uni.getStorageSync('openid');
+				if (openid && openid != "") {
+					let param = {
+						openid: openid
+					};
+				queryFansListByUserId(param).then(data => {
 					var [error, res] = data;
 					if (res && res.data.success) {
 						const tempList = res.data.result.content;
@@ -113,6 +118,9 @@
 						}
 					}
 				})
+				} else {
+					getApp().getUserInfo();
+				}
 
 			},
 			//获取文字信息
