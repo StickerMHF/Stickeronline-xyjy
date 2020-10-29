@@ -4,6 +4,8 @@
 		getUserOpenid
 	} from '@/api/user.js'
 	import {dateUtil} from '@/utils/dateUtil.js'
+	// var QQMapWX = require('./js_sdk/qqmap-wx-jssdk.js')
+	// var qqmapsdk
 	export default {
 		data() {
 			return {
@@ -125,8 +127,14 @@
 			this.getUserInfo();
 			// this.wxGetUserInfo();
 		},
+		// onLoad: function() {
+		// 	// 实例化API核心类
+		// 	qqmapsdk = new QQMapWX({
+		// 		key: '5DVBZ-R4D6U-HRIVT-2473O-WXKTE-KFFAE'
+		// 	});
+		// },
 		onShow: function() {
-			console.log('App Show')
+			console.log('App Show');
 		},
 		onHide: function() {
 			console.log('App Hide')

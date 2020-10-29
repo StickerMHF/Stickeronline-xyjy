@@ -1,5 +1,5 @@
-const baseurl='https://www.imapway.cn/alumniapi'
-// const baseurl='http://localhost:8084'
+// const baseurl='https://www.imapway.cn/alumniapi'
+const baseurl='http://192.168.0.160:8084'
 const api = {
 	test:baseurl+'/stickeronline/rich/text/list',
 	getUserOpenid:baseurl+'/tb/wechat/getAppletUserInfo',
@@ -52,7 +52,12 @@ const api = {
 	addCooperation: baseurl+'/stickeronline/cooperation/add',
 	updateCooperation: baseurl+'/stickeronline/cooperation/edit',
 	deleteCooperation: baseurl+'/stickeronline/cooperation/delete',
-	
+	/**
+	 * 点亮全球
+	 */
+	addLightUpPersonnel: baseurl+'/stickeronline/signin/add',
+	getPositionList: baseurl+'/stickeronline/signin/queryAll',
+	updatePersonnelPosition: baseurl+'/stickeronline/signin/edit',
 	/**
 	 * 组织
 	 */

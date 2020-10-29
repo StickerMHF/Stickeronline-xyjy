@@ -4,15 +4,63 @@
 		<cu-custom bgColor="bg-gradual-green1" :isBack="false"><block slot="content">校友</block></cu-custom>
 		<view >
 			<scroll-view scroll-x class="bg-white nav text-center" scroll-with-animation>
-				<view class="cu-item" :class="item.id==tabCur?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect"
-				
-				 :data-id="item.id">
-					{{item.name}}
-				</view>
+				<view class="cu-item" :class="item.id==tabCur?'text-green cur':''" v-for="item in tabList" :key="item.id" @tap="tabSelect" :data-id="item.id">{{item.name}}</view>
 			</scroll-view>
 		</view>
 		<view v-if="tabCur==5" >
-			<web-view class="webviewStyles" src="https://www.imapway.cn/Alumni/echarts/test.html"></web-view>
+			<!-- <statistics></statistics> -->
+			<view class="statisticsView">
+				<view class="flex-box">
+					<view class="alumnusNums">
+						<text class="cuIcon-people myIcon"></text>
+						<view class="numsBox">
+							<text>校友总数</text>
+							<text>{{peopleNums}}个</text>
+						</view>
+						
+					</view>
+					<view class="alumnusNums">
+						<text class="cuIcon-taoxiaopu myIcon"></text>
+						<view class="numsBox">
+							<text>校友会</text>
+							<text>{{groupNums}}个</text>
+						</view>
+					</view>
+				</view>
+				<view class="qiun-columns">
+					<view class="qiun-bg-white qiun-title-bar qiun-common-mt" >
+						<view class="qiun-title-dot-light"><text class="cuIcon-titles text-green1"></text>各级校友统计</view>
+					</view>
+					<view class="qiun-charts" >
+						<canvas canvas-id="canvasColumn" id="canvasColumn" class="charts" @touchstart="touchColumn"></canvas>
+					</view>
+				</view>
+				<view class="qiun-columns">
+					<view class="qiun-bg-white qiun-title-bar qiun-common-mt" >
+						<view class="qiun-title-dot-light"><text class="cuIcon-titles text-green1"></text>校友分布</view>
+					</view>
+					<view class="qiun-charts" >
+						<canvas canvas-id="canvasDistribution" id="canvasDistribution" class="charts" @touchstart="touchDistribution"></canvas>
+					</view>
+				</view>
+				<view class="qiun-columns">
+					<view class="qiun-bg-white qiun-title-bar qiun-common-mt" >
+						<view class="qiun-title-dot-light"><text class="cuIcon-titles text-green1"></text>就业率统计</view>
+					</view>
+					<view class="qiun-charts" >
+						<canvas canvas-id="canvasTrack" id="canvasTrack" class="charts" @touchstart="touchTrack"></canvas>
+					</view>
+				</view>
+				<view class="qiun-columns">
+					<view class="qiun-bg-white qiun-title-bar qiun-common-mt" >
+						<view class="qiun-title-dot-light"><text class="cuIcon-titles text-green1"></text>就业人数统计</view>
+					</view>
+					<view class="qiun-charts" >
+						<canvas canvas-id="canvasEmployment" id="canvasEmployment" class="charts" @touchstart="touchEmployment"></canvas>
+					</view>
+				</view>
+			</view>
+			<!-- <web-view class="webviewStyles" src="https://www.imapway.cn/Alumni/echarts/test.html"></web-view> -->
 		</view>
 		<view v-else class="">
 			<!-- 刷新页面后的顶部提示框 -->
@@ -69,13 +117,34 @@
 
 <script>
 	import {getAlumnusList} from '@/api/alumnus.js'
+	import uCharts from '../../js_sdk/u-charts/u-charts.js';
+	// import statistics from './statistics.vue'
+	var _self;
+	var canvaColumn=null;
+	var canvaTrack=null;
+	var canvaEmployment=null;
+	var canvaDistribution=null;
+	
 	export default {
-		components: {},
+		components: {
+			// statistics
+		},
 		data() {
 			return {
-				tabCur:'all',
+				cWidth:'',
+				cHeight:'',
+				pixelRatio:1,
+				serverData:'',
+				peopleNums:7534,
+				groupNums:23,
+				tabCur:5,
 				current: 0,
-				tabList: [{
+				tabList: [
+				{
+					id: 5,
+					name: '校友统计'
+				},
+				{
 					id: 'all',
 					name: '全部'
 				}, {
@@ -121,6 +190,10 @@
 			// 	type: ''
 			// }
 			this.getAlumnusList(this.params);
+			_self = this;
+			this.cWidth=uni.upx2px(750);
+			this.cHeight=uni.upx2px(500);
+			this.getServerData();
 		},
 		methods: {
 			getAlumnusList(params){
@@ -145,6 +218,13 @@
 				this.params.type = e.currentTarget.dataset.id;
 				this.params.pageNo = 1;
 				this.getAlumnusList(this.params);
+				
+				if(e.currentTarget.dataset.id == 5){
+					_self = this;
+					this.cWidth=uni.upx2px(750);
+					this.cHeight=uni.upx2px(500);
+					this.getServerData();
+				}
 			},
 			/**
 			 * 切换商品列表布局方向
@@ -220,7 +300,230 @@
 				// 			showCancel: false
 				// 		})
 				// 	})s
-			}
+			},
+			getServerData(){
+				uni.request({//往期校友统计
+					url: 'https://www.imapway.cn/Alumni/alumniStatistics.json',
+					data:{},
+					success: function(res) {
+						let Column = res.data.data;
+						_self.showColumn("canvasColumn",Column);
+					},
+					fail: () => {
+						_self.tips="网络错误，小程序端请检查合法域名";
+					},
+				});
+				uni.request({//毕业率统计
+					url: 'https://www.imapway.cn/Alumni/employmentMode.json',
+					data:{},
+					success: function(res) {
+						let pieColumn = res.data.data;
+						_self.showTrack("canvasTrack",pieColumn);
+					},
+					fail: () => {
+						_self.tips="网络错误，小程序端请检查合法域名";
+					},
+				});
+				uni.request({//就业人数统计
+					url: 'https://www.imapway.cn/Alumni/employmentRate.json',
+					data:{},
+					success: function(res) {
+						let employmentColumn = res.data.data;
+						_self.showEmployment("canvasEmployment",employmentColumn);
+					},
+					fail: () => {
+						_self.tips="网络错误，小程序端请检查合法域名";
+					},
+				});
+				
+				uni.request({//就业地图分布
+					url: 'https://www.imapway.cn/Alumni/chinaArea.json',
+					data:{
+					},
+					success: function(res) {
+						uni.request({//就业地图分布
+							url: 'https://www.imapway.cn/Alumni/mapDistribution.json',
+							data:{
+							},
+							success: function(mapDistribution) {
+								let datas = mapDistribution.data.data.series;
+								let provinces = res.data.features;
+								let mapData = provinces.map(province=>{
+										for (var i = 0; i < datas.length; i++) {
+										  if(datas[i].name === province.properties.name){
+											  if(datas[i].data >= 100){
+												province.color = "#ff0000"
+											  }else if(datas[i].data >= 50){
+												province.color = "#ce8900"
+											  }else if(datas[i].data >= 20){
+												province.color = "#ffe26b"
+											  }else if(datas[i].data >= 0){
+												province.color = "#bdd9d8"
+											  }else{
+												province.color = "#d3d9d9"
+											  }
+											return {...province,...datas[i]}
+										  }
+										}
+										return province;
+									})
+									let mapColumn = {
+										series: mapData
+									}
+								_self.showDistribution("canvasDistribution",mapColumn);
+							}
+						})
+						
+					},
+					fail: () => {
+						_self.tips="网络错误，小程序端请检查合法域名";
+					},
+				});
+				
+			},
+			showColumn(canvasId,chartData){
+				canvaColumn=new uCharts({
+					$this:_self,
+					canvasId: canvasId,
+					type: 'column',
+					legend:{show:false},
+					fontSize:11,
+					background:'#FFFFFF',
+					pixelRatio:_self.pixelRatio,
+					animation: true,
+					categories: chartData.categories,
+					series: chartData.series,
+					xAxis: {
+						disableGrid:true,
+					},
+					yAxis: {
+						data:{
+							calibration:false,
+							axisLine:true
+						}
+					},
+					dataLabel: true,
+					width: _self.cWidth*_self.pixelRatio,
+					height: _self.cHeight*_self.pixelRatio,
+					extra: {
+						column: {
+							type:'group',
+							width: _self.cWidth*_self.pixelRatio*0.45/chartData.categories.length
+						}
+					  }
+				});
+				
+			},
+			showTrack(canvasId,chartData){
+				canvaTrack=new uCharts({
+					$this:_self,
+					canvasId: canvasId,
+					type: 'pie',
+					fontSize:11,
+					legend:{show:false},
+					background:'#FFFFFF',
+					pixelRatio:_self.pixelRatio,
+					series: chartData.series,
+					animation: true,
+					width: _self.cWidth*_self.pixelRatio,
+					height: _self.cHeight*_self.pixelRatio,
+					dataLabel: true,
+					extra: {
+						pie: {
+						  lableWidth:15
+						}
+					},
+				});
+			},
+			showEmployment(canvasId,chartData){
+				canvaEmployment = new uCharts({
+					$this:_self,
+					canvasId: canvasId,
+					type: 'column',
+					legend:{show:false},
+					fontSize:11,
+					background:'#FFFFFF',
+					pixelRatio:_self.pixelRatio,
+					animation: true,
+					categories: chartData.categories,
+					series: chartData.series,
+					xAxis: {
+						disableGrid:true,
+					},
+					yAxis: {
+						data:{
+							calibration:false,
+							axisLine:true
+						}
+					},
+					dataLabel: true,
+					width: _self.cWidth*_self.pixelRatio,
+					height: _self.cHeight*_self.pixelRatio,
+					extra: {
+						column: {
+							type:'group',
+							width: 40
+						}
+					  }
+				});
+			},
+			showDistribution(canvasId,chartData){
+				canvaDistribution=new uCharts({
+					$this:_self,
+					canvasId: canvasId,
+					type: 'map',
+					fontSize:11,
+					padding:[0,0,0,0],
+					legend:{
+						show:false
+					},
+					background:'#FFFFFF',
+					pixelRatio:_self.pixelRatio,
+					series: chartData.series,
+					width: _self.cWidth*_self.pixelRatio,
+					height: _self.cHeight*_self.pixelRatio,
+					extra: {
+						map: {
+							border:true,
+							borderWidth:1,
+							borderColor:'#666666',
+							fillOpacity:0.6
+						},
+					}
+				});
+			},
+			touchColumn(e){
+				canvaColumn.showToolTip(e, {
+					format: function (item, category) {
+						if(typeof item.data === 'object'){
+							return category + ' ' + item.name + ':' + item.data.value 
+						}else{
+							return category + ' ' + item.name + ':' + item.data 
+						}
+					}
+				});
+			},
+			touchTrack(e){
+				canvaTrack.showToolTip(e, {
+					format: function (item) {
+						return item.name + ':' + item.data 
+					}
+				});
+			},
+			touchEmployment(e){
+				canvaEmployment.showToolTip(e, {
+					format: function (item) {
+						return item.name + ':' + item.data 
+					}
+				});
+			},
+			touchDistribution(e){
+				canvaDistribution.showToolTip(e, {
+				  format: function (item) {
+					return `${item.properties.name}: ${item.data}`
+				  }
+				});
+			},
 		}
 	};
 </script>
@@ -384,4 +687,44 @@
 		bottom: 0px;
 		top: 90px;
 	}
+	
+	.statisticsView{
+		background: #fff;
+	}
+	.flex-box{
+		display: flex;
+		justify-content: space-around;
+		padding: 20rpx 0;
+	}
+	.alumnusNums{
+		width:300rpx;
+		height:150rpx;
+		border: 1px solid #E9E9E9;
+		border-radius:4px;
+		display: flex;
+		padding:0 40rpx;
+		justify-content: space-between;
+		align-items: center;
+		.myIcon{
+			font-size: 30px;
+		}
+	}
+	.numsBox{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	
+	
+	page{background:#F2F2F2;width: 750upx;overflow-x: hidden;}
+	.qiun-padding{padding:2%; width:96%;}
+	.qiun-wrap{display:flex; flex-wrap:wrap;}
+	.qiun-rows{display:flex; flex-direction:row !important;}
+	.qiun-columns{display:flex; flex-direction:column !important;}
+	.qiun-common-mt{margin-top:10upx;}
+	.qiun-bg-white{background:#FFFFFF;}
+	.qiun-title-bar{width:96%; padding:10upx 2%; flex-wrap:nowrap;}
+	.qiun-title-dot-light{ padding-left: 10upx; font-size: 32upx;color: #000000}
+	.qiun-charts{width: 750upx; height:500upx;background-color: #FFFFFF;}
+	.charts{width: 750upx; height:500upx;background-color: #FFFFFF;}
 </style>

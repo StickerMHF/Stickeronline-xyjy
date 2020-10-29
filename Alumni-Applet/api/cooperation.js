@@ -25,6 +25,17 @@ export const deleteCooperation = (params) => {
 }
 
 
-
+//获取人员位置列表
+export const getPositionList = (params) => {
+    return getAction(api.getPositionList, params)
+}
+//新增点亮人员
+export const addLightUpPersonnel = (params) => {
+    return postAction(api.addLightUpPersonnel, params)
+}
+// 更新人员位置
+export const updatePersonnelPosition = (params) => {
+    return putAction(api.updatePersonnelPosition, params)
+}
 
 
