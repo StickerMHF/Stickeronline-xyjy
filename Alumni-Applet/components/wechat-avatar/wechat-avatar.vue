@@ -14,10 +14,10 @@
 				</view>
 			</view>
 		</view>
-		
+
 		<view class="save-btn">
 			<button class="btn" type="default" @tap="save">保存头像</button>
-			
+
 			<button class="btn" type="default" @tap="upload">上传图片</button>
 			<!-- <button class="btn" type="default" @tap="share">分享朋友</button> -->
 		</view>
@@ -51,8 +51,8 @@
 				ctx: null,
 				canvasSide: 0,
 				id: 0,
-				text:'',
-				text1:'',
+				text: '',
+				text1: '',
 				// #ifdef H5
 				newAvatar: ''
 				// #endif
@@ -136,39 +136,50 @@
 
 			// })
 			let that = this;
-				uni.createSelectorQuery().in(that).select('.canvas').boundingClientRect(data => {
-					that.canvasSide = data.width;
-					that.ctx = uni.createCanvasContext('canvas', that);
-					// let userInfo = uni.getStorageSync('userInfo');
-					// if (userInfo && userInfo != "") {
-					// 	debugger
-						
-					// } else {
-					// 	uni.navigateTo({
-					// 		url: "/pages/login/login"
-					// 	});
-					// }
-				
-				
-					uni.getUserInfo({
-						provider: 'weixin',
-						success: (res) => {
-				that.userInfo = res.userInfo;
-				debugger
-				// that.avatarUrl = userInfo.avatarUrl;
-				// that.drawImage(that.imgList[that.id]);
-				uni.getImageInfo({
-					src: res.userInfo.avatarUrl,
-					success: (image) => {
-						that.avatarUrl = image.path;
-						// this.avatarUrl = userInfo.avatarUrl;
-						that.drawImage(that.imgList[that.id])
+			uni.createSelectorQuery().in(that).select('.canvas').boundingClientRect(data => {
+				that.canvasSide = data.width;
+				that.ctx = uni.createCanvasContext('canvas', that);
+				// let userInfo = uni.getStorageSync('userInfo');
+				// if (userInfo && userInfo != "") {
+				// 	debugger
+
+				// } else {
+				// 	uni.navigateTo({
+				// 		url: "/pages/login/login"
+				// 	});
+				// }
+
+
+				uni.getUserInfo({
+					provider: 'weixin',
+					success: (res) => {
+						that.userInfo = res.userInfo;
+						debugger
+						// that.avatarUrl = userInfo.avatarUrl;
+						// that.drawImage(that.imgList[that.id]);
+						uni.getImageInfo({
+							src: res.userInfo.avatarUrl,
+							success: (image) => {
+								that.avatarUrl = image.path;
+								// this.avatarUrl = userInfo.avatarUrl;
+								that.drawImage(that.imgList[that.id])
+							},
+							fail:(e)=>{
+								uni.getImageInfo({
+									src: "http://www.imapway.cn/Alumni/static/user/face.jpg",
+									success: (image) => {
+										that.avatarUrl = image.path;
+										// this.avatarUrl = userInfo.avatarUrl;
+										that.drawImage(that.imgList[that.id])
+									}
+								})
+								
+							}
+						})
 					}
 				})
-						}
-					})
-				}).exec();
-			
+			}).exec();
+
 		},
 		created() {
 			uni.getSystemInfo({

@@ -122,7 +122,7 @@
 					},
 					{
 						icon: 'http://www.imapway.cn/Alumni/static/home/dlqq2x.png',
-						txt: '点亮全球',
+						txt: '校友通讯',
 						page: '/pages/home/address/address'
 					},
 					{
