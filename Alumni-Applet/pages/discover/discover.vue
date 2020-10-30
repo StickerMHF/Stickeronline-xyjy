@@ -27,15 +27,7 @@
 		</view>
 		<view class="discover-content">
 			<moments :list="momentsList" :fatherLikeMethod="likeClick" :fatherCommentMethod="commentMethod"></moments>
-		</view>
-		<!-- <view class="discover-comment" v-show="commentShow">
-			<view class="weui-cells weui-cells_after-title">
-			  <view class="weui-cell weui-cell_input">
-				<input class="weui-input" auto-focus placeholder="评论" :value="commentParams.content"/>
-				<button @click="sumbitComment">发送</button>
-			  </view>
-			</view>
-		</view>	 -->	
+		</view>			
 	</view>
 </template>
 
@@ -341,7 +333,7 @@
 		background: white;
 	}
 	.publishData{
-		    position: absolute;
+		    position: fixed;
 		    z-index: 99;
 			right: 10px;
 			margin-top: 5px;
