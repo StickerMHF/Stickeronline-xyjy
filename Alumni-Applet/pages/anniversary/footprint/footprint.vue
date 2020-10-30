@@ -1,6 +1,6 @@
 <template>
 	<view class="ann_news">
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="true" @callBack="callBack">
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
@@ -18,8 +18,9 @@
 				<view class="">点亮国家<text class="textNums">{{starCountrys}}</text></view>
 			</view>
 			<view class="btnBox">
-				<view class="btn" @click="lightUpOrUpdate">{{textBtn}}</view>
-				<view class="btn">邀请好友点亮</view>
+				<!-- <view class="btn">邀请好友点亮</view> -->
+				<button class="btn" @click="lightUpOrUpdate">{{textBtn}}</button>
+				<button class="btn" open-type="share">邀请好友点亮</button>
 			</view>
 			<view :class="!lightUpState && (!showState) ? 'tipBox showTip' : 'tipBox hideTip'">
 				<view class="tip">
@@ -98,7 +99,18 @@
 				}
 			})
 		},
+		onShareAppMessage: function () {
+			return {
+			  title: "快来和我一起点亮全球吧。",
+			  path:`/pages/anniversary/footprint/footprint` 
+			}
+		},
 		methods: {
+			callBack(){
+				uni.redirectTo({
+					url: '/pages/anniversary/index'
+				});
+			},
 			getPositionListData(){
 				getPositionList("").then(data => {
 					var [error, res] = data;
@@ -111,7 +123,7 @@
 								id: v.id,
 								latitude: location[1],
 								longitude: location[0],
-								iconPath: '../../../static/images/marker.png', //图标路径
+								iconPath: 'http://www.imapway.cn/Alumni/static/images/marker.png', //图标路径
 								width: 30,
 								height: 30
 							})
@@ -257,6 +269,8 @@
 		width: 200rpx;
 		text-align: center;
 		border-radius: 4px;
+		margin:0;
+		font-size: 14px;
 	}
 }
 .tipBox{

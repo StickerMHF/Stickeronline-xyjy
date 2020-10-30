@@ -8,7 +8,8 @@
           <div class="wrap">
             <view class="like  hm-btn" :class="islike?'cuIcon-likefill':'cuIcon-like'"  @click="likeHandler"></view>
 			<!-- <button open-type="share">s </button> -->
-            <view class="share cuIcon-share hm-btn"  @click="shareHandler"></view>
+            <!-- <view class="share cuIcon-share hm-btn" @click="shareHandler"></view> -->
+			<button class="share cuIcon-share hm-btn" open-type="share"></button>
           </div>
         </div>
         <span class="time">{{ formatDate(options.createTime) }}</span>

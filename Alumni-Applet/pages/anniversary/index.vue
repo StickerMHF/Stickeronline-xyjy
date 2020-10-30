@@ -1,6 +1,6 @@
 <template>
 	<view class="anniversary">
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="true"  @callBack="callBack">
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
@@ -63,7 +63,11 @@
 			this.title = options.title;
 		},
 		methods: {
-
+			callBack(){
+				uni.switchTab({
+					url: '/pages/home/home'
+				});
+			},
 		}
 	}
 </script>
