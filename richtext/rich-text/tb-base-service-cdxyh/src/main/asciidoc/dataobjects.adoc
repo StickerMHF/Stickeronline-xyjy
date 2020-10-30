@@ -1,7 +1,64 @@
 = Cheatsheets
 
-[[BTeachersEntity]]
-== BTeachersEntity
+[[BAlummunsMemberEntity]]
+== BAlummunsMemberEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[email]]`@email`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[organization]]`@organization`|`String`|-
+|[[photo]]`@photo`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[telephone]]`@telephone`|`String`|-
+|[[trade]]`@trade`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusActivityEntity]]
+== BAlumnusActivityEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[img]]`@img`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusEntity]]
+== BAlumnusEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[activity]]`@activity`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[liveness]]`@liveness`|`Number (Integer)`|-
+|[[member]]`@member`|`Number (Integer)`|-
+|[[name]]`@name`|`String`|-
+|[[thumb]]`@thumb`|`String`|-
+|[[type]]`@type`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusJoinEntity]]
+== BAlumnusJoinEntity
 
 
 [cols=">25%,25%,50%"]
@@ -28,5 +85,277 @@
 |[[updateBy]]`@updateBy`|`String`|-
 |[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |[[yjly]]`@yjly`|`String`|-
+|===
+
+[[BAlumnusNewsEntity]]
+== BAlumnusNewsEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[author]]`@author`|`String`|-
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[img]]`@img`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BAlumnusPhotoEntity]]
+== BAlumnusPhotoEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[author]]`@author`|`String`|-
+|[[commentCount]]`@commentCount`|`String`|-
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[imgs]]`@imgs`|`String`|-
+|[[likeCount]]`@likeCount`|`String`|-
+|[[photo]]`@photo`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[viewCount]]`@viewCount`|`String`|-
+|===
+
+[[BBarrageEntity]]
+== BBarrageEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BCooperationEntity]]
+== BCooperationEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[contact]]`@contact`|`String`|-
+|[[contents]]`@contents`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BMemberEntity]]
+== BMemberEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[attention]]`@attention`|`Number (Integer)`|-
+|[[contact]]`@contact`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[desc]]`@desc`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[photo]]`@photo`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BMomentsCommentEntity]]
+== BMomentsCommentEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[content]]`@content`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[fid]]`@fid`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[momentId]]`@momentId`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BMomentsEntity]]
+== BMomentsEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[commentCount]]`@commentCount`|`Number (Integer)`|-
+|[[content]]`@content`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[likeCount]]`@likeCount`|`Number (Integer)`|-
+|[[photos]]`@photos`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|===
+
+[[BMomentsLikeEntity]]
+== BMomentsLikeEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[momentId]]`@momentId`|`String`|-
+|[[status]]`@status`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BNewsEntity]]
+== BNewsEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[contents]]`@contents`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[desc]]`@desc`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[istop]]`@istop`|`Number (Integer)`|-
+|[[thumb]]`@thumb`|`String`|-
+|[[title]]`@title`|`String`|-
+|[[type]]`@type`|`Number (Integer)`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|===
+
+[[BPhotoEntity]]
+== BPhotoEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[imgs]]`@imgs`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BSigninEntity]]
+== BSigninEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[location]]`@location`|`String`|-
+|[[orderNum]]`@orderNum`|`Number (long)`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BTeachersEntity]]
+== BTeachersEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[bgdd]]`@bgdd`|`String`|-
+|[[byyx]]`@byyx`|`String`|-
+|[[college]]`@college`|`String`|-
+|[[contact]]`@contact`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[education]]`@education`|`String`|-
+|[[email]]`@email`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[photos]]`@photos`|`String`|-
+|[[rank]]`@rank`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|===
+
+[[BWechatUsersAttentionEntity]]
+== BWechatUsersAttentionEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[mark]]`@mark`|`String`|-
+|[[memberId]]`@memberId`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|===
+
+[[BWechatUsersEntity]]
+== BWechatUsersEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[avatarUrl]]`@avatarUrl`|`String`|-
+|[[city]]`@city`|`String`|-
+|[[college]]`@college`|`String`|-
+|[[country]]`@country`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[education]]`@education`|`String`|-
+|[[endDate]]`@endDate`|`String`|-
+|[[identityCard]]`@identityCard`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[nickName]]`@nickName`|`String`|-
+|[[openid]]`@openid`|`String`|-
+|[[profession]]`@profession`|`String`|-
+|[[province]]`@province`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[startDate]]`@startDate`|`String`|-
+|[[type]]`@type`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
 |===
 
