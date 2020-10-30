@@ -7,8 +7,7 @@ import com.sticker.online.core.model.ReplyObj;
 import com.sticker.online.core.utils.AsyncServiceUtil;
 import com.sticker.online.core.utils.HttpUtil;
 import com.sticker.online.tools.common.utils.CommonUtil;
-import com.tb.service.cdxyh.service.BMemberAttentionAsyncService;
-import com.tb.service.cdxyh.service.BTeachersAsyncService;
+import com.tb.service.cdxyh.service.BWechatUsersAttentionAsyncService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -19,11 +18,11 @@ import io.vertx.ext.web.RoutingContext;
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
 
-@RouteHandler("stickeronline/member/attention")
+@RouteHandler("stickeronline/wechat/users/attention")
 @Api(tags = "校友关注")
-public class BMemberAttentionHandler {
-    private BMemberAttentionAsyncService bMemberAttentionAsyncService =
-            AsyncServiceUtil.getAsyncServiceInstance(BMemberAttentionAsyncService.class);
+public class BWechatUsersAttentionHandler {
+    private BWechatUsersAttentionAsyncService bMemberAttentionAsyncService =
+            AsyncServiceUtil.getAsyncServiceInstance(BWechatUsersAttentionAsyncService.class);
 
     @RouteMapping(value = "/add", method = RouteMethod.POST, order = 1)
     @ApiOperation(value = "新增校友关注")

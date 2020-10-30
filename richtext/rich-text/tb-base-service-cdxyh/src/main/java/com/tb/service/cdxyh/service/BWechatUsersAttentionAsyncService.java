@@ -6,7 +6,7 @@ import io.vertx.core.Handler;
 import io.vertx.core.json.JsonObject;
 
 @ProxyGen
-public interface BMemberAttentionAsyncService {
+public interface BWechatUsersAttentionAsyncService {
     /**
      * 新增优秀校友
      *

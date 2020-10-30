@@ -1,5 +1,5 @@
-// const baseurl='https://www.imapway.cn/alumniapi'
-const baseurl='http://localhost:8084'
+const baseurl='https://www.imapway.cn/alumniapi'
+// const baseurl='http://localhost:8084'
 const api = {
 	test:baseurl+'/stickeronline/rich/text/list',
 	getUserOpenid:baseurl+'/tb/wechat/getAppletUserInfo',
@@ -11,6 +11,18 @@ const api = {
 	addWechatUser: baseurl+'/stickeronline/wechat/users/add',
 	updateWechatUser: baseurl+'/stickeronline/wechat/users/edit',
 	deletetWechatUser: baseurl+'/stickeronline/wechat/users/delete',
+	queryAllByUserId: baseurl+'/stickeronline/wechat/users/queryAllByUserId',
+	queryFansListByUserId: baseurl+'/stickeronline/wechat/users/queryFansListByUserId',
+	queryAttentionListByUserId: baseurl+'/stickeronline/wechat/users/queryAttentionListByUserId',
+	/**
+	 * 关注校友
+	 */
+	getWechatUserAttentionList: baseurl+'/stickeronline/wechat/users/attention/list',
+	getWechatUserAttentionById: baseurl+'/stickeronline/wechat/users/attention/queryById',
+	addWechatUserAttention: baseurl+'/stickeronline/wechat/users/attention/add',
+	updateWechatUserAttention: baseurl+'/stickeronline/wechat/users/attention/edit',
+	deleteWechatUserAttention: baseurl+'/stickeronline/wechat/users/attention/delete',
+	
 	/**
 	 * 新闻接口
 	 */
@@ -30,19 +42,12 @@ const api = {
 	/**
 	 * 优秀校友
 	 */
-	getMemberList: baseurl+'/stickeronline/member/queryAllByUserId',
+	getMemberList: baseurl+'/stickeronline/member/list',
 	getMemberById: baseurl+'/stickeronline/member/queryById',
 	addMember: baseurl+'/stickeronline/member/add',
 	updateMember: baseurl+'/stickeronline/member/edit',
 	deleteMember: baseurl+'/stickeronline/member/delete',
-	/**
-	 * 关注校友
-	 */
-	getMemberAttentionList: baseurl+'/stickeronline/member/attention/list',
-	getMemberAttentionById: baseurl+'/stickeronline/member/attention/queryById',
-	addMemberAttention: baseurl+'/stickeronline/member/attention/add',
-	updateMemberAttention: baseurl+'/stickeronline/member/attention/edit',
-	deleteMemberAttention: baseurl+'/stickeronline/member/attention/delete',
+	
 	
 	/**
 	 * 校友合作

@@ -34,6 +34,39 @@ export const updateWechatUser = (params) => {
 export const deleteWechatUser = (params) => {
     return deleteAction(api.deleteWechatUser, params)
 }
+// 查询所有校友列表
+export const queryAllByUserId = (params) => {
+    return getAction(api.queryAllByUserId, params)
+}
+// 查询关注我的校友列表
+export const queryFansListByUserId = (params) => {
+    return getAction(api.queryFansListByUserId, params)
+}
+// 查询我关注的校友列表
+export const queryAttentionListByUserId = (params) => {
+    return getAction(api.queryAttentionListByUserId, params)
+}
+
+// 获取关注校友
+export const getWechatUserAttentionList = (params) => {
+    return getAction(api.getWechatUserAttentionList, params)
+}
+//根据ID查询关注校友
+export const getWechatUserAttentionById = (params) => {
+    return getAction(api.getWechatUserAttentionById, params)
+}
+// 添加关注校友
+export const addWechatUserAttention = (params) => {
+    return postAction(api.addWechatUserAttention, params)
+}
+// 更新关注校友
+export const updateWechatUserAttention = (params) => {
+    return putAction(api.updateWechatUserAttention, params)
+}
+//删除关注校友
+export const deleteWechatUserAttention = (params) => {
+    return deleteAction(api.deleteWechatUserAttention, params)
+}
 
 
 

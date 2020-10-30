@@ -179,7 +179,6 @@
 				}
 			},
 			wxGetUserInfo() {
-				// debugger
 				// let that = this;
 				// this.isLogin=uni.getStorageSync('isLogin');
 				// if (!this.isLogin) {

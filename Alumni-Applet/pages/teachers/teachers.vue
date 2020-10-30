@@ -26,7 +26,6 @@
 				</template>
 				<!-- 通过body插槽定义商品布局 -->
 				<view slot="body" class="shop">
-					
 						<view class="uni-title">
 							<text class="uni-ellipsis-2">{{ item.name }}</text>
 						</view>
@@ -41,6 +40,9 @@
 						<text class="shop-price-text" style="margin: 0 5px;"></text>
 						访问</view>
 						
+					</view>
+					<view class="teachers-icon margin-tb-sm text-center mem-attention">
+						<text class="lg text-gray cuIcon-right" ></text>
 					</view>
 				</view>
 			</uni-list-item>
@@ -166,7 +168,7 @@
 	};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	@import '@/common/uni-ui.scss';
 	page {
 		display: flex;
@@ -304,5 +306,10 @@
 	}
 	.teachers-item{
 		margin: 5px 0;
+	}
+	.teachers-icon{
+		position: absolute;
+		    right: 20px;
+		    top: 49px;
 	}
 </style>

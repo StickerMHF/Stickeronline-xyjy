@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="newsContent">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
@@ -83,6 +83,10 @@
 	}
 </script>
 
-<style>
-
+<style lang="scss">
+	// .newsContent{
+	// 	.hm-news-detail{
+	// 		height:100%;
+	// 	}
+	// }
 </style>

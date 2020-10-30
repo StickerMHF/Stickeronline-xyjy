@@ -83,7 +83,6 @@
 						})
 						break;
 				}
-				debugger
 				if (strProvider != "") { //点击了0-3序号的这4个按钮
 					uni.share({
 						provider: strProvider,

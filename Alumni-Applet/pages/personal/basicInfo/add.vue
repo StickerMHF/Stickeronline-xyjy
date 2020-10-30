@@ -152,7 +152,6 @@
 			this.type = options.type;
 			this.isEdit = options.isEdit;
 			if (!this.type) {
-				// debugger
 			}
 			if (this.isEdit||this.isEdit=="true") {
 				this.isEdit=true;
@@ -183,7 +182,6 @@
 								that.form = ss;
 								that.type = that.form.type;
 							} else {
-								debugger
 							}
 						}
 					});
@@ -205,7 +203,6 @@
 				this.form.education = this.eduPicker[this.eduIndex];
 			},
 			startDateChange(e) {
-				debugger
 				this.form.startDate = e.detail.value
 			},
 			endDateChange(e) {
@@ -222,7 +219,6 @@
 				let userInfo = uni.getStorageSync('userInfo');
 				let params = Object.assign(userInfo, formData);
 				let openid = uni.getStorageSync('openid');
-				debugger
 				if (openid && openid != "") {
 					params.openid = openid;
 					params.type = that.type;
