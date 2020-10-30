@@ -1,20 +1,32 @@
 = Cheatsheets
 
-[[BAlumnusJoinEntity]]
-== BAlumnusJoinEntity
+[[BTeachersEntity]]
+== BTeachersEntity
 
 
 [cols=">25%,25%,50%"]
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
-|[[alumnusId]]`@alumnusId`|`String`|-
+|[[bgdd]]`@bgdd`|`String`|-
+|[[byyx]]`@byyx`|`String`|-
+|[[college]]`@college`|`String`|-
+|[[contact]]`@contact`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
+|[[education]]`@education`|`String`|-
+|[[email]]`@email`|`String`|-
+|[[grjj]]`@grjj`|`String`|-
 |[[id]]`@id`|`String`|-
-|[[status]]`@status`|`String`|-
+|[[kjcg]]`@kjcg`|`String`|-
+|[[kyxm]]`@kyxm`|`String`|-
+|[[lw]]`@lw`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[photos]]`@photos`|`String`|-
+|[[rank]]`@rank`|`String`|-
+|[[ryjl]]`@ryjl`|`String`|-
+|[[sex]]`@sex`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
-|[[userId]]`@userId`|`String`|-
-|[[userName]]`@userName`|`String`|-
-|[[userPhoto]]`@userPhoto`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|[[yjly]]`@yjly`|`String`|-
 |===
 

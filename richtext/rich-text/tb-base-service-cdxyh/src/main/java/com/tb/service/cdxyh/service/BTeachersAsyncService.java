@@ -48,4 +48,5 @@ public interface BTeachersAsyncService {
      * @param handler
      */
     void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    void jobs(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 }
