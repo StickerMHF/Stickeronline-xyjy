@@ -4,10 +4,10 @@ import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
 import com.sticker.online.core.utils.TimeUtil;
 import com.tb.base.common.vo.PageVo;
-import com.tb.service.cdxyh.entity.BMemberEntity;
 import com.tb.service.cdxyh.entity.BWechatUsersEntity;
 import com.tb.service.cdxyh.repository.BWechatUsersRepository;
 import com.tb.service.cdxyh.service.BWechatUsersAsyncService;
+import com.tb.service.cdxyh.utils.Pinyin4jUtil;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -34,6 +34,9 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
         BWechatUsersEntity bWechatUsersEntity = new BWechatUsersEntity(params);
         bWechatUsersEntity.setCreateTime(new Date());
         bWechatUsersEntity.setUpdateTime(new Date());
+        //获取名字首字母
+        String nameInitial = Pinyin4jUtil.getFirstPinYinHeadChar(bWechatUsersEntity.getName());
+        bWechatUsersEntity.setNameInitial(nameInitial);
         bWechatUsersRepository.save(bWechatUsersEntity);
         future.complete("添加成功!");
         handler.handle(future);
@@ -163,4 +166,37 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
 
         handler.handle(future);
     }
+
+    /**
+     * 按首字母分组排序返回结果
+     * @param params
+     * @param handler
+     */
+    @Override
+    public void getUserListByInitialGroup(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        JsonObject resObj = new JsonObject();
+        List<BWechatUsersEntity> list = bWechatUsersRepository.findAllOrderByNameDesc();
+        for (int i = 0; i < list.size(); i++) {
+            BWechatUsersEntity bWechatUsersEntity = list.get(i);
+            String nameInitial = bWechatUsersEntity.getNameInitial();
+            JsonObject obj = resObj.getJsonObject(nameInitial);
+            System.out.println(i);
+            if (obj !=null && !obj.isEmpty()){
+                obj.getJsonArray("list").add(new JsonObject(Json.encode(bWechatUsersEntity)));
+            } else {
+                resObj.put(nameInitial,new JsonObject().put("list", new JsonArray().add(new JsonObject(Json.encode(bWechatUsersEntity)))));
+            }
+        }
+        future.complete(resObj);
+        handler.handle(future);
+    }
+
+    public static void main(String[] args) {
+        JsonObject resObj = new JsonObject();
+        System.out.println(resObj.getJsonObject("*"));
+    }
+
+
+
 }

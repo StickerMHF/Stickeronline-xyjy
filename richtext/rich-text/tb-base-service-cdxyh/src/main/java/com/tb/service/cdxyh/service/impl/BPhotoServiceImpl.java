@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Component
@@ -75,19 +76,23 @@ public class BPhotoServiceImpl implements BPhotoService, BaseAsyncService {
     }
 
     @Override
-    public void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler) {
-        Future<JsonArray> future = Future.future();
-        ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
-        BPhotoEntity bPhotoEntity = new BPhotoEntity();
-        matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
-        //创建实例
-        Example<BPhotoEntity> ex = Example.of(bPhotoEntity, matcher);
-        List<BPhotoEntity> newsList = bPhotoRepository.findAll(ex);
-        if (newsList == null || newsList.size() <= 0) {
-            future.complete(new JsonArray());
-        } else {
-            future.complete(new JsonArray(Json.encode(newsList)));
-        }
+    public void getUserList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
+        String userId = params.getString("userId");
+        Integer offset = (pageVo.getPageNo()-1)*pageVo.getPageSize();
+        Integer zoom = bPhotoRepository.countByUserId(userId);  //统计总条数
+        //总页数
+        Integer totalPages = (zoom-1)/pageVo.getPageSize()+1;
+        List<Map<String, Object>> list = bPhotoRepository.groupByUserId(pageVo.getPageSize(),offset);
+
+        JsonObject pageable = new JsonObject();
+        pageable.put("pageNumber", pageVo.getPageNo());
+        pageable.put("offset", 0);
+        pageable.put("pageSize", pageVo.getPageSize());
+        future.complete(new JsonObject().put("content",list).put("pageable",pageable).put("totalPages", totalPages));
+//        future.complete(new JsonArray(Json.encode(list)));
+
         handler.handle(future);
     }
 

@@ -182,4 +182,20 @@ public class BWechatUsersHandler {
             });
         };
     }
+
+    @RouteMapping(value = "/getUserListByInitialGroup", method = RouteMethod.GET, order = 1)
+    @ApiOperation(value = "根据品议首字母查询用户列表")
+    public Handler<RoutingContext> getUserListByInitialGroup(){
+        return ctx -> {
+            bWechatUsersAsyncService.getUserListByInitialGroup(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
 }

@@ -337,6 +337,7 @@
 |[[endDate]]`@endDate`|`String`|-
 |[[identityCard]]`@identityCard`|`String`|-
 |[[name]]`@name`|`String`|-
+|[[nameInitial]]`@nameInitial`|`String`|-
 |[[nickName]]`@nickName`|`String`|-
 |[[openid]]`@openid`|`String`|-
 |[[profession]]`@profession`|`String`|-
