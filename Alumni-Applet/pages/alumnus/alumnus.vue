@@ -54,7 +54,7 @@
             ></canvas>
           </view>
         </view>
-		<alumnusDistribution></alumnusDistribution>
+        <alumnusDistribution></alumnusDistribution>
         <view class="qiun-columns">
           <view class="qiun-bg-white qiun-title-bar qiun-common-mt">
             <view class="qiun-title-dot-light"
@@ -138,23 +138,22 @@
                         {{ item.member }}
                       </view>
                     </view>
-					<button
-					  class="alumnus-btn cu-btn round sm bg-orange"
-					  v-if="item.join == true"
-					>
-					  已加入
-					</button>
-					<button
-					  class="alumnus-btn cu-btn round sm bg-orange"
-					  v-else
-					  @click="addJoin(item)"
-					>
-					  加入
-					</button>
+                    <button
+                      class="alumnus-btn cu-btn round sm bg-orange"
+                      v-if="item.join == true"
+                    >
+                      已加入
+                    </button>
+                    <button
+                      class="alumnus-btn cu-btn round sm bg-orange"
+                      v-else
+                      @click="addJoin(item)"
+                    >
+                      加入
+                    </button>
                   </view>
                 </view>
               </navigator>
-              
             </view>
           </view>
         </uni-list-item>
@@ -168,7 +167,7 @@
 <script>
 import { getAlumnusList, addAlumnusJoin } from "@/api/alumnus.js";
 import uCharts from "../../js_sdk/u-charts/u-charts.js";
-import alumnusDistribution from './alumnusDistribution.vue'
+import alumnusDistribution from "./alumnusDistribution.vue";
 var _self;
 var canvaColumn = null;
 var canvaTrack = null;
@@ -177,7 +176,7 @@ var canvaEmployment = null;
 
 export default {
   components: {
-    alumnusDistribution
+    alumnusDistribution,
   },
   data() {
     return {
@@ -249,17 +248,16 @@ export default {
     // }
     this.params.userId = uni.getStorageSync("openid");
     this.getAlumnusList(this.params);
-    
   },
   onHide() {
-  	this.tabCur = 1;
+    this.tabCur = 1;
   },
   onShow() {
-  	this.tabCur = 5;
-	_self = this;
-	this.cWidth = uni.upx2px(750);
-	this.cHeight = uni.upx2px(500);
-	this.getServerData();
+    this.tabCur = 5;
+    _self = this;
+    this.cWidth = uni.upx2px(750);
+    this.cHeight = uni.upx2px(500);
+    this.getServerData();
   },
   methods: {
     getAlumnusList(params) {
@@ -400,7 +398,7 @@ export default {
       // 	})s
     },
     getServerData() {
-		// _self.$refs.alumnusDistribution.getData();
+      // _self.$refs.alumnusDistribution.getData();
       uni.request({
         //往期校友统计
         url: "https://www.imapway.cn/Alumni/alumniStatistics.json",
@@ -549,7 +547,7 @@ export default {
           return item.name + ":" + item.data;
         },
       });
-    }
+    },
   },
 };
 </script>

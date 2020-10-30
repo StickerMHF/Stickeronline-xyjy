@@ -14,15 +14,19 @@
 				</view>
 			</view>
 		</view>
+
 		<view class="save-btn">
 			<button class="btn" type="default" @tap="save">保存头像</button>
+
 			<button class="btn" type="default" @tap="upload">上传图片</button>
 			<!-- <button class="btn" type="default" @tap="share">分享朋友</button> -->
 		</view>
 		<!-- #ifdef H5 -->
 		<view class="preview-wrap" :style="{display: newAvatar ? 'block' : 'none'}" @tap="newAvatar = ''">
 			<view class="preview" @tap.stop="(()=>{return false})">
-				<view class="new-avatar"><image :src="newAvatar"></image></view>
+				<view class="new-avatar">
+					<image :src="newAvatar"></image>
+				</view>
 				<view class="hint">长按头像保存图片</view>
 			</view>
 		</view>
@@ -40,13 +44,15 @@
 		},
 		data() {
 			return {
-				avatarUrl: '',
+				avatarUrl: 'http://www.imapway.cn/Alumni/static/user/face.jpg',
 				target: '../../static/anniversary/head0.png',
 				windowHeight: 0,
 				//画笔
 				ctx: null,
 				canvasSide: 0,
 				id: 0,
+				text: '',
+				text1: '',
 				// #ifdef H5
 				newAvatar: ''
 				// #endif
@@ -78,7 +84,7 @@
 					width: this.canvasSide,
 					height: this.canvasSide,
 					canvasId: 'canvas',
-					success: (res)=> {
+					success: (res) => {
 						// #ifndef H5
 						uni.saveImageToPhotosAlbum({
 							filePath: res.tempFilePath,
@@ -107,12 +113,11 @@
 					success: (res) => {
 						this.avatarUrl = res.tempFilePaths[0];
 						this.ctx = uni.createCanvasContext('canvas', this);
-						debugger
 						this.drawImage(this.imgList[this.id])
 					}
 				})
 			},
-			share(){
+			share() {
 				uni.share({
 					provider: "weixin",
 					scene: "WXSceneSession",
@@ -130,25 +135,51 @@
 			// wx.ready(() => {
 
 			// })
-			uni.createSelectorQuery().in(this).select('.canvas').boundingClientRect(data => {
-				this.canvasSide = data.width;
-				this.ctx = uni.createCanvasContext('canvas', this);
-				// #ifdef MP
+			let that = this;
+			uni.createSelectorQuery().in(that).select('.canvas').boundingClientRect(data => {
+				that.canvasSide = data.width;
+				that.ctx = uni.createCanvasContext('canvas', that);
+				// let userInfo = uni.getStorageSync('userInfo');
+				// if (userInfo && userInfo != "") {
+				// 	debugger
+
+				// } else {
+				// 	uni.navigateTo({
+				// 		url: "/pages/login/login"
+				// 	});
+				// }
+
+
 				uni.getUserInfo({
 					provider: 'weixin',
 					success: (res) => {
+						that.userInfo = res.userInfo;
+						debugger
+						// that.avatarUrl = userInfo.avatarUrl;
+						// that.drawImage(that.imgList[that.id]);
 						uni.getImageInfo({
 							src: res.userInfo.avatarUrl,
 							success: (image) => {
-								this.avatarUrl = image.path;
-						debugger
-								this.drawImage(this.imgList[this.id])
+								that.avatarUrl = image.path;
+								// this.avatarUrl = userInfo.avatarUrl;
+								that.drawImage(that.imgList[that.id])
+							},
+							fail:(e)=>{
+								uni.getImageInfo({
+									src: "http://www.imapway.cn/Alumni/static/user/face.jpg",
+									success: (image) => {
+										that.avatarUrl = image.path;
+										// this.avatarUrl = userInfo.avatarUrl;
+										that.drawImage(that.imgList[that.id])
+									}
+								})
+								
 							}
 						})
 					}
 				})
-				// #endif
 			}).exec();
+
 		},
 		created() {
 			uni.getSystemInfo({
@@ -238,16 +269,18 @@
 		margin: 0 10rpx;
 		font-size: 16px;
 	}
+
 	/* #ifdef H5 */
-	.preview-wrap{
-	    position: absolute;
-	    top: 0;
-	    left: 0;
-	    right: 0;
-	    bottom: 0;
-	    background-color: rgba(0,0,0,.8);
+	.preview-wrap {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, .8);
 	}
-	.preview{
+
+	.preview {
 		position: absolute;
 		top: 0;
 		left: 0;
@@ -259,7 +292,8 @@
 		border-radius: 12px;
 		background-color: #fff;
 	}
-	.new-avatar{
+
+	.new-avatar {
 		width: 500rpx;
 		height: 500rpx;
 		margin: 40rpx auto 0;
@@ -267,14 +301,17 @@
 		border-radius: 4px;
 		overflow: hidden;
 	}
-	.new-avatar image{
+
+	.new-avatar image {
 		width: 100%;
 		height: 100%;
 	}
-	.hint{
+
+	.hint {
 		font-size: 40rpx;
-		text-align: center;	
+		text-align: center;
 		margin: 30rpx auto 0;
 	}
+
 	/* #endif */
 </style>

@@ -114,6 +114,23 @@
 |[[viewCount]]`@viewCount`|`String`|-
 |===
 
+[[BBarrageEntity]]
+== BBarrageEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
 [[BCooperationEntity]]
 == BCooperationEntity
 
@@ -128,22 +145,6 @@
 |[[id]]`@id`|`String`|-
 |[[title]]`@title`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
-|===
-
-[[BMemberAttentionEntity]]
-== BMemberAttentionEntity
-
-
-[cols=">25%,25%,50%"]
-[frame="topbot"]
-|===
-^|Name | Type ^| Description
-|[[createBy]]`@createBy`|`String`|-
-|[[id]]`@id`|`String`|-
-|[[mark]]`@mark`|`String`|-
-|[[memberId]]`@memberId`|`String`|-
-|[[updateBy]]`@updateBy`|`String`|-
-|[[userId]]`@userId`|`String`|-
 |===
 
 [[BMemberEntity]]
@@ -173,10 +174,11 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[content]]`@content`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
+|[[fid]]`@fid`|`String`|-
 |[[id]]`@id`|`String`|-
-|[[mark]]`@mark`|`String`|-
-|[[memberId]]`@memberId`|`String`|-
+|[[momentId]]`@momentId`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |[[userId]]`@userId`|`String`|-
 |[[userName]]`@userName`|`String`|-
@@ -242,6 +244,42 @@
 |[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 
+[[BPhotoEntity]]
+== BPhotoEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[imgs]]`@imgs`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BSigninEntity]]
+== BSigninEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[location]]`@location`|`String`|-
+|[[orderNum]]`@orderNum`|`Number (long)`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
 [[BTeachersEntity]]
 == BTeachersEntity
 
@@ -264,6 +302,22 @@
 |[[sex]]`@sex`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|===
+
+[[BWechatUsersAttentionEntity]]
+== BWechatUsersAttentionEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[mark]]`@mark`|`String`|-
+|[[memberId]]`@memberId`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
 |===
 
 [[BWechatUsersEntity]]

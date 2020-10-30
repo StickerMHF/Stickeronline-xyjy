@@ -73,7 +73,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 @import './index.response.css';
 .new-content{
 	width: 100%;

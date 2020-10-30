@@ -3,20 +3,21 @@ package com.tb.service.cdxyh.service;
 import io.vertx.codegen.annotations.ProxyGen;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 @ProxyGen
-public interface BMemberAsyncService {
+public interface BBarrageService {
     /**
-     * 新增优秀校友
+     * 新增
      *
      * @param params
      * @param handler
      */
-    void add(JsonObject params, Handler<AsyncResult<String>> handler);
+    void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
-     * 分页查询优秀校友列表
+     * 分页查询
      *
      * @param params
      * @param handler
@@ -24,7 +25,7 @@ public interface BMemberAsyncService {
     void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
-     * 编辑优秀校友
+     * 编辑
      *
      * @param params
      * @param handler
@@ -42,8 +43,22 @@ public interface BMemberAsyncService {
 
 
     /**
-     * 根据ID查询优秀校友详情
+     * 查询所有
      *
+     * @param params
+     * @param handler
+     */
+    void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+
+    /**
+     * 获取相册列表
+     * @param params
+     * @param handler
+     */
+    void getList(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+
+    /**
+     * 根据ID获取数据
      * @param params
      * @param handler
      */

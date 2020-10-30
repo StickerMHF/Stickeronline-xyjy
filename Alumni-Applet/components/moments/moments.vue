@@ -58,7 +58,7 @@
 		<view class="discover-comment" v-show="commentShow">
 			<view class="weui-cells weui-cells_after-title">
 			  <view class="weui-cell weui-cell_input">
-				<input ref="commentdom" class="weui-input comment-input" type="text" placeholder="评论" @blur="bindBlurEvent" @focus="bindFocusEvent" v-model="commentText" confirm-type="send"/>
+				<input ref="commentdom" class="uni-input comment-input" :focus="commentShow" type="text" placeholder="评论" @blur="bindBlurEvent" @focus="bindFocusEvent" v-model="commentText" confirm-type="send"/>
 				<button @click="sumbitComment">发送</button>
 			  </view>
 			</view>
@@ -72,6 +72,7 @@
 		data() {
 			return {
 				commentShow: false,
+				ifshow: false,
 				commentText: '',
 				isCard:true,
 				likeParams: {
@@ -228,7 +229,6 @@
 					this.commentParams.userName = userInfo.nickName;
 					this.commentParams.userPhoto = userInfo.avatarUrl;
 					this.commentShow = true;
-					// debugger
 					// this.$refs.commentdom.focus();
 				} else {
 					//跳转页面 

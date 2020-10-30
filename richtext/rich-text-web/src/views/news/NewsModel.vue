@@ -1,5 +1,5 @@
 <template>
-      <a-modal  :title="title" :width='1100'  v-model="visible" @ok="handleOk">
+      <a-modal  :title="title" :width='1100' placement="right"  v-model="visible" @ok="handleOk">
         <a-form-model ref="addForm" :model="form" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol" >
             <a-form-model-item ref="name" label="标题" prop="name">
                 <a-input  v-model="form.name" placeholder="请输入标题"/>
