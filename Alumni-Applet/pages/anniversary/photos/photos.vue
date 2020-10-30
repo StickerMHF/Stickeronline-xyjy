@@ -14,7 +14,7 @@
 	export default {
 		data() {
 			return {
-				
+				title:'照片征集'
 			}
 		},
 		methods: {
