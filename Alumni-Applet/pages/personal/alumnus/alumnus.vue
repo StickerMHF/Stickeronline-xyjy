@@ -50,7 +50,7 @@
 </template>
 
 <script>
-	import {getAlumnusList} from '@/api/alumnus.js'
+	import {getAlumnusByuserId} from '@/api/alumnus.js'
 	export default {
 		components: {},
 		data() {
@@ -70,19 +70,20 @@
 				params: {
 					pageNo: 1,// 当前页数
 					pageSize: 10,// 每页显示的数据条数
-					type: 'all'
+					userId: ''
 				}
 			};
 		},
 		onLoad(options) {
 			// 初始化页面数据
 			this.title=options.title;
+			this.params.userId = uni.getStorageSync('openid');
 			this.getAlumnusList(this.params);
 		},
 		methods: {
 			getAlumnusList(params){
 				console.log(params)
-				getAlumnusList(params).then(data=>{
+				getAlumnusByuserId(params).then(data=>{
 					var [error, res] = data;
 					if (res&&res.data&&res.data.result) {
 						this.lists = res.data.result.content;

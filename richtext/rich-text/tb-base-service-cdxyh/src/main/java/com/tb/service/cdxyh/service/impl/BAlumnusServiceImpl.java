@@ -116,7 +116,10 @@ public class BAlumnusServiceImpl implements BAlumnusService, BaseAsyncService {
         String userId = params.getString("userId");
         Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
         Integer zoom = bAlumnusRepository.countByuserId(userId);  //统计总条数
+        //总页数
+        Integer totalPages = (zoom-1)/pageVo.getPageSize()+1;
         List<Map<String, Object>> list = bAlumnusRepository.queryByuserId(userId,pageVo.getPageSize(),offset);
+        JsonArray resArray = new JsonArray();
         for (int i = 0; i < list.size(); i++) {
             JsonObject item = new JsonObject(list.get(i));
             JsonObject resObj = new JsonObject(Json.encode(item));
@@ -127,9 +130,14 @@ public class BAlumnusServiceImpl implements BAlumnusService, BaseAsyncService {
             //统计成员
             Integer member = bAlumnusJoinRepository.countAllByAlumnusId(id);
             resObj.put("member", member);
+            resArray.add(resObj);
         }
-        JsonArray array=new JsonArray(list);
-        future.complete(new JsonObject().put("content",array).put("total",zoom));
+        JsonObject pageable = new JsonObject();
+        pageable.put("pageNumber", pageVo.getPageNo());
+        pageable.put("offset", 0);
+        pageable.put("pageSize", pageVo.getPageSize());
+        future.complete(new JsonObject().put("content",resArray).put("pageable",pageable).put("totalPages", totalPages));
         handler.handle(future);
     }
+
 }
