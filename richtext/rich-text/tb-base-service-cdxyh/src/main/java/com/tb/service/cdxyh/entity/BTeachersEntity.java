@@ -123,6 +123,16 @@ public class BTeachersEntity extends BaseEntity {
      */
     @Column(name = "ryjl")
     private String ryjl;
+    /**
+     * 工作经历
+     */
+    @Column(name = "gzjl")
+    private String gzjl;
+
+    /**
+     * 社会职务
+     */
+    private String shzw;
 
     public String getId() {
         return id;
@@ -266,5 +276,21 @@ public class BTeachersEntity extends BaseEntity {
 
     public void setRyjl(String ryjl) {
         this.ryjl = ryjl;
+    }
+
+    public String getShzw() {
+        return shzw;
+    }
+
+    public void setShzw(String shzw) {
+        this.shzw = shzw;
+    }
+
+    public String getGzjl() {
+        return gzjl;
+    }
+
+    public void setGzjl(String gzjl) {
+        this.gzjl = gzjl;
     }
 }

@@ -216,7 +216,7 @@ public class BTeachersAsyncServiceImpl implements BTeachersAsyncService, BaseAsy
                             default:
                                 break;
                         }
-                        System.out.println(title);
+//                        System.out.println(title);
                     }
 
 
@@ -236,8 +236,7 @@ public class BTeachersAsyncServiceImpl implements BTeachersAsyncService, BaseAsy
      */
     private  void gzjl(BTeachersEntity bTeachersEntity,Element element){
         Element ul = element.getElementsByAttributeValue("class", "con").get(0);
-        System.out.println(ul.html());
-        bTeachersEntity.setGrjj(ul.html());
+        bTeachersEntity.setGzjl(ul.html());
     }
     /**
      * 荣誉奖励
@@ -246,8 +245,7 @@ public class BTeachersAsyncServiceImpl implements BTeachersAsyncService, BaseAsy
      */
     private  void ryjl(BTeachersEntity bTeachersEntity,Element element){
         Element ul = element.getElementsByAttributeValue("class", "con").get(0);
-        System.out.println(ul.html());
-        bTeachersEntity.setGrjj(ul.html());
+        bTeachersEntity.setRyjl(ul.html());
     }
     /**
      * 科技成果
@@ -256,8 +254,7 @@ public class BTeachersAsyncServiceImpl implements BTeachersAsyncService, BaseAsy
      */
     private  void kjcg(BTeachersEntity bTeachersEntity,Element element){
         Element ul = element.getElementsByAttributeValue("class", "con").get(0);
-        System.out.println(ul.html());
-        bTeachersEntity.setGrjj(ul.html());
+        bTeachersEntity.setKjcg(ul.html());
     }
     /**
      * 论文
@@ -266,8 +263,7 @@ public class BTeachersAsyncServiceImpl implements BTeachersAsyncService, BaseAsy
      */
     private  void lunwen(BTeachersEntity bTeachersEntity,Element element){
         Element ul = element.getElementsByAttributeValue("class", "con").get(0);
-        System.out.println(ul.html());
-        bTeachersEntity.setGrjj(ul.html());
+        bTeachersEntity.setLw(ul.html());
     }
     /**
      * 科研项目
@@ -276,8 +272,7 @@ public class BTeachersAsyncServiceImpl implements BTeachersAsyncService, BaseAsy
      */
     private  void kyxm(BTeachersEntity bTeachersEntity,Element element){
         Element ul = element.getElementsByAttributeValue("class", "con").get(0);
-        System.out.println(ul.html());
-        bTeachersEntity.setGrjj(ul.html());
+        bTeachersEntity.setKyxm(ul.html());
     }
     /**
      * 研究领域
@@ -286,8 +281,7 @@ public class BTeachersAsyncServiceImpl implements BTeachersAsyncService, BaseAsy
      */
     private  void yjly(BTeachersEntity bTeachersEntity,Element element){
         Element ul = element.getElementsByAttributeValue("class", "con").get(0);
-        System.out.println(ul.html());
-        bTeachersEntity.setGrjj(ul.html());
+        bTeachersEntity.setYjly(ul.html());
     }
     /**
      * 社会职务
@@ -296,8 +290,7 @@ public class BTeachersAsyncServiceImpl implements BTeachersAsyncService, BaseAsy
      */
     private  void shzw(BTeachersEntity bTeachersEntity,Element element){
         Element ul = element.getElementsByAttributeValue("class", "con").get(0);
-        System.out.println(ul.html());
-        bTeachersEntity.setGrjj(ul.html());
+        bTeachersEntity.setShzw(ul.html());
     }
     /**
      * 个人简介
@@ -306,7 +299,6 @@ public class BTeachersAsyncServiceImpl implements BTeachersAsyncService, BaseAsy
      */
     private  void grjj(BTeachersEntity bTeachersEntity,Element element){
         Element ul = element.getElementsByAttributeValue("class", "con").get(0);
-        System.out.println(ul.html());
         bTeachersEntity.setGrjj(ul.html());
     }
 
@@ -318,15 +310,15 @@ public class BTeachersAsyncServiceImpl implements BTeachersAsyncService, BaseAsy
     private void grzl(BTeachersEntity bTeachersEntity,Element element){
         Elements ul = element.getElementsByAttributeValue("class", "news_list news_text clearfix");
         Elements li = ul.get(0).getElementsByTag("li");
-        if(bTeachersEntity.getName().equals("瞿伟")){
-            System.out.println(bTeachersEntity.getName());
-        }
+//        if(bTeachersEntity.getName().equals("瞿伟")){
+//            System.out.println(bTeachersEntity.getName());
+//        }
         for (Element item : li){
             Elements title=item.getElementsByAttributeValue("class", "title");
             if(title.size()==0)break;
             String name=item.getElementsByAttributeValue("class", "title").get(0).text();
             String value=item.getElementsByAttributeValue("class", "txt").get(0).text();
-            System.out.println(name+":"+value);
+//            System.out.println(name+":"+value);
             switch (name){
                 case "学院：":
                     bTeachersEntity.setCollege(value);
