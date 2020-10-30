@@ -48,3 +48,8 @@ export const getAlumnusMemberById = (params) => {
 export const addAlumnusJoin = (params) => {
 	return postAction(api.addAlumnusJoin, params);
 }
+
+//获取加入组织列表
+export const getAlumnusByuserId = (params) => {
+	return getAction(api.getAlumnusByuserId, params);
+}
