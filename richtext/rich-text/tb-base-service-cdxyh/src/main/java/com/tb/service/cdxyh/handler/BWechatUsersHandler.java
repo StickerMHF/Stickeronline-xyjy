@@ -184,6 +184,7 @@ public class BWechatUsersHandler {
     }
 
     @RouteMapping(value = "/getUserListByInitialGroup", method = RouteMethod.GET, order = 1)
+    @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "String", paramType = "query", required = true)
     @ApiOperation(value = "根据品议首字母查询用户列表")
     public Handler<RoutingContext> getUserListByInitialGroup(){
         return ctx -> {
