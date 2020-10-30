@@ -195,12 +195,12 @@ export default {
         },
         {
           id: "all",
-          name: "全部",
-        },
-        {
-          id: 2,
           name: "校友之窗",
         },
+        // {
+        //   id: 2,
+        //   name: "校友之窗",
+        // },
         {
           id: 3,
           name: "同城校友",

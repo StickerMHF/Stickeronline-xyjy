@@ -1,5 +1,5 @@
 <template>
-	
+
 	<view class="list">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="backText">返回</block>
@@ -8,7 +8,7 @@
 		<!-- 刷新页面后的顶部提示框 -->
 		<!-- 当前弹出内容没有实际逻辑 ，可根据当前业务修改弹出提示 -->
 		<view class="tips" :class="{ 'tips-ani': tipShow }">为您更新了10条最新新闻动态</view>
-		<view class="cu-bar bg-white solid-bottom" >
+		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-titles text-green1"></text> 师资力量
 				<text class="lg text-gray teachers-btn" :class="waterfall?'cuIcon-sort':'cuIcon-apps'" @click="select"></text>
@@ -17,32 +17,33 @@
 		<!-- 基于 uni-list 的页面布局 -->
 		<uni-list class="teachers-list" :class="{ 'uni-list--waterfall': waterfall }">
 			<!-- 通过 uni-list--waterfall 类决定页面布局方向 -->
-			<uni-list-item :to="'/pages/teachers/detail/detail?id='+item.id" :border="!waterfall" class="uni-list-item--waterfall teachers-item" title="自定义商品列表" v-for="item in lists" :key="item._id">
+			<uni-list-item :to="'/pages/teachers/detail/detail?id='+item.id" :border="!waterfall" class="uni-list-item--waterfall teachers-item"
+			 title="自定义商品列表" v-for="item in lists" :key="item._id">
 				<!-- 通过header插槽定义列表左侧图片 -->
 				<template v-slot:header>
 					<view class="uni-thumb shop-picture" :class="{ 'shop-picture-column': waterfall }">
-						<image :src="item.photos" ></image>
+						<image :src="item.photos"></image>
 					</view>
 				</template>
 				<!-- 通过body插槽定义商品布局 -->
 				<view slot="body" class="shop">
-						<view class="uni-title">
-							<text class="uni-ellipsis-2">{{ item.name }}</text>
-						</view>
+					<view class="uni-title">
+						<text class="uni-ellipsis-2">{{ item.name }}</text>
+					</view>
 					<view>
 						<view class="shop-price">
-						<text class="shop-price-text" style="font-size: 14px;">{{ item.rank }}</text>
-						<text class="shop-price-text" style="margin: 0 5px;">|</text>
-						<text class="shop-price-text"> {{ item.college }}</text>
+							<text class="shop-price-text" style="font-size: 14px;">{{ item.rank }}</text>
+							<text class="shop-price-text" style="margin: 0 5px;">|</text>
+							<text class="shop-price-text"> {{ item.college }}</text>
 						</view>
-						<view class="uni-note">
-						<text class="shop-price-text" style="color: red;">{{ item.viewCount }}</text>
-						<text class="shop-price-text" style="margin: 0 5px;"></text>
-						访问</view>
-						
+						<!-- <view class="uni-note">
+							<text class="shop-price-text" style="color: red;">{{ item.viewCount?item.viewCount:0 }}</text>
+							<text class="shop-price-text" style="margin: 0 5px;"></text>
+							访问</view>
+ -->
 					</view>
 					<view class="teachers-icon margin-tb-sm text-center mem-attention">
-						<text class="lg text-gray cuIcon-right" ></text>
+						<text class="lg text-gray cuIcon-right"></text>
 					</view>
 				</view>
 			</uni-list-item>
@@ -61,13 +62,7 @@
 		components: {},
 		data() {
 			return {
-				lists: [{
-					name:"白琳",
-					photos:"https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					college:"地质工程与测绘学院",
-					rank:"副教授",
-					viewCount:20
-				}], // 列表数据
+				lists: [], // 列表数据
 				waterfall: false, // 布局方向切换
 				status: 'more', // 加载状态
 				tipShow: false, // 是否显示顶部提示框
@@ -77,21 +72,44 @@
 		},
 		onLoad(options) {
 			// 初始化页面数据
-			this.title=options.title;
+			this.title = options.title;
 			this.getTeachersListData();
 		},
 		methods: {
-			getTeachersListData(sort){
+			getTeachersListData(reload, sort) {
 				let param = {
 					pageNo: this.current,
 					pageSize: this.pageSize,
-					sort:sort?sort:'createTime'
+					sort: sort ? sort : 'createTime'
 				};
 				getTeachersList(param).then(data => {
 					var [error, res] = data;
 					if (res && res.data.success) {
-						let ss = res.data.result.content;
-						this.lists = res.data.result.content;
+						const tempList = res.data.result.content
+						// 判断是否可翻页
+						if (tempList.length === this.pageSize) {
+							this.status = 'more'
+						} else {
+							this.status = 'noMore'
+						}
+						if (reload) {
+							// 处理下拉加载提示框
+							this.tipShow = true;
+							clearTimeout(this.timer);
+							this.timer = setTimeout(() => {
+								this.tipShow = false;
+							}, 2000);
+							this.lists = tempList
+							// 停止刷新
+							uni.stopPullDownRefresh()
+						} else {
+							// 上拉加载后合并数据
+							this.lists = this.lists.concat(tempList)
+						}
+						if (tempList.length) {
+							this.current++
+						}
+
 					}
 				});
 			},
@@ -106,63 +124,13 @@
 			 */
 			onPullDownRefresh() {
 				this.current = 1
-				this.getNewsList(true);
+				this.getTeachersListData(true);
 			},
 			/**
 			 * 上拉加载回调函数
 			 */
 			onReachBottom() {
-				// this.getNewsList();
-			},
-			/**
-			 * 获取页面数据
-			 * @param {Object} reload 参数reload值为true时执行列表初始化逻辑，值为false时执行追加下一页数据的逻辑。默认为false
-			 */
-			getNewsList(reload) {
-				this.status = 'loading'
-
-				// db.collection('opendb-mall-goods')
-				// 	.where({
-				// 		// 查询字段是否存在
-				// 		_id: dbCmd.exists(true)
-				// 	})
-				// 	// 跳过对应数量的文档，输出剩下的文档
-				// 	.skip(this.pageSize * (this.current - 1))
-				// 	// 限制输出到下一阶段的记录数
-				// 	.limit(this.pageSize)
-				// 	// 获取集合中的记录
-				// 	.get()
-				// 	.then((res) => {
-				// 		const tempList = res.result.data
-				// 		// 判断是否可翻页
-				// 		if (tempList.length === this.pageSize) {
-				// 			this.status = 'more'
-				// 		} else {
-				// 			this.status = 'noMore'
-				// 		}
-				// 		if (reload) {
-				// 			// 处理下拉加载提示框
-				// 			this.tipShow = true;
-				// 			clearTimeout(this.timer);
-				// 			this.timer = setTimeout(() => {
-				// 				this.tipShow = false;
-				// 			}, 2000);
-				// 			this.lists = tempList
-				// 			// 停止刷新
-				// 			uni.stopPullDownRefresh()
-				// 		} else {
-				// 			// 上拉加载后合并数据
-				// 			this.lists = this.lists.concat(tempList)
-				// 		}
-				// 		if (tempList.length) {
-				// 			this.current++
-				// 		}
-				// 	}).catch((err) => {
-				// 		uni.showModal({
-				// 			content: '请求失败，请稍后再试：' + err,
-				// 			showCancel: false
-				// 		})
-				// 	})
+				this.getTeachersListData();
 			}
 		}
 	};
@@ -170,6 +138,7 @@
 
 <style lang="scss" scoped>
 	@import '@/common/uni-ui.scss';
+
 	page {
 		display: flex;
 		flex-direction: column;
@@ -297,19 +266,23 @@
 			/* #endif */
 		}
 	}
-	.teachers-btn{
+
+	.teachers-btn {
 		position: absolute;
-		    right: 10px;
+		right: 10px;
 	}
-	.teachers-list{
+
+	.teachers-list {
 		background-color: transparent;
 	}
-	.teachers-item{
+
+	.teachers-item {
 		margin: 5px 0;
 	}
-	.teachers-icon{
+
+	.teachers-icon {
 		position: absolute;
-		    right: 20px;
-		    top: 49px;
+		right: 20px;
+		top: 49px;
 	}
 </style>

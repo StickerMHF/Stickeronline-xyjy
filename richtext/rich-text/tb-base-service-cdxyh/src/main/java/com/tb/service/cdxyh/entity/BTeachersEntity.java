@@ -93,6 +93,47 @@ public class BTeachersEntity extends BaseEntity {
     @Column(name = "view_count")
     private Integer viewCount;
 
+    /**
+     * 个人简介
+     */
+    @Column(name = "grjj")
+    private String grjj;
+    /**
+     * 研究领域
+     */
+    @Column(name = "yjly")
+    private String yjly;
+    /**
+     * 科研项目
+     */
+    @Column(name = "kyxm")
+    private String kyxm;
+    /**
+     * 论文
+     */
+    @Column(name = "lw")
+    private String lw;
+    /**
+     * 科技成果
+     */
+    @Column(name = "kjcg")
+    private String kjcg;
+    /**
+     * 荣誉奖励
+     */
+    @Column(name = "ryjl")
+    private String ryjl;
+    /**
+     * 工作经历
+     */
+    @Column(name = "gzjl")
+    private String gzjl;
+
+    /**
+     * 社会职务
+     */
+    private String shzw;
+
     public String getId() {
         return id;
     }
@@ -187,5 +228,69 @@ public class BTeachersEntity extends BaseEntity {
 
     public void setPhotos(String photos) {
         this.photos = photos;
+    }
+
+    public String getGrjj() {
+        return grjj;
+    }
+
+    public void setGrjj(String grjj) {
+        this.grjj = grjj;
+    }
+
+    public String getYjly() {
+        return yjly;
+    }
+
+    public void setYjly(String yjly) {
+        this.yjly = yjly;
+    }
+
+    public String getKyxm() {
+        return kyxm;
+    }
+
+    public void setKyxm(String kyxm) {
+        this.kyxm = kyxm;
+    }
+
+    public String getLw() {
+        return lw;
+    }
+
+    public void setLw(String lw) {
+        this.lw = lw;
+    }
+
+    public String getKjcg() {
+        return kjcg;
+    }
+
+    public void setKjcg(String kjcg) {
+        this.kjcg = kjcg;
+    }
+
+    public String getRyjl() {
+        return ryjl;
+    }
+
+    public void setRyjl(String ryjl) {
+        this.ryjl = ryjl;
+    }
+
+    public String getShzw() {
+        return shzw;
+    }
+
+    public void setShzw(String shzw) {
+        this.shzw = shzw;
+    }
+
+    public String getGzjl() {
+        return gzjl;
+    }
+
+    public void setGzjl(String gzjl) {
+        this.gzjl = gzjl;
     }
 }

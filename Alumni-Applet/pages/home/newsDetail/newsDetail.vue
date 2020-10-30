@@ -1,6 +1,6 @@
 <template>
 	<view class="newsContent">
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="true" @callBack="callBack">
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
@@ -58,14 +58,26 @@
 			this.id = options.id;
 			this.getNewsById(this.id);
 		},
+		onShareAppMessage: function () {
+			return {
+			  title: "新闻详情",
+			  path:`/pages/home/newsDetail/newsDetail?id=${this.id}` 
+			}
+		},
 		methods: {
+			callBack(){
+				uni.redirectTo({
+					url: '/pages/home/news/news'
+				});
+			},
 			formatDate(date){
 				return dateUtil.formatDate(date);
 			},
 			likeHandler(){
 			},
 			shareHandler(){
-				this.$refs.sharepopup.open();
+				
+				// this.$refs.sharepopup.open();
 			},
 			getNewsById(id) {
 				let param = {

@@ -55,8 +55,8 @@ public class BNewsEntity extends BaseEntity {
     /**
      * 新闻描述
      */
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "description")
+    private String description;
     /**
      * 浏览量
      */
@@ -113,12 +113,12 @@ public class BNewsEntity extends BaseEntity {
         this.viewCount = viewCount;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Integer getIstop() {

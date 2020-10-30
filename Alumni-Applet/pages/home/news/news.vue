@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="true" @callBack="callBack">
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
@@ -63,6 +63,11 @@
 			this.getNewsList(true);
 		},
 		methods: {
+			callBack(){
+				uni.switchTab({
+					url: '/pages/home/home'
+				});
+			},
 			formatDate(date){
 				return dateUtil.formatDate(date);
 			},
