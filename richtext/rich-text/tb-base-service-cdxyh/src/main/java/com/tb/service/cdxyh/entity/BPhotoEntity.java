@@ -9,21 +9,21 @@ import javax.persistence.*;
 
 @Entity
 @DataObject(generateConverter = true)
-@Table(name = "b_alumnus_photo")
-public class BAlumnusPhotoEntity extends BaseEntity {
-    public BAlumnusPhotoEntity() {
+@Table(name = "b_photo")
+public class BPhotoEntity extends BaseEntity {
+    public BPhotoEntity() {
     }
 
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
         json = super.toJson();
-        BAlumnusPhotoEntityConverter.toJson(this, json);
+        BPhotoEntityConverter.toJson(this, json);
         return json;
     }
 
-    public BAlumnusPhotoEntity(JsonObject jsonObject) {
+    public BPhotoEntity(JsonObject jsonObject) {
         super(jsonObject);
-        BAlumnusPhotoEntityConverter.fromJson(jsonObject, this);
+        BPhotoEntityConverter.fromJson(jsonObject, this);
     }
 
     /**
@@ -42,10 +42,10 @@ public class BAlumnusPhotoEntity extends BaseEntity {
     private String context;
 
     /**
-     * 作者
+     * 发布者名称
      */
-    @Column(name = "author")
-    private String author;
+    @Column(name = "user_name")
+    private String userName;
 
     /**
      * 照片
@@ -60,28 +60,10 @@ public class BAlumnusPhotoEntity extends BaseEntity {
     private String userId;
 
     /**
-     * 点赞次数
-     */
-    @Column(name = "like_count")
-    private String likeCount;
-
-    /**
-     * 评论次数
-     */
-    @Column(name = "comment_count")
-    private String commentCount;
-
-    /**
-     * 浏览次数
-     */
-    @Column(name = "view_count")
-    private String viewCount;
-
-    /**
      * 发布者头像
      */
-    @Column(name = "photo")
-    private String photo;
+    @Column(name = "user_photo")
+    private String userPhoto;
 
     public String getId() {
         return id;
@@ -99,12 +81,12 @@ public class BAlumnusPhotoEntity extends BaseEntity {
         this.context = context;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getImgs() {
@@ -123,35 +105,11 @@ public class BAlumnusPhotoEntity extends BaseEntity {
         this.userId = userId;
     }
 
-    public String getLikeCount() {
-        return likeCount;
+    public String getUserPhoto() {
+        return userPhoto;
     }
 
-    public void setLikeCount(String likeCount) {
-        this.likeCount = likeCount;
-    }
-
-    public String getCommentCount() {
-        return commentCount;
-    }
-
-    public void setCommentCount(String commentCount) {
-        this.commentCount = commentCount;
-    }
-
-    public String getViewCount() {
-        return viewCount;
-    }
-
-    public void setViewCount(String viewCount) {
-        this.viewCount = viewCount;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto;
     }
 }

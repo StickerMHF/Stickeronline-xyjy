@@ -9,21 +9,21 @@ import javax.persistence.*;
 
 @Entity
 @DataObject(generateConverter = true)
-@Table(name = "b_photo")
-public class BPhotoEntity extends BaseEntity {
-    public BPhotoEntity() {
+@Table(name = "b_barrage")
+public class BBarrageEntity extends BaseEntity {
+    public BBarrageEntity() {
     }
 
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
         json = super.toJson();
-        BPhotoEntityConverter.toJson(this, json);
+        BBarrageEntityConverter.toJson(this, json);
         return json;
     }
 
-    public BPhotoEntity(JsonObject jsonObject) {
+    public BBarrageEntity(JsonObject jsonObject) {
         super(jsonObject);
-        BPhotoEntityConverter.fromJson(jsonObject, this);
+        BBarrageEntityConverter.fromJson(jsonObject, this);
     }
 
     /**
@@ -36,7 +36,7 @@ public class BPhotoEntity extends BaseEntity {
     private String id;
 
     /**
-     * 标题
+     * 弹幕内容
      */
     @Column(name = "context")
     private String context;
@@ -46,12 +46,6 @@ public class BPhotoEntity extends BaseEntity {
      */
     @Column(name = "user_name")
     private String userName;
-
-    /**
-     * 照片
-     */
-    @Column(name = "imgs")
-    private String imgs;
 
     /**
      * 发布者ID
@@ -87,14 +81,6 @@ public class BPhotoEntity extends BaseEntity {
 
     public void setUserName(String userName) {
         this.userName = userName;
-    }
-
-    public String getImgs() {
-        return imgs;
-    }
-
-    public void setImgs(String imgs) {
-        this.imgs = imgs;
     }
 
     public String getUserId() {

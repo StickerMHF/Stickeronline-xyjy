@@ -7,14 +7,14 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 @ProxyGen
-public interface BAlumnusPhotoService {
+public interface BPhotoService {
     /**
      * 新增
      *
      * @param params
      * @param handler
      */
-    void add(JsonObject params, Handler<AsyncResult<String>> handler);
+    void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
      * 分页查询

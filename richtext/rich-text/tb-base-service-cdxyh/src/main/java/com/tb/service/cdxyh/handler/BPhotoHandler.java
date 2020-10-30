@@ -7,31 +7,35 @@ import com.sticker.online.core.model.ReplyObj;
 import com.sticker.online.core.utils.AsyncServiceUtil;
 import com.sticker.online.core.utils.HttpUtil;
 import com.sticker.online.tools.common.utils.CommonUtil;
-import com.tb.service.cdxyh.service.BAlumnusPhotoService;
+import com.tb.service.cdxyh.service.BPhotoService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.vertx.core.Handler;
 import io.vertx.ext.web.RoutingContext;
+
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
 
-@RouteHandler("stickeronline/alumnusPhoto")
+@RouteHandler("stickeronline/photo")
 @Api(tags = "相册")
-public class BAlumnusPhotoHandler {
-    private BAlumnusPhotoService bAlumnusPhotoService =
-            AsyncServiceUtil.getAsyncServiceInstance(BAlumnusPhotoService.class);
+public class BPhotoHandler {
+    private BPhotoService bPhotoService =
+            AsyncServiceUtil.getAsyncServiceInstance(BPhotoService.class);
 
     @RouteMapping(value = "/add", method = RouteMethod.POST, order = 1)
-    @ApiOperation(value = "新增")
+    @ApiOperation(value = "新增相册")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "roleName", value = "角色名称", dataType = "String", paramType = "body", required = true),
-            @ApiImplicitParam(name = "description", value = "描述", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "String", paramType = "body", required = true),
+            @ApiImplicitParam(name = "userName", value = "用户名", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "userPhoto", value = "用户头像", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "context", value = "相册文案", dataType = "String", paramType = "body"),
+            @ApiImplicitParam(name = "imgs", value = "相册", dataType = "String", paramType = "body")
     })
     public Handler<RoutingContext> add() {
         return ctx -> {
-            bAlumnusPhotoService.add(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+            bPhotoService.add(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
                 if (res.succeeded()) {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
@@ -48,11 +52,11 @@ public class BAlumnusPhotoHandler {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
             @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true),
-            @ApiImplicitParam(name = "fid", value = "组织ID", dataType = "String", paramType = "query", required = true)
+            @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "String", paramType = "query", required = true)
     })
     public Handler<RoutingContext> queryPageList() {
         return ctx -> {
-            bAlumnusPhotoService.queryPageList(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+            bPhotoService.queryPageList(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
                 if (res.succeeded()) {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
@@ -71,7 +75,7 @@ public class BAlumnusPhotoHandler {
     })
     public Handler<RoutingContext> queryById() {
         return ctx -> {
-            bAlumnusPhotoService.queryById(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+            bPhotoService.queryById(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
                 if (res.succeeded()) {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));

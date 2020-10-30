@@ -9,21 +9,21 @@ import javax.persistence.*;
 
 @Entity
 @DataObject(generateConverter = true)
-@Table(name = "b_member")
-public class BMemberEntity extends BaseEntity {
-    public BMemberEntity() {
+@Table(name = "b_signin")
+public class BSigninEntity extends BaseEntity {
+    public BSigninEntity() {
     }
 
     public JsonObject toJson() {
         JsonObject json = new JsonObject();
         json = super.toJson();
-        BMemberEntityConverter.toJson(this, json);
+        BSigninEntityConverter.toJson(this, json);
         return json;
     }
 
-    public BMemberEntity(JsonObject jsonObject) {
+    public BSigninEntity(JsonObject jsonObject) {
         super(jsonObject);
-        BMemberEntityConverter.fromJson(jsonObject, this);
+        BSigninEntityConverter.fromJson(jsonObject, this);
     }
 
 
@@ -38,37 +38,30 @@ public class BMemberEntity extends BaseEntity {
 
 
     /**
-     * 姓名
+     * 用户名
      */
-    @Column(name = "name")
-    private String name;
+    @Column(name = "user_name")
+    private String userName;
     /**
-     * 性别
+     * 用户ID
      */
-    @Column(name = "sex")
-    private String sex;
+    @Column(name = "user_id")
+    private String userId;
     /**
-     * 联系方式
+     * 用户头像
      */
-    @Column(name = "contact")
-    private String contact;
+    @Column(name = "user_photo")
+    private String userPhoto;
     /**
-     * 校友简介
+     * 签到地点
      */
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "location")
+    private String location;
     /**
-     * 照片
+     * 签到次序
      */
-    @Column(name = "photo")
-    private String photo;
-
-    /**
-     * 是否关注
-     */
-    @Transient
-    private Integer attention=0;
-
+    @Column(name = "order_num")
+    private long orderNum;
 
     public String getId() {
         return id;
@@ -78,51 +71,43 @@ public class BMemberEntity extends BaseEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getSex() {
-        return sex;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getContact() {
-        return contact;
+    public String getUserPhoto() {
+        return userPhoto;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setUserPhoto(String userPhoto) {
+        this.userPhoto = userPhoto;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getLocation() {
+        return location;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setLocation(String location) {
+        this.location = location;
     }
 
-    public Integer getAttention() {
-        return attention;
+    public long getOrderNum() {
+        return orderNum;
     }
 
-    public void setAttention(Integer attention) {
-        this.attention = attention;
-    }
-
-    public String getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setOrderNum(long orderNum) {
+        this.orderNum = orderNum;
     }
 }

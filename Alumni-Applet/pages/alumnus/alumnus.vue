@@ -58,7 +58,7 @@
 								</view>
 							</navigator>
 							<button class="alumnus-btn cu-btn round sm bg-orange" v-if="item.join == true" >已加入</button>
-								<button class="alumnus-btn cu-btn round sm bg-orange" v-else @click="addJoin(item)">加入</button>
+							<button class="alumnus-btn cu-btn round sm bg-orange" v-else @click="addJoin(item)">加入</button>
 						</view>						
 					</view>
 				</uni-list-item>
@@ -134,7 +134,7 @@
 				getAlumnusList(params).then(data => {
 					var [error, res] = data;
 					if (res && res.data && res.data.result) {
-						this.lists = res.data.result.content;
+						this.lists = this.lists.concat(res.data.result.content);
 						let pageable = res.data.result.pageable;
 						this.params.pageNo = pageable.pageNumber + 1;
 						this.totalPages = res.data.result.totalPages;
@@ -150,6 +150,7 @@
 				this.tabCur = e.currentTarget.dataset.id;
 				this.params.type = e.currentTarget.dataset.id;
 				this.params.pageNo = 1;
+				this.lists = [];
 				this.getAlumnusList(this.params);
 			},
 			/**

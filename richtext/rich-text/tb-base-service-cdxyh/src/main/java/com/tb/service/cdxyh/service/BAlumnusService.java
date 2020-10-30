@@ -49,4 +49,11 @@ public interface BAlumnusService {
      * @param handler
      */
     void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+
+    /**
+     *
+     * @param params
+     * @param handler
+     */
+    void queryListByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 }

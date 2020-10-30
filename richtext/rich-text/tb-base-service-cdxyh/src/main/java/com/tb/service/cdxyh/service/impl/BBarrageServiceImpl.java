@@ -4,9 +4,9 @@ import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
 import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
-import com.tb.service.cdxyh.entity.BPhotoEntity;
-import com.tb.service.cdxyh.repository.BPhotoRepository;
-import com.tb.service.cdxyh.service.BPhotoService;
+import com.tb.service.cdxyh.entity.BBarrageEntity;
+import com.tb.service.cdxyh.repository.BBarrageRepository;
+import com.tb.service.cdxyh.service.BBarrageService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -23,16 +23,16 @@ import java.util.Optional;
 
 @Component
 @AsyncServiceHandler
-public class BPhotoServiceImpl implements BPhotoService, BaseAsyncService {
+public class BBarrageServiceImpl implements BBarrageService, BaseAsyncService {
     @Autowired
-    private BPhotoRepository bPhotoRepository;
+    private BBarrageRepository bBarrageRepository;
     @Override
     public void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
-        BPhotoEntity bPhotoEntity = new BPhotoEntity(params);
-        bPhotoEntity.setCreateTime(new Date());
-        bPhotoEntity.setCreateBy(bPhotoEntity.getUserName());
-        BPhotoEntity save = bPhotoRepository.save(bPhotoEntity);
+        BBarrageEntity bBarrageEntity = new BBarrageEntity(params);
+        bBarrageEntity.setCreateTime(new Date());
+        bBarrageEntity.setCreateBy(bBarrageEntity.getUserName());
+        BBarrageEntity save = bBarrageRepository.save(bBarrageEntity);
         if (oConvertUtils.isNotEmpty(save)){
             future.complete(new JsonObject(Json.encode(save)));
         } else {
@@ -45,22 +45,20 @@ public class BPhotoServiceImpl implements BPhotoService, BaseAsyncService {
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
-        String userId = params.getString("userId");
-        BPhotoEntity bPhotoEntity = new BPhotoEntity();
+        BBarrageEntity bBarrageEntity = new BBarrageEntity();
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-        if (oConvertUtils.isNotEmpty(userId)) {
-            bPhotoEntity.setUserId(userId);
-            exampleMatcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
-            //创建实例
-            Example<BPhotoEntity> ex = Example.of(bPhotoEntity, exampleMatcher);
 
-            Page<BPhotoEntity> plist = bPhotoRepository.findAll(ex,pageable);
+//            exampleMatcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
+            //创建实例
+            Example<BBarrageEntity> ex = Example.of(bBarrageEntity, exampleMatcher);
+
+            Page<BBarrageEntity> plist = bBarrageRepository.findAll(ex,pageable);
             future.complete(new JsonObject(Json.encode(plist)));
-        } else {
-            future.complete(new JsonObject().put("msg","请传入有效参数！"));
-        }
+//        } else {
+//            future.complete(new JsonObject().put("msg","请传入有效参数！"));
+//        }
         handler.handle(future);
     }
 
@@ -78,11 +76,11 @@ public class BPhotoServiceImpl implements BPhotoService, BaseAsyncService {
     public void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler) {
         Future<JsonArray> future = Future.future();
         ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
-        BPhotoEntity bPhotoEntity = new BPhotoEntity();
+        BBarrageEntity bBarrageEntity = new BBarrageEntity();
         matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建实例
-        Example<BPhotoEntity> ex = Example.of(bPhotoEntity, matcher);
-        List<BPhotoEntity> newsList = bPhotoRepository.findAll(ex);
+        Example<BBarrageEntity> ex = Example.of(bBarrageEntity, matcher);
+        List<BBarrageEntity> newsList = bBarrageRepository.findAll(ex);
         if (newsList == null || newsList.size() <= 0) {
             future.complete(new JsonArray());
         } else {
@@ -99,8 +97,8 @@ public class BPhotoServiceImpl implements BPhotoService, BaseAsyncService {
     @Override
     public void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
-        BPhotoEntity bPhotoEntity = new BPhotoEntity(params);
-        Optional<BPhotoEntity> res = bPhotoRepository.findById(bPhotoEntity.getId());
+        BBarrageEntity bBarrageEntity = new BBarrageEntity(params);
+        Optional<BBarrageEntity> res = bBarrageRepository.findById(bBarrageEntity.getId());
         if (res.isPresent()) {
             future.complete(new JsonObject(Json.encode(res.get())));
         }else{

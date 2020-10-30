@@ -12,6 +12,7 @@ import com.tb.service.cdxyh.repository.BAlumnusJoinRepository;
 import com.tb.service.cdxyh.repository.BAlumnusMemberRepository;
 import com.tb.service.cdxyh.repository.BAlumnusRepository;
 import com.tb.service.cdxyh.service.BAlumnusService;
+import io.swagger.models.auth.In;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -23,6 +24,7 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 @Component
 @AsyncServiceHandler
@@ -104,6 +106,30 @@ public class BAlumnusServiceImpl implements BAlumnusService, BaseAsyncService {
         } else {
             future.complete(new JsonArray(Json.encode(newsList)));
         }
+        handler.handle(future);
+    }
+
+    @Override
+    public void queryListByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
+        String userId = params.getString("userId");
+        Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+        Integer zoom = bAlumnusRepository.countByuserId(userId);  //统计总条数
+        List<Map<String, Object>> list = bAlumnusRepository.queryByuserId(userId,pageVo.getPageSize(),offset);
+        for (int i = 0; i < list.size(); i++) {
+            JsonObject item = new JsonObject(list.get(i));
+            JsonObject resObj = new JsonObject(Json.encode(item));
+            String id = item.getString("id");
+            //统计活动数量
+            Integer activity = bAlumnusActivityRepository.countAllByFid(id);
+            resObj.put("activity", activity);
+            //统计成员
+            Integer member = bAlumnusJoinRepository.countAllByAlumnusId(id);
+            resObj.put("member", member);
+        }
+        JsonArray array=new JsonArray(list);
+        future.complete(new JsonObject().put("content",array).put("total",zoom));
         handler.handle(future);
     }
 }

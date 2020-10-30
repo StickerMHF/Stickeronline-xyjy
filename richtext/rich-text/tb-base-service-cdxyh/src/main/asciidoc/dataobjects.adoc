@@ -114,6 +114,23 @@
 |[[viewCount]]`@viewCount`|`String`|-
 |===
 
+[[BBarrageEntity]]
+== BBarrageEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
 [[BCooperationEntity]]
 == BCooperationEntity
 
@@ -241,6 +258,42 @@
 |[[type]]`@type`|`Number (Integer)`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|===
+
+[[BPhotoEntity]]
+== BPhotoEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[imgs]]`@imgs`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BSigninEntity]]
+== BSigninEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[location]]`@location`|`String`|-
+|[[orderNum]]`@orderNum`|`Number (long)`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
 |===
 
 [[BTeachersEntity]]

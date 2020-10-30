@@ -7,7 +7,7 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 @ProxyGen
-public interface BMomentsService {
+public interface BSigninService {
     /**
      * 新增
      *
@@ -31,7 +31,7 @@ public interface BMomentsService {
      * @param handler
      */
 
-    void edit(JsonObject params, Handler<AsyncResult<String>> handler);
+    void edit(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
      * 通过id删除
@@ -48,7 +48,7 @@ public interface BMomentsService {
      * @param params
      * @param handler
      */
-    void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+    void queryAll(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
 
     /**
      * 根据ID获取成员详情
