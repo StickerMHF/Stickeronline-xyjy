@@ -72,6 +72,7 @@ const api = {
 	 * 照片征集
 	 */
 	getPhotoList: baseurl + '/stickeronline/photo/list',
+	getUserList: baseurl + '/stickeronline/photo/getUserList',
 	addPhoto: baseurl + '/stickeronline/photo/add',
 	/**
 	 * 组织
