@@ -249,10 +249,17 @@ export default {
     // }
     this.params.userId = uni.getStorageSync("openid");
     this.getAlumnusList(this.params);
-    _self = this;
-    this.cWidth = uni.upx2px(750);
-    this.cHeight = uni.upx2px(500);
-    this.getServerData();
+    
+  },
+  onHide() {
+  	this.tabCur = 1;
+  },
+  onShow() {
+  	this.tabCur = 5;
+	_self = this;
+	this.cWidth = uni.upx2px(750);
+	this.cHeight = uni.upx2px(500);
+	this.getServerData();
   },
   methods: {
     getAlumnusList(params) {

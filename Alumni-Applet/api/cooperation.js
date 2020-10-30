@@ -47,4 +47,12 @@ export const sendBulletChat = (params) => {
     return postAction(api.sendBulletChat, params)
 }
 
+//获取相册列表
+export const getPhotoList = (params) => {
+    return getAction(api.getPhotoList, params)
+}
+//发送弹幕
+export const addPhoto = (params) => {
+    return postAction(api.addPhoto, params)
+}
 

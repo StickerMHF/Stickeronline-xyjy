@@ -5,15 +5,15 @@
 				<view class="user-box">
 					<view class="user-img">
 						<view class="img-box">
-							<image :src="item.avatarUrl"></image>
+							<image :src="item.userPhoto"></image>
 						</view>
 					</view>
 					<!-- <view class="userInfo"> -->
 						<text class="user-text cl1">
-							{{item.name}}
+							{{item.userName}}
 						</text>
 						<text class="user-status cl1">
-							{{item.item}}
+							{{item.context}}
 						</text>
 					<!-- </view> -->
 				</view>
@@ -61,11 +61,26 @@
 				listData: []
 			}
 		},
+		watch:{
+			list(){
+				this.list.forEach( v => {
+					v['type'] = 'rightToLeft';
+					v['style'] = {
+						// animationDuration: `${data.time}s`,
+						animationDuration: `${Math.ceil(Math.floor(Math.random() * (this.maxTime - this.minTime + 1) + this.minTime))}s`,
+						top: `${Math.ceil(Math.random() * (this.maxTop - this.minTop + 1) + this.minTop)}px`
+					}
+					this.listData.push(v);
+				})
+				console.log(this.listData);
+			}
+		},
 		mounted() {
 			//leftBottom 使用参数
-			if (this.type === 'leftBottom') {
-				this.hrackNum = Math.floor(this.maxTop / this.hrackH);
-			}
+			// if (this.type === 'leftBottom') {
+			// 	this.hrackNum = Math.floor(this.maxTop / this.hrackH);
+			// }
+			
 		},
 		methods: {
 			add(obj) {
@@ -77,6 +92,19 @@
 					time: Math.ceil(Math.floor(Math.random() * (this.maxTime - this.minTime + 1) + this.minTime)),
 					type: this.type
 				}
+				let objData = {
+					context: data.item,
+					userName: data.name,
+					userPhoto: data.avatarUrl,
+					type: 'rightToLeft',
+					style: {
+						// animationDuration: `${data.time}s`,
+						animationDuration: `9s`,
+						top: `${Math.ceil(Math.random() * (this.maxTop - this.minTop + 1) + this.minTop)}px`
+					},
+					delTime: Date.parse(new Date()) + data.time * 1200
+				}
+				this.listData.push(objData);
 				// if (this.type === 'leftBottom') {
 				// 	let objData = {
 				// 		item: data.item,
@@ -111,18 +139,19 @@
 				// 		this.listData.push(objData);
 				// 	}
 				// } else if (this.type === 'rightToLeft') {
-					let objData = {
-						item: data.item,
-						name: data.name,
-						avatarUrl: data.avatarUrl,
-						type: 'rightToLeft',
-						style: {
-							// animationDuration: `${data.time}s`,
-							animationDuration: `9s`,
-							top: `${Math.ceil(Math.random() * (this.maxTop - this.minTop + 1) + this.minTop)}px`
-						},
-						delTime: Date.parse(new Date()) + data.time * 1200
-					}
+					// let objData = {
+					// 	context: data.item,
+					// 	userName: data.name,
+					// 	userPhoto: data.avatarUrl,
+					// 	type: 'rightToLeft',
+					// 	style: {
+					// 		// animationDuration: `${data.time}s`,
+					// 		animationDuration: `9s`,
+					// 		top: `${Math.ceil(Math.random() * (this.maxTop - this.minTop + 1) + this.minTop)}px`
+					// 	},
+					// 	delTime: Date.parse(new Date()) + data.time * 1200
+					// }
+					// this.listData.push(objData);
 					// for (let i in this.listData) {
 					// 	if (this.listData[i].delTime <= Date.parse(new Date())) {
 					// 		this.repaint(i, objData.type);
@@ -131,9 +160,7 @@
 					// 		return
 					// 	}
 					// }
-					this.listData.push(objData);
 					
-					console.log(this.listData);
 				// }
 			},
 			repaint(index, type) {

@@ -18,18 +18,18 @@
 <script>
 import uCharts from "../../js_sdk/u-charts/u-charts.js";
 let _selfs;
-let canvaDistribution = null;
+let canvaDistribution;
 export default {
 	components: {},
 	data() {
 		return {
-			cWidth: "",
-			cHeight: "",
+			cWidth: 0,
+			cHeight: 0,
 			pixelRatio: 1,
-			serverData: "",
 		};
 	},
 	mounted() {
+		// _selfs = this;
 		this.getData();
 	},
 	methods: {

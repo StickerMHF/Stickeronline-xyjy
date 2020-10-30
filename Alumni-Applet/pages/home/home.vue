@@ -56,7 +56,9 @@
 				<umap class="phm-map"></umap>
 			</view>
 		</view> -->
-		<alumnusDistribution></alumnusDistribution>
+		<view class="" v-if="!state">
+			<alumnusDistribution></alumnusDistribution>
+		</view>
 	</view>
 </template>
 
@@ -78,6 +80,7 @@
 		},
 		data() {
 			return {
+				state:true,
 				swiperList: [{
 					id: 0,
 					type: 'image',
@@ -157,6 +160,13 @@
 				}]
 			}
 
+		},
+		onShow() {
+			this.state = false;
+			console.log('state',this.state);
+		},
+		onHide() {
+			this.state = true;
 		},
 		onLoad() {
 			this.getNewsListData();

@@ -69,6 +69,11 @@ const api = {
 	getBulletChatList: baseurl+'/stickeronline/barrage/list',
 	sendBulletChat: baseurl+'/stickeronline/barrage/add',
 	/**
+	 * 照片征集
+	 */
+	getPhotoList: baseurl+'/stickeronline/photo/list',
+	addPhoto: baseurl+'/stickeronline/photo/add',
+	/**
 	 * 组织
 	 */
 	getAlumnusList: baseurl+'/stickeronline/alumnus/list',
