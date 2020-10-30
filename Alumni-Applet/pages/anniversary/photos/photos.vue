@@ -7,7 +7,7 @@
 		<view class="ann_news_content">
 			<view class="titleBox">
 				<!-- <image src="" mode=""></image> -->
-				<text>长安大学建校70周年照片征集</text>
+				<text class="titleText">长安大学建校70周年照片征集</text>
 			</view>
 			<view class="photoList">
 				<view class="listBox" v-for="(item,index) in listData" :key="index" @click="hrefToPhotoListPage(item.user_id)">
@@ -152,13 +152,18 @@
 	background-color: white;
 }
 .titleBox{
-	background-image: 'http://www.imapway.cn/Alumni/static/images/marker.png';
+	background-image: url('http://www.imapway.cn/Alumni/static/images/titleBg.png');
 	background-size: 100%;
 	width: 100%;
 	height: 220rpx;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	.titleText{
+		color: #fff;
+		font-size: 16px;
+		margin-top: 50rpx;
+	}
 }
 .photoList{
 	display: flex;
