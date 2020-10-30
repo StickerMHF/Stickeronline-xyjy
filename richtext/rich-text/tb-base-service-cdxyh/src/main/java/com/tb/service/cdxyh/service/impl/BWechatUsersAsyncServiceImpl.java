@@ -176,16 +176,16 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
     public void getUserListByInitialGroup(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         JsonObject resObj = new JsonObject();
-        List<BWechatUsersEntity> list = bWechatUsersRepository.findAllOrderByNameDesc();
+        String userId = params.getString("userId");
+        List<Map<String, Object>> list = bWechatUsersRepository.findAllOrderByNameDesc(userId);
         for (int i = 0; i < list.size(); i++) {
-            BWechatUsersEntity bWechatUsersEntity = list.get(i);
-            String nameInitial = bWechatUsersEntity.getNameInitial();
+            JsonObject jsonObject = new JsonObject(list.get(i));
+            String nameInitial = jsonObject.getString("name_initial");
             JsonObject obj = resObj.getJsonObject(nameInitial);
-            System.out.println(i);
             if (obj !=null && !obj.isEmpty()){
-                obj.getJsonArray("list").add(new JsonObject(Json.encode(bWechatUsersEntity)));
+                obj.getJsonArray("list").add(jsonObject);
             } else {
-                resObj.put(nameInitial,new JsonObject().put("list", new JsonArray().add(new JsonObject(Json.encode(bWechatUsersEntity)))));
+                resObj.put(nameInitial,new JsonObject().put("list", new JsonArray().add(jsonObject)));
             }
         }
         future.complete(resObj);

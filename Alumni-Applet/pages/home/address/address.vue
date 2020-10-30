@@ -19,19 +19,21 @@
 					<view class="address-padding">{{item.name}}</view>
 					<view class="cu-list menu-avatar no-padding">
 						<view class="cu-item" v-for="(items,sub) in item.users" :key="sub">
-							<view class="cu-avatar round lg" :style="'background-image: url('+items.photo+');'"></view>
+							<view class="cu-avatar round lg" :style="'background-image: url('+items.avatar_url+');'"></view>
 							
 							<view class="content">
 								<navigator url="">
-								<view class="text-grey">{{items.name}}<text class="text-abc">{{items.name}}</text></view>
+								<!-- <view class="text-grey">{{items.name}}<text class="text-abc">{{items.name}}</text></view> -->
+								<view class="text-grey"><text class="text-abc">{{items.name}}</text></view>
 								<view class="text-gray text-sm">
-									{{items.email||''}}
+									{{items.college||''}}
 								</view>
 							</navigator>
 							</view>
 							<view class="address-attention">
-								<view v-if="items.isAttention" class="address-attention-btn">已关注</view>
-								<view v-else class="address-attention-btn">关注</view>
+								<view v-if="items.attention == 1" class="address-attention-btn" @click="deleteMemberAttention(items)">已关注</view>
+								<view v-else-if="params.userId == items.id" class="address-attention-btn">我</view>
+								<view v-else class="address-attention-btn" @click="addMemberAttention(items)">关注</view>
 							</view>
 						</view>
 					</view>
@@ -51,6 +53,7 @@
 </template>
 
 <script>
+	import {getUserListByInitialGroup, addWechatUserAttention, deleteWechatUserAttention} from '@/api/user.js'
 	export default {
 		data() {
 			return {
@@ -86,50 +89,14 @@
 				}]
 			}],
 				listCur: '',
+				params:{
+					userId: ''
+				}
 			};
 		},
 		onLoad() {
-			let list = [{
-				name:"A",
-				users:[{
-					name:"A君",
-					photo:"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL5CRqudtTN97pM9JdXlQl7zjRNNfiaofSMiaVWyyTaN8elgbiax8v5RO67ozUH6cgVhHkvwOWER0AYw/132",
-					email:"111@163.com",
-					isAttention:true
-				},{
-					name:"A君",
-					photo:"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL5CRqudtTN97pM9JdXlQl7zjRNNfiaofSMiaVWyyTaN8elgbiax8v5RO67ozUH6cgVhHkvwOWER0AYw/132",
-					email:"111@163.com",
-					isAttention:false
-				}]
-			},{
-				name:"B",
-				users:[{
-					name:"B君",
-					photo:"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL5CRqudtTN97pM9JdXlQl7zjRNNfiaofSMiaVWyyTaN8elgbiax8v5RO67ozUH6cgVhHkvwOWER0AYw/132",
-					email:"111@163.com",
-					isAttention:false
-				},{
-					name:"B君",
-					photo:"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL5CRqudtTN97pM9JdXlQl7zjRNNfiaofSMiaVWyyTaN8elgbiax8v5RO67ozUH6cgVhHkvwOWER0AYw/132",
-					email:"",
-					isAttention:true
-				}]
-			},{
-				name:"#",
-				users:[{
-					name:"其他君",
-					photo:"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL5CRqudtTN97pM9JdXlQl7zjRNNfiaofSMiaVWyyTaN8elgbiax8v5RO67ozUH6cgVhHkvwOWER0AYw/132",
-					isAttention:false
-				},{
-					name:"其他君",
-					photo:"https://thirdwx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTL5CRqudtTN97pM9JdXlQl7zjRNNfiaofSMiaVWyyTaN8elgbiax8v5RO67ozUH6cgVhHkvwOWER0AYw/132",
-					email:"111@163.com",
-					isAttention:false
-				}]
-			}];
-			this.list = list;
-			this.listCur = list[0];
+			this.params.userId = uni.getStorageSync("openid");
+			this.getUsetList();			
 		},
 		onReady() {
 			let that = this;
@@ -140,7 +107,28 @@
 				that.barTop = res.top
 			}).exec()
 		},
-		methods: {
+		methods: {			
+			getUsetList(){
+				getUserListByInitialGroup(this.params).then(data => {
+					let [error, res] = data;
+					if(res&&res.data&&res.data.result){
+						let result = res.data.result;
+						let resArray = new Array();
+						for(let key in result){
+							let item = {
+									name: key,
+									users:result[key].list
+								}
+							
+							resArray.push(item);
+						}
+						this.list = resArray;
+						this.listCur = resArray[0];
+					}
+					// console.log(data);
+				});
+			},
+						
 			payHandler(item) {
 				if (item.attention == 0||!item.attention) {
 					this.addMemberAttention(item);
@@ -156,7 +144,7 @@
 						userId: openid,
 						memberId: item.id
 					};
-					addMemberAttention(param).then(data => {
+					addWechatUserAttention(param).then(data => {
 						var [error, res] = data;
 						if (res && res.data.success) {
 							item.attention = 1;
@@ -175,7 +163,7 @@
 						userId: openid,
 						memberId: item.id
 					};
-					deleteMemberAttention(param).then(data => {
+					deleteWechatUserAttention(param).then(data => {
 						var [error, res] = data;
 						if (res && res.data.success) {
 							item.attention = 0;
