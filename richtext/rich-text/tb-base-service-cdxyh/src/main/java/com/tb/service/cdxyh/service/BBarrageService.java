@@ -7,14 +7,14 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 
 @ProxyGen
-public interface BAlumnusService {
+public interface BBarrageService {
     /**
      * 新增
      *
      * @param params
      * @param handler
      */
-    void add(JsonObject params, Handler<AsyncResult<String>> handler);
+    void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
      * 分页查询
@@ -51,9 +51,17 @@ public interface BAlumnusService {
     void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
 
     /**
-     *
+     * 获取相册列表
      * @param params
      * @param handler
      */
-    void queryListByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    void getList(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+
+    /**
+     * 根据ID获取数据
+     * @param params
+     * @param handler
+     */
+    void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+
 }
