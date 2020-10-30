@@ -158,16 +158,16 @@ export default {
           txt: "优秀校友",
           page: "/pages/alumnus/goodMember",
         },
-        {
-          icon: "http://www.imapway.cn/Alumni/static/home/dlqq2x.png",
-          txt: "点亮全球",
-          page: "/pages/anniversary/footprint/footprint",
-        },
         // {
         //   icon: "http://www.imapway.cn/Alumni/static/home/dlqq2x.png",
-        //   txt: "校友通讯",
-        //   page: "/pages/home/address/address",
+        //   txt: "点亮全球",
+        //   page: "/pages/anniversary/footprint/footprint",
         // },
+        {
+          icon: "http://www.imapway.cn/Alumni/static/home/dlqq2x.png",
+          txt: "校友通讯",
+          page: "/pages/home/address/address",
+        },
         {
           id: "xyjz",
           icon: "http://www.imapway.cn/Alumni/static/home/xyjz2x.png",
