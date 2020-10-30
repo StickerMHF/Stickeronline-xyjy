@@ -246,6 +246,7 @@ export default {
     // 	pageSize: this.pageSize,
     // 	type: ''
     // }
+	this.lists = [];
     this.params.userId = uni.getStorageSync("openid");
     this.getAlumnusList(this.params);
   },
@@ -264,7 +265,7 @@ export default {
       getAlumnusList(params).then(data => {
         var [error, res] = data;
         if (res && res.data && res.data.result) {
-          this.lists = res.data.result.content;
+          this.lists = this.lists.concat(res.data.result.content);
           let pageable = res.data.result.pageable;
           this.params.pageNo = pageable.pageNumber + 1;
           this.totalPages = res.data.result.totalPages;
@@ -280,6 +281,7 @@ export default {
       this.tabCur = e.currentTarget.dataset.id;
       this.params.type = e.currentTarget.dataset.id;
       this.params.pageNo = 1;
+	  this.lists = [];
       this.getAlumnusList(this.params);
 
       if (e.currentTarget.dataset.id == 5) {
