@@ -38,11 +38,6 @@ public class BAlumnusMemberServiceImpl implements BAlumnusMemberService, BaseAsy
         BAlummunsMemberEntity bAlummunsMemberEntity = new BAlummunsMemberEntity();
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-//        if (oConvertUtils.isNotEmpty(type)) {
-//            bAlummunsMemberEntity.setType(type);
-//            exampleMatcher.withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains());
-//        }
         //创建实例
         Example<BAlummunsMemberEntity> ex = Example.of(bAlummunsMemberEntity);
 
