@@ -212,8 +212,15 @@ export default {
   onHide() {
     this.state = true;
   },
-  onLoad() {
+  onLoad(options) {
     this.getNewsListData();
+	if(options.url){
+	    let url = decodeURIComponent(options.url);
+		console.log('url',url);
+		uni.navigateTo({
+			url:url
+		})
+	}
   },
   methods: {
     getNewsListData(sort) {

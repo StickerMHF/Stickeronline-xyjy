@@ -106,6 +106,12 @@ public class BWechatUsersEntity  extends BaseEntity {
     @Column(name = "avatar_url")
     private String avatarUrl;
 
+    /**
+     * 名字首字母
+     */
+    @Column(name = "name_initial")
+    private String 	nameInitial;
+
     public String getOpenid() {
         return openid;
     }
@@ -226,4 +232,11 @@ public class BWechatUsersEntity  extends BaseEntity {
         this.avatarUrl = avatarUrl;
     }
 
+    public String getNameInitial() {
+        return nameInitial;
+    }
+
+    public void setNameInitial(String nameInitial) {
+        this.nameInitial = nameInitial;
+    }
 }

@@ -20,3 +20,107 @@
 |[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 
+[[BPhotoEntity]]
+== BPhotoEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[context]]`@context`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[imgs]]`@imgs`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BSigninEntity]]
+== BSigninEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[location]]`@location`|`String`|-
+|[[orderNum]]`@orderNum`|`Number (long)`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|[[userName]]`@userName`|`String`|-
+|[[userPhoto]]`@userPhoto`|`String`|-
+|===
+
+[[BTeachersEntity]]
+== BTeachersEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[bgdd]]`@bgdd`|`String`|-
+|[[byyx]]`@byyx`|`String`|-
+|[[college]]`@college`|`String`|-
+|[[contact]]`@contact`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[education]]`@education`|`String`|-
+|[[email]]`@email`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[photos]]`@photos`|`String`|-
+|[[rank]]`@rank`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
+|===
+
+[[BWechatUsersAttentionEntity]]
+== BWechatUsersAttentionEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[mark]]`@mark`|`String`|-
+|[[memberId]]`@memberId`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|===
+
+[[BWechatUsersEntity]]
+== BWechatUsersEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[avatarUrl]]`@avatarUrl`|`String`|-
+|[[city]]`@city`|`String`|-
+|[[college]]`@college`|`String`|-
+|[[country]]`@country`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[education]]`@education`|`String`|-
+|[[endDate]]`@endDate`|`String`|-
+|[[identityCard]]`@identityCard`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[nameInitial]]`@nameInitial`|`String`|-
+|[[nickName]]`@nickName`|`String`|-
+|[[openid]]`@openid`|`String`|-
+|[[profession]]`@profession`|`String`|-
+|[[province]]`@province`|`String`|-
+|[[sex]]`@sex`|`String`|-
+|[[startDate]]`@startDate`|`String`|-
+|[[type]]`@type`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
