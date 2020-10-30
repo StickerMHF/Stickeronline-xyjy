@@ -48,7 +48,7 @@ public interface BPhotoService {
      * @param params
      * @param handler
      */
-    void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+    void getUserList(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
      * 获取相册列表
