@@ -98,12 +98,14 @@
 				// 	name: '校友统计',
 				// 	uri: '/pages/alumnus/statistics'
 				// }
-				lists: [{
-					name: "校友总会",
-					thumb: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
-					member: 30,
-					activity: 2
-				}], // 列表数据
+				lists: [
+				// 	{
+				// 	name: "校友总会",
+				// 	thumb: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
+				// 	member: 30,
+				// 	activity: 2
+				// },
+				], // 列表数据
 				waterfall: false, // 布局方向切换
 				status: 'more', // 加载状态
 				tipShow: false, // 是否显示顶部提示框
