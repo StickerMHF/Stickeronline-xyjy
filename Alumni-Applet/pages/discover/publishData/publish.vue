@@ -99,7 +99,7 @@
 					return;
 				}
 				
-				uni.showLoading({title:'发布中'});
+				// uni.showLoading({title:'发布中'});
 				
 				// var location = await this.getLocation();//位置信息,可删除,主要想记录一下异步转同步处理
 				// var images = [];
@@ -130,13 +130,21 @@
 					 // console.log(pages,'UUUUUUUU')
 					 //  let currentPage = pages[pages.length - 2] // 获取当前页面的对象
 					 //  let url = currentPage.route // 当前页面url
+					uni.showLoading({title:'审核中！'});
+					setTimeout(function () {
+					    uni.hideLoading();
+						uni.navigateBack({
+							url:"/pages/discover/discover"
+						});
+					}, 1000);
 
-					// uni.navigateBack({
-					// 			url:"/pages/discover/discover"
-					// 		});
-					uni.navigateTo({
-								url:"/pages/discover/discover"
-							});
+					
+					// uni.navigateTo({
+					// 	url:"/pages/discover/discover"
+					// });
+					
+					// uni.hideLoading();
+					
 				});
 			},
 			

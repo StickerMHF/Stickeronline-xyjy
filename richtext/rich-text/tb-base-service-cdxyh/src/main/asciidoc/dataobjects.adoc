@@ -199,6 +199,7 @@
 |[[id]]`@id`|`String`|-
 |[[likeCount]]`@likeCount`|`Number (Integer)`|-
 |[[photos]]`@photos`|`String`|-
+|[[status]]`@status`|`Number (Integer)`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |[[userId]]`@userId`|`String`|-
 |[[userName]]`@userName`|`String`|-
