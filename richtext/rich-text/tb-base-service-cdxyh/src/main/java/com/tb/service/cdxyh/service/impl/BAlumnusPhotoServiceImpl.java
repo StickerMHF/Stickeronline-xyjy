@@ -2,10 +2,13 @@ package com.tb.service.cdxyh.service.impl;
 
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
-import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BAlumnusPhotoEntity;
+import com.tb.service.cdxyh.entity.BMomentsCommentEntity;
+import com.tb.service.cdxyh.entity.BMomentsLikeEntity;
 import com.tb.service.cdxyh.repository.BAlumnusPhotoRepository;
+import com.tb.service.cdxyh.repository.BMomentsCommentRepository;
+import com.tb.service.cdxyh.repository.BMomentsLikeRepository;
 import com.tb.service.cdxyh.service.BAlumnusPhotoService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -13,14 +16,12 @@ import io.vertx.core.Handler;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
-import netscape.javascript.JSObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.*;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Component
@@ -28,6 +29,10 @@ import java.util.Optional;
 public class BAlumnusPhotoServiceImpl implements BAlumnusPhotoService, BaseAsyncService {
     @Autowired
     private BAlumnusPhotoRepository bAlumnusPhotoRepository;
+    @Autowired
+    BMomentsCommentRepository bMomentsCommentRepository;
+    @Autowired
+    BMomentsLikeRepository bMomentsLikeRepository;
     @Override
     public void add(JsonObject params, Handler<AsyncResult<String>> handler) {
 
@@ -46,15 +51,28 @@ public class BAlumnusPhotoServiceImpl implements BAlumnusPhotoService, BaseAsync
         List<BAlumnusPhotoEntity> list = bAlumnusPhotoRepository.getListByalumnusId(fid, pageVo.getPageSize(), offset);
         JsonArray resArray=new JsonArray();
         list.forEach(item->{
+            JsonObject object = new JsonObject(Json.encode(item));
             BAlumnusPhotoEntity bAlumnusPhotoEntity = item;
             Integer viewCount = bAlumnusPhotoEntity.getViewCount();
+            String photoId = bAlumnusPhotoEntity.getId();
             if(viewCount == null){
                 bAlumnusPhotoEntity.setViewCount(1);
             } else {
                 bAlumnusPhotoEntity.setViewCount(viewCount+1);
             }
             bAlumnusPhotoRepository.save(bAlumnusPhotoEntity);  //更新浏览量
-            resArray.add(new JsonObject(Json.encode(item)));
+
+            //获取评论信息
+            List<BMomentsCommentEntity> commentList = bMomentsCommentRepository.queryByCommentId(photoId);
+            object.put("commentList", new JsonArray(Json.encode(commentList)));
+            //获取当前用户点赞状态
+            List<BMomentsLikeEntity> likeList = bMomentsLikeRepository.findAllByUserIdAndMomentId(params.getString("userId"),photoId);
+            if(likeList.size()>0){
+                object.put("status", likeList.get(0).getStatus());
+            }else {
+                object.put("status", "unlike");
+            }
+            resArray.add(object);
         });
         JsonObject pageable = new JsonObject();
         pageable.put("pageNumber", pageVo.getPageNo());
