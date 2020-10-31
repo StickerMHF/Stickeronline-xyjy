@@ -63,19 +63,19 @@ public class BAlumnusPhotoEntity extends BaseEntity {
      * 点赞次数
      */
     @Column(name = "like_count")
-    private String likeCount;
+    private Integer likeCount;
 
     /**
      * 评论次数
      */
     @Column(name = "comment_count")
-    private String commentCount;
+    private Integer commentCount;
 
     /**
      * 浏览次数
      */
     @Column(name = "view_count")
-    private String viewCount;
+    private Integer viewCount;
 
     /**
      * 发布者头像
@@ -123,27 +123,27 @@ public class BAlumnusPhotoEntity extends BaseEntity {
         this.userId = userId;
     }
 
-    public String getLikeCount() {
+    public Integer getLikeCount() {
         return likeCount;
     }
 
-    public void setLikeCount(String likeCount) {
+    public void setLikeCount(Integer likeCount) {
         this.likeCount = likeCount;
     }
 
-    public String getCommentCount() {
+    public Integer getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(String commentCount) {
+    public void setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
     }
 
-    public String getViewCount() {
+    public Integer getViewCount() {
         return viewCount;
     }
 
-    public void setViewCount(String viewCount) {
+    public void setViewCount(Integer viewCount) {
         this.viewCount = viewCount;
     }
 

@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -35,21 +36,31 @@ public class BAlumnusPhotoServiceImpl implements BAlumnusPhotoService, BaseAsync
     @Override
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
-        PageVo pageVo = new PageVo(params);
-        String type = params.getString("type");
-        BAlumnusPhotoEntity bAlumnusPhotoEntity = new BAlumnusPhotoEntity();
-        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
-        Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
-        ExampleMatcher exampleMatcher = ExampleMatcher.matching();
-//        if (oConvertUtils.isNotEmpty(type)) {
-//            bAlumnusPhotoEntity.setType(type);
-//            exampleMatcher.withMatcher("type", ExampleMatcher.GenericPropertyMatchers.contains());
-//        }
-        //创建实例
-        Example<BAlumnusPhotoEntity> ex = Example.of(bAlumnusPhotoEntity, exampleMatcher);
 
-        Page<BAlumnusPhotoEntity> plist = bAlumnusPhotoRepository.findAll(ex,pageable);
-        future.complete(new JsonObject(Json.encode(plist)));
+        PageVo pageVo = new PageVo(params);
+        String fid = params.getString("fid");
+        Integer zoom = bAlumnusPhotoRepository.countByalumnusId(fid);  //统计总条数
+        //总页数
+        Integer totalPages = (zoom-1)/pageVo.getPageSize()+1;
+        Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+        List<BAlumnusPhotoEntity> list = bAlumnusPhotoRepository.getListByalumnusId(fid, pageVo.getPageSize(), offset);
+        JsonArray resArray=new JsonArray();
+        list.forEach(item->{
+            BAlumnusPhotoEntity bAlumnusPhotoEntity = item;
+            Integer viewCount = bAlumnusPhotoEntity.getViewCount();
+            if(viewCount == null){
+                bAlumnusPhotoEntity.setViewCount(1);
+            } else {
+                bAlumnusPhotoEntity.setViewCount(viewCount+1);
+            }
+            bAlumnusPhotoRepository.save(bAlumnusPhotoEntity);  //更新浏览量
+            resArray.add(new JsonObject(Json.encode(item)));
+        });
+        JsonObject pageable = new JsonObject();
+        pageable.put("pageNumber", pageVo.getPageNo());
+        pageable.put("offset", zoom);
+        pageable.put("pageSize", pageVo.getPageSize());
+        future.complete(new JsonObject().put("content",resArray).put("pageable",pageable).put("totalPages", totalPages));
         handler.handle(future);
     }
 
