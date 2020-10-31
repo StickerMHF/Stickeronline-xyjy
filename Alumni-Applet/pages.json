@@ -240,16 +240,16 @@
             }
             
         },
-		// {
-  //           "path" : "pages/personal/basicInfo/certification",
-  //           "style" :                                                                                    
-  //           {
-  //               "navigationBarTitleText": "",
-  //               "enablePullDownRefresh": false
-  //           }
+		{
+            "path" : "pages/personal/basicInfo/certification",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
             
-  //       }
-  //       ,
+        }
+        ,
 		{
             "path" : "pages/personal/attention/attention",
             "style" :                                                                                    
