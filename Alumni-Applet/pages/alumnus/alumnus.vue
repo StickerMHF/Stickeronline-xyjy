@@ -25,17 +25,17 @@
       <view class="statisticsView">
         <view class="flex-box">
           <view class="alumnusNums">
-            <text class="cuIcon-people myIcon"></text>
+            <!-- <text class="cuIcon-people myIcon"></text> -->
             <view class="numsBox">
-              <text>校友总数</text>
-              <text>{{ peopleNums }}个</text>
+              <text class="peopleNumsText">{{ peopleNums }}</text>
+              <text>校友总数/人</text>
             </view>
           </view>
-          <view class="alumnusNums">
-            <text class="cuIcon-taoxiaopu myIcon"></text>
+          <view class="alumnusNums groupNums">
+            <!-- <text class="cuIcon-taoxiaopu myIcon"></text> -->
             <view class="numsBox">
-              <text>校友会</text>
-              <text>{{ groupNums }}个</text>
+              <text class="groupNumsText">{{ groupNums }}</text>
+              <text>校友会/个</text>
             </view>
           </view>
         </view>
@@ -123,7 +123,7 @@
               >
                 <view class="view-left">
                   <view class="uni-title">
-                    <text class="uni-ellipsis-2">{{ item.name }}</text>
+                    <view class="uni-ellipsis-2">{{ item.name }}</view>
                   </view>
                   <view>
                     <view class="cu-capsule radius">
@@ -152,6 +152,10 @@
                       加入
                     </button>
                   </view>
+				  <view class="starBox">
+					  <text class="liveness">活跃度</text>
+				  	<uniRate :readonly="true" :size="14" :value="item.liveness"></uniRate>
+				  </view>
                 </view>
               </navigator>
             </view>
@@ -168,6 +172,7 @@
 import { getAlumnusList, addAlumnusJoin } from "@/api/alumnus.js";
 import uCharts from "../../js_sdk/u-charts/u-charts.js";
 import alumnusDistribution from "./alumnusDistribution.vue";
+import uniRate from '@/components/uni-rate/uni-rate.vue';
 var _self;
 var canvaColumn = null;
 var canvaTrack = null;
@@ -177,6 +182,7 @@ var canvaEmployment = null;
 export default {
   components: {
     alumnusDistribution,
+	uniRate
   },
   data() {
     return {
@@ -442,6 +448,7 @@ export default {
       canvaColumn = new uCharts({
         $this: _self,
         canvasId: canvasId,
+		colors:['#aa00ff'],
         type: "column",
         legend: { show: false },
         fontSize: 11,
@@ -454,10 +461,12 @@ export default {
           disableGrid: true,
         },
         yAxis: {
-          data: {
-            calibration: false,
-            axisLine: true,
-          },
+			disabled:true,
+			disableGrid:true,
+          // data: {
+          //   calibration: false,
+          //   axisLine: true,
+          // },
         },
         dataLabel: true,
         width: _self.cWidth * _self.pixelRatio,
@@ -465,9 +474,10 @@ export default {
         extra: {
           column: {
             type: "group",
-            width:
-              (_self.cWidth * _self.pixelRatio * 0.45) /
-              chartData.categories.length,
+            // width:
+            //   (_self.cWidth * _self.pixelRatio * 0.45) /
+            //   chartData.categories.length,
+			width:20,
           },
         },
       });
@@ -520,7 +530,7 @@ export default {
         extra: {
           column: {
             type: "group",
-            width: 40,
+            width: 20,
           },
         },
       });
@@ -594,6 +604,7 @@ page {
 .shop-picture {
   width: 50px;
   height: 50px;
+  margin-top:20rpx;
 }
 
 .shop-picture-column {
@@ -642,13 +653,22 @@ page {
 }
 
 .uni-ellipsis-2 {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // display: -webkit-box;
+  // -webkit-line-clamp: 2;
+  // -webkit-box-orient: vertical;
+  font-size: 32rpx;
 }
-
+.starBox{
+	display: flex;
+	align-items: center;
+	.liveness{
+		margin-right:10rpx;
+		color: #888888;
+		font-size: 14px;
+	}
+}
 // 默认加入 scoped ，所以外面加一层提升权重
 .list {
   .uni-list--waterfall {
@@ -669,10 +689,13 @@ page {
 				.uni-list-item--waterfall {
         width: 50%;
         box-sizing: border-box;
+		display: flex;
+		align-items: center;
 
         .uni-list-item__container {
           padding: 5px;
           flex-direction: column;
+		  align-items: center;
         }
       }
 
@@ -680,9 +703,13 @@ page {
     }
 
     /* #endif */
+	
   }
 }
-
+/deep/ .uni-title{
+		padding:0;
+		margin:0;
+	}
 .nav .cu-item {
   height: 45px;
   display: inline-block;
@@ -694,6 +721,10 @@ page {
 .alumnus-btn {
   position: absolute;
   right: 10px;
+  margin-top: -16rpx;
+  // padding: 10rpx 30rpx;
+  width:140rpx;
+  height: 60rpx;
 }
 
 .star-pos {
@@ -725,24 +756,45 @@ page {
   padding: 20rpx 0;
 }
 .alumnusNums {
-  width: 300rpx;
-  height: 150rpx;
-  border: 1px solid #e9e9e9;
-  border-radius: 4px;
+  width: 200rpx;
+  height: 200rpx;
+  // border: 5px solid #d83838;
   display: flex;
-  padding: 0 40rpx;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  border-radius: 50%;
+  padding: 5px; 
+  border-radius: 50%; 
+  background-image: -webkit-linear-gradient(left, #00aaff 40%, #5500ff 100%);  
+  background-image: -moz-linear-gradient(left, #00aaff 40%, #5500ff 100%); 
+  background-image: linear-gradient(left, #00aaff 40%, #5500ff 100%);
   .myIcon {
     font-size: 30px;
   }
+}
+.groupNums{
+	background-image: -webkit-linear-gradient(left, #ff0000 30%, #aa007f 100%);
+	background-image: -moz-linear-gradient(left, #ff0000 30%, #aa007f 100%); 
+	background-image: linear-gradient(left, #ff0000 30%, #aa007f 100%);
 }
 .numsBox {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  height: 100%;
+  background: #f2f2f2;
+  border-radius: 50%;
+  justify-content: center;
 }
-
+.peopleNumsText{
+	font-size: 36rpx;
+	color:#00ffff;
+}
+.groupNumsText{
+	font-size: 36rpx;
+	color:#ff0000;
+}
 page {
   background: #f2f2f2;
   width: 750upx;
