@@ -27,7 +27,7 @@
 				<view class="text-gray text-sm text-right padding">
 					<text class="cuIcon-attentionfill margin-lr-xs"></text> {{moment.viewCount}}
 					<text class="cuIcon-appreciatefill margin-lr-xs" :class="moment.status=='like'?' active':''" @click="momentLike(i)"></text> {{moment.likeCount}}
-					<text class="cuIcon-messagefill margin-lr-xs" v-show="moment.commentList" @click="commentInput(i)"></text> {{moment.commentCount}}
+					<text class="cuIcon-messagefill margin-lr-xs" @click="commentInput(i)"></text> {{moment.commentCount}}
 				</view>
 				<view class="cu-list menu-avatar comment solids-top">
 					<view class="cu-item" v-for="comment in moment.commentList">
@@ -67,6 +67,7 @@
 </template>
 
 <script>
+	import {momentLike,momentComment} from '@/api/discover.js'
 	export default {
 		name: 'moments',
 		data() {
@@ -102,14 +103,14 @@
 			}
 		},
 		props: {
-			fatherLikeMethod: {
-				type: Function,
-				default: null
-			},
-			fatherCommentMethod: {
-				type: Function,
-				dafult: null
-			},
+			// fatherLikeMethod: {
+			// 	type: Function,
+			// 	default: null
+			// },
+			// fatherCommentMethod: {
+			// 	type: Function,
+			// 	dafult: null
+			// },
 			list: {
 				type: Array,
 				default: function(e) {
@@ -204,7 +205,7 @@
 					this.likeParams.status = 'like';
 				}
 				//提交数据
-				if(this.fatherLikeMethod){
+				// if(this.fatherLikeMethod){
 					this.likeParams.momentId = this.list[index].id;
 					//获取用户信息
 					this.likeParams.userId = uni.getStorageSync('openid');
@@ -212,17 +213,22 @@
 					if(userInfo){
 						this.likeParams.userName = userInfo.nickName;
 						this.likeParams.userPhoto = userInfo.avatarUrl;
-						this.fatherLikeMethod(this.likeParams);
+						// this.fatherLikeMethod(this.likeParams);
+						momentLike(this.likeParams).then(data => {
+							console.log(data)
+						});
+						
 					} else {
 						//跳转页面 
 						 wx.navigateTo({
 						 	url:'/pages/login/login'
 						 })
 					}					
-				}		
+				// }		
 			},
 			//相册评论
 			commentInput(index){
+				debugger
 				this.commentParams.momentId = this.list[index].id;
 				this.nowComment = this.list[index].id;
 				//获取用户信息
@@ -259,11 +265,24 @@
 					 });
 				}	
 			},
-			sumbitComment(){				
-				if(this.fatherCommentMethod){
+			// sumbitComment(){				
+			// 	if(this.fatherCommentMethod){
+			// 		this.commentParams.content = this.commentText;
+			// 		this.fatherCommentMethod(this.commentParams);
+			// 	}
+			// },
+			//发表评论
+			sumbitComment(){
+				// if(this.fatherCommentMethod){
 					this.commentParams.content = this.commentText;
-					this.fatherCommentMethod(this.commentParams);
-				}
+					// this.fatherCommentMethod(this.commentParams);
+					momentComment(this.commentParams).then(data => {
+						console.log(data);
+						this.commentShow = false;
+						this.commentText = '';
+					});
+					
+				// }
 			}
 		},
 		
