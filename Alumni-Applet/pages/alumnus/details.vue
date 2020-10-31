@@ -230,7 +230,7 @@
 					if (res && res.data && res.data.result) {
 						let list = res.data.result.content;
 						this.activityList = this.convertData(list);
-						if(this.activityList){
+						if(this.activityList.length == 0){
 							this.showActivity = false;
 						}
 					}
@@ -242,6 +242,9 @@
 					if (res && res.data && res.data.result) {
 						let list = res.data.result.content;
 						this.photoList = this.converMomentsData(list);
+						if(this.photoList.length == 0){
+							this.showPhoto = false;
+						}
 					}
 				});
 			},
@@ -250,6 +253,9 @@
 					let [error, res] = data;
 					if(res&& res.data&&res.data.result){
 						this.memberList = res.data.result.content;
+						if(this.memberList.length == 0){
+							this.showMember = false;
+						}
 					}
 				});
 			},

@@ -27,7 +27,7 @@
 				<view class="text-gray text-sm text-right padding">
 					<text class="cuIcon-attentionfill margin-lr-xs"></text> {{moment.viewCount}}
 					<text class="cuIcon-appreciatefill margin-lr-xs" :class="moment.status=='like'?' active':''" @click="momentLike(i)"></text> {{moment.likeCount}}
-					<text class="cuIcon-messagefill margin-lr-xs" @click="commentInput(i)"></text> {{moment.commentCount}}
+					<text class="cuIcon-messagefill margin-lr-xs" v-show="moment.commentList" @click="commentInput(i)"></text> {{moment.commentCount}}
 				</view>
 				<view class="cu-list menu-avatar comment solids-top">
 					<view class="cu-item" v-for="comment in moment.commentList">
@@ -92,7 +92,8 @@
 					
 				},
 				listArray: [],
-				inputValue: ''
+				inputValue: '',
+				nowComment: ''
 			}
 		},
 		watch:{
@@ -220,8 +221,10 @@
 					}					
 				}		
 			},
+			//相册评论
 			commentInput(index){
 				this.commentParams.momentId = this.list[index].id;
+				this.nowComment = this.list[index].id;
 				//获取用户信息
 				this.commentParams.userId = uni.getStorageSync('openid');
 				let userInfo = uni.getStorageSync('userInfo');
