@@ -34,6 +34,10 @@ export const updateWechatUser = (params) => {
 export const deleteWechatUser = (params) => {
     return deleteAction(api.deleteWechatUser, params)
 }
+//获取用户列表
+export const getUserListByInitialGroup = (params) => {
+	return getAction(api.getUserListByInitialGroup, params);
+}
 // 查询所有校友列表
 export const queryAllByUserId = (params) => {
     return getAction(api.queryAllByUserId, params)

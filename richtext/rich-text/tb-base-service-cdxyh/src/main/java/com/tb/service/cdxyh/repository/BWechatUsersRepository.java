@@ -49,8 +49,11 @@ public interface BWechatUsersRepository extends JpaRepository<BWechatUsersEntity
      * 根据用户名字首字母获取用户列表
      * @return
      */
-    @Query(value="select * from w_wechat_users order by name_initial", nativeQuery=true)
-    List<BWechatUsersEntity> findAllOrderByNameDesc();
+//    @Query(value="select * from w_wechat_users order by name_initial", nativeQuery=true)
+//    List<BWechatUsersEntity> findAllOrderByNameDesc();
+
+    @Query(value = "SELECT a.name,a.id,a.avatar_url,a.college,a.name_initial,b.attention FROM w_wechat_users a left JOIN (SELECT member_id,count(*) as attention from b_wechat_users_attention where user_id=?1 group by member_id) b ON a.id=b.member_id order by a.name_initial", nativeQuery = true)
+    List<Map<String,Object>> findAllOrderByNameDesc(String userId);
 
 
     
