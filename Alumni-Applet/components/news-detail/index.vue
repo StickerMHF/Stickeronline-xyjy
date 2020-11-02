@@ -6,7 +6,7 @@
         <div class="outer">
           <span class="author">{{ options.createBy }}</span>
           <div class="wrap">
-            <view class="like  hm-btn" :class="islike?'cuIcon-likefill':'cuIcon-like'"  @click="likeHandler"></view>
+            <button class="like  hm-btn" :class="islike?'cuIcon-likefill':'cuIcon-like'"  @click="likeHandler"></button>
 			<!-- <button open-type="share">s </button> -->
             <!-- <view class="share cuIcon-share hm-btn" @click="shareHandler"></view> -->
 			<button class="share cuIcon-share hm-btn" open-type="share"></button>
@@ -96,8 +96,18 @@ export default {
 }
 .hm-btn{
 	color: #ff8901;
+	    width: 30px;
+	    height: 30px;
+	    border: 0px;
+	    padding: 0;
+	    margin: 0px 2px;
 }
 .hd{
 	min-height: 40px;
+}
+.share{
+	width: 30px;
+	height: 30px;
+	border: 0px;
 }
 </style>
