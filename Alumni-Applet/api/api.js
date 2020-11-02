@@ -1,5 +1,5 @@
-const baseurl = 'https://www.imapway.cn/alumniapi'
-// const baseurl = 'http://localhost:8084'
+// const baseurl = 'https://www.imapway.cn/alumniapi'
+const baseurl = 'http://localhost:8084'
 const api = {
 	test: baseurl + '/stickeronline/rich/text/list',
 	getUserOpenid: baseurl + '/tb/wechat/getAppletUserInfo',
@@ -82,6 +82,7 @@ const api = {
 	getAlumnusList: baseurl + '/stickeronline/alumnus/list',
 	//加入组织
 	addAlumnusJoin: baseurl + '/stickeronline/alumnusJoin/add',
+	delAlumnusJoin: baseurl + '/stickeronline/alumnusJoin/delete',
 	//获取我加入的组织列表
 	getAlumnusByuserId: baseurl + '/stickeronline/alumnus/getListByUserId',
 	//资讯

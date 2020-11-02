@@ -44,7 +44,18 @@ public class BAlumnusJoinServiceImpl implements BAlumnusJoinService, BaseAsyncSe
 
     @Override
     public void delete(JsonObject params, Handler<AsyncResult<String>> handler) {
-
+        Future<String> future = Future.future();
+        BAlumnusJoinEntity bAlumnusJoinEntity = new BAlumnusJoinEntity(params);
+        String alumnusId = bAlumnusJoinEntity.getAlumnusId();
+        String userId = bAlumnusJoinEntity.getUserId();
+        bAlumnusJoinRepository.deleteByAlumnusIdAndUserId(alumnusId,userId);
+//        bAlumnusJoinRepository.delete(bAlumnusJoinEntity);
+//        String[] ids = params.getString("id").split(",");
+//        for (int i = 0; i < ids.length; i++) {
+//            bAlumnusJoinRepository.deleteByIdEquals(ids[i]);
+//        }
+        future.complete("删除成功!");
+        handler.handle(future);
     }
 
     @Override

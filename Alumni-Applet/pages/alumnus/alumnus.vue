@@ -100,7 +100,7 @@
 								</view>
 							</navigator>
 							<view class="alumunus-button">
-								<button class="alumnus-btn cu-btn round sm bg-orange" v-if="item.join == true">
+								<button class="alumnus-btn cu-btn round sm bg-orange" v-if="item.join == true" @click="deleteAlumnusJoin(item)">
 									已加入
 								</button>
 								<button class="alumnus-btn cu-btn round sm bg-orange" v-else @click="addJoin(item)">
@@ -120,7 +120,8 @@
 <script>
 	import {
 		getAlumnusList,
-		addAlumnusJoin
+		addAlumnusJoin,
+		delAlumnusJoin
 	} from "@/api/alumnus.js";
 	import uCharts from "../../js_sdk/u-charts/u-charts.js";
 	import alumnusDistribution from "./alumnusDistribution.vue";
@@ -270,8 +271,8 @@
 				this.getNewsList();
 			},
 			addJoin(alumnu) {
-				debugger;
-				let params = {
+				// debugger
+				var params = {
 					alumnusId: alumnu.id,
 					userId: "",
 					userName: "",
@@ -283,11 +284,13 @@
 				//获取用户信息
 				params.userId = uni.getStorageSync("openid");
 				let userInfo = uni.getStorageSync("userInfo");
+				var that = this;
 				if (userInfo) {
 					params.userName = userInfo.nickName;
 					params.userPhoto = userInfo.avatarUrl;
 					addAlumnusJoin(params).then(data => {
 						console.log(data);
+						alumnu.join = true;
 					});
 				} else {
 					//跳转页面
@@ -295,6 +298,18 @@
 						url: "/pages/login/login",
 					});
 				}
+			},
+			//取消关注
+			deleteAlumnusJoin(alumnu){
+				let formdata = {
+					alumnusId: alumnu.id,
+					userId: ""
+				}
+				formdata.userId = uni.getStorageSync("openid");
+				delAlumnusJoin(formdata).then(data =>{
+					console.log(data);
+					alumnu.join = false;
+				});
 			},
 			/**
 			 * 获取页面数据

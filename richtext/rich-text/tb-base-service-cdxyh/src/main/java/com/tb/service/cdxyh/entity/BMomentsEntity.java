@@ -83,6 +83,12 @@ public class BMomentsEntity extends BaseEntity {
     @Column(name = "user_id")
     private String userId;
 
+    /**
+     * 评论次数
+     */
+    @Column(name = "status")
+    private Integer status = 0;
+
 
 
     public String getId() {
@@ -155,5 +161,13 @@ public class BMomentsEntity extends BaseEntity {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

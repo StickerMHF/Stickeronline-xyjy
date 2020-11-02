@@ -49,6 +49,11 @@ export const addAlumnusJoin = (params) => {
 	return postAction(api.addAlumnusJoin, params);
 }
 
+//退出组织
+export const delAlumnusJoin = (params) => {
+	return postAction(api.delAlumnusJoin, params);
+}
+
 //获取加入组织列表
 export const getAlumnusByuserId = (params) => {
 	return getAction(api.getAlumnusByuserId, params);

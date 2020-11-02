@@ -63,8 +63,12 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
             sort = new Sort(Sort.Direction.DESC, "createTime");
         }
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
+        ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
+        matcher.withMatcher("status", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建实例
-        Example<BMomentsEntity> ex = Example.of(bMomentsEntity);
+        bMomentsEntity.setStatus(1);
+        Example<BMomentsEntity> ex = Example.of(bMomentsEntity,matcher);
+
         Page<BMomentsEntity> plist = bMomentsRepository.findAll(ex,pageable);
         JsonObject resObj = new JsonObject(Json.encode(plist));
         JsonArray contents = resObj.getJsonArray("content");

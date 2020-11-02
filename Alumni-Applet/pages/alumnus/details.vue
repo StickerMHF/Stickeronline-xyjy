@@ -289,13 +289,15 @@
 			converMomentsData(list) {
 				list = list.map(item => {
 					var res = {
+						id: item.id,
 						username: item.author,
 						publishDate: dateUtil.formatDate(item.createTime),
 						photo: item.photo,
 						content: item.context,
 						viewCount: item.viewCount,
 						likeCount: item.likeCount,
-						commentCount: item.commentCount
+						commentCount: item.commentCount,
+						commentList: this.listToTree(item.commentList),
 					}
 					if (item.imgs) {
 						let imgArray = item.imgs.split(";");
@@ -310,7 +312,37 @@
 					return res;
 				});
 				return list;
-			}
+			},
+			listToTree(list){
+				var data = list.map(item =>{
+					return {
+						id: item.id,
+						url: item.userPhoto,
+						name: item.userName,
+						content: item.content,
+						userId: item.userId,
+						commentTime: dateUtil.formatTime(item.createTime),
+						parent: item.fid,
+						momentId:item.momentId
+					}
+				});
+				
+				var tree = [];
+				var dataMap = data.reduce(function(map, node) {
+				    map[node.id] = node;
+				    return map;
+				}, {});
+				data.forEach(function(node) {
+				    var parent = dataMap[node.parent];
+				    if (parent) {
+				        (parent.replyList || (parent.replyList = []))
+				            .push(node);
+				    } else {
+				        tree.push(node);
+				    }
+				});
+				return tree;
+			},
 		}
 	}
 </script>
