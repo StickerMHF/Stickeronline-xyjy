@@ -3,6 +3,7 @@ package com.tb.service.cdxyh.service.impl;
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
 import com.tb.base.common.vo.PageVo;
+import com.tb.service.baidu.service.impl.ContentCensorServiceImpl;
 import com.tb.service.cdxyh.entity.BMomentsCommentEntity;
 import com.tb.service.cdxyh.entity.BMomentsEntity;
 import com.tb.service.cdxyh.entity.BMomentsLikeEntity;
@@ -33,6 +34,8 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
     private BMomentsCommentRepository bMomentsCommentRepository;
     @Autowired
     private BMomentsLikeRepository bMomentsLikeRepository;
+    @Autowired
+    private ContentCensorServiceImpl contentCensorServiceImpl;
 
     @Override
     public void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
@@ -40,6 +43,9 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         BMomentsEntity bMomentsEntity = new BMomentsEntity(params);
         bMomentsEntity.setCreateTime(new Date());
         BMomentsEntity save = bMomentsRepository.save(bMomentsEntity);
+        contentCensorServiceImpl.getContentCensorInfo(new JsonObject().put("text",bMomentsEntity.getContent()),res->{
+            save.set
+        });
         future.complete(new JsonObject(Json.encode(save)));
         handler.handle(future);
     }

@@ -33,6 +33,11 @@
             <artifactId>pinyin4j</artifactId>
             <version>2.5.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.tb.service</groupId>
+            <artifactId>tb-base-service-wechat</artifactId>
+            <version>1.2.1-RELEASE</version>
+        </dependency>
     </dependencies>
 
 
