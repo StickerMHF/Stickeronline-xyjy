@@ -14,6 +14,6 @@ import java.util.List;
 public interface BMomentsCommentRepository extends JpaRepository<BMomentsCommentEntity, String> {
 
     @Modifying
-    @Query(value = "select a from BMomentsCommentEntity a where a.momentId = :commentId")
+    @Query(value = "select a from BMomentsCommentEntity a where a.momentId = :commentId and a.status = 1")
     List<BMomentsCommentEntity> queryByCommentId(@Param("commentId") String commentId);
 }

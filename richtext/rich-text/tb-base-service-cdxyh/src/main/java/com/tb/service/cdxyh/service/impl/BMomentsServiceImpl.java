@@ -44,7 +44,13 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         bMomentsEntity.setCreateTime(new Date());
         BMomentsEntity save = bMomentsRepository.save(bMomentsEntity);
         contentCensorServiceImpl.getContentCensorInfo(new JsonObject().put("text",bMomentsEntity.getContent()),res->{
-            save.set
+            if(res.succeeded()&&res.result().getInteger("conclusionType")==1){
+                save.setStatus(1);
+                bMomentsRepository.save(save);
+            }else{
+                save.setStatus(-1);
+                bMomentsRepository.save(save);
+            }
         });
         future.complete(new JsonObject(Json.encode(save)));
         handler.handle(future);

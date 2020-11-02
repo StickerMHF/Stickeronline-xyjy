@@ -68,6 +68,11 @@ public class BMomentsCommentEntity extends BaseEntity {
      */
     @Column(name = "fid")
     private String fid;
+    /**
+     * 审核状态
+     */
+    @Column(name = "status")
+    private Integer status;
 
     public String getId() {
         return id;
@@ -123,5 +128,13 @@ public class BMomentsCommentEntity extends BaseEntity {
 
     public void setFid(String fid) {
         this.fid = fid;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

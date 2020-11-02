@@ -87,7 +87,7 @@ public class BMomentsEntity extends BaseEntity {
      * 评论次数
      */
     @Column(name = "status")
-    private Integer status = 0;
+    private Integer status;
 
 
 
