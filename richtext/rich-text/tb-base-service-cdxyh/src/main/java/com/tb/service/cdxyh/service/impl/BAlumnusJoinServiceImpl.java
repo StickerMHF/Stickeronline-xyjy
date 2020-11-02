@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 
 @Component
 @AsyncServiceHandler
@@ -48,12 +49,12 @@ public class BAlumnusJoinServiceImpl implements BAlumnusJoinService, BaseAsyncSe
         BAlumnusJoinEntity bAlumnusJoinEntity = new BAlumnusJoinEntity(params);
         String alumnusId = bAlumnusJoinEntity.getAlumnusId();
         String userId = bAlumnusJoinEntity.getUserId();
-        bAlumnusJoinRepository.deleteByAlumnusIdAndUserId(alumnusId,userId);
-//        bAlumnusJoinRepository.delete(bAlumnusJoinEntity);
-//        String[] ids = params.getString("id").split(",");
-//        for (int i = 0; i < ids.length; i++) {
-//            bAlumnusJoinRepository.deleteByIdEquals(ids[i]);
-//        }
+        //查询数据条目
+        List<BAlumnusJoinEntity> list = bAlumnusJoinRepository.findByAlumnusIdAndUserId(alumnusId, userId);
+        list.forEach(item ->{
+            bAlumnusJoinRepository.delete(item);
+        });
+
         future.complete("删除成功!");
         handler.handle(future);
     }

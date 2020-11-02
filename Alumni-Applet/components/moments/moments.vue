@@ -284,22 +284,27 @@
 					this.commentShow = false;
 					this.commentText = '';
 					//获取当前评论数据
-					debugger
 					var fid = this.commentParams.momentId;
 					var that = this;
-					this.listArray.forEach(function(val, index, arr) {
-						if (fid == val.id) {
+					var [error, res] = data;	
+					if(res&&res.data&&res.data.result){
+						if(res.data.result.status == 1){
 							debugger
-							that.listArray[index].commentList.push({
-								name: that.commentParams.userName,
-								content: that.commentParams.content,
-								userId: that.commentParams.userId,
-								replyTime: new Date(),
-								fid: that.commentParams.fid,
-								url: that.commentParams.userPhoto
+							this.listArray.forEach(function(val, index, arr) {
+								if (fid == val.id) {							
+									that.listArray[index].commentList.push({
+										name: that.commentParams.userName,
+										content: that.commentParams.content,
+										userId: that.commentParams.userId,
+										replyTime: new Date(),
+										fid: that.commentParams.fid,
+										url: that.commentParams.userPhoto
+									});
+								}
 							});
 						}
-					});
+					}
+					
 				});
 
 				// }
