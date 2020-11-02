@@ -46,13 +46,14 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         contentCensorServiceImpl.getContentCensorInfo(new JsonObject().put("text",bMomentsEntity.getContent()),res->{
             if(res.succeeded()&&res.result().getInteger("conclusionType")==1){
                 save.setStatus(1);
-                bMomentsRepository.save(save);
+                BMomentsEntity save1=bMomentsRepository.save(save);
+                future.complete(new JsonObject(Json.encode(save1)));
             }else{
                 save.setStatus(-1);
-                bMomentsRepository.save(save);
+                BMomentsEntity save1=bMomentsRepository.save(save);
+                future.complete(new JsonObject(Json.encode(save1)));
             }
         });
-        future.complete(new JsonObject(Json.encode(save)));
         handler.handle(future);
     }
 

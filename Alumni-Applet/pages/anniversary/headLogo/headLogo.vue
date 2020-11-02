@@ -18,7 +18,7 @@
 		},
 		data() {
 			return {
-				sources:["../../static/anniversary/head0.png","../../static/anniversary/head1.png","../../static/anniversary/head2.png","../../static/anniversary/head3.png","../../static/anniversary/head0.png","../../static/anniversary/head1.png"]
+				sources:["../../static/anniversary/head4.png","../../static/anniversary/head5.png","../../static/anniversary/head2.png","../../static/anniversary/head3.png","../../static/anniversary/head0.png","../../static/anniversary/head1.png"]
 			}
 		},
 		methods: {
