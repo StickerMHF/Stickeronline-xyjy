@@ -114,7 +114,7 @@ export default {
   width: 100%;
   height: 200rpx;
   .sendBtn {
-    background: #f37b1d;
+    background: #00beb7;
     color: #fff;
     font-size: 16px;
     margin: 16rpx auto;
