@@ -1,6 +1,6 @@
 <template>
 	<view class="ann_news">
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="true" @callBack="callBack">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="false" @callBack="callBack">
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
@@ -53,8 +53,8 @@
 				starNums:0,
 				totalStars:0,
 				currentCityStars:45,
-				starCitys:29,
-				starCountrys:21,
+				starCitys:1,
+				starCountrys:1,
 				location:'',
 				longitude:'',
 				latitude:'',
@@ -115,8 +115,10 @@
 				getPositionList("").then(data => {
 					var [error, res] = data;
 					if (res && res.data.success) {
-						let datas = res.data.result;
+						let datas = res.data.result.list;
 						this.starNums = datas.length;
+						this.starCountrys=res.data.result.countryNum;
+						this.starCitys=res.data.result.cityNum;
 						datas.forEach(v => {
 							let location = v.location.split(",");
 							this.markers.push({ //赋值数组
@@ -133,6 +135,7 @@
 				});
 			},
 			lightUpOrUpdate(){
+				debugger
 				if(this.userId !== this.userLightUpId){//点亮
 					this.addLightUpPersonnel();
 				}else{//更新
@@ -180,7 +183,7 @@
 				} else {
 					//跳转页面 
 					 wx.navigateTo({
-					 	url:'pages/login/login'
+					 	url:'/pages/login/login'
 					 })
 				}
 			},

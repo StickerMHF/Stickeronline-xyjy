@@ -5,11 +5,11 @@
         <div class="header">
           <a href="/">
             <img src="~@/assets/logo.svg" class="logo" alt="logo">
-            <span class="title">快速构建平台</span>
+            <span class="title">校友会管理系统</span>
             <!-- stickeronline/sys -->
           </a>
         </div>
-        <div class="desc">天邦快速构建平台</div>
+        <div class="desc">校友会管理系统</div>
       </div>
 
       <route-view></route-view>
@@ -21,8 +21,8 @@
           <a href="http://www.baidu.com" target="_blank">条款</a>
         </div>
         <div class="copyright">
-          Copyright &copy; 2019
-          <a href="http://www.giscn.net/" target="_blank">天邦</a> 出品
+          Copyright &copy; 2020
+          <a href="" target="_blank">Sticker</a> 出品
         </div>
       </div>
     </div>

@@ -48,7 +48,7 @@
 				pixelRatio: 1,
 				canvaMap: null,
 				currentfromSelect: '1',
-				currentSelect: '1',
+				currentSelect: '2',
 				isSelect: false,
 				attentionList: [{
 						name: "道路桥梁与渡河工程",
@@ -157,7 +157,7 @@
 				}
 			}
 		},
-		onLoad() {			
+		onShow() {			
 			//获取用户ID
 			this.params.userId = uni.getStorageSync('openid');
 			

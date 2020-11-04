@@ -81,7 +81,7 @@ public class BNewsAsyncServiceImpl implements BNewsAsyncService, BaseAsyncServic
         Future<String> future = Future.future();
         String[] ids = params.getString("id").split(",");
         for (int i = 0; i < ids.length; i++) {
-            bNewsRepository.deleteByIdEquals(ids[i]);
+            bNewsRepository.deleteById(ids[i]);
         }
         future.complete("删除成功!");
         handler.handle(future);

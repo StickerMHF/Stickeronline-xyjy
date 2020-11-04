@@ -134,8 +134,8 @@ export default {
         },
         {
           icon: "http://www.imapway.cn/Alumni/static/home/xqzt2x.png",
-          txt: "校庆专题",
-          page: "/pages/anniversary/index",
+          txt: "校友统计",
+          page: "/pages/home/statistics/statistics",
         },
         {
           id: "ysjs",
@@ -258,11 +258,11 @@ export default {
           },
         });
       }
-      if (value && value == "ysjs") {
-        uni.switchTab({
-          url: "/pages/schoolHistory/schoolHistory",
-        });
-      }
+      // if (value && value == "ysjs") {
+      //   uni.switchTab({
+      //     url: "/pages/schoolHistory/schoolHistory",
+      //   });
+      // }
     },
   },
 };
@@ -272,7 +272,9 @@ export default {
 .phm-card {
   border-bottom: 1rpx solid #e5dee5;
 }
-
+.screen-swiper {
+    min-height: 300rpx;
+}
 .ph-menu {
   padding: 10px;
   margin-bottom: 10px;
