@@ -14,14 +14,14 @@
               <image :src="item.userPhoto"></image>
             </view>
           </view>
-          <!-- <view class="userInfo"> -->
-          <text class="user-text cl1">
-            {{ item.userName === null ? "陌生人" : item.userName }}
-          </text>
-          <text class="user-status cl1">
-            {{ item.context }}
-          </text>
-          <!-- </view> -->
+          <view class="userInfo">
+            <text class="user-text cl1">
+              {{ item.userName === null ? "校友" : item.userName }}
+            </text>
+            <text class="user-status cl1">
+              {{ item.context }}
+            </text>
+          </view>
         </view>
       </view>
     </view>
@@ -296,13 +296,15 @@ export default {
       display: flex;
       padding: 3rpx 40rpx 3rpx 10rpx;
       background: rgba(0, 0, 0, 0.3);
-      border-radius: 32rpx;
+      border-radius: 20px;
       align-items: center;
+      //   justify-content: start;
+      min-width: 300rpx;
       .userInfo {
         display: flex;
         flex-direction: column;
         justify-content: start;
-        align-items: center;
+        // align-items: center;
       }
       .user-img {
         .img-box {
@@ -332,6 +334,7 @@ export default {
         font-weight: 400;
         // width: 80rpx;
         color: rgba(255, 255, 255, 1);
+        height: 18px;
       }
     }
   }
