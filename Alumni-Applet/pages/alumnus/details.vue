@@ -230,7 +230,7 @@
 					if (res && res.data && res.data.result) {
 						let list = res.data.result.content;
 						this.activityList = this.convertData(list);
-						if(this.activityList){
+						if(this.activityList.length == 0){
 							this.showActivity = false;
 						}
 					}
@@ -242,6 +242,9 @@
 					if (res && res.data && res.data.result) {
 						let list = res.data.result.content;
 						this.photoList = this.converMomentsData(list);
+						if(this.photoList.length == 0){
+							this.showPhoto = false;
+						}
 					}
 				});
 			},
@@ -250,6 +253,9 @@
 					let [error, res] = data;
 					if(res&& res.data&&res.data.result){
 						this.memberList = res.data.result.content;
+						if(this.memberList.length == 0){
+							this.showMember = false;
+						}
 					}
 				});
 			},
@@ -283,13 +289,15 @@
 			converMomentsData(list) {
 				list = list.map(item => {
 					var res = {
+						id: item.id,
 						username: item.author,
 						publishDate: dateUtil.formatDate(item.createTime),
 						photo: item.photo,
 						content: item.context,
 						viewCount: item.viewCount,
 						likeCount: item.likeCount,
-						commentCount: item.commentCount
+						commentCount: item.commentCount,
+						commentList: this.listToTree(item.commentList),
 					}
 					if (item.imgs) {
 						let imgArray = item.imgs.split(";");
@@ -304,7 +312,37 @@
 					return res;
 				});
 				return list;
-			}
+			},
+			listToTree(list){
+				var data = list.map(item =>{
+					return {
+						id: item.id,
+						url: item.userPhoto,
+						name: item.userName,
+						content: item.content,
+						userId: item.userId,
+						commentTime: dateUtil.formatTime(item.createTime),
+						parent: item.fid,
+						momentId:item.momentId
+					}
+				});
+				
+				var tree = [];
+				var dataMap = data.reduce(function(map, node) {
+				    map[node.id] = node;
+				    return map;
+				}, {});
+				data.forEach(function(node) {
+				    var parent = dataMap[node.parent];
+				    if (parent) {
+				        (parent.replyList || (parent.replyList = []))
+				            .push(node);
+				    } else {
+				        tree.push(node);
+				    }
+				});
+				return tree;
+			},
 		}
 	}
 </script>

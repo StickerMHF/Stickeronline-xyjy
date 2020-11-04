@@ -17,5 +17,5 @@ public interface BAlumnusRepository extends JpaRepository<BAlumnusEntity, String
     List<Map<String, Object>> queryByuserId(String userId,Integer pageSize,Integer offset);
 
     @Query(value="select count(*) as num from (select count(*) from b_photo group by user_id) a", nativeQuery = true)
-    Integer countByuserId(String userId);
+    Integer countByuserId();
 }

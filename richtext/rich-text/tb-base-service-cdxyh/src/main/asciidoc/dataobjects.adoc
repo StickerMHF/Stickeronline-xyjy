@@ -102,16 +102,16 @@
 |===
 ^|Name | Type ^| Description
 |[[author]]`@author`|`String`|-
-|[[commentCount]]`@commentCount`|`String`|-
+|[[commentCount]]`@commentCount`|`Number (Integer)`|-
 |[[context]]`@context`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
 |[[id]]`@id`|`String`|-
 |[[imgs]]`@imgs`|`String`|-
-|[[likeCount]]`@likeCount`|`String`|-
+|[[likeCount]]`@likeCount`|`Number (Integer)`|-
 |[[photo]]`@photo`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |[[userId]]`@userId`|`String`|-
-|[[viewCount]]`@viewCount`|`String`|-
+|[[viewCount]]`@viewCount`|`Number (Integer)`|-
 |===
 
 [[BBarrageEntity]]
@@ -179,6 +179,7 @@
 |[[fid]]`@fid`|`String`|-
 |[[id]]`@id`|`String`|-
 |[[momentId]]`@momentId`|`String`|-
+|[[status]]`@status`|`Number (Integer)`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |[[userId]]`@userId`|`String`|-
 |[[userName]]`@userName`|`String`|-
@@ -199,6 +200,7 @@
 |[[id]]`@id`|`String`|-
 |[[likeCount]]`@likeCount`|`Number (Integer)`|-
 |[[photos]]`@photos`|`String`|-
+|[[status]]`@status`|`Number (Integer)`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |[[userId]]`@userId`|`String`|-
 |[[userName]]`@userName`|`String`|-

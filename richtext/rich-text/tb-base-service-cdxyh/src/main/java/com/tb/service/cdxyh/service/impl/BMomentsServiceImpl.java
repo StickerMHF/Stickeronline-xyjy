@@ -3,6 +3,7 @@ package com.tb.service.cdxyh.service.impl;
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
 import com.tb.base.common.vo.PageVo;
+import com.tb.service.baidu.service.impl.ContentCensorServiceImpl;
 import com.tb.service.cdxyh.entity.BMomentsCommentEntity;
 import com.tb.service.cdxyh.entity.BMomentsEntity;
 import com.tb.service.cdxyh.entity.BMomentsLikeEntity;
@@ -33,6 +34,8 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
     private BMomentsCommentRepository bMomentsCommentRepository;
     @Autowired
     private BMomentsLikeRepository bMomentsLikeRepository;
+    @Autowired
+    private ContentCensorServiceImpl contentCensorServiceImpl;
 
     @Override
     public void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
@@ -40,7 +43,17 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         BMomentsEntity bMomentsEntity = new BMomentsEntity(params);
         bMomentsEntity.setCreateTime(new Date());
         BMomentsEntity save = bMomentsRepository.save(bMomentsEntity);
-        future.complete(new JsonObject(Json.encode(save)));
+        contentCensorServiceImpl.getContentCensorInfo(new JsonObject().put("text",bMomentsEntity.getContent()),res->{
+            if(res.succeeded()&&res.result().getInteger("conclusionType")==1){
+                save.setStatus(1);
+                BMomentsEntity save1=bMomentsRepository.save(save);
+                future.complete(new JsonObject(Json.encode(save1)));
+            }else{
+                save.setStatus(-1);
+                BMomentsEntity save1=bMomentsRepository.save(save);
+                future.complete(new JsonObject(Json.encode(save1)));
+            }
+        });
         handler.handle(future);
     }
 
@@ -57,8 +70,12 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
             sort = new Sort(Sort.Direction.DESC, "createTime");
         }
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
+        ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
+        matcher.withMatcher("status", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建实例
-        Example<BMomentsEntity> ex = Example.of(bMomentsEntity);
+        bMomentsEntity.setStatus(1);
+        Example<BMomentsEntity> ex = Example.of(bMomentsEntity,matcher);
+
         Page<BMomentsEntity> plist = bMomentsRepository.findAll(ex,pageable);
         JsonObject resObj = new JsonObject(Json.encode(plist));
         JsonArray contents = resObj.getJsonArray("content");

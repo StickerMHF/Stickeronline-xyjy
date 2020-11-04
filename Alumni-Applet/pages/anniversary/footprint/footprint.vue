@@ -271,6 +271,7 @@
 		border-radius: 4px;
 		margin:0;
 		font-size: 14px;
+		height: 35px;
 	}
 }
 .tipBox{

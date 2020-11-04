@@ -26,14 +26,14 @@
 			<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="navigatorTo"></image>
 		</view>
 		<view class="discover-content">
-			<moments :list="momentsList" :fatherLikeMethod="likeClick" :fatherCommentMethod="commentMethod"></moments>
+			<moments :list="momentsList"></moments>
 		</view>			
 	</view>
 </template>
 
 <script>	
 	import moments from '@/components/moments/moments.vue'; 
-	import {getDiscoverList, momentLike, momentComment} from '@/api/discover.js'
+	import {getDiscoverList} from '@/api/discover.js'
 	import {dateUtil } from "@/utils/dateUtil.js"
 	var _self = '';
 	export default {
@@ -181,18 +181,18 @@
 		},
 		methods: {
 			//点赞
-			likeClick(params){
-				momentLike(params).then(data => {
-					console.log(data)
-				});
-			},
-			commentMethod(params){
-				momentComment(params).then(data => {
-					console.log(data);
-					this.commentShow = false;
-					this.commentText = '';
-				});
-			},
+			// likeClick(params){
+			// 	momentLike(params).then(data => {
+			// 		console.log(data)
+			// 	});
+			// },
+			// commentMethod(params){
+			// 	momentComment(params).then(data => {
+			// 		console.log(data);
+			// 		this.commentShow = false;
+			// 		this.commentText = '';
+			// 	});
+			// },
 			selectHandler(value) {
 				this.currentSelect = value;
 				if (this.currentSelect == '1') {

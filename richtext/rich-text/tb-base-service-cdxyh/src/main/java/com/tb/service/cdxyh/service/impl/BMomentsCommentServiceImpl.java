@@ -3,6 +3,7 @@ package com.tb.service.cdxyh.service.impl;
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
 import com.tb.base.common.vo.PageVo;
+import com.tb.service.baidu.service.impl.ContentCensorServiceImpl;
 import com.tb.service.cdxyh.entity.BMomentsCommentEntity;
 import com.tb.service.cdxyh.repository.BMomentsCommentRepository;
 import com.tb.service.cdxyh.service.BMomentsCommentService;
@@ -25,12 +26,23 @@ import java.util.Optional;
 public class BMomentsCommentServiceImpl implements BMomentsCommentService, BaseAsyncService {
     @Autowired
     private BMomentsCommentRepository bMomentsCommentRepository;
+    @Autowired
+    private ContentCensorServiceImpl contentCensorServiceImpl;
     @Override
     public void add(JsonObject params, Handler<AsyncResult<String>> handler) {
         Future future = Future.future();
         BMomentsCommentEntity bMomentsCommentEntity = new BMomentsCommentEntity(params);
         bMomentsCommentEntity.setCreateTime(new Date());
         BMomentsCommentEntity save = bMomentsCommentRepository.save(bMomentsCommentEntity);
+        contentCensorServiceImpl.getContentCensorInfo(new JsonObject().put("text",bMomentsCommentEntity.getContent()),res->{
+            if(res.succeeded()&&res.result().getInteger("conclusionType")==1){
+                save.setStatus(1);
+                bMomentsCommentRepository.save(save);
+            }else{
+                save.setStatus(-1);
+                bMomentsCommentRepository.save(save);
+            }
+        });
         future.complete(new JsonObject(Json.encode(save)));
         handler.handle(future);
     }

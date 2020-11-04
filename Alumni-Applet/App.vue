@@ -148,7 +148,7 @@
 						provider: 'weixin',
 						success(res) {
 							let params = {
-								appid: 'wx3c10620fb5c8651c',
+								appid: 'wx7adb6a8da538ae86',
 								code: res.code
 							}
 							getUserOpenid(params).then(data => {
