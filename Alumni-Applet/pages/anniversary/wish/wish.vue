@@ -35,7 +35,7 @@
 			getBulletChatList(){
 				let param = {
 					pageNo: 1,
-					pageSize: 30,
+					pageSize: 10,
 				};
 				getBulletChatList(param).then(data => {
 					var [error, res] = data;
@@ -79,51 +79,6 @@
 						}
 					});
 				}
-				
-				// uni.login({
-				//   provider: 'weixin',
-				//   success: function (loginRes) {
-				//     console.log(loginRes.authResult);
-				    
-				//     uni.getUserInfo({
-				//       provider: 'weixin',
-				//       success: function (infoRes) {
-				// 		if(that.textContent === ""){
-				// 			uni.showToast({
-				// 				icon:'none',
-				// 				title:"请输入祝福语"
-				// 			})
-				// 			return;
-				// 		}
-				// 		let param = {
-				// 			context: that.textContent,
-				// 			userId: infoRes.userInfo.,
-				// 		};
-				// 		http://localhost:8084/stickeronline/barrage/add?context=测试&userId=001&userName=张三&userPhoto=45645646cxzcxzcxzcxzcxz
-				// 		sendBulletChat(param).then(data => {
-				// 			var [error, res] = data;
-				// 			if (res && res.data.success) {
-				// 				let datas = res.data.result;
-								
-				// 				that.$refs.lffBarrage.add({item:that.textContent,name:infoRes.userInfo.nickName,avatarUrl:infoRes.userInfo.avatarUrl});
-				// 				uni.showToast({
-				// 					title:"发送成功"
-				// 				})
-				// 				that.textContent = "";
-				// 			}
-				// 		});
-				//       },
-				// 	  fail:function (err) {
-				// 		  console.log(err);
-				// 		  uni.showToast({
-				// 		  	icon:'none',
-				// 			title:'请登录后重试'
-				// 		  })
-				// 	  }
-				//     });
-				//   }
-				// });
-				
 			}
 		}
 	}
@@ -149,13 +104,13 @@
 	width: 100%;
 	height: 200rpx;
 	.sendBtn{
-		width: 240rpx;
-		height: 60rpx;
 		background: #F37B1D;
 		color: #fff;
 		font-size: 16px;
-		line-height: 60rpx;
-		margin-top:40rpx;
+		margin: 16rpx auto;
+		width: 90%;
+		height: 100rpx;
+		line-height: 100rpx;
 	}
 	.sendText{
 		width:100%;

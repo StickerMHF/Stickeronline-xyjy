@@ -2,7 +2,7 @@
 	<view class="barrageBox">
 		<view class="danmu-li" v-for="(item,index) in listData" :class="item.type" :style="[item.style]" :key="index">
 			<view class="danmu-inner">
-				<view class="user-box">
+				<view class="user-box" :style="[item.bg]">
 					<view class="user-img">
 						<view class="img-box">
 							<image :src="item.userPhoto"></image>
@@ -58,15 +58,19 @@
 		},
 		data() {
 			return {
-				listData: []
+				listData: [],
+				bg : ["#c72f2fcc","#4fd5ffcc","#ff904fcc","#4fa6ffcc","#ff4fb1cc","#4fffa6cc"]
 			}
 		},
 		watch:{
 			list(){
 				this.list.forEach( v => {
 					v['type'] = 'rightToLeft';
+					v['bg'] = {
+						background:`${this.bg[Math.floor(Math.random()*5)]}`
+					};
 					v['style'] = {
-						// animationDuration: `${data.time}s`,
+						// animationDuration: `9s`,
 						animationDuration: `${Math.ceil(Math.floor(Math.random() * (this.maxTime - this.minTime + 1) + this.minTime))}s`,
 						top: `${Math.ceil(Math.random() * (this.maxTop - this.minTop + 1) + this.minTop)}px`
 					}
@@ -97,9 +101,12 @@
 					userName: data.name,
 					userPhoto: data.avatarUrl,
 					type: 'rightToLeft',
+					bg:	{
+						background:`${this.bg[Math.floor(Math.random()*5)]}`
+					},
 					style: {
 						// animationDuration: `${data.time}s`,
-						animationDuration: `9s`,
+						animationDuration: `${Math.ceil(Math.floor(Math.random() * (this.maxTime - this.minTime + 1) + this.minTime))}s`,
 						top: `${Math.ceil(Math.random() * (this.maxTop - this.minTop + 1) + this.minTop)}px`
 					},
 					delTime: Date.parse(new Date()) + data.time * 1200
