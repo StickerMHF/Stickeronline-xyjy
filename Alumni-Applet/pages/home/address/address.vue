@@ -3,7 +3,7 @@
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="content">通讯录</block>
 		</cu-custom>
-		<view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
+		<!-- <view class="cu-bar bg-white search fixed" :style="[{top:CustomBar + 'px'}]">
 			<view class="search-form round">
 				<text class="cuIcon-search"></text>
 				<input type="text" placeholder="输入搜索的关键词" confirm-type="search"></input>
@@ -11,7 +11,7 @@
 			<view class="action">
 				<button class="cu-btn bg-gradual-green shadow-blur round">搜索</button>
 			</view>
-		</view>
+		</view> -->
 		<scroll-view scroll-y class="indexes" :scroll-into-view="'indexes-'+ listCurID" :style="[{height:'calc(100vh - '+ CustomBar + 'px - 50px)'}]"
 		 :scroll-with-animation="true" :enable-back-to-top="true">
 			<block v-for="(item,index) in list" :key="index">
@@ -232,7 +232,7 @@
 }
 	.indexes {
 		position: relative;
-		top: 60px;
+		top: 10px;
 	}
 
 	.indexBar {

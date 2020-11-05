@@ -311,6 +311,14 @@
             </snapshots>
         </repository>
         <repository>
+            <id>tianbang</id>
+            <name>tianbang</name>
+            <url>http://192.168.0.140:8081/repository/tianbang/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
             <id>rdc-releases</id>
             <url>https://packages.aliyun.com/maven/repository/2018215-release-SRbBdl/</url>
         </repository>

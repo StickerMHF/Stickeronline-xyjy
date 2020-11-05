@@ -55,6 +55,14 @@ public interface BWechatUsersRepository extends JpaRepository<BWechatUsersEntity
     @Query(value = "SELECT a.name,a.id,a.avatar_url,a.college,a.name_initial,b.attention FROM w_wechat_users a left JOIN (SELECT member_id,count(*) as attention from b_wechat_users_attention where user_id=?1 group by member_id) b ON a.id=b.member_id order by a.name_initial", nativeQuery = true)
     List<Map<String,Object>> findAllOrderByNameDesc(String userId);
 
-
+    /**
+     * 根据校友会ID获取校友用户
+     * @param userId
+     * @param pageSize
+     * @param offset
+     * @return
+     */
+    @Query(value = "select s.* from (SELECT a.name,a.id,a.avatar_url as avatarUrl,b.attention FROM w_wechat_users a left JOIN (SELECT member_id,count(*) as attention from b_wechat_users_attention where user_id=?1 GROUP BY member_id) b ON a.id=b.member_id) as s LEFT JOIN b_alumnus_join as j on s.id=j.user_id where j.alumnus_id=?2 limit ?3 offset ?4", nativeQuery = true)
+    List<Map<String,Object>> queryListByAlumnusId(String userId,String alumnusId, Integer pageSize, Integer offset);
     
 }

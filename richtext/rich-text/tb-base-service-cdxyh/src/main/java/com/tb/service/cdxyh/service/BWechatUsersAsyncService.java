@@ -72,4 +72,11 @@ public interface BWechatUsersAsyncService {
      * @param handler
      */
     void getUserListByInitialGroup(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+
+    /**
+     * 根据校友会ID获取校友用户
+     * @param params
+     * @param handler
+     */
+    void queryListByAlumnusId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 }

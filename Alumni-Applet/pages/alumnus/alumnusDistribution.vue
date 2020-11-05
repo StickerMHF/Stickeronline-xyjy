@@ -2,7 +2,8 @@
 	<view class="qiun-columns">
 	  <view class="qiun-bg-white qiun-title-bar qiun-common-mt">
 	    <view class="qiun-title-dot-light">
-			<text class="cuIcon-titles text-green1"></text>校友分布</view>
+			<!-- cuIcon-titles text-green1 -->
+			<text class="xyfb_icon" style="background:url(https://www.imapway.cn/Alumni/static/home/xyfb.png);background-size: 100%;"></text>校友分布</view>
 	  </view>
 	  <view class="qiun-charts">
 	    <canvas
@@ -51,13 +52,13 @@ export default {
 							for (var i = 0; i < datas.length; i++) {
 								if (datas[i].name === province.properties.name) {
 									if (datas[i].data >= 100) {
-										province.color = "#DD6968";
+										province.color = "#F45937";
 									} else if (datas[i].data >= 50) {
-										province.color = "#F3E0C3";
+										province.color = "#F4871E";
 									} else if (datas[i].data >= 20) {
-										province.color = "#F6F0CF";
+										province.color = "#FFBA08";
 									}else {
-										province.color = "#D7F2F7";
+										province.color = "#3FC1C0";
 									}
 									return { ...province, ...datas[i] };
 								}
@@ -95,7 +96,7 @@ export default {
 		      map: {
 		        border: true,
 		        borderWidth: 0.1,
-		        borderColor: "#666666",
+		        borderColor: "#ffffff",
 		        fillOpacity: 1,
 		      },
 		    },
@@ -142,5 +143,12 @@ export default {
   width: 750upx;
   height: 500upx;
   background-color: #ffffff;
+}
+.xyfb_icon{
+	width: 15px;
+	    height: 15px;
+	    display: inline-block;
+	    background-size: 100% 100%;
+	    margin-right: 5px;
 }
 </style>

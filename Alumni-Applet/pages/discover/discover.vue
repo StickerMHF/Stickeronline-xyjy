@@ -336,7 +336,7 @@
 		    position: fixed;
 		    z-index: 99;
 			right: 10px;
-			margin-top: 5px;
+			bottom: 20rpx;
 	}
 	.image{
 		height: 40px;

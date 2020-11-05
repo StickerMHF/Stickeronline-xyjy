@@ -150,12 +150,12 @@
 				tabList: [
 					{
 						id: "all",
-						name: "校友之窗",
+						name: "全部",
 					},
-					// {
-					//   id: 2,
-					//   name: "校友之窗",
-					// },
+					{
+					  id: 2,
+					  name: "校友之窗",
+					},
 					{
 						id: 3,
 						name: "同城校友",
@@ -163,11 +163,12 @@
 					{
 						id: 4,
 						name: "行业校友",
-					}, {
-					id: 5,
-					name: '校友统计',
-					uri: '/pages/alumnus/statistics'
-				}
+					}
+				// 	, {
+				// 	id: 5,
+				// 	name: '校友统计',
+				// 	uri: '/pages/alumnus/statistics'
+				// }
 				],
 				
 				lists: [{

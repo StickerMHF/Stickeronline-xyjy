@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="whole_alumnus_details">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="content">首页</block>
 		</cu-custom>
@@ -11,7 +11,7 @@
 					<image :src="item.url" v-if="item.type=='image'"></image>
 				</swiper-item>
 			</swiper>
-			<view class="al-menu cu-list grid col-5">
+			<view class="al-menu cu-list grid col-5 shadow-warp radius">
 				<view v-for="(item,index) in menus" :key="index">
 					<view class="al-menu-image" :data-cur="item.menu" @click="switchMenu">
 						<image :src="item.icon" class="image"></image>
@@ -115,31 +115,31 @@
 					url: 'http://www.imapway.cn/Alumni/static/home/banner32x.png'
 				}],
 				menus: [{
-						icon: 'http://www.imapway.cn/Alumni/static/home/dcxw2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/alumnus/jj2x.png',
 						txt: '简介',
 						page: '/pages/home/news/news',
 						menu: 'intro'
 					},
 					{
-						icon: 'http://www.imapway.cn/Alumni/static/home/xqzt2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/alumnus/lxr2x.png',
 						txt: '资讯',
 						page: '/pages/home/news/news',
 						menu: 'news'
 					},
 					{
-						icon: 'http://www.imapway.cn/Alumni/static/home/xqzt2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/alumnus/cy2x.png',
 						txt: '成员',
 						page: '/pages/home/news/news',
 						menu: 'member'
 					},
 					{
-						icon: 'http://www.imapway.cn/Alumni/static/home/ysjs2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/alumnus/xc2x.png',
 						txt: '相册',
 						page: '/pages/schoolHistory/schoolHistory',
 						menu: 'photo'
 					},
 					{
-						icon: 'http://www.imapway.cn/Alumni/static/home/szll2x.png',
+						icon: 'http://www.imapway.cn/Alumni/static/alumnus/ly2x.png',
 						txt: '活动',
 						page: '/pages/teachers/teachers',
 						menu: 'activity'
@@ -249,9 +249,13 @@
 				});
 			},
 			gitAlumnusMemberList(){
+				let openid = uni.getStorageSync('openid');
+				this.params.userId=openid;
+				this.params.alumnusId=this.params.fid;
 				gitAlumnusMemberList(this.params).then(data => {
 					let [error, res] = data;
 					if(res&& res.data&&res.data.result){
+						debugger
 						this.memberList = res.data.result.content;
 						if(this.memberList.length == 0){
 							this.showMember = false;
@@ -348,6 +352,9 @@
 </script>
 
 <style lang="scss">
+	.whole_alumnus_details{
+		background: #FFFFFF;
+	}
 	.al-desc {
 		padding: 10px;
 		background: #ffffff;
@@ -362,12 +369,18 @@
 	}
 
 	.al-menu {
-		padding: 10px 30px;
+		padding: 10px 10px;
+		    margin: 13px 10px;
+		    margin-top: -15px;
+			box-shadow: 0 0 10rpx rgba(0, 0, 0, 0.5);
 	}
 
 	.al-menu-image>image {
-		width: 30px;
-		height: 30px;
+		width: 25px;
+		    height: 30px;
+		    text-align: center;
+		    margin: 0 auto;
+			margin-top: 10px;
 	}
 
 	.cu-item {
