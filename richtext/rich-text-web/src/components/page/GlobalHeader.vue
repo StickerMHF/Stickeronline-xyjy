@@ -24,8 +24,8 @@
         :type="collapsed ? 'menu-unfold' : 'menu-fold'"
         @click.native="toggle"/>
 <!-- stickeronline/sys -->
-      <span v-if="device === 'desktop'">欢迎进入 天邦 企业级快速开发平台</span>
-      <span v-else>天邦</span>
+      <span v-if="device === 'desktop'">欢迎进入 校友会管理平台</span>
+      <span v-else>校友会</span>
 
       <user-menu :theme="theme"/>
     </div>

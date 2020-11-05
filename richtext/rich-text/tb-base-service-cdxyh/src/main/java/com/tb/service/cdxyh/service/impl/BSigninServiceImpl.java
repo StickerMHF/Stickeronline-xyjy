@@ -3,6 +3,7 @@ package com.tb.service.cdxyh.service.impl;
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
 import com.tb.base.common.vo.PageVo;
+import com.tb.service.baidu.service.impl.BaiDuMapApiServiceImpl;
 import com.tb.service.cdxyh.entity.BMomentsCommentEntity;
 import com.tb.service.cdxyh.entity.BMomentsEntity;
 import com.tb.service.cdxyh.entity.BMomentsLikeEntity;
@@ -30,7 +31,7 @@ import java.util.Optional;
 @Component
 @AsyncServiceHandler
 public class BSigninServiceImpl implements BSigninService, BaseAsyncService {
-//    @Autowired
+    //    @Autowired
 //    private BMomentsRepository bMomentsRepository;
 //    @Autowired
 //    private BMomentsCommentRepository bMomentsCommentRepository;
@@ -38,6 +39,8 @@ public class BSigninServiceImpl implements BSigninService, BaseAsyncService {
 //    private BMomentsLikeRepository bMomentsLikeRepository;
     @Autowired
     private BSigninRepository bSigninRepository;
+    @Autowired
+    private BaiDuMapApiServiceImpl baiDuMapApiServiceImpl;
 
     @Override
     public void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
@@ -45,15 +48,26 @@ public class BSigninServiceImpl implements BSigninService, BaseAsyncService {
         BSigninEntity bSigninEntity = new BSigninEntity(params);
         String userId = bSigninEntity.getUserId();
         Integer num = bSigninRepository.countByuserId(userId);
-        if (num == 0){
+        if (num == 0) {
             bSigninEntity.setCreateTime(new Date());
             bSigninEntity.setCreateBy(bSigninEntity.getUserName());
             long orderNum = bSigninRepository.count();
             bSigninEntity.setOrderNum(orderNum + 1);
-            BSigninEntity save = bSigninRepository.save(bSigninEntity);
-            future.complete(new JsonObject(Json.encode(save)));
+            String[] strs = bSigninEntity.getLocation().split(",");
+            baiDuMapApiServiceImpl.getReverseGeocoding(new JsonObject().put("lat", Double.valueOf(strs[1])).put("lng", Double.valueOf(strs[0])), res -> {
+                if (res.succeeded()) {
+                    bSigninEntity.setCountry(res.result().getJsonObject("result").getJsonObject("addressComponent").getString("country"));
+                    bSigninEntity.setCity(res.result().getJsonObject("result").getJsonObject("addressComponent").getString("city"));
+                    BSigninEntity save = bSigninRepository.save(bSigninEntity);
+                    future.complete(new JsonObject(Json.encode(save)));
+                } else {
+                    BSigninEntity save = bSigninRepository.save(bSigninEntity);
+                    future.complete(new JsonObject(Json.encode(save)));
+                }
+            });
+
         } else {
-            future.complete(new JsonObject().put("msg","用户签到信息已存在！"));
+            future.complete(new JsonObject().put("msg", "用户签到信息已存在！"));
         }
         handler.handle(future);
     }
@@ -64,17 +78,29 @@ public class BSigninServiceImpl implements BSigninService, BaseAsyncService {
         Future<JsonObject> future = Future.future();
 
         List<BSigninEntity> list = bSigninRepository.queryAllByUserId(params.getString("userId"));//.findById(params.getString("id"));
-       if (list.size()>0){
-           BSigninEntity bSigninEntity = list.get(0);
-           bSigninEntity.setLocation(params.getString("location"));
-           bSigninEntity.setUpdateTime(new Date());
-           bSigninEntity.setUpdateBy(bSigninEntity.getUserName());
+        if (list.size() > 0) {
+            BSigninEntity bSigninEntity = list.get(0);
+            bSigninEntity.setLocation(params.getString("location"));
+            bSigninEntity.setUpdateTime(new Date());
+            bSigninEntity.setUpdateBy(bSigninEntity.getUserName());
 
-           BSigninEntity save = bSigninRepository.save(bSigninEntity);
-           future.complete(new JsonObject(Json.encode(save)));
-       } else {
-           future.complete(new JsonObject().put("msg","请传入有效参数！"));
-       }
+            String[] strs = bSigninEntity.getLocation().split(",");
+            baiDuMapApiServiceImpl.getReverseGeocoding(new JsonObject().put("lat", Double.valueOf(strs[1])).put("lng", Double.valueOf(strs[0])), res -> {
+                if (res.succeeded()) {
+                    bSigninEntity.setCountry(res.result().getJsonObject("result").getJsonObject("addressComponent").getString("country"));
+                    bSigninEntity.setCity(res.result().getJsonObject("result").getJsonObject("addressComponent").getString("city"));
+                    BSigninEntity save = bSigninRepository.save(bSigninEntity);
+                    future.complete(new JsonObject(Json.encode(save)));
+                } else {
+                    BSigninEntity save = bSigninRepository.save(bSigninEntity);
+                    future.complete(new JsonObject(Json.encode(save)));
+                }
+            });
+
+
+        } else {
+            future.complete(new JsonObject().put("msg", "请传入有效参数！"));
+        }
 
         handler.handle(future);
     }
@@ -131,16 +157,22 @@ public class BSigninServiceImpl implements BSigninService, BaseAsyncService {
     }
 
     @Override
-    public void queryAll(JsonObject params, Handler<AsyncResult<JsonArray>> handler) {
-        Future<JsonArray> future = Future.future();
+    public void queryAll(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
         List<BSigninEntity> newsList = bSigninRepository.findAll();
         JsonArray resList = new JsonArray(Json.encode(newsList));
-        future.complete(resList);
+        JsonObject result=new JsonObject();
+        result.put("list",resList);
+        Integer cityNum=bSigninRepository.countByCity();
+        result.put("cityNum",cityNum);
+        Integer countryNum=bSigninRepository.countByCountry();
+        result.put("countryNum",countryNum);
+        future.complete(result);
         handler.handle(future);
     }
 
     @Override
-    public void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler){
+    public void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
 //        ExampleMatcher matcher = ExampleMatcher.matching();
 //        BMomentsEntity bAlummunsMemberEntity = new BMomentsEntity(params);

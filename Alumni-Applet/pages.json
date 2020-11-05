@@ -328,6 +328,15 @@
             }
             
         }
+        ,{
+            "path" : "pages/home/statistics/statistics",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"mp-alipay": {
@@ -335,8 +344,8 @@
 			"transparentTitle": "always",
 			"allowsBounceVertical": "NO"
 		},
-		"navigationBarBackgroundColor": "#0081ff",
-		"navigationBarTitleText": "ColorUi for UniApp",
+		"navigationBarBackgroundColor": "#00BEB7",
+		"navigationBarTitleText": "",
 		"navigationStyle": "custom",
 		"navigationBarTextStyle": "white"
 	},
@@ -365,15 +374,15 @@
 			"selectedIconPath": "static/nav/zz_cur2x.png",
 			"text": "组织"
 		}, {
+			"pagePath": "pages/anniversary/index",
+			"iconPath": "static/nav/ys2x.png",
+			"selectedIconPath": "static/nav/ys_cur2x.png",
+			"text": "校庆"
+		}, {
 			"pagePath": "pages/discover/discover",
 			"iconPath": "static/nav/fx2x.png",
 			"selectedIconPath": "static/nav/fx_cur2x.png",
 			"text": "发现"
-		}, {
-			"pagePath": "pages/schoolHistory/schoolHistory",
-			"iconPath": "static/nav/ys2x.png",
-			"selectedIconPath": "static/nav/ys_cur2x.png",
-			"text": "院史"
 		}, {
 			"pagePath": "pages/personal/personal",
 			"iconPath": "static/nav/wd2x.png",

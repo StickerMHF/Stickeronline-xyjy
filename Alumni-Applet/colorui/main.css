@@ -8,7 +8,7 @@
 */
 
 /* ==================
-        初始化
+        初始化0081FF 替换为00BEB7
  ==================== */
 body {
 	background-color: #f1f1f1;
@@ -271,8 +271,8 @@ radio.radio .uni-radio-input-checked::after {
 
 .switch-sex[checked] .wx-switch-input,
 .switch-sex.checked .uni-switch-input {
-	background: #0081ff !important;
-	border-color: #0081ff !important;
+	background: #00BEB7 !important;
+	border-color: #00BEB7 !important;
 }
 
 switch.red[checked] .wx-switch-input.wx-switch-input-checked,
@@ -354,8 +354,8 @@ radio.blue[checked] .wx-radio-input,
 switch.blue.checked .uni-switch-input,
 checkbox.blue.checked .uni-checkbox-input,
 radio.blue.checked .uni-radio-input {
-	background-color: #0081ff !important;
-	border-color: #0081ff !important;
+	background-color: #00BEB7 !important;
+	border-color: #00BEB7 !important;
 	color: #ffffff !important;
 }
 
@@ -3441,7 +3441,7 @@ scroll-view.cu-steps .cu-item {
 
 .line-blue::after,
 .lines-blue::after {
-	border-color: #0081ff;
+	border-color: #00BEB7;
 }
 
 .line-purple::after,
@@ -3515,7 +3515,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-blue {
-	background-color: #0081ff;
+	background-color: #00BEB7;
 	color: #ffffff;
 }
 
@@ -3600,7 +3600,7 @@ scroll-view.cu-steps .cu-item {
 }
 
 .bg-blue.light {
-	color: #0081ff;
+	color: #00BEB7;
 	background-color: #cce6ff;
 }
 
@@ -3658,7 +3658,7 @@ scroll-view.cu-steps .cu-item {
 	color: #ffffff;
 }
 .bg-gradual-blue {
-	background-image: linear-gradient(45deg, #0081ff, #1cbbb4);
+	background-image: linear-gradient(45deg, #00BEB7, #1cbbb4);
 	color: #ffffff;
 }
 
@@ -3947,7 +3947,7 @@ scroll-view.cu-steps .cu-item {
 .text-blue,
 .line-blue,
 .lines-blue {
-	color: #0081ff;
+	color: #00BEB7;
 }
 
 .text-purple,

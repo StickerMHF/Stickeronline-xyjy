@@ -1,6 +1,6 @@
 <template>
 	<view class="ann_news">
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="true" @callBack="callBack">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="false" @callBack="callBack">
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>

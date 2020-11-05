@@ -143,14 +143,11 @@
 				cHeight: "",
 				pixelRatio: 1,
 				serverData: "",
-				peopleNums: 7534,
-				groupNums: 23,
-				tabCur: 5,
+				peopleNums: 0,
+				groupNums: 21,
+				tabCur: "all",
 				current: 0,
-				tabList: [{
-						id: 5,
-						name: "校友统计",
-					},
+				tabList: [
 					{
 						id: "all",
 						name: "校友之窗",
@@ -166,13 +163,13 @@
 					{
 						id: 4,
 						name: "行业校友",
-					},
+					}, {
+					id: 5,
+					name: '校友统计',
+					uri: '/pages/alumnus/statistics'
+				}
 				],
-				// , {
-				// 	id: 5,
-				// 	name: '校友统计',
-				// 	uri: '/pages/alumnus/statistics'
-				// }
+				
 				lists: [{
 					name: "校友总会",
 					thumb: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603106747111&di=c70b4adee0bef68057ea07caca505d5f&imgtype=0&src=http%3A%2F%2Fh.hiphotos.baidu.com%2Fzhidao%2Fwh%3D450%2C600%2Fsign%3De5752296cb95d143da23ec2746c0ae34%2Fdc54564e9258d109140c6727d258ccbf6d814dbc.jpg",
@@ -206,10 +203,10 @@
 			this.getAlumnusList(this.params);
 		},
 		onHide() {
-			this.tabCur = 1;
+			// this.tabCur = 1;
 		},
 		onShow() {
-			// this.tabCur = 5;
+			// this.tabCur = "all";
 			_self = this;
 			this.cWidth = uni.upx2px(750);
 			this.cHeight = uni.upx2px(500);
@@ -323,49 +320,6 @@
 				} else {
 					this.status = "noMore";
 				}
-
-				// db.collection('opendb-mall-goods')
-				// 	.where({
-				// 		// 查询字段是否存在
-				// 		_id: dbCmd.exists(true)
-				// 	})
-				// 	// 跳过对应数量的文档，输出剩下的文档
-				// 	.skip(this.pageSize * (this.current - 1))
-				// 	// 限制输出到下一阶段的记录数
-				// 	.limit(this.pageSize)
-				// 	// 获取集合中的记录
-				// 	.get()
-				// 	.then((res) => {
-				// 		const tempList = res.result.data
-				// 		// 判断是否可翻页
-				// 		if (tempList.length === this.pageSize) {
-				// 			this.status = 'more'
-				// 		} else {
-				// 			this.status = 'noMore'
-				// 		}
-				// 		if (reload) {
-				// 			// 处理下拉加载提示框
-				// 			this.tipShow = true;
-				// 			clearTimeout(this.timer);
-				// 			this.timer = setTimeout(() => {
-				// 				this.tipShow = false;
-				// 			}, 2000);
-				// 			this.lists = tempList
-				// 			// 停止刷新
-				// 			uni.stopPullDownRefresh()
-				// 		} else {
-				// 			// 上拉加载后合并数据
-				// 			this.lists = this.lists.concat(tempList)
-				// 		}
-				// 		if (tempList.length) {
-				// 			this.current++
-				// 		}
-				// 	}).catch((err) => {
-				// 		uni.showModal({
-				// 			content: '请求失败，请稍后再试：' + err,
-				// 			showCancel: false
-				// 		})
-				// 	})s
 			},
 			getServerData() {
 				// _self.$refs.alumnusDistribution.getData();

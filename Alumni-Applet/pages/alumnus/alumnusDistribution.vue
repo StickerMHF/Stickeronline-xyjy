@@ -51,15 +51,13 @@ export default {
 							for (var i = 0; i < datas.length; i++) {
 								if (datas[i].name === province.properties.name) {
 									if (datas[i].data >= 100) {
-										province.color = "#ff0000";
+										province.color = "#DD6968";
 									} else if (datas[i].data >= 50) {
-										province.color = "#ce8900";
+										province.color = "#F3E0C3";
 									} else if (datas[i].data >= 20) {
-										province.color = "#ffe26b";
-									} else if (datas[i].data >= 0) {
-										province.color = "#bdd9d8";
-									} else {
-										province.color = "#d3d9d9";
+										province.color = "#F6F0CF";
+									}else {
+										province.color = "#D7F2F7";
 									}
 									return { ...province, ...datas[i] };
 								}
@@ -96,9 +94,9 @@ export default {
 		    extra: {
 		      map: {
 		        border: true,
-		        borderWidth: 1,
+		        borderWidth: 0.1,
 		        borderColor: "#666666",
-		        fillOpacity: 0.6,
+		        fillOpacity: 1,
 		      },
 		    },
 		  });

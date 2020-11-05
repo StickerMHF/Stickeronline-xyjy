@@ -1,7 +1,7 @@
 <template>
   <div class="index">
     <div class="sticker-title">
-      <span class="sticker-title-name">天邦应用构建系统</span>
+      <span class="sticker-title-name">校友会</span>
     </div>
     <div class="sticker-menu">
       <ul class="sticker-menu-all">

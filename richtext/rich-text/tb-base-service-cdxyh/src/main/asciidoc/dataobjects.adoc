@@ -272,6 +272,8 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[city]]`@city`|`String`|-
+|[[country]]`@country`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
 |[[id]]`@id`|`String`|-
 |[[location]]`@location`|`String`|-
