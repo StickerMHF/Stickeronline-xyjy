@@ -29,6 +29,9 @@ export default {
 			pixelRatio: 1,
 		};
 	},
+	created() {
+		
+	},
 	mounted() {
 		// _selfs = this;
 		this.getData();
