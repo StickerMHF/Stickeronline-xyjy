@@ -1,16 +1,16 @@
 <template>
 		<view class="ann_news_list" style="background-image: url(http://www.imapway.cn/Alumni/static/anniversary/xqzx.png1);">
 			<view class="ann_news_top shadow-warp" >
-				<view class="ann_news_top_item" v-for="item in top">
-					<navigator :url="'/pages/home/newsDetail/newsDetail?id='+item.id" style="display: flex;width: 100%;">
-					<view class="ann_news_div">
-						<view class="ann_news_top_icon" style="background-image: url(http://www.imapway.cn/Alumni/static/images/dingzhi2x.png);width: 15px;height: 15px;"></view>
-					</view>
-					<span class="ann_news_top_title">{{item.title}}</span>
+				<view class="ann_news_top_item" v-for="(item,index) in top" :key="index">
+					<navigator :url="'/pages/home/newsDetail/newsDetail?id='+item.id" class="newsBox">
+						<view class="ann_news_div">
+							<view class="ann_news_top_icon" style="background-image: url(http://www.imapway.cn/Alumni/static/images/dingzhi2x.png);width: 15px;height: 15px;"></view>
+						</view>
+						<span class="ann_news_top_title">{{item.title}}</span>
 					</navigator>
 				</view>
 			</view>
-			<view class="" v-for="news in list">
+			<view class="" v-for="(news,index) in list" :key="index">
 				<navigator :url="'/pages/home/newsDetail/newsDetail?id='+news.id">
 				<newsItem :opts="news" ></newsItem>
 				</navigator>
@@ -118,29 +118,26 @@
 	display: flex;
 	line-height: 35px;
 	padding: 0 10px;
-	
+	.newsBox{
+		display: flex;
+		align-items: center;
+	}
 	.ann_news_div {
-		width: 35px;
+		width: 20px;
 		height: 35px;
-		position: relative;
-		
+		line-height: 35px;
+		display: flex;
+		align-items: center;
 		.ann_news_top_icon{
-			width: 15px;
-			height:15px;
-			// margin: 25% 25%;
-			position: absolute;
-			 height: 35px;
-			 top: 50%;
-			 left: 50%;
-			 transform: translate(-50%, -50%);
-			 display: inline-block;
-			    vertical-align: middle;
+			width: 100%;
+			height:100%;
 			background-size: 100% 100%;
 		}
 	}
 	
 	.ann_news_top_title{
 		// display: flex;
+		width:660rpx;
 		overflow:hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
