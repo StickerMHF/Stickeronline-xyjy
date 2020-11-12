@@ -5,26 +5,29 @@
 			<block slot="content">{{title}}</block>
 		</cu-custom>
 		<view class="ann_news_content" style="background-image: url(http://www.imapway.cn/Alumni/static/anniversary/xqzx.png1);">
-			<newsList :newsList="lists"></newsList>
+			<!-- <newsList :newsList="lists"></newsList> -->
+			<newsList2 :list="lists2"></newsList2>
 		</view>
 	</view>
 </template>
 
 <script>
 	import newsItem from "@/components/news-list/news-item.vue"
-	import newsList from "@/components/news-list/news-list.vue"
+	// import newsList from "@/components/news-list/news-list.vue"
+	import newsList2 from '@/components/news-list2/index.vue'; 
 	import {
 		getNewsList
 	} from '@/api/news.js'
 	export default {
 		components: {
 		newsItem,
-		newsList
+		newsList2
 		},
 		
 		data() {
 			return {
 				lists:[],
+				lists2:[],
 				status: 'more', // 加载状态
 				tipShow: false, // 是否显示顶部提示框
 				pageSize: 10, // 每页显示的数据条数
@@ -72,6 +75,18 @@
 											this.tipShow = false;
 										}, 2000);
 										this.lists = tempList
+										this.lists2 = this.lists.map(item=>{
+											return {
+														id: item.id,
+														username: item.createBy,
+														publishDate: item.createTime,
+														photo: "http://cdxyh.stickeronline.cn/logo.jpg",
+														content: item.title,
+														images: this.dataTar(item.thumb),
+																viewCount: item.viewCount || 0,
+																
+															}
+										})
 										// 停止刷新
 										uni.stopPullDownRefresh()
 									} else {
@@ -83,6 +98,14 @@
 									}
 					}
 				});
+			},
+			dataTar(str){
+				let arr = JSON.parse(str)
+				return arr.map(item=>{
+					return {
+						url: item
+					}
+				})
 			}
 		}
 	}
