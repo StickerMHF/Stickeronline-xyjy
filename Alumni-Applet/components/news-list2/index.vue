@@ -4,56 +4,33 @@
 			<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="navigatorTo"></image>
 		</view> -->
 		<view class="cu-card dynamic" :class="isCard?'no-card':''" v-for="(moment,i) in listArray" :key="i">
-			<view class="cu-item shadow">
-				<view class="cu-list menu-avatar">
-					<view class="cu-item">
-						<view class="cu-avatar round lg" :style="'background-image:url('+moment.photo+');'"></view>
-						<view class="content flex-sub">
-							<view>{{moment.username}}</view>
-							<view class="text-gray text-sm flex justify-between">
-								{{moment.publishDate}}
+			<navigator :url="'/pages/home/newsDetail/newsDetail?id='+moment.id">
+				<view class="cu-item shadow">
+					<view class="cu-list menu-avatar">
+						<view class="cu-item">
+							<view class="cu-avatar round lg" :style="'background-image:url('+moment.photo+');'"></view>
+							<view class="content flex-sub">
+								<view>{{moment.username}}</view>
+								<view class="text-gray text-sm flex justify-between">
+									{{moment.publishDate}}
+								</view>
 							</view>
 						</view>
 					</view>
-				</view>
-				<view class="text-content">
-					<navigator :url="'/pages/home/newsDetail/newsDetail?id='+moment.id">
-						{{moment.content}}
-					</navigator>
-				</view>
-				<view class="grid flex-sub padding-lr" :class="isCard?'col-3 grid-square':'col-1'">
-					<view class="bg-img" :class="isCard?'':'only-img'" :style="'background-image:url('+item.url+');'" @tap="clickPic(moment.images, index)"
-					 v-for="(item,index) in moment.images" :key="index">
+					<view class="text-content">					
+							{{moment.content}}					
 					</view>
-				</view>
-				<view class="text-gray text-sm text-right padding comment_icon">
-					<text class="cuIcon-attentionfill margin-lr-xs"></text> {{moment.viewCount}}
-					<!-- <text class="cuIcon-appreciatefill margin-lr-xs" :class="moment.status=='like'?' active':''" @click="momentLike(i)"></text>
-					{{moment.likeCount}}
-					<text class="cuIcon-messagefill margin-lr-xs" @click="commentInput(i)"></text> {{moment.commentCount}} -->
-				</view>
-				<!-- <view class="cu-list menu-avatar comment solids-top">
-					<view class="cu-item" v-for="comment in moment.commentList">
-						<view class="cu-avatar round" :style="'background-image:url('+comment.url+');'"></view>
-						<view class="content">
-							<view class="text-grey">{{comment.name}}</view>
-							<view class="text-gray text-content text-df">
-								{{comment.content}}
-							</view>
+					<view class="grid flex-sub padding-lr" :class="isCard?'col-3 grid-square':'col-1'">
+						<view class="bg-img" :class="isCard?'':'only-img'" :style="'background-image:url('+item.url+');'" 
+						 v-for="(item,index) in moment.images" :key="index">
 						</view>
 					</view>
-				</view> -->
-			</view>
+					<view class="text-gray text-sm text-right padding comment_icon">
+						<text class="cuIcon-attentionfill margin-lr-xs"></text> {{moment.viewCount}}
+					</view>
+				</view>
+			</navigator>
 		</view>
-		<!-- <view class="discover-comment" v-show="commentShow">
-			<view class="weui-cells weui-cells_after-title">
-				<view class="weui-cell weui-cell_input">
-					<input ref="commentdom" class="uni-input comment-input" :focus="commentShow" type="text" placeholder="评论" @blur="bindBlurEvent"
-					 @focus="bindFocusEvent" v-model="commentText" confirm-type="send" />
-					<button @click="sumbitComment">发送</button>
-				</view>
-			</view>
-		</view> -->
 	</view>
 </template>
 
@@ -108,64 +85,7 @@
 			list: {
 				type: Array,
 				default: function(e) {
-					return [{
-						username: "凯尔",
-						publishDate: "2019年12月3日",
-						photo: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg",
-						content: "折磨生出苦难，苦难又会加剧折磨，凡间这无穷的循环，将有我来终结！",
-						images: [{
-							url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
-						}, {
-							url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
-						}, {
-							url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
-						}, {
-							url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
-						}, {
-							url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
-						}, {
-							url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
-						}, {
-							url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
-						}, {
-							url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
-						}, {
-							url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg"
-						}],
-						viewCount: 20,
-						likeCount: 10,
-						commentCount: 5,
-						commentList: [{
-							url: "https://ossweb-img.qq.com/images/lol/img/champion/Morgana.png",
-							name: "莫甘娜",
-							content: "凯尔，你被自己的光芒变的盲目。",
-							userId: "1",
-							commentTime: "2018年12月4日",
-							replyList: [{
-								name: "凯尔",
-								content: "妹妹，你在帮他们给黑暗找借口吗?",
-								userId: "",
-								replyTime: ""
-							}, {
-								name: "凯尔",
-								content: "妹妹，你在帮他们给黑暗找借口吗?",
-								userId: "",
-								replyTime: ""
-							}]
-						}, {
-							url: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg",
-							name: "凯尔",
-							content: "妹妹，如果不是为了飞翔，我们要这翅膀有什么用?",
-							userId: "2",
-							commentTime: "2018年12月4日",
-							replyList: [{
-								name: "莫甘娜",
-								content: "如果不能立足于大地，要这双脚又有何用?",
-								userId: "",
-								replyTime: ""
-							}]
-						}]
-					}];
+					return [];
 				}
 			}
 		},
@@ -304,6 +224,9 @@
 </script>
 
 <style lang="scss">
+	.comment_icon{
+		margin-right: 10px;
+	}
 	.discover-comment {
 		position: fixed;
 		z-index: 999;
