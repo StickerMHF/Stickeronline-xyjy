@@ -289,9 +289,10 @@
 					var [error, res] = data;	
 					if(res&&res.data&&res.data.result){
 						if(res.data.result.status == 1){
-							debugger
+							
 							this.listArray.forEach(function(val, index, arr) {
-								if (fid == val.id) {							
+								if (fid == val.id) {
+									debugger
 									that.listArray[index].commentList.push({
 										name: that.commentParams.userName,
 										content: that.commentParams.content,
