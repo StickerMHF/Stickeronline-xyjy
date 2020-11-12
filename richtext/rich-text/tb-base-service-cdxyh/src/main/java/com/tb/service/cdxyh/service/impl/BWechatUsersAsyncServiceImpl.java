@@ -192,6 +192,25 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
         handler.handle(future);
     }
 
+    @Override
+    public void queryListByAlumnusId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
+        BWechatUsersEntity bWechatUsersEntity = new BWechatUsersEntity(params);
+        String userId=params.getString("userId");
+        String alumnusId=params.getString("alumnusId");
+        if(userId!=null&&alumnusId!=null){
+            Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+            List<Map<String,Object>> res = bWechatUsersRepository.queryListByAlumnusId(userId,alumnusId,pageVo.getPageSize(),offset);
+            Long zoom=bWechatUsersRepository.count();
+            JsonArray array=new JsonArray(res);
+            future.complete(new JsonObject().put("content",array).put("total",zoom));
+        }else{
+            future.complete(new JsonObject().put("content",new JsonArray()).put("total",0));
+        }
+        handler.handle(future);
+    }
+
     public static void main(String[] args) {
         JsonObject resObj = new JsonObject();
         System.out.println(resObj.getJsonObject("*"));

@@ -33,7 +33,7 @@
         </swiper-item>
       </swiper>
     </view>
-    <!-- 列表 -->
+    <!-- 菜单 -->
     <view class="ph-menu">
       <view class="bg-white">
         <view class="grid col-4 grid-square">
@@ -55,7 +55,10 @@
         </view>
       </view>
     </view>
-
+	<!-- 校友分布 -->
+<view class="" v-if="!state">
+      <alumnusDistribution></alumnusDistribution>
+    </view>
     <view class="ph-menu">
       <scroll-view scroll-x class="bg-white nav" scroll-with-animation>
         <view
@@ -69,6 +72,7 @@
           {{ item.name }}
         </view>
       </scroll-view>
+	  
       <view
         class="phm-card cu-card case no-card"
         v-for="(item, index) in newsList"
@@ -88,9 +92,7 @@
 				<umap class="phm-map"></umap>
 			</view>
 		</view> -->
-    <view class="" v-if="!state">
-      <alumnusDistribution></alumnusDistribution>
-    </view>
+    
   </view>
 </template>
 
@@ -134,8 +136,8 @@ export default {
         },
         {
           icon: "http://www.imapway.cn/Alumni/static/home/xqzt2x.png",
-          txt: "校庆专题",
-          page: "/pages/anniversary/index",
+          txt: "校友统计",
+          page: "/pages/home/statistics/statistics",
         },
         {
           id: "ysjs",
@@ -258,11 +260,11 @@ export default {
           },
         });
       }
-      if (value && value == "ysjs") {
-        uni.switchTab({
-          url: "/pages/schoolHistory/schoolHistory",
-        });
-      }
+      // if (value && value == "ysjs") {
+      //   uni.switchTab({
+      //     url: "/pages/schoolHistory/schoolHistory",
+      //   });
+      // }
     },
   },
 };
@@ -272,7 +274,9 @@ export default {
 .phm-card {
   border-bottom: 1rpx solid #e5dee5;
 }
-
+.screen-swiper {
+    min-height: 300rpx;
+}
 .ph-menu {
   padding: 10px;
   margin-bottom: 10px;
@@ -284,7 +288,12 @@ export default {
 }
 
 .bg-img {
-  min-height: 80px;
+    min-height: 65px;
+    margin-bottom: 0rpx;
+    padding-bottom: 0rpx !important;
+}
+.bg-white{
+	margin: 0 10px;
 }
 
 .ph-banner-item {
@@ -298,15 +307,15 @@ export default {
 }
 
 .phm-item-image {
-  width: 56px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
   margin: 0 auto;
   position: relative;
 }
 
 .phm-item-txt {
   width: 56px;
-  height: 56px;
+  height: 30px;
   margin: 0 auto;
   position: relative;
   display: block;

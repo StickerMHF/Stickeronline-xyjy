@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BNewsRepository extends JpaRepository<BNewsEntity, String> {
-void deleteByIdEquals(String id);
+
 }

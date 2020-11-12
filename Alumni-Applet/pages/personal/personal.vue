@@ -81,12 +81,12 @@
 					page: "/pages/personal/attention/attention"
 				}, {
 					name: "我的粉丝",
-					icon: "http://www.imapway.cn/Alumni/static/personal/wdpl2x.png",
+					icon: "http://www.imapway.cn/Alumni/static/personal/sc2x.png",
 					page: "/pages/personal/fans/fans"
 				}],
 				// ,{
 				// 	name: "收藏",
-				// 	icon: "http://www.imapway.cn/Alumni/static/personal/sc2x.png",
+				// 	icon: "http://www.imapway.cn/Alumni/static/personal/wdpl2x.png",
 				// 	page: "/pages/personal/collect/collect"
 				// },
 				//   {

@@ -24,7 +24,7 @@
 					 v-for="(item,index) in moment.images" :key="index">
 					</view>
 				</view>
-				<view class="text-gray text-sm text-right padding">
+				<view class="text-gray text-sm text-right padding comment_icon">
 					<text class="cuIcon-attentionfill margin-lr-xs"></text> {{moment.viewCount}}
 					<text class="cuIcon-appreciatefill margin-lr-xs" :class="moment.status=='like'?' active':''" @click="momentLike(i)"></text>
 					{{moment.likeCount}}
@@ -38,7 +38,7 @@
 							<view class="text-gray text-content text-df">
 								{{comment.content}}
 							</view>
-							<view class="bg-grey padding-sm radius margin-top-sm  text-sm" v-show="comment.replyList.length>0">
+							<!-- <view class="bg-grey padding-sm radius margin-top-sm  text-sm" v-show="comment.replyList.length>0">
 								<view class="flex" v-for="reply in comment.replyList">
 									<view>{{reply.name}}:</view>
 									<view class="flex-sub"> {{reply.content}}</view>
@@ -47,10 +47,9 @@
 							<view class="margin-top-sm flex justify-between">
 								<view class="text-gray text-df">{{comment.commentTime}}</view>
 								<view>
-									<!-- <text class="cuIcon-appreciatefill text-red"></text> -->
 									<text class="cuIcon-messagefill text-gray margin-left-sm" @click="commentInput2(comment)"></text>
 								</view>
-							</view>
+							</view> -->
 						</view>
 					</view>
 				</view>
@@ -289,10 +288,9 @@
 					var [error, res] = data;	
 					if(res&&res.data&&res.data.result){
 						if(res.data.result.status == 1){
-							
+							debugger
 							this.listArray.forEach(function(val, index, arr) {
-								if (fid == val.id) {
-									debugger
+								if (fid == val.id) {							
 									that.listArray[index].commentList.push({
 										name: that.commentParams.userName,
 										content: that.commentParams.content,
@@ -340,7 +338,10 @@
 	.weui-cell_input {
 		height: 100%;
 	}
-
+.comment_icon{
+	font-size: 15px;
+	    padding: 5px;
+}
 	// .publishData{
 	// 	    position: absolute;
 	// 	    z-index: 99;

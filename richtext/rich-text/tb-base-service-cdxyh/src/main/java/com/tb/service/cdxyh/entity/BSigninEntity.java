@@ -62,6 +62,17 @@ public class BSigninEntity extends BaseEntity {
      */
     @Column(name = "order_num")
     private long orderNum;
+    /**
+     * 所在国家
+     */
+    @Column(name = "country")
+    private String country;
+    /**
+     * 所在城市
+     */
+    @Column(name = "city")
+    private String city;
+
 
     public String getId() {
         return id;
@@ -109,5 +120,21 @@ public class BSigninEntity extends BaseEntity {
 
     public void setOrderNum(long orderNum) {
         this.orderNum = orderNum;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

@@ -48,7 +48,7 @@ public interface BSigninService {
      * @param params
      * @param handler
      */
-    void queryAll(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+    void queryAll(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
      * 根据ID获取成员详情

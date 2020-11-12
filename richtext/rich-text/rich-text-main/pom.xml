@@ -63,7 +63,7 @@
         <dependency>
             <groupId>com.tb.service</groupId>
             <artifactId>tb-base-service-wechat</artifactId>
-            <version>1.2.2-RELEASE</version>
+            <version>1.2.4-RELEASE</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.slf4j</groupId>

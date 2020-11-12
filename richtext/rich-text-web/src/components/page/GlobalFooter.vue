@@ -1,14 +1,14 @@
 <template>
   <div class="footer">
     <div class="links">
-      <a href="http://www.giscn.net" target="_blank">天邦 首页</a>
+      <a href="http://www.giscn.net" target="_blank">Sticker 首页</a>
         <a-icon type="github"/>
       </a>
     </div>
     <div class="copyright">
       Copyright
       <a-icon type="copyright"/>
-      2020 <span>天邦 出品</span>
+      2020 <span>Sticker 出品</span>
     </div>
   </div>
 </template>

@@ -6,7 +6,7 @@
 				<view :class="'indexItem-' + item.name" :id="'indexes-' + item.name" :data-index="item.name">
 					<view class="cu-list menu-avatar no-padding">
 						<view class="cu-item">
-							<view v-if="item.photo" class="cu-avatar round lg" :style="'background-image:url('+item.photo+');'"></view>
+							<view v-if="item.avatarurl" class="cu-avatar round lg" :style="'background-image:url('+item.avatarurl+');'"></view>
 							<view v-else class="cu-avatar round lg" style="background-image:url('http://www.imapway.cn/Alumni/static/alumnus/default_photo.png')"></view>
 							<view class="content">
 								<view class="text-grey">{{item.name}}<text class="text-abc"></text>

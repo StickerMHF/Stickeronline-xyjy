@@ -1,6 +1,6 @@
 <template>
 	<view class="school">
-		<cu-custom bgColor="bg-gradual-green1" :isBack="false">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>

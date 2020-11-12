@@ -4,6 +4,7 @@ import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BAlummunsMemberEntity;
+import com.tb.service.cdxyh.entity.BWechatUsersEntity;
 import com.tb.service.cdxyh.repository.BAlumnusMemberRepository;
 import com.tb.service.cdxyh.service.BAlumnusMemberService;
 import io.vertx.core.AsyncResult;
@@ -35,11 +36,11 @@ public class BAlumnusMemberServiceImpl implements BAlumnusMemberService, BaseAsy
         PageVo pageVo = new PageVo(params);
         String type = params.getString("type");
         System.out.println(type);
-        BAlummunsMemberEntity bAlummunsMemberEntity = new BAlummunsMemberEntity();
+        BAlummunsMemberEntity bWechatUsersEntity = new BAlummunsMemberEntity();
         Sort sort = new Sort(Sort.Direction.DESC, "createTime");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         //创建实例
-        Example<BAlummunsMemberEntity> ex = Example.of(bAlummunsMemberEntity);
+        Example<BAlummunsMemberEntity> ex = Example.of(bWechatUsersEntity);
 
         Page<BAlummunsMemberEntity> plist = bAlumnusMemberRepository.findAll(ex,pageable);
         future.complete(new JsonObject(Json.encode(plist)));

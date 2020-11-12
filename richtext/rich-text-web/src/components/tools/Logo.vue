@@ -21,7 +21,7 @@
     props: {
       title: {
         type: String,
-        default: '天邦',
+        default: '校友会',
         required: false
       },
       showTitle: {
