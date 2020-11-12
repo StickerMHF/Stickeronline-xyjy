@@ -115,12 +115,12 @@ export default {
         {
           id: 0,
           type: "image",
-          url: "http://www.imapway.cn/Alumni/static/home/banner12x.png",
+          url: "http://www.imapway.cn/Alumni/static/home/banner22x.png",
         },
         {
           id: 1,
           type: "image",
-          url: "http://www.imapway.cn/Alumni/static/home/banner22x.png",
+          url: "http://www.imapway.cn/Alumni/static/home/banner12x.png",
         },
         {
           id: 2,
