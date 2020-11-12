@@ -67,7 +67,7 @@
 		methods: {
 			callBack(){
 				uni.redirectTo({
-					url: '/pages/home/news/news'
+					url: '/pages/anniversary/news/news'
 				});
 			},
 			formatDate(date){
