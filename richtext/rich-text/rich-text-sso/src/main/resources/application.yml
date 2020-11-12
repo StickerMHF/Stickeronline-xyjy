@@ -4,7 +4,7 @@ spring:
     url: jdbc:postgresql://121.36.87.178:5432/rich_text?stringtype=unspecified
 #    url: jdbc:postgresql://pgm-8vbo3d9po58lqa1t8o.pgsql.zhangbei.rds.aliyuncs.com:3433/rich_text?stringtype=unspecified
     username: postgres
-    password: postgres
+    password: tb_postgis!@#*^+/
     hikari:
       minimum-idle: 5
       idle-timeout: 600000

@@ -100,6 +100,10 @@
 					if (res && res.data.success) {
 						let ss = res.data.result.content;
 						const tempList =  res.data.result.content;
+						tempList.forEach(item=>{
+							console.log(item.createTime)
+							item.createTime = this.formatDate(item.createTime)
+						})
 						// this.lists = res.data.result.content;
 									// 判断是否可翻页
 									if (tempList.length === this.pageSize) {
@@ -178,7 +182,38 @@
 
 <style lang="scss">
 	@import '@/common/uni-ui.scss';
-
+	.uni-list-box{
+		    // border-bottom: 1px solid: #80808026;
+		    // margin: 24rpx 30rpx;fd
+		    margin-left: 0;
+			margin-top:0;
+			border-color: #999;
+		    // padding: 0 0 24px 0;
+	}
+	.uni-list--border:after {
+	    position: absolute;
+	    top: 0;
+	    right: 30rpx;
+	    left: 30rpx;
+	    height: 1px;
+	    content: '';
+	    -webkit-transform: scaleY(0.5);
+	    transform: scaleY(0.5);
+	    background-color: #f2f2f2;
+	}
+	.uni-list-item{
+		position: absolute;
+	}
+	.uni-ellipsis-2{
+		    line-height: 1.5;
+	}
+	.uni-thumb{
+		    height: 90px;
+			border-radius: 8rpx;
+	}
+	.uni-title-sub{
+		font-size: 30rpx;	
+	}
 	page {
 		display: flex;
 		flex-direction: column;

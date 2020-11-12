@@ -56,14 +56,14 @@
       </view>
     </view>
 	<!-- 校友分布 -->
-<view class="" v-if="!state">
+<view class="ph-menu" v-if="!state">
       <alumnusDistribution></alumnusDistribution>
     </view>
     <view class="ph-menu">
       <scroll-view scroll-x class="bg-white nav" scroll-with-animation>
         <view
-          class="cu-item"
-          :class="index == tabCur ? 'text-green cur' : ''"
+          class="cu-item cuItem"
+          :class="index == tabCur ? 'text-green1' : ''"
           v-for="(item, index) in tabList"
           :key="index"
           @tap="tabSelect"
@@ -281,6 +281,18 @@ export default {
   padding: 10px;
   margin-bottom: 10px;
   background: white;
+  .cuItem{
+	height: 72rpx;
+	display: inline-block;
+	line-height: 80rpx;
+	margin: 0 6px;
+	padding: 0;
+	font-size: 16px;
+  }
+  .text-green1 {
+    color: #00BEB7;
+    border-bottom: 2px solid #00BEB7;
+	}
 }
 
 .ph-banner {

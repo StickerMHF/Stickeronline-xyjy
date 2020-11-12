@@ -85,7 +85,7 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
         Future<String> future = Future.future();
         String[] ids = params.getString("id").split(",");
         for (int i = 0; i < ids.length; i++) {
-            bWechatUsersRepository.deleteByOpenidEquals(ids[i]);
+            bWechatUsersRepository.deleteById(ids[i]);
         }
         future.complete("删除成功!");
         handler.handle(future);

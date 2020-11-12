@@ -1,5 +1,12 @@
 <template>
 	<view class="news-item shadow">
+		<view class="title-box">
+			<image class="imgs" src="http://cdxyh.stickeronline.cn/logo.jpg" mode=""></image>
+			<view class="textBox">
+				<text class="text">地测学院</text>
+				<text class="date">2020-11-12</text>
+			</view>
+		</view>
 		<view class="news-item-title">
 			<view class="news-title">{{item.title}}</view>
 		</view>
@@ -26,7 +33,9 @@
 		<view class="news-item-foot">
 			<view class="phm-zx-content">
 				<view class="text-gray text-sm flex justify-between">
-					{{formatDate(item.createTime)}}
+					<view class="">
+						
+					</view>
 					<view class="phm-zx-view text-gray text-sm">
 						<text class="cuIcon-attentionfill margin-lr-xs"></text> {{item.viewCount?item.viewCount:0}}
 					</view>
@@ -81,7 +90,29 @@
 <style lang="scss" scoped>
 	.news-item {
 		width: 100%;
-		padding: 10px;
+		padding: 30rpx 20rpx;
+		.title-box{
+			display: flex;
+			justify-content: flex-start;
+			align-items: center;
+			.imgs{
+				width:76rpx;
+				height:76rpx;
+				margin-right:20rpx;
+			}
+			.textBox{
+				display: flex;
+				flex-direction: column;
+				align-items: start;
+				.text{
+					height:44rpx;
+				}
+				.date{
+					font-size: 12px;
+					color:#999;
+				}
+			}
+		}
 	}
 
 	.news-item-title {
@@ -91,13 +122,17 @@
 		.news-title{
 			overflow:hidden;
 			text-overflow: ellipsis;
+			    margin: 20rpx 0;
+			    font-size: 16px;
 			// white-space: nowrap;
 		}
 	}
 
 	.news-item-images {
 		width: 100%;
-
+		margin-right: 12rpx;
+		margin-bottom: 12rpx;
+		border-radius: 8rpx;
 		image {
 			width: 100%;
 			background-size: 100% 100%;

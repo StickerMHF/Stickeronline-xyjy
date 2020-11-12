@@ -44,7 +44,11 @@ public class BAlumnusPhotoServiceImpl implements BAlumnusPhotoService, BaseAsync
 
         PageVo pageVo = new PageVo(params);
         String fid = params.getString("fid");
-        Integer zoom = bAlumnusPhotoRepository.countByalumnusId(fid);  //统计总条数
+        Integer zoom=0;
+        if(fid!=null){
+           zoom = bAlumnusPhotoRepository.countByalumnusId(fid);  //统计总条数
+        }
+
         //总页数
         Integer totalPages = (zoom-1)/pageVo.getPageSize()+1;
         Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();

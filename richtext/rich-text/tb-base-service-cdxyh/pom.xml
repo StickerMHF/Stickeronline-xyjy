@@ -28,10 +28,15 @@
             <artifactId>jsoup</artifactId>
             <version>1.11.2</version>
             </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.open-android</groupId>-->
+<!--            <artifactId>pinyin4j</artifactId>-->
+<!--            <version>2.5.0</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>com.github.open-android</groupId>
+            <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
-            <version>2.5.0</version>
+            <version>2.5.1</version>
         </dependency>
         <dependency>
             <groupId>com.tb.service</groupId>

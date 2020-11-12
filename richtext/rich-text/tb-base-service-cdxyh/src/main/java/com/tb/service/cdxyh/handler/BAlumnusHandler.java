@@ -85,4 +85,43 @@ public class BAlumnusHandler {
             });
         };
     }
+
+    @RouteMapping(value = "/edit", method = RouteMethod.PUT, order = 1)
+    @ApiOperation(value = "编辑组织")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "组织id", dataType = "String", paramType = "body", required = true)
+    })
+    public Handler<RoutingContext> edit() {
+        return ctx -> {
+            bAlumnusService.edit(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
+
+    @RouteMapping(value = "/delete", method = RouteMethod.DELETE, order = 1)
+    @ApiOperation(value = "删除组织")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "组织id", dataType = "String", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> delete() {
+        return ctx -> {
+            bAlumnusService.delete(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
+
 }

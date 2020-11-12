@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <div class="links">
-      <a href="http://www.giscn.net" target="_blank">Sticker 首页</a>
+      <a href="http://www.mapway.net/" target="_blank">Sticker 首页</a>
         <a-icon type="github"/>
       </a>
     </div>

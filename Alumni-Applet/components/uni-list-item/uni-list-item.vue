@@ -282,13 +282,13 @@ $list-item-pd: $uni-spacing-col-lg $uni-spacing-row-lg;
 .uni-list--border:after {
 	position: absolute;
 	top: 0;
-	right: 0;
-	left: 0;
+	right: 30rpx;
+	left: 30rpx;
 	height: 1px;
 	content: '';
 	-webkit-transform: scaleY(0.5);
 	transform: scaleY(0.5);
-	background-color: $uni-border-color;
+	background-color: #f2f2f2;
 }
 
 /* #endif */

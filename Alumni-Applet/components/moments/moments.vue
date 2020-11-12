@@ -9,32 +9,32 @@
 					<view class="cu-item">
 						<view class="cu-avatar round lg" :style="'background-image:url('+moment.photo+');'"></view>
 						<view class="content flex-sub">
-							<view>{{moment.username}}</view>
+							<view class="text-title">{{moment.username}}</view>
 							<view class="text-gray text-sm flex justify-between">
 								{{moment.publishDate}}
 							</view>
 						</view>
 					</view>
 				</view>
-				<view class="text-content">
+				<view class="text-content details-list">
 					{{moment.content}}
 				</view>
-				<view class="grid flex-sub padding-lr" :class="isCard?'col-3 grid-square':'col-1'">
+				<view class="grid flex-sub padding-lr details-list" :class="isCard?'col-3 grid-square':'col-1'">
 					<view class="bg-img" :class="isCard?'':'only-img'" :style="'background-image:url('+item.url+');'" @tap="clickPic(moment.images, index)"
 					 v-for="(item,index) in moment.images" :key="index">
 					</view>
 				</view>
-				<view class="text-gray text-sm text-right padding comment_icon">
-					<text class="cuIcon-attentionfill margin-lr-xs"></text> {{moment.viewCount}}
-					<text class="cuIcon-appreciatefill margin-lr-xs" :class="moment.status=='like'?' active':''" @click="momentLike(i)"></text>
+				<view class="text-gray text-sm text-right padding comment_icon" v-if="isComment">
+					<!-- <text class="cuIcon-attentionfill margin-lr-xs"></text> {{moment.viewCount}} -->
+					<text class="cuIcon-appreciatefill margin-lr-xs" :class="moment.islike=='like'?' active':''" @click="momentLike(i)"></text>
 					{{moment.likeCount}}
-					<text class="cuIcon-messagefill margin-lr-xs" @click="commentInput(i)"></text> {{moment.commentCount}}
+					<text class="cuIcon-messagefill margin-lr-xs" @click="commentInput(i)"></text> {{moment.commentList.length}}
 				</view>
-				<view class="cu-list menu-avatar comment solids-top">
-					<view class="cu-item" v-for="comment in moment.commentList">
-						<view class="cu-avatar round" :style="'background-image:url('+comment.url+');'"></view>
+				<view class="cu-list menu-avatar comment solids-top details-list" v-if="isComment">
+					<view class="cu-item comment-body" v-for="comment in moment.commentList">
+						<view class="cu-avatar round" :style="'background-image:url('+comment.userPhoto+');'"></view>
 						<view class="content">
-							<view class="text-grey">{{comment.name}}</view>
+							<view class="text-grey">{{comment.userName}}</view>
 							<view class="text-gray text-content text-df">
 								{{comment.content}}
 							</view>
@@ -55,7 +55,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="discover-comment" v-show="commentShow">
+		<view class="discover-comment details-list" v-show="commentShow">
 			<view class="weui-cells weui-cells_after-title">
 				<view class="weui-cell weui-cell_input">
 					<input ref="commentdom" class="uni-input comment-input" :focus="commentShow" type="text" placeholder="评论" @blur="bindBlurEvent"
@@ -85,7 +85,7 @@
 					userId: '',
 					userName: '',
 					userPhoto: '',
-					status: 'unlike'
+					islike: 'unlike'
 				},
 				commentParams: {
 					content: '',
@@ -115,6 +115,12 @@
 			// 	type: Function,
 			// 	dafult: null
 			// },
+			isComment:{
+				type: Boolean,
+				default: function(e) {
+					return true
+				}
+			},
 			list: {
 				type: Array,
 				default: function(e) {
@@ -199,14 +205,14 @@
 			},
 			//点赞操作
 			momentLike(index) {
-				if (this.list[index].status == 'like') {
-					this.list[index].status = 'unlike';
+				if (this.list[index].islike == 'like') {
+					this.list[index].islike = 'unlike';
 					this.list[index].likeCount = this.list[index].likeCount - 1;
-					this.likeParams.status = 'unlike';
+					this.likeParams.islike = 'unlike';
 				} else {
-					this.list[index].status = 'like';
+					this.list[index].islike = 'like';
 					this.list[index].likeCount = this.list[index].likeCount + 1;
-					this.likeParams.status = 'like';
+					this.likeParams.islike = 'like';
 				}
 				//提交数据
 				// if(this.fatherLikeMethod){
@@ -288,16 +294,15 @@
 					var [error, res] = data;	
 					if(res&&res.data&&res.data.result){
 						if(res.data.result.status == 1){
-							debugger
 							this.listArray.forEach(function(val, index, arr) {
 								if (fid == val.id) {							
 									that.listArray[index].commentList.push({
-										name: that.commentParams.userName,
+										userName: that.commentParams.userName,
 										content: that.commentParams.content,
 										userId: that.commentParams.userId,
 										replyTime: new Date(),
 										fid: that.commentParams.fid,
-										url: that.commentParams.userPhoto
+										userPhoto: that.commentParams.userPhoto
 									});
 								}
 							});
@@ -314,6 +319,16 @@
 </script>
 
 <style lang="scss">
+	.comment-body{
+		    height: 65px;
+	}
+	.text-title{
+		font-weight: bold;
+	}
+	.details-list{
+		    width: 340px;
+		    margin-left: 50px;
+	}
 	.discover-comment {
 		position: fixed;
 		z-index: 999;

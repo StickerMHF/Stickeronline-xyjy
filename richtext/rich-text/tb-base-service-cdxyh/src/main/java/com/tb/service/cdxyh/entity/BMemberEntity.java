@@ -55,8 +55,8 @@ public class BMemberEntity extends BaseEntity {
     /**
      * 校友简介
      */
-    @Column(name = "desc")
-    private String desc;
+    @Column(name = "describe")
+    private String describe;
     /**
      * 照片
      */
@@ -102,12 +102,12 @@ public class BMemberEntity extends BaseEntity {
         this.contact = contact;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDescribe() {
+        return describe;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 
     public Integer getAttention() {

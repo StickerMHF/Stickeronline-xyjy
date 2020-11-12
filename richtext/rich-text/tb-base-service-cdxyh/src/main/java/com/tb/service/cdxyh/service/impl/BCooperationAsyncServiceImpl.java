@@ -44,7 +44,10 @@ public class BCooperationAsyncServiceImpl implements BCooperationAsyncService, B
         Sort sort = new Sort(Sort.Direction.DESC, sorts);
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
-//        matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
+        if(params.getString("status")!=null){
+            bCooperationEntity.setStatus(Integer.parseInt(params.getString("status")));
+            matcher.withMatcher("status", ExampleMatcher.GenericPropertyMatchers.contains());
+        }
         //创建实例
         Example<BCooperationEntity> ex = Example.of(bCooperationEntity, matcher);
         Page<BCooperationEntity> plist = bCooperationRepository.findAll(ex,pageable);
@@ -74,7 +77,7 @@ public class BCooperationAsyncServiceImpl implements BCooperationAsyncService, B
         Future<String> future = Future.future();
         String[] ids = params.getString("id").split(",");
         for (int i = 0; i < ids.length; i++) {
-            bCooperationRepository.deleteByIdEquals(ids[i]);
+            bCooperationRepository.deleteById(ids[i]);
         }
         future.complete("删除成功!");
         handler.handle(future);

@@ -2,8 +2,10 @@ package com.tb.service.cdxyh.service.impl;
 
 import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
+import com.sticker.online.core.utils.TimeUtil;
 import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
+import com.tb.service.cdxyh.entity.BNewsEntity;
 import com.tb.service.cdxyh.entity.BPhotoEntity;
 import com.tb.service.cdxyh.repository.BPhotoRepository;
 import com.tb.service.cdxyh.service.BPhotoService;
@@ -54,25 +56,39 @@ public class BPhotoServiceImpl implements BPhotoService, BaseAsyncService {
         if (oConvertUtils.isNotEmpty(userId)) {
             bPhotoEntity.setUserId(userId);
             exampleMatcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
-            //创建实例
-            Example<BPhotoEntity> ex = Example.of(bPhotoEntity, exampleMatcher);
-
-            Page<BPhotoEntity> plist = bPhotoRepository.findAll(ex,pageable);
-            future.complete(new JsonObject(Json.encode(plist)));
-        } else {
-            future.complete(new JsonObject().put("msg","请传入有效参数！"));
         }
+        Example<BPhotoEntity> ex = Example.of(bPhotoEntity, exampleMatcher);
+        Page<BPhotoEntity> plist = bPhotoRepository.findAll(ex,pageable);
+        future.complete(new JsonObject(Json.encode(plist)));
         handler.handle(future);
     }
 
     @Override
     public void edit(JsonObject params, Handler<AsyncResult<String>> handler) {
-
+        Future<String> future = Future.future();
+        BPhotoEntity bPhotoEntity = new BPhotoEntity(params);
+        bPhotoEntity.setCreateTime(TimeUtil.convertStringToDate(params.getString("createTime")));
+        Optional<BPhotoEntity> sr = bPhotoRepository.findById(bPhotoEntity.getId());
+        if (sr == null) {
+            future.fail("未找到对应实体");
+        } else {
+            bPhotoEntity.setUpdateTime(new Date());
+            bPhotoRepository.save(bPhotoEntity);
+            //TODO 返回false说明什么？
+            future.complete("修改成功!");
+        }
+        handler.handle(future);
     }
 
     @Override
     public void delete(JsonObject params, Handler<AsyncResult<String>> handler) {
-
+        Future<String> future = Future.future();
+        String[] ids = params.getString("id").split(",");
+        for (int i = 0; i < ids.length; i++) {
+            bPhotoRepository.deleteById(ids[i]);
+        }
+        future.complete("删除成功!");
+        handler.handle(future);
     }
 
     @Override

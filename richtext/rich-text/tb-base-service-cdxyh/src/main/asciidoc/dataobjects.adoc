@@ -21,6 +21,21 @@
 |[[updateBy]]`@updateBy`|`String`|-
 |===
 
+[[BAlumnusActivityApplyEntity]]
+== BAlumnusActivityApplyEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[activityId]]`@activityId`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
+|===
+
 [[BAlumnusActivityEntity]]
 == BAlumnusActivityEntity
 
@@ -29,12 +44,15 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[address]]`@address`|`String`|-
+|[[applyList]]`@applyList`|`Array of link:dataobjects.html#BAlumnusActivityApplyEntity[BAlumnusActivityApplyEntity]`|-
 |[[context]]`@context`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
 |[[fid]]`@fid`|`String`|-
 |[[id]]`@id`|`String`|-
 |[[img]]`@img`|`String`|-
 |[[title]]`@title`|`String`|-
+|[[type]]`@type`|`Number (Integer)`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |===
 
@@ -143,6 +161,7 @@
 |[[contents]]`@contents`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
 |[[id]]`@id`|`String`|-
+|[[status]]`@status`|`Number (Integer)`|-
 |[[title]]`@title`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |===
@@ -158,7 +177,7 @@
 |[[attention]]`@attention`|`Number (Integer)`|-
 |[[contact]]`@contact`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
-|[[desc]]`@desc`|`String`|-
+|[[describe]]`@describe`|`String`|-
 |[[id]]`@id`|`String`|-
 |[[name]]`@name`|`String`|-
 |[[photo]]`@photo`|`String`|-
@@ -195,10 +214,12 @@
 |===
 ^|Name | Type ^| Description
 |[[commentCount]]`@commentCount`|`Number (Integer)`|-
+|[[commentList]]`@commentList`|`Array of link:dataobjects.html#BMomentsCommentEntity[BMomentsCommentEntity]`|-
 |[[content]]`@content`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
 |[[id]]`@id`|`String`|-
 |[[likeCount]]`@likeCount`|`Number (Integer)`|-
+|[[likeList]]`@likeList`|`Array of link:dataobjects.html#BMomentsLikeEntity[BMomentsLikeEntity]`|-
 |[[photos]]`@photos`|`String`|-
 |[[status]]`@status`|`Number (Integer)`|-
 |[[updateBy]]`@updateBy`|`String`|-

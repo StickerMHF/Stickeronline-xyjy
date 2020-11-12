@@ -32,7 +32,7 @@ export const StickerListMixin = {
             /* 排序参数 */
             isorter: {
                 column: 'createTime',
-                order: 'desc',
+                order: 'createTime',
             },
             /* 筛选参数 */
             filters: {},

@@ -58,3 +58,24 @@ export const delAlumnusJoin = (params) => {
 export const getAlumnusByuserId = (params) => {
 	return getAction(api.getAlumnusByuserId, params);
 }
+
+// 获取
+export const getActivityApplyList = (params) => {
+    return getAction(api.getActivityApplyList, params)
+}
+//根据ID查询
+export const getActivityApplyById = (params) => {
+    return getAction(api.getActivityApplyById, params)
+}
+// 添加
+export const addActivityApply = (params) => {
+    return postAction(api.addActivityApply, params)
+}
+// 更新
+export const updateActivityApply = (params) => {
+    return putAction(api.updateActivityApply, params)
+}
+//删除
+export const deleteActivityApply = (params) => {
+    return deleteAction(api.deleteActivityApply, params)
+}

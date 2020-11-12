@@ -68,7 +68,7 @@
 					<!-- 通过header插槽定义列表左侧图片 -->
 					<template v-slot:header>
 						<view class="uni-thumb shop-picture" :class="{ 'shop-picture-column': waterfall }">
-							<image :src="item.thumb"></image>
+							<image :src="item.thumb?item.thumb:'http://cdxyh.stickeronline.cn/organizations%402x.png'"></image>
 						</view>
 					</template>
 					<!-- 通过body插槽定义商品布局 -->
@@ -269,33 +269,45 @@
 				this.getNewsList();
 			},
 			addJoin(alumnu) {
-				// debugger
-				var params = {
-					alumnusId: alumnu.id,
-					userId: "",
-					userName: "",
-					userPhoto: "",
-					status: "1",
-				};
-				let join = alumnu.join;
-				if (!join) {}
-				//获取用户信息
-				params.userId = uni.getStorageSync("openid");
-				let userInfo = uni.getStorageSync("userInfo");
-				var that = this;
-				if (userInfo) {
-					params.userName = userInfo.nickName;
-					params.userPhoto = userInfo.avatarUrl;
-					addAlumnusJoin(params).then(data => {
-						console.log(data);
-						alumnu.join = true;
-					});
-				} else {
-					//跳转页面
-					wx.navigateTo({
-						url: "/pages/login/login",
+				let that=this;
+				that.isCertification=uni.getStorageSync('isCertification');
+				if(that.isCertification==true){
+					debugger
+					var params = {
+						alumnusId: alumnu.id,
+						userId: "",
+						userName: "",
+						userPhoto: "",
+						status: "1",
+					};
+					let join = alumnu.join;
+					if (!join) {}
+					//获取用户信息
+					params.userId = uni.getStorageSync("openid");
+					let userInfo = uni.getStorageSync("userInfo");
+					if (userInfo) {
+						params.userName = userInfo.nickName;
+						params.userPhoto = userInfo.avatarUrl;
+						addAlumnusJoin(params).then(data => {
+							console.log(data);
+							alumnu.join = true;
+							alumnu.member=alumnu.member+1;
+						});
+					} else {
+						//跳转页面
+						wx.navigateTo({
+							url: "/pages/login/login",
+						});
+					}
+				}else{
+					// getApp().getUserInfo();
+					uni.showToast({
+					    title: '请先进行校友认证',
+					    duration: 2000
 					});
 				}
+				
+				
 			},
 			//取消关注
 			deleteAlumnusJoin(alumnu){
@@ -307,6 +319,7 @@
 				delAlumnusJoin(formdata).then(data =>{
 					console.log(data);
 					alumnu.join = false;
+					alumnu.member=alumnu.member-1;
 				});
 			},
 			/**

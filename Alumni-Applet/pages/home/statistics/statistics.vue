@@ -1,6 +1,6 @@
 <template>
 	<view class="whole_statistics">
-		<web-view src="http://39.100.142.33:10082/rest/v1/newdip/share/report/index.html?uuid=78e64602f19f4fdbbeab6f9e0898c8ef"></web-view>
+		<web-view src="https://www.imapway.cn/Alumni/alumnusActivity/index.html"></web-view>
 	</view>
 </template>
 

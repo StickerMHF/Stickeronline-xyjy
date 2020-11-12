@@ -84,7 +84,10 @@
 			 */
 			getNewsList(reload) {
 				this.status = 'loading'
-				getCooperationList().then(data => {
+				let params={
+					status:1
+				}
+				getCooperationList(params).then(data => {
 					var [error, res] = data;
 					if (res && res.data.success) {
 						const tempList = res.data.result.content;

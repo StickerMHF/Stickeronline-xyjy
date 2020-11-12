@@ -1,7 +1,7 @@
 <template>
   <a-card :bordered="false" style="height: calc( 100% - 20px)">
     <!-- 查询区域 -->
-    <div class="table-page-search-wrapper">
+    <!-- <div class="table-page-search-wrapper">
       <a-form layout="inline">
         <a-row :gutter="24">
 
@@ -46,7 +46,7 @@
 
         </a-row>
       </a-form>
-    </div>
+    </div> -->
     <!-- 操作按钮区域 -->
     <div class="table-operator" style="border-top: 5px">
       <a-button @click="handleAdd" type="primary" icon="plus">发布新闻</a-button>
@@ -135,7 +135,6 @@
         columns: [
           {ellipsis: true,title: '新闻标题',align: "center",dataIndex: 'title',width: 120},
           {ellipsis: true,title: '发布人',align: "center",width: 100,dataIndex: 'createBy',},
-          {ellipsis: true,title: '头像',align: "center",width: 120,dataIndex: 'avatar',scopedSlots: {customRender: "avatarslot"}},
           {ellipsis: true,title: '发布时间',align: "center",width: 180,dataIndex: 'createTime'},
           {ellipsis: true,title: '浏览量',align: "center",width: 100,dataIndex: 'viewCount'},
           {ellipsis: true,title: '操作',dataIndex: 'action',scopedSlots: {customRender: 'action'},align: "center",width: 170}
@@ -145,6 +144,26 @@
     computed: {
     },
     methods: {
+       loadData(arg) {
+            if (!this.url.list) {
+                this.$message.error("请设置url.list属性!")
+                return
+            }
+            //加载数据 若传入参数1则加载第一页的内容
+            if (arg === 1) {
+                this.ipagination.current = 1;
+            }
+            var params = this.getQueryParams(); //查询条件
+            this.loading = true;
+            params.type=0;
+            getAction(this.url.list, params).then((res) => {
+                if (res.success) {
+                        this.dataSource = res.result.content;
+                        this.ipagination.total = res.result.totalElements;
+                }
+                this.loading = false;
+            })
+        },
       handleMenuClick(e) {
         if (e.key == 1) {
           this.batchDel();

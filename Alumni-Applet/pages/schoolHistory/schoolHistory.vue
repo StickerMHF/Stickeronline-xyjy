@@ -38,10 +38,7 @@
 			return {
 				tabCur: 0,
 				tabList: [{
-					name: '学校介绍',
-					id: 0
-				}, {
-					name: '院史介绍',
+					name: '简介',
 					id: 1
 				}],
 			};

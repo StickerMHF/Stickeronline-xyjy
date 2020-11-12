@@ -7,8 +7,8 @@ import { ACCESS_TOKEN } from "@/store/mutation-types"
 
 const URL = {
     loginUrl:"http://121.36.73.167:8089",//登录IP
-    baseUrl:'http://localhost:8084',//业务IP
-    FileUrl:'http://localhost:8084/file/upload',//业务IP
+    baseUrl:'https://www.imapway.cn/alumniapi',//业务IP
+    FileUrl:'https://www.imapway.cn/alumniapi/file/upload',//业务IP
 }
 export function getFileUrl() {
     return URL.FileUrl

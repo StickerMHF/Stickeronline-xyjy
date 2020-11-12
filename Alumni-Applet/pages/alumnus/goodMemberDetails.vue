@@ -9,7 +9,7 @@
 				<text class="cuIcon-titles text-green1"></text> 简介
 			</view>
 		</view>
-		<view class="good_md_content" v-html="item.desc"></view>
+		<view class="good_md_content" v-html="item.describe"></view>
 	</view>
 </template>
 
@@ -21,7 +21,7 @@
 		data() {
 			return {
 				item:{
-					desc:"sss"
+					describe:"sss"
 				}
 			}
 		},

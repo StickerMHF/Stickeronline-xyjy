@@ -229,10 +229,12 @@
 						photo: item.userPhoto,
 						content: item.content,
 						images: JSON.parse(item.photos),
-						commentList: this.listToTree(item.commentList),
+						islike:item.islike,
+						commentList: item.commentList,//this.listToTree(item.commentList),
 						viewCount: item.viewCount,
-						likeCount: item.likeCount,
 						commentCount: item.commentCount,
+						likeList:item.likeList,
+						likeCount:item.likeList.length,
 						status: item.status
 					}					
 				});

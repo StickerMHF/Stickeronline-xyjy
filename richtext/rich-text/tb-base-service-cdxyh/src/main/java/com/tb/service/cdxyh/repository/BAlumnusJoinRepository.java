@@ -14,7 +14,7 @@ public interface BAlumnusJoinRepository extends JpaRepository<BAlumnusJoinEntity
 
     List<BAlumnusJoinEntity> findByAlumnusIdAndUserId(@Param("alumnusId") String alumnusId, @Param("userId") String userId);
 
-    Integer countAllByAlumnusId(@Param("alumnusId") String alumnusId);
+    Integer countAllByAlumnusIdAndStatus(@Param("alumnusId") String alumnusId,@Param("status") String status);
 
     Integer countAllByAlumnusIdAndUserId(@Param("alumnusId") String alumnusId, @Param("userId") String userId);
 

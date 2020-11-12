@@ -103,7 +103,14 @@ const api = {
 	gitAlumnusMemberList: baseurl + '/stickeronline/wechat/users/queryListByAlumnusId',
 	//获取组织成员信息
 	getAlumnusMemberById: baseurl + '/stickeronline/alumnusMember/queryById',
-
+	/**
+	 * 参加活动接口
+	 */
+	getActivityApplyList: baseurl + '/stickeronline/alumnusActivity/apply/list',
+	getActivityApplyById: baseurl + '/stickeronline/alumnusActivity/apply/queryById',
+	addActivityApply: baseurl + '/stickeronline/alumnusActivity/apply/add',
+	updateActivityApply: baseurl + '/stickeronline/alumnusActivity/apply/edit',
+	deleteActivityApply: baseurl + '/stickeronline/alumnusActivity/apply/delete',
 	/**
 	 * 发现
 	 */

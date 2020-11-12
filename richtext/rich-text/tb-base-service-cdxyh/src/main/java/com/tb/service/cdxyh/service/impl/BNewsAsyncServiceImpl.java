@@ -111,7 +111,12 @@ public class BNewsAsyncServiceImpl implements BNewsAsyncService, BaseAsyncServic
         Optional<BNewsEntity> res = bNewsRepository.findById(bNewsEntity.getId());
         if (res.isPresent()) {
             BNewsEntity bNewsEntity1=res.get();
-            bNewsEntity1.setViewCount(bNewsEntity1.getViewCount()+1);
+            if(bNewsEntity1.getViewCount()!=null){
+                bNewsEntity1.setViewCount(bNewsEntity1.getViewCount()+1);
+            }else{
+                bNewsEntity1.setViewCount(1);
+            }
+
             bNewsRepository.save(bNewsEntity1);
             future.complete(new JsonObject(Json.encode(bNewsEntity1)));
         }else{

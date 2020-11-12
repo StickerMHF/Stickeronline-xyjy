@@ -18,17 +18,16 @@
 				<view :class="'indexItem-' + item.name" :id="'indexes-' + item.name" :data-index="item.name">
 					<view class="cu-list menu-avatar no-padding">
 						<view class="cu-item">
-							<view v-if="item.photo" class="cu-avatar round lg" :style="'background-image:url('+item.photo+');'"></view>
+							<view v-if="item.avatarUrl" class="cu-avatar round lg" :style="'background-image:url('+item.avatarUrl+');'"></view>
 							<view v-else class="cu-avatar round lg" style="background-image:url('http://www.imapway.cn/Alumni/static/alumnus/default_photo.png')"></view>
 							<view class="content">
 								<view class="text-grey">{{item.name}}<text class="text-abc"></text>
 								</view>
 							</view>
-							<view class="margin-tb-sm text-center mem-attention">
+							<!-- <view class="margin-tb-sm text-center mem-attention">
 								<button @click="payHandler(item)" v-if="attention&&attention==1" class="cu-btn round bg-yellow">已关注</button>
 								<button @click="payHandler(item)" v-else class="cu-btn round bg-gradual-green1">关注</button>
-
-							</view>
+							</view> -->
 						</view>
 					</view>
 				</view>
@@ -84,7 +83,7 @@
 				let openid = uni.getStorageSync('openid');
 				if (openid && openid != "") {
 					let param = {
-						openid: openid
+						userId: openid
 					};
 				queryFansListByUserId(param).then(data => {
 					var [error, res] = data;

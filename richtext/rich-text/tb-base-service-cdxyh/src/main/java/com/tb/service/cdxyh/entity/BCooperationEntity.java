@@ -52,7 +52,11 @@ public class BCooperationEntity extends BaseEntity {
      */
     @Column(name = "contact")
     private String contact;
-
+    /**
+     * 审核状态
+     */
+    @Column(name = "status")
+    private Integer status;
     public String getId() {
         return id;
     }
@@ -83,5 +87,13 @@ public class BCooperationEntity extends BaseEntity {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

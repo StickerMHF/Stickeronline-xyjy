@@ -90,16 +90,16 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
                 content.put("viewCount",1);
             }
 
-            bMomentsRepository.save(new BMomentsEntity(content));
-            //获取评论信息
-            List<BMomentsCommentEntity> commentList = bMomentsCommentRepository.queryByCommentId(commentId);
-            resObj.getJsonArray("content").getJsonObject(i).put("commentList", new JsonArray(Json.encode(commentList)));
+//            bMomentsRepository.save(new BMomentsEntity(content));
+//            //获取评论信息
+//            List<BMomentsCommentEntity> commentList = bMomentsCommentRepository.queryByCommentId(commentId);
+//            resObj.getJsonArray("content").getJsonObject(i).put("commentList1", new JsonArray(Json.encode(commentList)));
             //获取当前用户点赞状态
             List<BMomentsLikeEntity> likeList = bMomentsLikeRepository.findAllByUserIdAndMomentId(params.getString("userId"),commentId);
             if(likeList.size()>0){
-                resObj.getJsonArray("content").getJsonObject(i).put("status", likeList.get(0).getStatus());
+                resObj.getJsonArray("content").getJsonObject(i).put("islike", likeList.get(0).getStatus());
             }else {
-                resObj.getJsonArray("content").getJsonObject(i).put("status", "unlike");
+                resObj.getJsonArray("content").getJsonObject(i).put("islike", "unlike");
             }
         }
         future.complete(resObj);
@@ -107,14 +107,35 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
     }
 
     @Override
-    public void edit(JsonObject params, Handler<AsyncResult<String>> handler) {
-
+    public void edit(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        BMomentsEntity bMomentsEntity = new BMomentsEntity(params);
+        bMomentsEntity.setCreateTime(new Date());
+        BMomentsEntity save = bMomentsRepository.save(bMomentsEntity);
+        contentCensorServiceImpl.getContentCensorInfo(new JsonObject().put("text",bMomentsEntity.getContent()),res->{
+            if(res.succeeded()&&res.result().getInteger("conclusionType")==1){
+                save.setStatus(1);
+                BMomentsEntity save1=bMomentsRepository.save(save);
+                future.complete(new JsonObject(Json.encode(save1)));
+            }else{
+                save.setStatus(-1);
+                BMomentsEntity save1=bMomentsRepository.save(save);
+                future.complete(new JsonObject(Json.encode(save1)));
+            }
+        });
+        handler.handle(future);
     }
-
     @Override
     public void delete(JsonObject params, Handler<AsyncResult<String>> handler) {
-
+        Future<String> future = Future.future();
+        String[] ids = params.getString("id").split(",");
+        for (int i = 0; i < ids.length; i++) {
+            bMomentsRepository.deleteById(ids[i]);
+        }
+        future.complete("删除成功!");
+        handler.handle(future);
     }
+
 
     @Override
     public void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler) {

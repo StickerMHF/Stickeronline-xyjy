@@ -49,7 +49,7 @@
 				</view>
 			</view>
 			<view class="discover-content">
-				<moments v-bind:list="photoList"></moments>
+				<moments v-bind:list="photoList" :isComment=false></moments>
 			</view>			
 		</view>
 		<view class="al-desc-title" v-show="showMember">

@@ -29,7 +29,7 @@ export default {
     return {
       targetTime: new Date().getTime() + 3900000,
       systemList: [],
-      imageList: ['/img/cyrygl_jg.png', '/img/cyrygl_yw.png', '/img/cyrygl_zj.png'],
+      imageList: ['/alumnus/img/cyrygl_jg.png', '/alumnus/img/cyrygl_yw.png', '/alumnus/img/cyrygl_zj.png'],
       item:null
     }
   },

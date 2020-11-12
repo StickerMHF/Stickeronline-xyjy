@@ -31,7 +31,7 @@ public interface BMomentsService {
      * @param handler
      */
 
-    void edit(JsonObject params, Handler<AsyncResult<String>> handler);
+    void edit(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
      * 通过id删除

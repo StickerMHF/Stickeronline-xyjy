@@ -1,7 +1,7 @@
 <template>
 	<view class="activity_details">
 		<view class="actd_heade">
-			<image :src="item.url" mode="aspectFill"></image>
+			<image :src="item.url||'http://cdxyh.stickeronline.cn/banner12x.png'" mode="aspectFill"></image>
 		</view>
 		<view class="actd_addr">
 			<view class="actd_addr_title">
@@ -25,22 +25,35 @@
 				<text class="cuIcon-titles text-green1"></text> 活动详情
 			</view>
 		</view>
-		<view class="actd_content" v-html="item.content"></view>
+		<view class="actd_content" v-html="item.context"></view>
 		<view class="actd_foot">
 			<view class="actd_foot_btn bg-white">
-				已报{{item.joinNum}}人
+				已报{{count||0}}人
 			</view>
-			<view class="actd_foot_btn bg-gradual-green1">
+			<view v-if="moment(new Date())>moment(item.deadline)" class="actd_foot_btn bg-gradual-green1">
 				报名已截止
+			</view>
+			<view v-else-if="!state" class="actd_foot_btn bg-gradual-green1" @click="applyHandler(item)">
+				点我报名
+			</view>
+			<view v-else class="actd_foot_btn bg-gradual-green1" >
+				已报名
 			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		getAlumnusActivityList,
+		addActivityApply,getAlumnusActivityById
+	} from '@/api/alumnus.js'
+	// import moment from "moment";  
 	export default {
 		data() {
 			return {
+				state:false,
+				count:0,
 				item: {}
 			}
 		},
@@ -51,12 +64,13 @@
 					return {
 						url: "http://cdxyh.stickeronline.cn/banner12x.png",
 						title: "长安大学70周年校庆公告（第二号）发布仪式暨校友代表座谈会举行",
-						startTime: "2020年11月11日",
-						endTime: "2020年12月12日",
+						startTime: "2020-10-26 00:00:00",
+						endTime: "2020-10-26 00:00:00",
 						address: "长安大学渭水校区",
-						deadline: "2020年10月10日",
+						deadline: "2020-10-26 00:00:00",
 						content: "<h1>长安大学70周年校庆公告（第二号）发布仪式暨校友代表座谈会举行</h1>",
-						joinNum: 23
+						joinNum: 23,
+						isApply:false
 					}
 				}
 			}
@@ -70,9 +84,41 @@
 			this.formatData();
 		},
 		methods: {
+			moment(date){
+				var res = new Date(date);
+				return res;
+			},
 			formatData() {
 				let that = this;
 				that.item = that.opts;
+				that.count=that.item.applyList.length;
+				that.state=that.item.isApply;
+				
+			},
+			applyHandler(value) {
+				let that = this;
+				let openid = uni.getStorageSync('openid');
+				if (openid) {
+					let params = {
+						userId: openid,
+						activityId: value.id
+					}
+					addActivityApply(params).then(data => {
+						var [error, res] = data;
+						if (res && res.data.success) {
+							that.state = true;
+							that.count=that.count+1;
+							uni.showToast({
+								title: '报名成功',
+								duration: 2000
+							});
+						}
+					})
+				} else {
+					uni.navigateTo({
+						url: "/pages/login/login"
+					});
+				}
 			}
 		}
 	}
@@ -82,14 +128,15 @@
 	.activity_details {
 		width: 100%;
 		height: 100%;
+		background: white;
 	}
 
 	.actd_heade {
 		width: 100%;
 		border-radius: 0;
-
 		image {
 			width: 100%;
+			height: 350rpx;
 			border-radius: 0;
 		}
 	}
@@ -104,7 +151,7 @@
 		}
 
 		.actd_addr_item {
-			line-height: 35px;
+			line-height: 70rpx;
 
 			.aiicon {
 				padding-right: 10px;
@@ -117,12 +164,12 @@
 	}
 
 	.actd_content {
-		padding: 10px 20px;
-		padding-bottom: 60px;
+		padding: 20rpx 40rpx;
+		padding-bottom: 120rpx;
 	}
 
 	.actd_foot {
-		height: 60px;
+		height: 120rpx;
 		position: fixed;
 		bottom: 0px;
 		left: 0px;
@@ -133,7 +180,7 @@
 			width: 50%;
 			text-align: center;
 			font-size: 16px;
-			line-height: 70px;
+			line-height: 120rpx;
 			display: inline-block;
 		}
 	}

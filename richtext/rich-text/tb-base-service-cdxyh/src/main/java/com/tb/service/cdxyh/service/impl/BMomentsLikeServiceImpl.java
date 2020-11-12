@@ -44,8 +44,8 @@ public class BMomentsLikeServiceImpl implements BMomentsLikeService, BaseAsyncSe
         BMomentsLikeEntity save;
         BMomentsEntity bMomentsEntity = bMomentsRepository.findById(params.getString("momentId")).get();
         Integer likeCount = bMomentsEntity.getLikeCount();
-        String status = params.getString("status");
-        if(status.equals("like")){
+        String islike = params.getString("islike");
+        if(islike.equals("like")){
             likeCount += 1;
         } else {
             likeCount -= 1;
@@ -54,7 +54,7 @@ public class BMomentsLikeServiceImpl implements BMomentsLikeService, BaseAsyncSe
         bMomentsRepository.save(bMomentsEntity);
         if (like.size()>0){
             BMomentsLikeEntity updatedDta = like.get(0);
-            updatedDta.setStatus(status);
+            updatedDta.setStatus(islike);
             //更新数据
             save = bMomentsLikeRepository.save(updatedDta);
         } else {

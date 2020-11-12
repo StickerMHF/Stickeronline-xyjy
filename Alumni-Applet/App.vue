@@ -1,7 +1,7 @@
 <script>
 	import Vue from 'vue'
 	import {
-		getUserOpenid
+		getUserOpenid,getWechatUserById
 	} from '@/api/user.js'
 	import {dateUtil} from '@/utils/dateUtil.js'
 	// var QQMapWX = require('./js_sdk/qqmap-wx-jssdk.js')
@@ -156,6 +156,7 @@
 								if (res && res.data.success && res.data.data.openid) {
 									that.openid = res.data.data.openid
 									uni.setStorageSync('openid', that.openid);
+									that.getWechatUserInfo();
 									// uni.setStorage({
 									// 	key: 'openid',
 									// 	data: res.data.openid,
@@ -181,31 +182,34 @@
 						let params = {
 							openId: this.openid
 						}
-						that.wxGetUserInfo(params)
+						that.getWechatUserInfo(params)
 					}
 
 				}
 			},
-			wxGetUserInfo() {
-				// let that = this;
-				// this.isLogin=uni.getStorageSync('isLogin');
-				// if (!this.isLogin) {
-				// 	uni.getUserInfo({
-				// 		provider: 'weixin',
-				// 		success: function(res) {
-				// 			try {
-				// 				uni.setStorageSync('isLogin', true);
-				// 				uni.setStorageSync('userInfo', res.userInfo); //记录是否第一次授权  false:表示不是第一次授权
-				// 				// _this.updateUserInfo();
-				// 			} catch (e) {
-				// 				console.log(e)
-				// 			}
-				// 		},
-				// 		fail(e) {
-				// 			console.log(e)
-				// 		}
-				// 	});
-				// }
+			getWechatUserInfo(){
+				let that=this;
+				let openid = uni.getStorageSync('openid');
+				if (openid&&openid!="") {
+					let param = {
+						openid:openid
+					};
+					getWechatUserById(param).then(data => {
+						var [error, res] = data;
+						if (res && res.data.success) {
+							let ss = res.data.result;
+							if(ss!=null){
+								that.isCertification=true;
+								uni.setStorageSync('isCertification', that.isCertification);
+							}else{
+								that.isCertification=false;
+								uni.setStorageSync('isCertification', that.isCertification);
+							}
+						}
+					});
+				} else {
+					that.getUserInfo();
+				}
 			},
 			formatDate(date){
 				return dateUtil.formatDate(date);

@@ -4,8 +4,10 @@ import com.sticker.online.core.entity.BaseEntity;
 import io.vertx.codegen.annotations.DataObject;
 import io.vertx.core.json.JsonObject;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @DataObject(generateConverter = true)
@@ -84,12 +86,25 @@ public class BMomentsEntity extends BaseEntity {
     private String userId;
 
     /**
-     * 评论次数
+     * 审核状态
      */
     @Column(name = "status")
     private Integer status;
-
-
+    /**
+     * 评论列表
+     */
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="moment_id",referencedColumnName = "id")
+    @Where(clause="status=1")
+    @OrderBy("create_time ASC")
+    private Set<BMomentsCommentEntity> commentList;
+    /**
+     * 点赞列表
+     */
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinColumn(name="moment_id",referencedColumnName = "id")
+    @Where(clause="status='like'")
+    private Set<BMomentsLikeEntity> likeList;
 
     public String getId() {
         return id;
@@ -169,5 +184,21 @@ public class BMomentsEntity extends BaseEntity {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Set<BMomentsCommentEntity> getCommentList() {
+        return commentList;
+    }
+
+    public void setCommentList(Set<BMomentsCommentEntity> commentList) {
+        this.commentList = commentList;
+    }
+
+    public Set<BMomentsLikeEntity> getLikeList() {
+        return likeList;
+    }
+
+    public void setLikeList(Set<BMomentsLikeEntity> likeList) {
+        this.likeList = likeList;
     }
 }

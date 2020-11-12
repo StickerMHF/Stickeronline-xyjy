@@ -10,9 +10,18 @@
 					<input class="basicinfo_name input" v-model="form.name" name="input" placeholder="姓名" />
 				</bjx-form-item>
 			</view>
-			<view class="cu-form-group">
+			<!-- <view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="性别" prop="sex">
 					<input v-model="form.sex" class="input" name="input" placeholder="性别" />
+				</bjx-form-item>
+			</view> -->
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="性别" label-right="right" prop='sex'>
+					<picker @change="sexChange" :value="form.sex" :range="sex">
+						<view class="picker">
+							{{form.sex}}
+						</view>
+					</picker>
 				</bjx-form-item>
 			</view>
 			<view class="cu-form-group">
@@ -22,13 +31,22 @@
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="所属学院" label-right="left" prop='college'>
-					<input v-model="form.college" class="input" name="input" placeholder="所属学院" />
+					<input v-model="form.college" class="input" name="input" placeholder="所属学院" disabled="true"/>
 				</bjx-form-item>
 			</view>
 			<!-- 不是教师 -->
-			<view v-if="type!='3'" class="cu-form-group">
+			<!-- <view v-if="type!='3'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="所在专业" label-right="right" prop='profession'>
 					<input v-model="form.profession" class="input" name="input" placeholder="所在专业" />
+				</bjx-form-item>
+			</view> -->
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="所在专业" label-right="right" prop='profession'>
+					<picker @change="professionChange" :value="form.profession" :range="profession">
+						<view class="picker">
+							{{form.profession}}
+						</view>
+					</picker>
 				</bjx-form-item>
 			</view>
 
@@ -109,18 +127,22 @@
 				form: {
 					openid: '',
 					name: '',
-					sex: '',
+					sex: '男',
 					identityCard: "",
-					college: '',
-					profession: '',
+					college: '地测学院',
+					profession: '勘查技术与工程',
 					education: '请选择',
 					startDate: '2016-9-1',
 					endDate: '2020-6-20',
 				},
 				index: -1,
 				eduIndex: -1,
+				sexIndex: -1,
+				professionIndex: -1,
 				picker: ['喵喵喵', '汪汪汪', '哼唧哼唧'],
+				sex: ['男','女'],
 				eduPicker: ['大专', '本科', '硕士', '博士'],
+				profession: ['勘查技术与工程','地球物理学','测绘工程','地理信息科学','遥感科学与技术','安全工程','地质工程'],
 				rules: {
 					name: {
 						required: true,
@@ -201,6 +223,14 @@
 			eduChange(e) {
 				this.eduIndex = e.detail.value;
 				this.form.education = this.eduPicker[this.eduIndex];
+			},
+			sexChange(e) {
+				this.sexIndex = e.detail.value;
+				this.form.sex = this.sex[this.sexIndex];
+			},
+			professionChange(e){
+				this.professionIndex = e.detail.value;
+				this.form.profession = this.profession[this.professionIndex];
 			},
 			startDateChange(e) {
 				this.form.startDate = e.detail.value

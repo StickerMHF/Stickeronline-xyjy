@@ -3,7 +3,7 @@
 	  <view class="qiun-bg-white qiun-title-bar qiun-common-mt">
 	    <view class="qiun-title-dot-light">
 			<!-- cuIcon-titles text-green1 -->
-			<text class="xyfb_icon" style="background:url(https://www.imapway.cn/Alumni/static/home/xyfb.png);background-size: 100%;"></text>校友分布</view>
+			<text class="xyfb_icon" style="background:url(https://www.imapway.cn/Alumni/static/home/xyfb.png);background-size: 100%;"></text>2020毕业校友分布</view>
 	  </view>
 	  <view class="qiun-charts">
 	    <canvas
@@ -88,13 +88,13 @@ export default {
 		    fontSize: 11,
 		    padding: [0, 0, 0, 0],
 		    legend: {
-		      show: false,
+		      show: true,
 		    },
-		    background: "#FFFFFF",
+		    background: "#f2fbff",
 		    pixelRatio: _selfs.pixelRatio,
 		    series: chartData.series,
 		    width: _selfs.cWidth * _selfs.pixelRatio,
-		    height: _selfs.cHeight * _selfs.pixelRatio,
+		    height: _selfs.cHeight * 1.4,
 		    extra: {
 		      map: {
 		        border: true,
@@ -138,13 +138,14 @@ export default {
   color: #000000;
 }
 .qiun-charts {
-  width: 750upx;
-  height: 500upx;
+  width: 100%;
+  height: 480upx;
   background-color: #ffffff;
+  padding: 10upx;
 }
 .charts {
-  width: 750upx;
-  height: 500upx;
+  width: 730upx;
+  height: 480upx;
   background-color: #ffffff;
 }
 .xyfb_icon{

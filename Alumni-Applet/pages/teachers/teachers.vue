@@ -80,7 +80,7 @@
 				let param = {
 					pageNo: this.current,
 					pageSize: this.pageSize,
-					sort: sort ? sort : 'createTime'
+					sort: sort ? sort : 'id'
 				};
 				getTeachersList(param).then(data => {
 					var [error, res] = data;
@@ -109,7 +109,6 @@
 						if (tempList.length) {
 							this.current++
 						}
-
 					}
 				});
 			},

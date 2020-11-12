@@ -51,10 +51,7 @@ public class BAlumnusJoinServiceImpl implements BAlumnusJoinService, BaseAsyncSe
         String userId = bAlumnusJoinEntity.getUserId();
         //查询数据条目
         List<BAlumnusJoinEntity> list = bAlumnusJoinRepository.findByAlumnusIdAndUserId(alumnusId, userId);
-        list.forEach(item ->{
-            bAlumnusJoinRepository.delete(item);
-        });
-
+        bAlumnusJoinRepository.deleteAll(list);
         future.complete("删除成功!");
         handler.handle(future);
     }

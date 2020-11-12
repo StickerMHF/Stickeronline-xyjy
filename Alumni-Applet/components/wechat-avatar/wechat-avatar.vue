@@ -16,9 +16,11 @@
 		</view>
 
 		<view class="save-btn">
-			<button class="btn" type="default" @tap="save">保存头像</button>
+			<!-- <button class="btn" type="default" @tap="save">保存头像</button> -->
+			<text class="btn" @click="save">保存头像</text>
+			<text class="btn" @click="upload">上传图片</text>
 
-			<button class="btn" type="default" @tap="upload">上传图片</button>
+			<!-- <button class="btn" type="default" @tap="upload">上传图片</button> -->
 			<!-- <button class="btn" type="default" @tap="share">分享朋友</button> -->
 		</view>
 		<!-- #ifdef H5 -->
@@ -263,12 +265,24 @@
 		bottom: 5%;
 		display: flex;
 		flex-direction: row;
+		
 	}
 
 	.btn {
 		margin: 0 10rpx;
 		font-size: 16px;
+		border-radius: 20px;
+		background: #FF8901;
+		color: #fff;
+		padding: 0 40rpx;
+		line-height: 76rpx;
 	}
+	/* button::after {
+		border: none;
+			  background: #FF8901;
+			  color: #aa0000;
+			  border-radius: 20px;
+			} */
 
 	/* #ifdef H5 */
 	.preview-wrap {

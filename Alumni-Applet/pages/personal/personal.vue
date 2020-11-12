@@ -106,35 +106,33 @@
 				    url: "/pages/login/login"
 				});
 			}
-			// if(userInfo){
-			// 	getApp().wxGetUserInfo();
-			// }
 
 		},
 		methods: {
 			getWechatUserInfo(){
 				let that=this;
-				let openid = uni.getStorageSync('openid');
-				if (openid&&openid!="") {
-					let param = {
-						openid:openid
-					};
-					getWechatUserById(param).then(data => {
-						var [error, res] = data;
-						if (res && res.data.success) {
-							let ss = res.data.result;
-							if(ss!=null){
-								that.isCertification=true;
-							}else{
-								that.isCertification=false;
-							}
-						}
-					});
-				} else {
-					getApp().getUserInfo();
-				}
-
-				
+				that.isCertification=uni.getStorageSync('isCertification');
+				// let openid = uni.getStorageSync('openid');
+				// if (openid&&openid!="") {
+				// 	let param = {
+				// 		openid:openid
+				// 	};
+				// 	getWechatUserById(param).then(data => {
+				// 		var [error, res] = data;
+				// 		if (res && res.data.success) {
+				// 			let ss = res.data.result;
+				// 			if(ss!=null){
+				// 				that.isCertification=true;
+				// 				uni.setStorageSync('isCertification', that.isCertification);
+				// 			}else{
+				// 				that.isCertification=false;
+				// 				uni.setStorageSync('isCertification', that.isCertification);
+				// 			}
+				// 		}
+				// 	});
+				// } else {
+				// 	getApp().getUserInfo();
+				// }
 			},
 			changeSkin() {
 				uni.navigateTo({

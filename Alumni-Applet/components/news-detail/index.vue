@@ -74,22 +74,23 @@ export default {
   }
 };
 </script>
-<style scoped>
+<style lang="less" scoped>
 @import './index.response.css';
 .new-content{
 	width: 100%;
-	    overflow: hidden;
+	    /* overflow: hidden;
 	    text-overflow: ellipsis;
 	    line-height: 62rpx;
 	    letter-spacing: 0px;
 	    white-space: pre-wrap;
 	    color: #000000;
 	    font-size: 36rpx;
-	    font-weight: 400;
-		padding: 0 20px;
+	    font-weight: 400; */
+		padding: 0 5px;
+		// text-indent: 2em;
 }
 .news-title{
-	font-size: 24px;
+	font-size: 16px;
 	    font-weight: bold;
 	    text-align: center;
 	    padding: 10px 30px;
@@ -101,6 +102,9 @@ export default {
 	    border: 0px;
 	    padding: 0;
 	    margin: 0px 2px;
+		background: #FFFFFF;
+		border-color: #fff;
+		line-height: 30px;
 }
 .hd{
 	min-height: 40px;
@@ -109,5 +113,8 @@ export default {
 	width: 30px;
 	height: 30px;
 	border: 0px;
+}
+.hm-btn::after{
+  border:none;
 }
 </style>
