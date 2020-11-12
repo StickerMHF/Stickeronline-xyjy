@@ -130,8 +130,8 @@
 
 	.news-item-images {
 		width: 100%;
-		margin-right: 12rpx;
-		margin-bottom: 12rpx;
+		// margin-right: 12rpx!important;
+		margin-bottom: 12rpx!important;
 		border-radius: 8rpx;
 		image {
 			width: 100%;

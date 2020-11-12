@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="dynamicBox">
 		<!-- <view class="publishData">
 			<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="navigatorTo"></image>
 		</view> -->
@@ -17,10 +17,10 @@
 							</view>
 						</view>
 					</view>
-					<view class="text-content">					
+					<view class="text-content details-list">					
 							{{moment.content}}					
 					</view>
-					<view class="grid flex-sub padding-lr" :class="isCard?'col-3 grid-square':'col-1'">
+					<view class="grid flex-sub padding-lr details-list" :class="isCard?'col-3 grid-square':'col-1'">
 						<view class="bg-img" :class="isCard?'':'only-img'" :style="'background-image:url('+item.url+');'" 
 						 v-for="(item,index) in moment.images" :key="index">
 						</view>
@@ -37,6 +37,7 @@
 <script>
 	import {
 		momentLike,
+		
 		momentComment
 	} from '@/api/discover.js'
 	export default {
@@ -224,6 +225,24 @@
 </script>
 
 <style lang="scss">
+	.dynamicBox{
+		background: #fff;
+	}
+	.details-list{
+		margin-top: 10px;
+		padding: 0;
+		.bg-img{
+			margin-right: 12rpx!important;
+			margin-bottom: 12rpx!important;
+		}
+	}
+	.text-title{
+		font-weight: bold;
+	}
+	.details-list{
+		    width: 340px;
+		    margin-left: 50px;
+	}
 	.comment_icon{
 		margin-right: 10px;
 	}

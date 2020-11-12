@@ -94,7 +94,7 @@ export default {
 		    pixelRatio: _selfs.pixelRatio,
 		    series: chartData.series,
 		    width: _selfs.cWidth * _selfs.pixelRatio,
-		    height: _selfs.cHeight * 1.4,
+		    height: _selfs.cHeight * 1.5,
 		    extra: {
 		      map: {
 		        border: true,
@@ -139,9 +139,10 @@ export default {
 }
 .qiun-charts {
   width: 100%;
-  height: 480upx;
+  // height: 600rpx;
   background-color: #ffffff;
   padding: 10upx;
+  overflow: hidden;
 }
 .charts {
   width: 730upx;

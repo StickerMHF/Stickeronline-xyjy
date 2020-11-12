@@ -36,7 +36,7 @@
 	export default {
 		data() {
 			return {
-				tabCur: 0,
+				tabCur: 1,
 				tabList: [{
 					name: '简介',
 					id: 1

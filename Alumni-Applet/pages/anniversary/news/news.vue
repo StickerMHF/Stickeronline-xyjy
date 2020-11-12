@@ -4,6 +4,9 @@
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
+		<!-- <view class="place">
+			
+		</view> -->
 		<view class="ann_news_content" style="background-image: url(http://www.imapway.cn/Alumni/static/anniversary/xqzx.png1);">
 			<!-- <newsList :newsList="lists"></newsList> -->
 			<newsList2 :list="lists2"></newsList2>
@@ -112,6 +115,10 @@
 </script>
 
 <style lang="scss" scoped>
+	// .place{
+	// 	width: 100%;
+	// 	height:60rpx;
+	// }
 .ann_news{
 	width: 100%;
 	height: 100%;

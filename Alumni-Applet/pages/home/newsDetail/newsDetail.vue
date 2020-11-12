@@ -31,7 +31,7 @@
 				detail: {
 					yunshu:
 					  "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_0.png",
-					createBy: "天邦科技",
+					createBy: "",
 					like:
 					  "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_1.png",
 					share:
