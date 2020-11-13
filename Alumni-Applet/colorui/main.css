@@ -2017,6 +2017,7 @@ button.cuIcon.lg {
 	text-align: center;
 	font-size: 34upx;
 }
+
 /* ==================
          导航栏
  ==================== */
@@ -2579,11 +2580,13 @@ button.cuIcon.lg {
 .cu-modal.drawer-modal.show .cu-dialog {
 	transform: translateX(0%);
 }
-.cu-modal .cu-dialog>.cu-bar:first-child .action{
-  min-width: 100rpx;
-  margin-right: 0;
-  min-height: 100rpx;
+
+.cu-modal .cu-dialog>.cu-bar:first-child .action {
+	min-width: 100rpx;
+	margin-right: 0;
+	min-height: 100rpx;
 }
+
 /* ==================
          轮播
  ==================== */
@@ -3013,11 +3016,13 @@ scroll-view.cu-steps .cu-item {
 	position: relative;
 	overflow: hidden;
 }
+
 .grid.grid-square>view.bg-img image {
 	width: 100%;
 	height: 100%;
 	position: absolute;
 }
+
 .grid.col-1.grid-square>view {
 	padding-bottom: 100%;
 	height: 0;
@@ -3653,10 +3658,12 @@ scroll-view.cu-steps .cu-item {
 	background-image: linear-gradient(45deg, #ec008c, #6739b6);
 	color: #ffffff;
 }
+
 .bg-gradual-green1 {
 	background-image: linear-gradient(45deg, #00BEB7, #00BEB7);
 	color: #ffffff;
 }
+
 .bg-gradual-blue {
 	background-image: linear-gradient(45deg, #00BEB7, #1cbbb4);
 	color: #ffffff;
@@ -3932,9 +3939,10 @@ scroll-view.cu-steps .cu-item {
 .text-green,
 .line-green,
 .lines-green {
-	color: #39b54a;
+	color: #00beb7;
 }
-.text-green1{
+
+.text-green1 {
 	color: #00BEB7
 }
 
