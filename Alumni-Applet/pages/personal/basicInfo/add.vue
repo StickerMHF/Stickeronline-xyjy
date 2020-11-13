@@ -166,9 +166,11 @@
 				</bjx-form-item>
 			</view>
 
-			<button class="bg-gradual-green1 margin" type="primary" @tap="submit">提交</button>
-		</bjx-form>
-	</view>
+      <button class="bg-gradual-green1 margin" type="primary" @tap="submit">
+        提交
+      </button>
+    </bjx-form>
+  </view>
 </template>
 
 <script>
@@ -439,15 +441,15 @@
 </script>
 
 <style lang="scss" scoped>
-	.basicinfo_item {
-		width: 100% !important;
-	}
+.basicinfo_item {
+  width: 100% !important;
+}
 
-	.basicinfo_name {
-		display: inline-block;
+.basicinfo_name {
+  display: inline-block;
 
-		.renzheng {
-			float: right;
-		}
-	}
+  .renzheng {
+    float: right;
+  }
+}
 </style>

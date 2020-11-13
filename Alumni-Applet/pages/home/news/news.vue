@@ -1,42 +1,21 @@
 <template>
-	<view>
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="true" @callBack="callBack">
-			<block slot="backText">返回</block>
-			<block slot="content">{{title}}</block>
+	<view class="home-news">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="false" @callBack="callBack">
+			<!-- <block slot="backText">返回</block> -->
+			<block slot="content">新闻列表</block>
 		</cu-custom>
 		<!-- 刷新页面后的顶部提示框 -->
-		<view class="tips" :class="{ 'tips-ani': tipShow }">为您更新了10条最新新闻动态</view>
-		<!-- 基于 uni-list 的页面布局 -->
-		<uni-list>
-			
-			<uni-list-item :to="'/pages/home/newsDetail/newsDetail?id='+item.id" direction="column" v-for="item in lists" :key="item.id">
-				
-				<!-- <template v-slot:header>
-					<view class="uni-title">{{item.title}}</view>
-				</template> -->
-				<!-- 通过body插槽定义列表内容显示 -->
-				<template v-slot:body>
-					<view class="uni-list-box">
-						<view class="uni-thumb">
-							<image :src="JSON.parse(item.thumb)[0]" mode="aspectFill"></image>
-						</view>
-						<view class="uni-content">
-							<view class="uni-title-sub uni-ellipsis-2">{{item.title}}</view>
-							<view class="uni-note">{{ item.createBy }} {{ formatDate(item.createTime) }}</view>
-						</view>
-					</view>
-				</template>
-				<!-- 同步footer插槽定义列表底部的显示效果 -->
-				<!-- <template v-slot:footer>
-					<view class="uni-footer">
-						<text class="uni-footer-text">评论</text>
-						<text class="uni-footer-text">点赞</text>
-						<text class="uni-footer-text">分享</text>
-					</view>
-				</template> -->
-				
-			</uni-list-item>
-		</uni-list>
+		<!-- <view class="tips" :class="{ 'tips-ani': tipShow }">为您更新了10条最新新闻动态</view> -->
+		
+		<view
+		  class="phm-card cu-card case no-card"
+		  v-for="(item, index) in lists"
+		>
+		  <navigator :url="'/pages/home/newsDetail/newsDetail?id=' + item.id">
+		    <newsItem :opts="item"></newsItem>
+		  </navigator>
+		</view>
+		
 		<!-- 通过 loadMore 组件实现上拉加载效果，如需自定义显示内容，可参考：https://ext.dcloud.net.cn/plugin?id=29 -->
 		<uni-load-more v-if="lists.length > 0" :status="status" />
 	</view>
@@ -44,10 +23,14 @@
 
 <script>
 	import {dateUtil} from '@/utils/dateUtil.js'
+	import newsItem from "@/components/news-list/news-item.vue";
 	import {
 		getNewsList
 	} from '@/api/news.js'
 	export default {
+		components: {
+		  newsItem
+		},
 		data() {
 			return {
 				lists: [], // 列表数据
@@ -180,8 +163,13 @@
 	};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	@import '@/common/uni-ui.scss';
+	.home-news{
+		width: 100%;
+		height: 100%;
+		background: #ffffff;
+	}
 	.uni-list-box{
 		    // border-bottom: 1px solid: #80808026;
 		    // margin: 24rpx 30rpx;fd
@@ -273,5 +261,9 @@
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
+	}
+	.phm-card{
+		border-bottom: 1px solid #e5dee5;
+		margin: 0 10px;
 	}
 </style>

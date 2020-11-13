@@ -1,8 +1,8 @@
 <template>
 	<view class="newsContent">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="true" @callBack="callBack">
-			<block slot="backText">返回</block>
-			<block slot="content">{{title}}</block>
+			<!-- <block slot="backText">返回</block> -->
+			<block slot="content">新闻详情</block>
 		</cu-custom>
 		<newsDetail :options="detail" :photos="JSON.parse(detail.thumb)" @likeHandler="likeHandler" @shareHandler="shareHandler"></newsDetail>
 	<!-- 分享弹窗 -->

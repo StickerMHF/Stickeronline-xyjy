@@ -24,6 +24,14 @@
     <div class="ft">
       <view class="new-content" v-html="options.contents"></view>
     </div>
+	<view class="hm-new-bottom">
+		<text class="hmnb-item cuIcon-forward">10</text>
+			<text class="hmnb-item cuIcon-appreciate">10</text>
+			
+			<text class="hmnb-item cuIcon-like">10</text>
+	</view>
+	<view class="hm-new-bottoms">
+	</view>
   </div>
 </template>
 <script>
@@ -86,35 +94,53 @@ export default {
 	    color: #000000;
 	    font-size: 36rpx;
 	    font-weight: 400; */
-		padding: 0 5px;
+		padding: 0 10rpx;
 		// text-indent: 2em;
 }
 .news-title{
-	font-size: 16px;
+	font-size: 32rpx;
 	    font-weight: bold;
 	    text-align: center;
-	    padding: 10px 30px;
+	    padding: 10rpx 60rpx;
+		width: 100%;
 }
 .hm-btn{
 	color: #ff8901;
-	    width: 30px;
-	    height: 30px;
-	    border: 0px;
+	    width: 60rpx;
+	    height: 60rpx;
+	    border: 0rpx;
 	    padding: 0;
-	    margin: 0px 2px;
+	    margin: 0rpx 2rpx;
 		background: #FFFFFF;
 		border-color: #fff;
-		line-height: 30px;
+		line-height: 60rpx;
 }
 .hd{
-	min-height: 40px;
+	min-height: 80rpx;
+}
+.ft{
+	padding: 10rpx 30rpx;
 }
 .share{
-	width: 30px;
-	height: 30px;
-	border: 0px;
+	width: 60rpx;
+	height: 60rpx;
+	border: 0rpx;
 }
 .hm-btn::after{
   border:none;
+}
+.hm-new-bottom{
+	width: 100%;
+	padding: 10rpx 32rpx;
+}
+.hmnb-item{
+	line-height: 80rpx;
+	padding: 0 10rpx;
+	font-size: 26rpx;
+	float: right;
+}
+.hm-new-bottoms{
+	height: 60rpx;
+	width: 100%;
 }
 </style>

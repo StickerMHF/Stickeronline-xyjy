@@ -2,7 +2,7 @@
 	<view class="school">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">{{title}}</block>
+			<block slot="content">院史介绍</block>
 		</cu-custom>
 
 		<view class="sch-his">

@@ -3,14 +3,19 @@
 		<view class="title-box">
 			<image class="imgs" src="http://cdxyh.stickeronline.cn/logo.jpg" mode=""></image>
 			<view class="textBox">
-				<text class="text">地测学院</text>
-				<text class="date">2020-11-12</text>
+				<text class="text">{{item.createBy}}</text>
+				<text class="date">{{formatDate(item.createTime)}}</text>
 			</view>
 		</view>
 		<view class="news-item-title">
 			<view class="news-title">{{item.title}}</view>
 		</view>
-		<view v-if="item.thumb.length>2" class="grid col-3 grid-square">
+		<view v-if="!showImages" class="grid col-1" style="height: 120px;">
+			<view class="news-item-images" style="height: 120px;">
+				<image :src="item.thumb[0]" mode="aspectFill" style="height: 120px;border-radius: 10px;"></image>
+			</view>
+		</view>
+		<view v-else-if="item.thumb.length>2" class="grid col-3 grid-square">
 			<view class="news-item-images" v-for="img in item.thumb">
 				<image :src="img" mode="aspectFill"></image><!-- mode="widthFix" -->
 			</view>
@@ -19,6 +24,7 @@
 			<view class="news-item-text" v-html="item.contents">
 			</view>
 		</view>
+		
 		<view v-else-if="item.thumb.length==1" class="grid col-1" style="height: 120px;">
 			<view class="news-item-images" v-for="img in item.thumb" style="height: 120px;">
 				<image :src="img" mode="aspectFill" style="height: 120px;border-radius: 10px;"></image><!-- mode="widthFix" -->
@@ -49,6 +55,12 @@
 	export default {
 		components: {},
 		props: {
+			showImages:{
+				type:Boolean,
+				default:function(){
+					return false;
+				}
+			},
 			opts: {
 				type: Object,
 				default: function() {
@@ -124,7 +136,7 @@
 			text-overflow: ellipsis;
 			    margin: 20rpx 0;
 			    font-size: 16px;
-			// white-space: nowrap;
+			white-space: nowrap;
 		}
 	}
 
@@ -132,10 +144,11 @@
 		width: 100%;
 		// margin-right: 12rpx!important;
 		margin-bottom: 12rpx!important;
-		border-radius: 8rpx;
+		border-radius: 4rpx;
 		image {
 			width: 100%;
 			background-size: 100% 100%;
+			border-radius: 8rpx !important;
 		}
 	}
 
@@ -143,5 +156,8 @@
 		max-height: 85px;
 		overflow: hidden;
 		text-overflow: ellipsis;
+	}
+	.phm-zx-view{
+		font-size: 28rpx;
 	}
 </style>
