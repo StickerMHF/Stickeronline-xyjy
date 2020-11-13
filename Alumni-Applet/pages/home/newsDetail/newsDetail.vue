@@ -66,8 +66,11 @@
 		},
 		methods: {
 			callBack(){
-				uni.redirectTo({
-					url: '/pages/anniversary/news/news'
+				// uni.redirectTo({
+				// 	url: '/pages/anniversary/news/news'
+				// });
+				uni.navigateBack({
+				    delta: 1
 				});
 			},
 			formatDate(date){

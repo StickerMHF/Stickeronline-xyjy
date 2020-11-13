@@ -1,14 +1,14 @@
 //时间戳转换方法    date:时间戳数字
 export const dateUtil={
 	formatDate(date) {
-	  var date = new Date(date);
+	  var date = new Date(date.replace(/-/g, '/'));
 	  var YY = date.getFullYear() + '-';
 	  var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
 	  var DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
 	  return YY + MM + DD;
 	},
 	formatTime(date) {
-	  var date = new Date(date);
+	  var date = new Date(date.replace(/-/g, '/'));
 	  var YY = date.getFullYear() + '-';
 	  var MM = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
 	  var DD = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
