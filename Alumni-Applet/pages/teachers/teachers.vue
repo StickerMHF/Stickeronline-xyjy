@@ -3,7 +3,7 @@
 	<view class="list">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">{{title}}</block>
+			<block slot="content">师资力量</block>
 		</cu-custom>
 		<!-- 刷新页面后的顶部提示框 -->
 		<!-- 当前弹出内容没有实际逻辑 ，可根据当前业务修改弹出提示 -->

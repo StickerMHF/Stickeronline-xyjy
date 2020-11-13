@@ -2,7 +2,7 @@
 	<view class="ann_news">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">{{title}}</block>
+			<block slot="content">新闻列表</block>
 		</cu-custom>
 		<!-- <view class="place">
 			
@@ -15,7 +15,7 @@
 </template>
 
 <script>
-	import newsItem from "@/components/news-list/news-item.vue"
+	// import newsItem from "@/components/news-list/news-item.vue"
 	// import newsList from "@/components/news-list/news-list.vue"
 	import newsList2 from '@/components/news-list2/index.vue'; 
 	import {
@@ -23,7 +23,7 @@
 	} from '@/api/news.js'
 	export default {
 		components: {
-		newsItem,
+		// newsItem,
 		newsList2
 		},
 		
