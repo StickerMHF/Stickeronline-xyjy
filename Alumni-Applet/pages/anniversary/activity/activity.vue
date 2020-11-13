@@ -22,7 +22,7 @@
 		},
 		data() {
 			return {
-				title: "",
+				title: "活动",
 				details: {
 					url: "http://cdxyh.stickeronline.cn/banner12x.png",
 					title: "长安大学70周年校庆公告（第二号）发布仪式暨校友代表座谈会举行",
@@ -77,8 +77,8 @@
 	}
 
 	.ann_news_content {
-		position: absolute;
-		top: 45px;
+		// position: absolute;
+		top: 5px;
 		bottom: 0px;
 		left: 0px;
 		right: 0px;

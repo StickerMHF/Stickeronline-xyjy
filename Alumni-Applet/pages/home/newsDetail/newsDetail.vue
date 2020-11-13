@@ -29,19 +29,18 @@
 		data() {
 			return {
 				detail: {
-					yunshu:
-					  "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_0.png",
-					createBy: "天邦科技",
-					like:
-					  "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_1.png",
-					share:
-					  "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_2.png",
-					createTime: 1603468800000,
-					title: "",
-					thumb:
-					  "",
-					contents:
-					  ""
+					// yunshu:
+					//   "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_0.png",
+					// createBy: "天邦科技",
+					// like:
+					//   "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_1.png",
+					// share:
+					//   "http://www.imapway.cn/Alumni/static/hm-news-detail/images/img_22946_0_2.png",
+					// createTime: 1603468800000,
+					// title: "",
+					// thumb:
+					//   "",
+					// contents:""
 				},
 				sharedata: {
 					type: 1,

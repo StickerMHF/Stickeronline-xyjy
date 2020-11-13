@@ -124,8 +124,8 @@
 	height: 100%;
 }
 .ann_news_content{
-	position: absolute;
-	top: 60px;
+	// position: absolute;
+	// top: 60px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
