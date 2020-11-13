@@ -138,7 +138,7 @@
 		image {
 			width: 100%;
 			height: 350rpx;
-			border-radius: 0;
+			border-radius: 10px;
 		}
 	}
 

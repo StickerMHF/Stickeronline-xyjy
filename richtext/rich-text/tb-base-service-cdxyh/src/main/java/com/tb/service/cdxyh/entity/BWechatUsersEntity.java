@@ -112,6 +112,58 @@ public class BWechatUsersEntity  extends BaseEntity {
     @Column(name = "name_initial")
     private String 	nameInitial;
 
+    /**
+     * 班级
+     */
+    @Column(name = "class_grade")
+    private String 	classGrade;
+    /**
+     * 学号
+     */
+    @Column(name = "student_number")
+    private String 	studentNumber;
+    /**
+     * 邮箱
+     */
+    @Column(name = "email")
+    private String 	email;
+    /**
+     * QQ
+     */
+    @Column(name = "qq")
+    private String 	qq;
+    /**
+     * 住址
+     */
+    @Column(name = "address")
+    private String 	address;
+    /**
+     * 单位名称
+     */
+    @Column(name = "company")
+    private String 	company;
+    /**
+     * 职位
+     */
+    @Column(name = "job_title")
+    private String 	jobTitle;
+    /**
+     * 电话
+     */
+    @Column(name = "phone")
+    private String 	phone;
+    /**
+     * 备注
+     */
+    @Column(name = "remark")
+    private String 	remark;
+    /**
+     * 微信
+     */
+    @Column(name = "wechat")
+    private String 	wechat;
+
+
     public String getOpenid() {
         return openid;
     }
@@ -238,5 +290,85 @@ public class BWechatUsersEntity  extends BaseEntity {
 
     public void setNameInitial(String nameInitial) {
         this.nameInitial = nameInitial;
+    }
+
+    public String getClassGrade() {
+        return classGrade;
+    }
+
+    public void setClassGrade(String classGrade) {
+        this.classGrade = classGrade;
+    }
+
+    public String getStudentNumber() {
+        return studentNumber;
+    }
+
+    public void setStudentNumber(String studentNumber) {
+        this.studentNumber = studentNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    public String getWechat() {
+        return wechat;
+    }
+
+    public void setWechat(String wechat) {
+        this.wechat = wechat;
     }
 }
