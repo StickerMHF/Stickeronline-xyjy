@@ -55,7 +55,7 @@
 				</view>
 			</view>
 		</view>
-		<view class="discover-comment details-list" v-show="commentShow">
+		<view class="discover-comment" v-show="commentShow">
 			<view class="weui-cells weui-cells_after-title">
 				<view class="weui-cell weui-cell_input">
 					<input ref="commentdom" class="uni-input comment-input" :focus="commentShow" type="text" placeholder="评论" @blur="bindBlurEvent"
@@ -326,7 +326,7 @@
 		font-weight: bold;
 	}
 	.details-list{
-		    width: 340px;
+		    // width: 340px;
 		    margin-left: 50px;
 	}
 	.discover-comment {

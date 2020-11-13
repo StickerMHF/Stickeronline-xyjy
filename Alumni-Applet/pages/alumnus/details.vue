@@ -1,7 +1,7 @@
 <template>
 	<view class="whole_alumnus_details">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
-			<block slot="content">首页</block>
+			<block slot="content">{{title}}</block>
 		</cu-custom>
 		<!-- banner -->
 		<view class="al-desc" style="padding-bottom: 0px;">
@@ -49,7 +49,7 @@
 				</view>
 			</view>
 			<view class="discover-content">
-				<moments v-bind:list="photoList" :isComment=false></moments>
+				<moments v-bind:list="photoList" :isComment="false"></moments>
 			</view>			
 		</view>
 		<view class="al-desc-title" v-show="showMember">
@@ -87,6 +87,7 @@
 		},
 		data() {
 			return {
+				title:"校友会",
 				contentText: {
 					contentdown: "显示更多",
 					contentrefresh: "正在加载...",
@@ -155,6 +156,7 @@
 		},
 		onLoad(options) {
 			// 初始化页面数据
+			this.title = options.name
 			this.params.fid = options.id;
 			this.initData(this.meanu);
 		},
@@ -255,7 +257,6 @@
 				gitAlumnusMemberList(this.params).then(data => {
 					let [error, res] = data;
 					if(res&& res.data&&res.data.result){
-						debugger
 						this.memberList = res.data.result.content;
 						if(this.memberList.length == 0){
 							this.showMember = false;
@@ -377,10 +378,10 @@
 
 	.al-menu-image>image {
 		width: 25px;
-		    height: 30px;
-		    text-align: center;
-		    margin: 0 auto;
-			margin-top: 10px;
+		height: 30px;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 10px;
 	}
 
 	.cu-item {

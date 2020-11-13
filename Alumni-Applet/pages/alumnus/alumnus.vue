@@ -81,14 +81,14 @@
 									</view>
 									<view>
 										<view class="cu-capsule radius">
-											<view class="cu-tag bg-blue sm"> 活动 </view>
-											<view class="cu-tag line-blue sm">
+											<view class="cu-tag bg-blue"> 活动 </view>
+											<view class="cu-tag line-blue">
 												{{ item.activity }}
 											</view>
 										</view>
 										<view class="cu-capsule radius">
-											<view class="cu-tag bg-gradual-green1 sm"> 成员 </view>
-											<view class="cu-tag line-green sm">
+											<view class="cu-tag bg-gradual-green1"> 成员 </view>
+											<view class="cu-tag line-green">
 												{{ item.member }}
 											</view>
 										</view>
@@ -253,14 +253,18 @@
 			/**
 			 * 下拉刷新回调函数
 			 */
-			onPullDownRefresh() {
-				console.log("下拉刷新");
-				if (this.params.pageNo > 1) {
-					this.status = "loading";
-					this.params.pageNo -= 1;
-					this.getAlumnusList(this.params);
-				}
-			},
+			// onPullDownRefresh() {
+			// 	// console.log("下拉刷新");
+			// 	if (this.params.pageNo > 1) {
+			// 		// this.status = "loading";
+			// 		this.params.pageNo -= 1;
+			// 		this.getAlumnusList(this.params);
+			// 	}
+				
+			// 	setTimeout(function () {
+			// 		uni.stopPullDownRefresh();
+			// 	}, 1000);
+			// },
 			/**
 			 * 上拉加载回调函数
 			 */
@@ -272,7 +276,6 @@
 				let that=this;
 				that.isCertification=uni.getStorageSync('isCertification');
 				if(that.isCertification==true){
-					debugger
 					var params = {
 						alumnusId: alumnu.id,
 						userId: "",
@@ -290,8 +293,21 @@
 						params.userPhoto = userInfo.avatarUrl;
 						addAlumnusJoin(params).then(data => {
 							console.log(data);
-							alumnu.join = true;
-							alumnu.member=alumnu.member+1;
+							let [error, res] = data
+							if(res&&res.data&&res.data.success){
+								alumnu.join = true;
+								alumnu.member=alumnu.member+1;
+								uni.showToast({
+								    title: '加入成功',
+								    duration: 2000
+								});
+							} else{
+								uni.showToast({
+								    title: '服务器忙，请稍后',
+								    duration: 2000
+								});
+							}
+							
 						});
 					} else {
 						//跳转页面
@@ -318,8 +334,21 @@
 				formdata.userId = uni.getStorageSync("openid");
 				delAlumnusJoin(formdata).then(data =>{
 					console.log(data);
-					alumnu.join = false;
-					alumnu.member=alumnu.member-1;
+					let [error,res] = data;
+					if(res&&res.data&&res.data.success){
+						alumnu.join = false;
+						alumnu.member=alumnu.member-1;						
+						uni.showToast({
+						    title: '退出成功',
+						    duration: 2000
+						});
+					} else{
+						uni.showToast({
+						    title: '服务器忙，请稍后再试！',
+						    duration: 2000
+						});
+					}
+					
 				});
 			},
 			/**
@@ -807,5 +836,10 @@
 
 	.view-left {
 		width: 200px;
+	}
+	
+	.cu-tag {
+	    font-size: 22rpx;
+		height: 45rpx;
 	}
 </style>
