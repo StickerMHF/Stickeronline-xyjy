@@ -55,7 +55,8 @@
 				</view>
 			</view>
 		</view>
-		<view class="discover-comment" v-show="commentShow">
+		<view class="discover-comment" v-show="true">
+			<!-- <comment></comment> -->
 			<view class="weui-cells weui-cells_after-title">
 				<view class="weui-cell weui-cell_input">
 					<input ref="commentdom" class="uni-input comment-input" :focus="commentShow" type="text" placeholder="评论" @blur="bindBlurEvent"
@@ -72,8 +73,12 @@
 		momentLike,
 		momentComment
 	} from '@/api/discover.js'
+	import comment from "../comment/comment.vue"
 	export default {
 		name: 'moments',
+		components:{
+			comment
+		},
 		data() {
 			return {
 				commentShow: false,
@@ -353,6 +358,13 @@
 	.weui-cell_input {
 		height: 100%;
 	}
+	// .discover-comment{
+	// 	position: absolute;
+	// 	top: 0;
+	// 	bottom: 0;
+	// 	width: 100%;
+	// 	background: #cecece;
+	// }
 .comment_icon{
 	font-size: 15px;
 	    padding: 5px;

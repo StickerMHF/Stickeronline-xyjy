@@ -7,7 +7,7 @@
 		<scroll-view scroll-x class="bg-white nav  text-center" scroll-with-animation>
 			<view class="cu-item" :class="index==tabCur?'text-green cur':''" v-for="(item,index) in tabList" :key="index" @tap="tabSelect"
 			 :data-id="item.id">
-				{{item.name}}
+				{{item.name||''}}
 			</view>
 		</scroll-view>
 		<view v-if="tabCur==='0'" class="td-item td-grgk">
@@ -19,39 +19,39 @@
 			<view class="td-item-content">
 				<view class="cu-form-group">
 					<view class="title">姓名：</view>
-					<text>{{content.name}}</text>
+					<text>{{content.name||''}}</text>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">性别：</view>
-					<text>{{content.sex}}</text>
+					<text>{{content.sex||''}}</text>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">职称：</view>
-					<text>{{content.rank}}</text>
+					<text>{{content.rank||''}}</text>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">学历：</view>
-					<text>{{content.education}}</text>
+					<text>{{content.education||''}}</text>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">毕业院校：</view>
-					<text>{{content.byyx}}</text>
+					<text>{{content.byyx||''}}</text>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">电子邮箱：</view>
-					<text>{{content.email}}</text>
+					<text>{{content.email||''}}</text>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">办公地址：</view>
-					<text>{{content.bgdd}}</text>
+					<text>{{content.bgdd||''}}</text>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">所在学院：</view>
-					<text>{{content.college}}</text>
+					<text>{{content.college||''}}</text>
 				</view>
 				<view class="cu-form-group">
 					<view class="title">联系电话：</view>
-					<text>{{content.contact}}</text>
+					<text>{{content.contact||''}}</text>
 				</view>
 				<!-- <view class="cu-form-group">
 					<view class="title">出生年月：</view>
@@ -117,6 +117,9 @@
 			</view>
 
 		</view>
+		<view class="teachers-bottom">
+			
+		</view>
 	</view>
 </template>
 
@@ -172,12 +175,17 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.td-item-content {
 		p {
 			text-indent: 2em;
 			margin: 0 auto;
 			line-height: 30px;
 		}
+	}
+	.teachers-bottom{
+		height: 100rpx;
+		width: 100%;
+		background: #ffffff;
 	}
 </style>

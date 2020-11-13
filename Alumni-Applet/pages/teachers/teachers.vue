@@ -11,7 +11,7 @@
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
 				<text class="cuIcon-titles text-green1"></text> 师资力量
-				<text class="lg text-gray teachers-btn" :class="waterfall?'cuIcon-sort':'cuIcon-apps'" @click="select"></text>
+				<!-- <text class="lg text-gray teachers-btn" :class="waterfall?'cuIcon-sort':'cuIcon-apps'" @click="select"></text> -->
 			</view>
 		</view>
 		<!-- 基于 uni-list 的页面布局 -->
@@ -32,15 +32,15 @@
 					</view>
 					<view>
 						<view class="shop-price">
-							<text class="shop-price-text" style="font-size: 14px;">{{ item.rank }}</text>
-							<text class="shop-price-text" style="margin: 0 5px;">|</text>
+							<text class="shop-price-text" >{{ item.rank?item.rank:'' }}</text>
+							<text class="shop-price-text" style="margin: 0 5px;">{{item.rank?'|':''}}</text>
 							<text class="shop-price-text"> {{ item.college }}</text>
 						</view>
-						<!-- <view class="uni-note">
+						<view class="uni-note">
 							<text class="shop-price-text" style="color: red;">{{ item.viewCount?item.viewCount:0 }}</text>
-							<text class="shop-price-text" style="margin: 0 5px;"></text>
-							访问</view>
- -->
+							<text class="shop-price-text" style="margin: 0 5px;">访问</text>
+							</view>
+
 					</view>
 					<view class="teachers-icon margin-tb-sm text-center mem-attention">
 						<text class="lg text-gray cuIcon-right"></text>
@@ -77,6 +77,7 @@
 		},
 		methods: {
 			getTeachersListData(reload, sort) {
+				this.status = 'loading'
 				let param = {
 					pageNo: this.current,
 					pageSize: this.pageSize,
@@ -190,7 +191,7 @@
 	}
 
 	.shop-price-text {
-		font-size: 12px;
+		font-size: 28rpx;
 	}
 
 	.hot-tag {
@@ -206,7 +207,12 @@
 		background: #007AFF;
 		color: #fff;
 	}
-
+.uni-title{
+	padding: 0;
+}
+.uni-note{
+	font-size: 12px;
+}
 	.uni-link {
 		flex-shrink: 0;
 	}
@@ -228,6 +234,9 @@
 		display: -webkit-box;
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
+		font-size: 32rpx;
+		font-weight: bold;
+		color: #000000;
 	}
 
 
