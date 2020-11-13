@@ -9,12 +9,7 @@
         <lff-barrage ref="lffBarrage" :list="dataList"></lff-barrage>
       </view>
       <view class="sendBox">
-        <textarea
-          class="sendText"
-          :value="textContent"
-          placeholder="请输入祝福语"
-          @input="changeText"
-        />
+        <textarea class="sendText" :value="textContent" @input="changeText" />
         <button type="default" @click="colrdo" class="sendBtn">发送祝福</button>
       </view>
     </view>
@@ -110,7 +105,7 @@ export default {
 }
 .sendBox {
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
   width: 100%;
   height: 200rpx;
   .sendBtn {
@@ -123,13 +118,14 @@ export default {
     line-height: 100rpx;
   }
   .sendText {
-    width: 100%;
-    height: 70rpx;
-    line-height: 60rpx;
-    padding: 10rpx 0;
+    width: 96%;
+    height: 45px;
+    line-height: 45px;
     text-indent: 10px;
     background: #fff;
-    border: 1px solid #f2f2f2;
+    border: 1px solid #999;
+    margin: 0 auto;
+    border-radius: 6px;
   }
 }
 </style>
