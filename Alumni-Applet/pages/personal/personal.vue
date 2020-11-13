@@ -134,27 +134,27 @@ export default {
     getWechatUserInfo() {
       let that = this;
       that.isCertification = uni.getStorageSync("isCertification");
-      // let openid = uni.getStorageSync('openid');
-      // if (openid&&openid!="") {
-      // 	let param = {
-      // 		openid:openid
-      // 	};
-      // 	getWechatUserById(param).then(data => {
-      // 		var [error, res] = data;
-      // 		if (res && res.data.success) {
-      // 			let ss = res.data.result;
-      // 			if(ss!=null){
-      // 				that.isCertification=true;
-      // 				uni.setStorageSync('isCertification', that.isCertification);
-      // 			}else{
-      // 				that.isCertification=false;
-      // 				uni.setStorageSync('isCertification', that.isCertification);
-      // 			}
-      // 		}
-      // 	});
-      // } else {
-      // 	getApp().getUserInfo();
-      // }
+      let openid = uni.getStorageSync('openid');
+      if (openid&&openid!="") {
+      	let param = {
+      		openid:openid
+      	};
+      	getWechatUserById(param).then(data => {
+      		var [error, res] = data;
+      		if (res && res.data.success) {
+      			let ss = res.data.result;
+      			if(ss!=null){
+      				that.isCertification=true;
+      				uni.setStorageSync('isCertification', that.isCertification);
+      			}else{
+      				that.isCertification=false;
+      				uni.setStorageSync('isCertification', that.isCertification);
+      			}
+      		}
+      	});
+      } else {
+      	getApp().getUserInfo();
+      }
     },
     changeSkin() {
       uni.navigateTo({

@@ -8,62 +8,133 @@
 			</block>
 		</cu-custom>
 		<bjx-form labelType="inline" :rules="rules" labelWidth="150" :form="form" ref="form">
+			<view class="cu-bar bg-white solid-bottom">
+				<view class="action">
+					<text class="cuIcon-titles text-green1"></text> 基本信息
+				</view>
+			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="姓名" prop="name">
-					<input class="basicinfo_name input" v-model="form.name" disabled name="input" placeholder="姓名" />
+					<input class="basicinfo_name input" v-model="form.name" disabled name="input"/>
 					<view class="basicinfo_name renzheng">已认证</view>
 				</bjx-form-item>
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="性别" prop="sex">
-					<input v-model="form.sex" disabled class="input" name="input" placeholder="性别" />
+					<input v-model="form.sex" disabled class="input" name="input"/>
 				</bjx-form-item>
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="身份证" label-right="left" prop='identityCard'>
-					<input v-model="form.identityCard" disabled class="input" name="input" placeholder="身份证号" />
+					<input v-model="form.identityCard" disabled class="input" name="input"/>
 				</bjx-form-item>
+			</view>
+			<view class="cu-bar bg-white solid-bottom margin-top">
+				<view class="action">
+					<text class="cuIcon-titles text-green1"></text> 学院信息
+				</view>
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="所属学院" label-right="left" prop='college'>
-					<input v-model="form.college" disabled class="input" name="input" placeholder="所属学院" />
+					<input v-model="form.college" disabled class="input" name="input"/>
 				</bjx-form-item>
 			</view>
 			<!-- 不是教师 -->
 			<view v-if="form.type!='3'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="所在专业" label-right="right" prop='profession'>
-					<input v-model="form.profession" disabled class="input" name="input" placeholder="所在专业" />
+					<input v-model="form.profession" disabled class="input" name="input"/>
 				</bjx-form-item>
 			</view>
-
+			<view v-if="form.type!='3'" class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="所在班级" label-right="right" prop='classGrade'>
+					<input v-model="form.classGrade" disabled class="input" name="input"/>
+				</bjx-form-item>
+			</view>
+			<view v-if="form.type!='3'" class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="学号" label-right="right" prop='studentNumber'>
+					<input v-model="form.studentNumber" disabled class="input" name="input"/>
+				</bjx-form-item>
+			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="学历" label-right="right" prop='education'>
-					<input v-model="form.education" disabled class="input" name="input" placeholder="学历" />
+					<input v-model="form.education" disabled class="input" name="input"/>
 				</bjx-form-item>
 			</view>
 			<!-- 曾经在校 -->
 			<view v-if="form.type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="入校时间" label-right="right" prop='startDate'>
-					<input v-model="form.startDate" disabled class="input" name="input" placeholder="入校时间" />
+					<input v-model="form.startDate" disabled class="input" name="input"/>
 				</bjx-form-item>
 			</view>
 			<!-- 在校学生 -->
 			<view v-else-if="form.type=='2'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="入学时间" label-right="right" prop='startDate'>
-					<input v-model="form.startDate" disabled class="input" name="input" placeholder="入学时间" />
+					<input v-model="form.startDate" disabled class="input" name="input"/>
 				</bjx-form-item>
 			</view>
 			<!-- 在职教师 -->
 			<view v-else class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="入职时间" label-right="right" prop='startDate'>
-					<input v-model="form.startDate" disabled class="input" name="input" placeholder="入职时间" />
+					<input v-model="form.startDate" disabled class="input" name="input"/>
 				</bjx-form-item>
 			</view>
-
+			
 			<!-- 曾经在校 -->
 			<view v-if="form.type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="离校时间" label-right="right" prop='endtDate'>
-					<input v-model="form.endDate" disabled class="input" name="input" placeholder="离校时间" />
+					<input v-model="form.endDate" disabled class="input" name="input"/>
+				</bjx-form-item>
+			</view>
+			
+			<view class="cu-bar bg-white solid-bottom margin-top">
+				<view class="action">
+					<text class="cuIcon-titles text-green1"></text> 工作信息
+				</view>
+			</view>
+			<view v-if="form.type!='3'" class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="工作单位" label-right="right" prop='company'>
+					<input v-model="form.company" disabled class="input" name="input"/>
+				</bjx-form-item>
+			</view>
+			<view v-if="form.type!='3'" class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="职位/职称" label-right="right" prop='jobTitle'>
+					<input v-model="form.profession" disabled class="jobTitle" name="input"/>
+				</bjx-form-item>
+			</view>
+			
+			<view class="cu-bar bg-white solid-bottom margin-top">
+				<view class="action">
+					<text class="cuIcon-titles text-green1"></text> 通讯信息
+				</view>
+			</view>
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="电话" label-right="right" prop='phone'>
+					<input v-model="form.phone" disabled class="input" name="input"/>
+				</bjx-form-item>
+			</view>
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="微信" label-right="right" prop='wechat'>
+					<input v-model="form.wechat" disabled class="input" name="input"/>
+				</bjx-form-item>
+			</view>
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="QQ" label-right="left" prop='qq'>
+					<input v-model="form.qq" disabled class="input" name="input"/>
+				</bjx-form-item>
+			</view>
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="Email" label-right="left" prop='email'>
+					<input v-model="form.email" disabled class="input" name="input"/>
+				</bjx-form-item>
+			</view>
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="住址" label-right="left" prop='address'>
+					<input v-model="form.address" disabled class="input" name="input"/>
+				</bjx-form-item>
+			</view>
+			<view class="cu-form-group">
+				<bjx-form-item class="basicinfo_item" label="备注" label-right="left" prop='remark'>
+					<input v-model="form.remark" disabled class="input" name="input"/>
 				</bjx-form-item>
 			</view>
 		</bjx-form>
@@ -102,8 +173,7 @@
 			}
 		},
 		onLoad(options) {
-			// 初始化页面数据
-			this.title = options.title;
+			// 初始化页面数据			this.title = options.title;
 			let userInfo = uni.getStorageSync('userInfo');
 			if (userInfo && userInfo != "") {
 				this.userInfo = userInfo;
@@ -135,8 +205,6 @@
 				} else {
 					getApp().getUserInfo();
 				}
-
-
 			},
 			editHandler(){
 				uni.navigateTo({

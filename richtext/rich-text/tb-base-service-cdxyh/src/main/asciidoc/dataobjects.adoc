@@ -361,23 +361,33 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[address]]`@address`|`String`|-
 |[[avatarUrl]]`@avatarUrl`|`String`|-
 |[[city]]`@city`|`String`|-
+|[[classGrade]]`@classGrade`|`String`|-
 |[[college]]`@college`|`String`|-
+|[[company]]`@company`|`String`|-
 |[[country]]`@country`|`String`|-
 |[[createBy]]`@createBy`|`String`|-
 |[[education]]`@education`|`String`|-
+|[[email]]`@email`|`String`|-
 |[[endDate]]`@endDate`|`String`|-
 |[[identityCard]]`@identityCard`|`String`|-
+|[[jobTitle]]`@jobTitle`|`String`|-
 |[[name]]`@name`|`String`|-
 |[[nameInitial]]`@nameInitial`|`String`|-
 |[[nickName]]`@nickName`|`String`|-
 |[[openid]]`@openid`|`String`|-
+|[[phone]]`@phone`|`String`|-
 |[[profession]]`@profession`|`String`|-
 |[[province]]`@province`|`String`|-
+|[[qq]]`@qq`|`String`|-
+|[[remark]]`@remark`|`String`|-
 |[[sex]]`@sex`|`String`|-
 |[[startDate]]`@startDate`|`String`|-
+|[[studentNumber]]`@studentNumber`|`String`|-
 |[[type]]`@type`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
+|[[wechat]]`@wechat`|`String`|-
 |===
 

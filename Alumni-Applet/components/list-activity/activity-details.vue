@@ -134,10 +134,11 @@
 	.actd_heade {
 		width: 100%;
 		border-radius: 0;
+		padding: 10px;
 		image {
 			width: 100%;
 			height: 350rpx;
-			border-radius: 0;
+			border-radius: 10px;
 		}
 	}
 
