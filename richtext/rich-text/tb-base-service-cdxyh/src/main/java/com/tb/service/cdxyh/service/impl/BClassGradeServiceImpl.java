@@ -48,7 +48,7 @@ public class BClassGradeServiceImpl implements BClassGradeService, BaseAsyncServ
         BClassGradeEntity bClassGradeEntity = new BClassGradeEntity();
         String sorts=params.getString("sort","createTime");
         Sort sort = new Sort(Sort.Direction.DESC, sorts);
-
+        String userId = params.getString("userId");
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
 //        if (params.getString("type")!=null) {
@@ -63,6 +63,13 @@ public class BClassGradeServiceImpl implements BClassGradeService, BaseAsyncServ
         for (int i = 0; i < contents.size(); i++) {
             JsonObject obj = contents.getJsonObject(i);
             String id = obj.getString("id");
+            //获取关注情况
+            Integer join = bAlumnusJoinRepository.countAllByAlumnusIdAndUserId(id, userId);
+            if (join > 0){
+                obj.put("join", true);
+            } else {
+                obj.put("join", false);
+            }
             //统计成员
             Integer member = bAlumnusJoinRepository.countAllByAlumnusIdAndStatus(id,"1");
             obj.put("member", member);
