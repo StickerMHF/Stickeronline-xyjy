@@ -10,7 +10,7 @@
         <view class="box">
           <view class="box-hd">
             <view class="avator" @click="loginHandler">
-              <img :src="userInfo.avatarUrl" />
+              <img :src="userInfo.avatarUrl"/>
             </view>
             <view class="phone-number">{{ userInfo.nickName }}</view>
           </view>
@@ -164,8 +164,20 @@ export default {
     loginHandler() {
       let openid = uni.getStorageSync("openid");
       let userInfo = uni.getStorageSync("userInfo");
+	  let isCertification= uni.getStorageSync("isCertification")
+	  // if()
       if (userInfo) {
         this.userInfo = userInfo;
+		if(isCertification){
+			uni.navigateTo({
+				url:"/pages/personal/userDetail/userDetail?userId="+openid
+			})
+		} else {
+			uni.navigateTo({
+				url:"/pages/personal/basicInfo/certification"
+			})
+		}
+		
       } else {
         uni.navigateTo({
           url: "/pages/login/login",
