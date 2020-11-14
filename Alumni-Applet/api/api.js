@@ -16,6 +16,7 @@ const api = {
 	queryAttentionListByUserId: baseurl + '/stickeronline/wechat/users/queryAttentionListByUserId',
 	
 	getUserListByInitialGroup: baseurl+'/stickeronline/wechat/users/getUserListByInitialGroup',
+	getUserDetailsByUserId: baseurl+'/stickeronline/wechat/users/getUserDetailsByUserId',
 	/**
 	 * 关注校友
 	 */
