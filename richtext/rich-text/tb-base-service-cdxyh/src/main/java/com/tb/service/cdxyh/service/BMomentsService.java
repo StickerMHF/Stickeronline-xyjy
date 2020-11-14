@@ -63,4 +63,5 @@ public interface BMomentsService {
      * @param handler
      */
     void likeClick(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+
 }

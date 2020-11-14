@@ -2,7 +2,7 @@
 	<view>
 		<scroll-view scroll-y class="indexes" :scroll-into-view="'indexes-'+ listCurID" :style="[{height:'calc(100vh - '+ CustomBar + 'px - 50px)'}]"
 		 :scroll-with-animation="true" :enable-back-to-top="true">
-			<block v-for="(item,index) in list" :key="index">
+			<block v-for="(item,index) in dataList" :key="index">
 				<view :class="'indexItem-' + item.name" :id="'indexes-' + item.name" :data-index="item.name">
 					<view class="cu-list menu-avatar no-padding">
 						<view class="cu-item">
@@ -13,7 +13,7 @@
 								</view>
 							</view>
 							<view class="margin-tb-sm text-center mem-attention">
-								<button @click="payHandler(item)" v-if="item.attention&&item.attention==1" class="cu-btn round bg-yellow">已关注</button>
+								<button @click="delAttention(item)" v-if="item.attention&&item.attention>=1" class="cu-btn round bg-yellow">已关注</button>
 								<button @click="payHandler(item)" v-else class="cu-btn round bg-gradual-green1">关注</button>
 							</view>
 						</view>
@@ -25,9 +25,20 @@
 </template>
 
 <script>
+	import {addWechatUserAttention, deleteWechatUserAttention} from '@/api/user.js';
 	export default {
 		data() {
-			return {};
+			return {
+				dataList: this.list
+			};
+		},
+		watch:{
+		    list : {
+		　　　　handler(newValue, oldValue) {
+		　　　　　　this.dataList = newValue
+		　　　　},
+		　　　　deep: true
+		　　}
 		},
 		props: {
 			list: {
@@ -58,7 +69,53 @@
 			}
 		},
 		methods: {
-
+			payHandler(item){
+				//获取用户ID
+				let userId =  uni.getStorageSync('openid');
+				let params = {
+					memberId: item.id,
+					userId: userId
+				}
+				addWechatUserAttention(params).then(data =>{
+					// debugger
+					let [error, res] = data;
+					if(res&&res.data&&res.data.success){
+						uni.showToast({
+						    title: '关注成功',
+						    duration: 2000
+						});
+						item.attention = 1;
+					} else{
+						uni.showToast({
+						    title: '服务器忙',
+						    duration: 2000
+						});
+					}					
+				});				
+			},
+			delAttention(item){
+				let userId =  uni.getStorageSync('openid');
+				let params = {
+					memberId: item.id,
+					userId: userId
+				}
+				deleteWechatUserAttention(params).then(data =>{
+					// debugger
+					let [error, res] = data;
+					if(res&&res.data&&res.data.success){
+						uni.showToast({
+						    title: '取消关注',
+						    duration: 2000
+						});
+						item.attention = 0;
+					} else{
+						uni.showToast({
+						    title: '服务器忙',
+						    duration: 2000
+						});
+					}					
+				});		
+			}
 		}
 	};
 </script>

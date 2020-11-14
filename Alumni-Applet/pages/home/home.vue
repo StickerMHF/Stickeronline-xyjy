@@ -273,8 +273,7 @@ export default {
 			  uni.navigateTo({
 			  	url: '/pages/personal/basicInfo/certification'
 			  });
-		  }
-		  
+		  }		  
 	  }
       // if (value && value == "ysjs") {
       //   uni.switchTab({

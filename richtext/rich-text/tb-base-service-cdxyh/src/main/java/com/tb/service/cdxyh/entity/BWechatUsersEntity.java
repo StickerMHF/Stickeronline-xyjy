@@ -162,6 +162,11 @@ public class BWechatUsersEntity  extends BaseEntity {
      */
     @Column(name = "wechat")
     private String 	wechat;
+    /**
+     * 状态
+     */
+    @Column(name = "audit_status")
+    private String 	auditStatus;
 
 
     public String getOpenid() {
@@ -370,5 +375,13 @@ public class BWechatUsersEntity  extends BaseEntity {
 
     public void setWechat(String wechat) {
         this.wechat = wechat;
+    }
+
+    public String getAuditStatus() {
+        return auditStatus;
+    }
+
+    public void setAuditStatus(String auditStatus) {
+        this.auditStatus = auditStatus;
     }
 }
