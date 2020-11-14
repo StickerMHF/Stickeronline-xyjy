@@ -63,6 +63,7 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         PageVo pageVo = new PageVo(params);
         BMomentsEntity bMomentsEntity = new BMomentsEntity();
         String likeCount = params.getString("order");
+        String selfId = params.getString("selfId");
         Sort sort;
         if (likeCount != null&&!likeCount.isEmpty()){
             sort =new Sort(Sort.Direction.DESC, likeCount);
@@ -74,6 +75,9 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         matcher.withMatcher("status", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建实例
         bMomentsEntity.setStatus(1);
+        if (selfId != null&&!selfId.isEmpty()){
+            bMomentsEntity.setUserId(selfId);
+        }
         Example<BMomentsEntity> ex = Example.of(bMomentsEntity,matcher);
 
         Page<BMomentsEntity> plist = bMomentsRepository.findAll(ex,pageable);
@@ -193,4 +197,5 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
 
         handler.handle(future);
     }
+
 }

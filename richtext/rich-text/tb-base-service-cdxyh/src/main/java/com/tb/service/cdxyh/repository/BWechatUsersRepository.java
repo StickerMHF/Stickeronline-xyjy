@@ -25,7 +25,9 @@ public interface BWechatUsersRepository extends JpaRepository<BWechatUsersEntity
      * @param offset
      * @return
      */
-    @Query(value = "SELECT b.* FROM b_wechat_users_attention a left JOIN w_wechat_users b ON a.user_id=b.id where a.member_id=?1 limit ?2 offset ?3", nativeQuery = true)
+//    @Query(value = "SELECT b.* FROM b_wechat_users_attention a left JOIN w_wechat_users b ON a.user_id=b.id where a.member_id=?1 limit ?2 offset ?3", nativeQuery = true)
+//    List<BWechatUsersEntity> queryFansListByUserId(String userId, Integer pageSize, Integer offset);
+    @Query(value = "SELECT b.id,b.nick_name,b.avatar_url FROM b_wechat_users_attention a left JOIN w_wechat_users b ON a.user_id=b.id where a.member_id=?1 limit ?2 offset ?3", nativeQuery = true)
     List<BWechatUsersEntity> queryFansListByUserId(String userId, Integer pageSize, Integer offset);
 
     /**
@@ -64,5 +66,8 @@ public interface BWechatUsersRepository extends JpaRepository<BWechatUsersEntity
      */
     @Query(value = "select s.* from (SELECT a.name,a.id,a.avatar_url as avatarUrl,b.attention FROM w_wechat_users a left JOIN (SELECT member_id,count(*) as attention from b_wechat_users_attention where user_id=?1 GROUP BY member_id) b ON a.id=b.member_id) as s LEFT JOIN b_alumnus_join as j on s.id=j.user_id where j.alumnus_id=?2 limit ?3 offset ?4", nativeQuery = true)
     List<Map<String,Object>> queryListByAlumnusId(String userId,String alumnusId, Integer pageSize, Integer offset);
-    
+
+
+    @Query(value = "select a.id,a.sex,a.nick_name,a.avatar_url from w_wechat_users a where a.id=?1", nativeQuery = true)
+    List<Map<String,Object>> getUserInfoByUserId(String openId);
 }

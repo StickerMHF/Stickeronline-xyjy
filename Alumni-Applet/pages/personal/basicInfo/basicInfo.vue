@@ -16,7 +16,9 @@
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="姓名" prop="name">
 					<input class="basicinfo_name input" v-model="form.name" disabled name="input"/>
-					<view class="basicinfo_name renzheng">已认证</view>
+					<view class="basicinfo_name renzheng" v-if="form.auditStatus=='1'">已认证</view>
+					<view class="basicinfo_name renzheng" v-else-if="form.auditStatus=='-1'">未通过</view>
+					<view class="basicinfo_name renzheng" v-else>待审核</view>
 				</bjx-form-item>
 			</view>
 			<view class="cu-form-group">

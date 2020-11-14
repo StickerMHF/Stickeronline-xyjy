@@ -149,6 +149,23 @@
 |[[userPhoto]]`@userPhoto`|`String`|-
 |===
 
+[[BClassGradeEntity]]
+== BClassGradeEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[imgUrl]]`@imgUrl`|`String`|-
+|[[major]]`@major`|`String`|-
+|[[name]]`@name`|`String`|-
+|[[period]]`@period`|`String`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|===
+
 [[BCooperationEntity]]
 == BCooperationEntity
 
@@ -362,6 +379,7 @@
 |===
 ^|Name | Type ^| Description
 |[[address]]`@address`|`String`|-
+|[[auditStatus]]`@auditStatus`|`String`|-
 |[[avatarUrl]]`@avatarUrl`|`String`|-
 |[[city]]`@city`|`String`|-
 |[[classGrade]]`@classGrade`|`String`|-

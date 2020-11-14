@@ -217,4 +217,21 @@ public class BWechatUsersHandler {
             });
         };
     }
+
+    @RouteMapping(value = "/getUserDetailsByUserId", method = RouteMethod.GET,order = 1)
+    @ApiImplicitParam(name = "id", value = "用户ID", dataType = "String", paramType = "query", required = true)
+    @ApiOperation(value = "根据用户ID查询用户详情信息")
+    public Handler<RoutingContext> getUserDetailsByUserId(){
+        return ctx ->{
+            bWechatUsersAsyncService.getUserDetailsByUserId(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res ->{
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
 }
