@@ -109,9 +109,10 @@ export default {
           page: "/pages/personal/fans/fans",
         },
 		{
+		id:'xtgl',
       	name: "系统管理",
       	icon: "http://www.imapway.cn/Alumni/static/personal/sz2x.png",
-      	page: "/pages/personal/manager/login"
+      	// page: "/pages/personal/manager/login"
        }
 	  //   {
 	  // 	name: "设置",
@@ -184,6 +185,11 @@ export default {
 					url: '/pages/personal/basicInfo/certification'
 				  });
 			  }		  
+		}else if(value && value == 'xtgl'){
+			uni.navigateTo({
+				// url:'/pages/personal/examine/examine'
+				url:'/pages/personal/manager/login'
+			})
 		}
 	},
     changeSkin() {

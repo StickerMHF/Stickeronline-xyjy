@@ -60,3 +60,20 @@ export const getUserList = (params) => {
     return getAction(api.getUserList, params)
 }
 
+
+//获取校友审核列表
+//会长
+export const getExamineList = (params)=>{
+	return getAction(api.getExamineList,params)
+}
+export const getPresidentStatus = (params)=>{
+	return postAction(api.getPresidentStatus,params)
+}
+
+//校友
+export const getPresidentList = (params)=>{
+	return getAction(api.getPresidentList,params)
+}
+export const getExamineStatus = (params)=>{
+	return postAction(api.getExamineStatus,params)
+}
