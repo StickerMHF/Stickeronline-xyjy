@@ -61,7 +61,7 @@
 		onLoad(options) {
 			// 初始化页面数据
 			this.title = options.title;
-
+  
 		},
 		methods: {
 			validatePhone(phone){
