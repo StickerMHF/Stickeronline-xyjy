@@ -64,11 +64,17 @@
     </view>
     	<view class="al-desc-title" v-show="showMember">
 			<view class="cu-bar bg-white solid-bottom">
-				<view class="action action1">
-					<text class="cuIcon-titles text-green1"></text> 成员
-					<span v-if="checkState==1"  class="al-desc-title-btn acbtn" type="default">待审核</span>
-					<span v-else-if="checkState==-2"  class="al-desc-title-btn acbtn" type="default">拒绝申请</span>
-					<span v-else @click="applyHandler" class="al-desc-title-btn acbtn" type="default">申请会长</span>
+				<view class="action action1 peoBox">
+					<view class="">
+						<text class="cuIcon-titles text-green1"></text>
+						<text>成员</text>
+					</view>
+					<view class="">
+						<span v-if="checkState==1"  class="al-desc-title-btn acbtn  round bg-gradual-green1" type="default">待审核</span>
+						<span v-else-if="checkState==-1"  class="al-desc-title-btn acbtn  round bg-gradual-green1" type="default">拒绝申请</span>
+						<span v-else-if="checkState==0" @click="applyHandler" class="al-desc-title-btn acbtn  round bg-gradual-green1" type="default">申请会长</span>
+						
+					</view>
 				</view>
 			</view>
 			<list-member v-bind:list="memberList"></list-member>
@@ -472,5 +478,18 @@ export default {
 .view_more {
   text-align: center;
 }
-
+.al-desc-title .peoBox{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	.acbtn{
+		line-height: 50rpx;
+		width: 140rpx;
+		height: 50rpx;
+		font-size: 14px;
+		text-align: center;
+		display: inline-block;
+	}
+}
 </style>

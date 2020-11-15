@@ -34,6 +34,8 @@ public class BAlumnusJoinServiceImpl implements BAlumnusJoinService, BaseAsyncSe
         BAlumnusJoinEntity bAlumnusJoinEntity = new BAlumnusJoinEntity(params);
         bAlumnusJoinEntity.setCreateTime(new Date());
         bAlumnusJoinEntity.setCreateBy(bAlumnusJoinEntity.getUserName());
+        bAlumnusJoinEntity.setCheckState(0);
+        bAlumnusJoinEntity.setPresident(0);
         BAlumnusJoinEntity save = bAlumnusJoinRepository.save(bAlumnusJoinEntity);
         future.complete(new JsonObject(Json.encode(save)));
         handler.handle(future);
@@ -116,15 +118,16 @@ public class BAlumnusJoinServiceImpl implements BAlumnusJoinService, BaseAsyncSe
         BAlumnusJoinEntity bAlumnusJoinEntity = new BAlumnusJoinEntity(params);
 
         Optional<BAlumnusJoinEntity> sr =bAlumnusJoinRepository.findById(bAlumnusJoinEntity.getId());
-        if (!sr.isPresent()) {
-            future.fail("未找到对应实体");
-        } else {
+        if (sr.isPresent()) {
             BAlumnusJoinEntity result=sr.get();
             result.setCheckState(Integer.parseInt(params.getString("checkState","0")));
 //            result.setPresident(Integer.parseInt(params.getString("president","0")));
             bAlumnusJoinRepository.save(result);
             //TODO 返回false说明什么？
             future.complete(new JsonObject(Json.encode(result)));
+
+        } else {
+            future.fail("未找到对应实体");
         }
 
         handler.handle(future);
