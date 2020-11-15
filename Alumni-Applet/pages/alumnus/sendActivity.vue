@@ -179,6 +179,9 @@
 </script>
 
 <style lang="scss" scoped>
+	body{
+		background: #fff;
+	}
 	.album-content{
 		width: 100%;
 		font-size: 16px;

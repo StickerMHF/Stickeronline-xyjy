@@ -192,7 +192,17 @@
             }
             
         }
-        ,{
+        ,
+		{
+		    "path" : "pages/anniversary/activity/activityDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
             "path" : "pages/anniversary/wish/wish",
             "style" :                                                                                    
             {
