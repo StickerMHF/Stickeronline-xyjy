@@ -20,6 +20,9 @@
         class="charts"
         @touchstart="touchDistribution"
       ></canvas>
+	 <!-- <view class="xyfb_legend">
+	  	dd
+	  </view> -->
     </view>
   </view>
 </template>
@@ -161,5 +164,8 @@ export default {
   display: inline-block;
   background-size: 100% 100%;
   margin-right: 5px;
+}
+.xyfb_legend{
+	position: absolute;
 }
 </style>

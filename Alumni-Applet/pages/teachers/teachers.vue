@@ -12,11 +12,11 @@
     <view class="cu-bar bg-white solid-bottom">
       <view class="action">
         <text class="cuIcon-titles text-green1"></text> 师资力量
-        <text
+       <!-- <text
           class="lg text-gray teachers-btn"
           :class="waterfall ? 'cuIcon-sort' : 'cuIcon-apps'"
           @click="select"
-        ></text>
+        ></text> -->
       </view>
     </view>
     <!-- 基于 uni-list 的页面布局 -->
@@ -44,7 +44,7 @@
         </template>
         <!-- 通过body插槽定义商品布局 -->
         <view slot="body" class="shop">
-          <view class="uni-title">
+          <view class="uni-title nameBox">
             <text class="uni-ellipsis-2 username">{{ item.name }}</text>
           </view>
           <view>
@@ -58,12 +58,12 @@
               >
               <text class="shop-price-text"> {{ item.college }}</text>
             </view>
-            <!-- <view class="uni-note">
-							<text class="shop-price-text" style="color: red;">{{ item.viewCount?item.viewCount:0 }}</text>
-							<text class="shop-price-text" style="margin: 0 5px;"></text>
-							访问</view>
- -->
           </view>
+		  	<view class="uni-note">
+		  		<text class="shop-price-text" style="color: red;">{{ item.viewCount?item.viewCount:0 }}</text>
+		  		<text class="shop-price-text" style="margin: 0 5px;"></text>
+		  		访问
+			</view>
           <view class="teachers-icon margin-tb-sm text-center mem-attention">
             <text class="lg text-gray cuIcon-right"></text>
           </view>
@@ -190,12 +190,18 @@ page {
   flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .shop .username {
   font-size: 16px;
 }
-
+.shop .nameBox{
+	margin:0;
+	padding: 0;
+}
+.shop .uni-note{
+	margin-top:0;
+}
 .shop-picture {
   width: 70px;
   height: 90px;
@@ -278,6 +284,7 @@ page {
         .uni-list-item__container {
           padding: 5px;
           flex-direction: column;
+		  align-items: center;
         }
       }
 

@@ -55,16 +55,16 @@
 				</view>
 			</view>
 		</view>
-		<!-- <view class="discover-comment" v-show="true"> -->
+		<view class="discover-comment" v-show="true">
 			<!-- <comment></comment> -->
-			<!-- <view class="weui-cells weui-cells_after-title">
+			<view class="weui-cells weui-cells_after-title">
 				<view class="weui-cell weui-cell_input">
 					<input ref="commentdom" class="uni-input comment-input" :focus="commentShow" type="text" placeholder="评论" @blur="bindBlurEvent"
 					 @focus="bindFocusEvent" v-model="commentText" confirm-type="send" />
 					<button @click="sumbitComment">发送</button>
 				</view>
-			</view> -->
-		<!-- </view> -->
+			</view>
+		</view>
 	</view>
 </template>
 
@@ -73,11 +73,11 @@
 		momentLike,
 		momentComment
 	} from '@/api/discover.js'
-
+	import comment from "../comment/comment.vue"
 	export default {
 		name: 'moments',
 		components:{
-			// comment
+			comment
 		},
 		data() {
 			return {
@@ -245,7 +245,21 @@
 			commentInput(index) {
 				this.commentParams.momentId = this.list[index].id;
 				this.nowComment = this.list[index].id;
-				this.$emit("comment",this.nowComment)
+				//获取用户信息
+				this.commentParams.userId = uni.getStorageSync('openid');
+				let userInfo = uni.getStorageSync('userInfo');
+				if (userInfo) {
+					this.commentParams.userName = userInfo.nickName;
+					this.commentParams.userPhoto = userInfo.avatarUrl;
+					this.commentShow = true;
+					this.$emit("comment",this.nowComment)
+					// this.$refs.commentdom.focus();
+				} else {
+					//跳转页面 
+					wx.navigateTo({
+						url: '/pages/login/login'
+					});
+				}
 			},
 			//评论的评论
 			commentInput2(comment) {

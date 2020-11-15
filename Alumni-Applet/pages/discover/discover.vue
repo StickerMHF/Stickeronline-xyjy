@@ -26,19 +26,30 @@
 			<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="navigatorTo"></image>
 		</view>
 		<view class="discover-content">
-			<moments :list="momentsList"></moments>
-		</view>			
+			<moments ref="moments" :list="momentsList" @comment="commentHandler"></moments>
+		</view>		
+			<view class="discover-comment">
+				<!-- <comment></comment> -->
+				<button @click="showHere">发布评论</button>
+				<ygc-comment ref="ygcComment" 
+				        :placeholder="'发布评论'" 
+				        @pubComment="pubComment"></ygc-comment>
+			</view>
 	</view>
 </template>
 
 <script>	
+import ygcComment from '@/components/ygc-comment/ygc-comment.vue';
 	import moments from '@/components/moments/moments.vue'; 
 	import {getDiscoverList} from '@/api/discover.js'
 	import {dateUtil } from "@/utils/dateUtil.js"
+	import comment from "@/components/comment/comment.vue"
 	var _self = '';
 	export default {
 		components:{
 			// moments
+			ygcComment,
+			comment
 		},
 		data() {
 			return {
@@ -180,6 +191,16 @@
 			// that = this;
 		},
 		methods: {
+			showHere(){
+				this.$refs.ygcComment.toggleMask('show');
+			},
+			pubComment(){},
+			commentHandler(id){
+				debugger
+			},
+			ss(){
+				// this.$refs.moments
+			},
 			//点赞
 			// likeClick(params){
 			// 	momentLike(params).then(data => {
@@ -282,7 +303,7 @@
 	}
 </script>
 
-<style>
+<style scoped>
 	.attention {
 		margin: 5px 5px 5px 5px;
 	}
@@ -343,5 +364,15 @@
 	.image{
 		height: 40px;
 		width: 40px;
+	}
+	.discover-comment{
+		position: absolute;
+		top: 0rpx;
+		bottom: 0;
+		width: 100%;
+		background: #00008800;;
+	}
+	.mask .mask-content .mask-content-topbar .right[data-v-7ae90f58] {
+		color:red
 	}
 </style>
