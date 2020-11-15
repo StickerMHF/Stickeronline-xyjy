@@ -39,6 +39,14 @@ export const getAlumnusPhotoById = (params) => {
 export const gitAlumnusMemberList = (params) => {
 	return getAction(api.gitAlumnusMemberList, params);
 }
+//获取用户会长身份接口
+export const queryPresidentByUserId = (params) => {
+	return getAction(api.queryPresidentByUserId, params);
+}
+//申请会长接口
+export const applyByUserId = (params) => {
+	return postAction(api.applyByUserId, params);
+}
 //获取成员信息
 export const getAlumnusMemberById = (params) => {
 	return getAction(api.getAlumnusMemberById, params);

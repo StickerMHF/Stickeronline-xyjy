@@ -66,7 +66,9 @@
 			<view class="cu-bar bg-white solid-bottom">
 				<view class="action action1">
 					<text class="cuIcon-titles text-green1"></text> 成员
-					<span @click="applyHandler" class="al-desc-title-btn acbtn" type="default">申请会长</span>
+					<span v-if="checkState==1"  class="al-desc-title-btn acbtn" type="default">待审核</span>
+					<span v-else-if="checkState==-2"  class="al-desc-title-btn acbtn" type="default">拒绝申请</span>
+					<span v-else @click="applyHandler" class="al-desc-title-btn acbtn" type="default">申请会长</span>
 				</view>
 			</view>
 			<list-member v-bind:list="memberList"></list-member>
@@ -90,6 +92,8 @@ import {
   getAlumnusActivityList,
   getAlumnusPhotoList,
   gitAlumnusMemberList,
+  queryPresidentByUserId,
+  applyByUserId
 } from "@/api/alumnus.js";
 export default {
   components: {
@@ -101,6 +105,7 @@ export default {
   data() {
     return {
 		showMenu:false,
+		checkState:0,//申请会长状态默认未申请
 		menusList:[
 			{
 				iconPath:'http://www.imapway.cn/Alumni/static/alumnus/lxr2x.png',
@@ -196,6 +201,7 @@ export default {
     this.title = options.name;
     this.params.fid = options.id;
     this.initData(this.meanu);
+	this.getApplyInfo();
   },
   methods: {
     initData(menu) {
@@ -246,6 +252,41 @@ export default {
           break;
       }
     },
+	applyHandler(){
+		let that=this;
+		this.params.userId=getApp().getOpenId();
+		this.params.alumnusId = this.params.fid;
+		this.params.checkState=1;
+		applyByUserId(this.params).then(data => {debugger
+		  let [error, res] = data;
+		  if (res && res.data && res.data.result) {
+		    let item = res.data.result;
+		    that.checkState=1;
+		  }else{
+			if(res.data.msg){
+				uni.showToast({
+				    title: res.data.msg,
+					icon:'none',
+				    duration: 2000
+				});
+			}
+			
+		  }
+		});
+	},
+	//获取会长身份信息
+	getApplyInfo(){
+		let that=this;
+		this.params.userId=getApp().getOpenId();
+		this.params.alumnusId = this.params.fid;
+		queryPresidentByUserId(this.params).then(data => {
+		  let [error, res] = data;
+		  if (res && res.data && res.data.result) {
+		    let item = res.data.result;
+		    that.checkState=item.checkState;
+		  }
+		});
+	},
     //切换菜单
     switchMenu(e) {
       let menu = e.currentTarget.dataset.cur;

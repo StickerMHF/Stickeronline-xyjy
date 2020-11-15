@@ -106,4 +106,42 @@ public class BAlumnusJoinHandler {
             });
         };
     }
+    @RouteMapping(value = "/queryPresidentByUserId", method = RouteMethod.GET, order = 1)
+    @ApiOperation(value = "查询列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> queryPresidentByUserId() {
+        return ctx -> {
+            bAlumnusJoinService.queryPresidentByUserId(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
+    @RouteMapping(value = "/applyByUserId", method = RouteMethod.POST, order = 1)
+    @ApiOperation(value = "查询列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> applyByUserId() {
+        return ctx -> {
+            bAlumnusJoinService.applyByUserId(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
 }

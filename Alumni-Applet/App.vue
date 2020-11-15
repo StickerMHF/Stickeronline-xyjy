@@ -211,6 +211,14 @@
 					that.getUserInfo();
 				}
 			},
+			getOpenId(){
+				let openid = uni.getStorageSync('openid');
+				return openid;
+			},
+			getIsCertification(){
+				let isCertification = uni.getStorageSync('isCertification');
+				return isCertification;
+			},
 			formatDate(date){
 				return dateUtil.formatDate(date);
 			},
