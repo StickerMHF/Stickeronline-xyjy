@@ -15,31 +15,31 @@
             <view class="phone-number">{{ userInfo.nickName }}</view>
           </view>
           <view class="box-bd">
-            <navigator url="/pages/personal/attention/attention">
+            <navigator url="">
               <view class="item">
                 <view class="icon"
                   ><img
-                    src="http://www.imapway.cn/Alumni/static/personal/wdgz2x.png"
+                    src="http://www.imapway.cn/Alumni/static/personal/wdpl2x.png"
                 /></view>
-                <view class="text">我的关注</view>
+                <view class="text">我的消息</view>
               </view>
             </navigator>
-            <navigator url="/pages/personal/fans/fans">
-              <view class="item">
-                <view class="icon"
-                  ><img
-                    src="http://www.imapway.cn/Alumni/static/personal/sc2x.png"
-                /></view>
-                <view class="text">我的粉丝</view>
-              </view>
-            </navigator>
-            <navigator url="/pages/personal/alumnus/alumnus">
+            <navigator url="">
               <view class="item">
                 <view class="icon"
                   ><img
                     src="http://www.imapway.cn/Alumni/static/personal/wdzz2x.png"
                 /></view>
-                <view class="text">我的圈子</view>
+                <view class="text">我的申请</view>
+              </view>
+            </navigator>
+            <navigator url="">
+              <view class="item">
+                <view class="icon"
+                  ><img
+                    src="http://www.imapway.cn/Alumni/static/personal/sc2x.png"
+                /></view>
+                <view class="text">我的收藏</view>
               </view>
             </navigator>
           </view>
@@ -108,17 +108,19 @@ export default {
           icon: "http://www.imapway.cn/Alumni/static/personal/sc2x.png",
           page: "/pages/personal/fans/fans",
         },
+		{
+      	name: "系统管理",
+      	icon: "http://www.imapway.cn/Alumni/static/personal/sz2x.png",
+      	page: "/pages/personal/manager/login"
+       }
+	  //   {
+	  // 	name: "设置",
+	  // 	icon: "http://www.imapway.cn/Alumni/static/personal/sz2x.png",
+	  // 	page: "/pages/personal/setting/setting"
+	  // }
       ],
-      // ,{
-      // 	name: "收藏",
-      // 	icon: "http://www.imapway.cn/Alumni/static/personal/wdpl2x.png",
-      // 	page: "/pages/personal/collect/collect"
-      // },
-      //   {
-      // 	name: "设置",
-      // 	icon: "http://www.imapway.cn/Alumni/static/personal/sz2x.png",
-      // 	page: "/pages/personal/setting/setting"
-      // }
+     
+     
     };
   },
   onShow() {

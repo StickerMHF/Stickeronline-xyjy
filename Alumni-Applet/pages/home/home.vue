@@ -134,6 +134,12 @@ export default {
           txt: "地测新闻",
           page: "/pages/home/news/news",
         },
+		{
+		  id:'xyrz',
+		  icon: "http://www.imapway.cn/Alumni/static/home/yxxy2x.png",
+		  txt: "校友认证",
+		  page: "",
+		},
         {
           icon: "http://www.imapway.cn/Alumni/static/home/xqzt2x.png",
           txt: "校友统计",
@@ -155,12 +161,7 @@ export default {
           txt: "校友合作",
           page: "/pages/cooperation/cooperation",
         },
-        {
-			id:'xyrz',
-          icon: "http://www.imapway.cn/Alumni/static/home/yxxy2x.png",
-          txt: "校友认证",
-          page: "",
-        },
+       
         // {
         //   icon: "http://www.imapway.cn/Alumni/static/home/dlqq2x.png",
         //   txt: "点亮全球",
@@ -168,8 +169,8 @@ export default {
         // },
         {
           icon: "http://www.imapway.cn/Alumni/static/home/dlqq2x.png",
-          txt: "校友通讯",
-          page: "/pages/home/address/address",
+          txt: "优秀校友",
+          page: "/pages/alumnus/goodMember",
         },
         {
           id: "xyjz",

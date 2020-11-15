@@ -7,7 +7,7 @@
 			<view class="cu-item shadow">
 				<view class="cu-list menu-avatar">
 					<view class="cu-item">
-						<view class="cu-avatar round lg" :style="'background-image:url('+moment.photo+');'"></view>
+						<view class="cu-avatar round lg" @click="avatarHandler(moment.userId)" :style="'background-image:url('+moment.photo+');'"></view>
 						<view class="content flex-sub">
 							<view class="text-title">{{moment.username}}</view>
 							<view class="text-gray text-sm flex justify-between">
@@ -32,24 +32,13 @@
 				</view>
 				<view class="cu-list menu-avatar comment solids-top details-list" v-if="isComment">
 					<view class="cu-item comment-body" v-for="comment in moment.commentList">
-						<view class="cu-avatar round" :style="'background-image:url('+comment.userPhoto+');'"></view>
+						<view class="cu-avatar round" @click="avatarHandler(comment.userId)" :style="'background-image:url('+comment.userPhoto+');'"></view>
 						<view class="content">
 							<view class="text-grey">{{comment.userName}}</view>
 							<view class="text-gray text-content text-df">
 								{{comment.content}}
 							</view>
-							<!-- <view class="bg-grey padding-sm radius margin-top-sm  text-sm" v-show="comment.replyList.length>0">
-								<view class="flex" v-for="reply in comment.replyList">
-									<view>{{reply.name}}:</view>
-									<view class="flex-sub"> {{reply.content}}</view>
-								</view>
-							</view>
-							<view class="margin-top-sm flex justify-between">
-								<view class="text-gray text-df">{{comment.commentTime}}</view>
-								<view>
-									<text class="cuIcon-messagefill text-gray margin-left-sm" @click="commentInput2(comment)"></text>
-								</view>
-							</view> -->
+							
 						</view>
 					</view>
 				</view>
@@ -208,6 +197,13 @@
 			bindFocusEvent() {
 				console.log('获得焦点');
 			},
+			avatarHandler(openid){debugger
+				if(openid!=null){
+					uni.navigateTo({
+						url:"/pages/personal/userDetail/userDetail?userId="+openid
+					})
+				}
+			},
 			//点赞操作
 			momentLike(index) {
 				if (this.list[index].islike == 'like') {
@@ -246,64 +242,6 @@
 				this.commentParams.momentId = this.list[index].id;
 				this.nowComment = this.list[index].id;
 				this.$emit("comment",this.nowComment)
-			},
-			//评论的评论
-			commentInput2(comment) {
-				this.commentParams.momentId = comment.momentId;
-				this.commentParams.fid = comment.id;
-				//获取用户信息
-				this.commentParams.userId = uni.getStorageSync('openid');
-				let userInfo = uni.getStorageSync('userInfo');
-				if (userInfo) {
-					this.commentParams.userName = userInfo.nickName;
-					this.commentParams.userPhoto = userInfo.avatarUrl;
-					this.commentShow = true;
-					// this.$refs.commentdom.focus();
-				} else {
-					//跳转页面 
-					wx.navigateTo({
-						url: '/pages/login/login'
-					});
-				}
-			},
-			// sumbitComment(){				
-			// 	if(this.fatherCommentMethod){
-			// 		this.commentParams.content = this.commentText;
-			// 		this.fatherCommentMethod(this.commentParams);
-			// 	}
-			// },
-			//发表评论
-			sumbitComment() {
-				// if(this.fatherCommentMethod){
-				this.commentParams.content = this.commentText;
-				// this.fatherCommentMethod(this.commentParams);
-				momentComment(this.commentParams).then(data => {
-					this.commentShow = false;
-					this.commentText = '';
-					//获取当前评论数据
-					var fid = this.commentParams.momentId;
-					var that = this;
-					var [error, res] = data;	
-					if(res&&res.data&&res.data.result){
-						if(res.data.result.status == 1){
-							this.listArray.forEach(function(val, index, arr) {
-								if (fid == val.id) {							
-									that.listArray[index].commentList.push({
-										userName: that.commentParams.userName,
-										content: that.commentParams.content,
-										userId: that.commentParams.userId,
-										replyTime: new Date(),
-										fid: that.commentParams.fid,
-										userPhoto: that.commentParams.userPhoto
-									});
-								}
-							});
-						}
-					}
-					
-				});
-
-				// }
 			}
 		},
 
