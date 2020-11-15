@@ -196,6 +196,9 @@ export default {
 		  pageable: {},
     };
   },
+  onShow() {
+  	this.initData(this.meanu);
+  },
   onLoad(options) {
     // 初始化页面数据
     this.title = options.name;
@@ -470,21 +473,4 @@ export default {
   text-align: center;
 }
 
-	.view_more {
-		text-align: center;
-	}
-	.cu-bar .action{
-		-webkit-justify-content:none;
-	}
-	.acbtn{
-		position: absolute;
-		    right: 10px;
-		    font-size: 14px;
-		    background-color: #00BEB7;
-		    color: #ffffff;
-		    border-radius: 10px;
-		    align-content: normal;
-		    width: 70px;
-		    text-align: center;
-	}
 </style>

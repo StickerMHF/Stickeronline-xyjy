@@ -314,7 +314,9 @@
 </script>
 
 <style scoped>
-	
+	body{
+		background: #fff;
+	}
 	.footer {
 		/* margin-top: 80upx; */
 		    position: fixed;

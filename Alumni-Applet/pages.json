@@ -148,7 +148,7 @@
             
         }
         ,{
-            "path" : "pages/cooperation/add",
+            "path" : "pages/cooperation/addDetail/addDetail",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -192,7 +192,17 @@
             }
             
         }
-        ,{
+        ,
+		{
+		    "path" : "pages/anniversary/activity/activityDetail",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "",
+		        "enablePullDownRefresh": false
+		    }
+		    
+		}
+		,{
             "path" : "pages/anniversary/wish/wish",
             "style" :                                                                                    
             {
@@ -387,6 +397,13 @@
                 "enablePullDownRefresh": false
             }
             
+        }
+        ,{
+            "path" : "pages/personal/examine/examine",
+            "style" : {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
         }
     ],
 	"globalStyle": {
