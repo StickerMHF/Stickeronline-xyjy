@@ -54,8 +54,9 @@
 		</view>
 		<view class="al-desc-title" v-show="showMember">
 			<view class="cu-bar bg-white solid-bottom">
-				<view class="action">
+				<view class="action action1">
 					<text class="cuIcon-titles text-green1"></text> 组织成员
+					<span @click="applyHandler" class="al-desc-title-btn acbtn" type="default">申请会长</span>
 				</view>
 			</view>
 			<list-member v-bind:list="memberList"></list-member>
@@ -390,5 +391,19 @@
 
 	.view_more {
 		text-align: center;
+	}
+	.cu-bar .action{
+		-webkit-justify-content:none;
+	}
+	.acbtn{
+		position: absolute;
+		    right: 10px;
+		    font-size: 14px;
+		    background-color: #00BEB7;
+		    color: #ffffff;
+		    border-radius: 10px;
+		    align-content: normal;
+		    width: 70px;
+		    text-align: center;
 	}
 </style>

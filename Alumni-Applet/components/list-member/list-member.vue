@@ -6,14 +6,18 @@
 				<view :class="'indexItem-' + item.name" :id="'indexes-' + item.name" :data-index="item.name">
 					<view class="cu-list menu-avatar no-padding">
 						<view class="cu-item">
-							<view v-if="item.avatarurl" class="cu-avatar round lg" :style="'background-image:url('+item.avatarurl+');'"></view>
+							<view v-if="item.avatarurl" @click="avatarHandler(item.id)" class="cu-avatar round lg" :style="'background-image:url('+item.avatarurl+');'"></view>
 							<view v-else class="cu-avatar round lg" style="background-image:url('http://www.imapway.cn/Alumni/static/alumnus/default_photo.png')"></view>
 							<view class="content">
-								<view class="text-grey">{{item.name}}<text class="text-abc"></text>
+								<view class="text-grey">{{item.name}}
+								<text v-if="item.president==2" class="text-abc">(会长)</text>
+								<text v-else-if="item.president==1" class="text-abc">(副会长)</text>
+								<text v-else class="text-abc"></text>
 								</view>
 							</view>
 							<view class="margin-tb-sm text-center mem-attention">
-								<button @click="delAttention(item)" v-if="item.attention&&item.attention>=1" class="cu-btn round bg-yellow">已关注</button>
+								<button  v-if="item.id==userId" class="cu-btn round bg-yellow">我</button>
+								<button @click="delAttention(item)" v-else-if="item.attention&&item.attention>=1" class="cu-btn round bg-yellow">已关注</button>
 								<button @click="payHandler(item)" v-else class="cu-btn round bg-gradual-green1">关注</button>
 							</view>
 						</view>
@@ -29,7 +33,8 @@
 	export default {
 		data() {
 			return {
-				dataList: this.list
+				dataList: this.list,
+				userId:""
 			};
 		},
 		watch:{
@@ -44,31 +49,21 @@
 			list: {
 				type: Array,
 				default: function() {
-					return [{
-							id: "1",
-							name: "sticker",
-							sex: "男",
-							telephone: "15245974561",
-							email: "gisfzb001@153.com",
-							fid: "001",
-							photo: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10006.jpg",
-							attention: 1
-						},
-						{
-							id: "2",
-							name: "gisfzb",
-							sex: "男",
-							telephone: "15498743016",
-							email: "gisfzb001@154.com",
-							fid: "0010",
-							photo: "https://ossweb-img.qq.com/images/lol/web201310/skin/big10007.jpg",
-							attention: 0
-						}
-					];
+					return [];
 				}
 			}
 		},
+		mounted() {
+			this.userId =  uni.getStorageSync('openid');
+		},
 		methods: {
+			avatarHandler(openid){
+				if(openid!=null){
+					uni.navigateTo({
+						url:"/pages/personal/userDetail/userDetail?userId="+openid
+					})
+				}
+			},
 			payHandler(item){
 				//获取用户ID
 				let userId =  uni.getStorageSync('openid');
@@ -120,6 +115,10 @@
 	};
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.cu-btn{
+	width: 140rpx;
+	height: 50rpx;
+	font-size: 28rpx;
+}
 </style>

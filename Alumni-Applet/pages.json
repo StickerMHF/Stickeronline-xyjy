@@ -396,7 +396,7 @@
 	"tabBar": {
 		"custom": false,
 		"color": "#7A7E83",
-		"selectedColor": "#3cc51f",
+		"selectedColor": "#00BEB7",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
@@ -423,7 +423,7 @@
 			"pagePath": "pages/personal/personal",
 			"iconPath": "static/nav/wd2x.png",
 			"selectedIconPath": "static/nav/wd_cur2x.png",
-			"text": "我"
+			"text": "我的"
 		}]
 	}
 }

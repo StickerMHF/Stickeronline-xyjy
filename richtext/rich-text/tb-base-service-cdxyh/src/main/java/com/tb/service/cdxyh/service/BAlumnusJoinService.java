@@ -31,7 +31,7 @@ public interface BAlumnusJoinService {
      * @param handler
      */
 
-    void edit(JsonObject params, Handler<AsyncResult<String>> handler);
+    void edit(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
      * 通过id删除
@@ -49,4 +49,25 @@ public interface BAlumnusJoinService {
      * @param handler
      */
     void queryall(JsonObject params, Handler<AsyncResult<JsonArray>> handler);
+    /**
+     * 审核会长
+     *
+     * @param params
+     * @param handler
+     */
+    void checkById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    /**
+     * 根据用户查询申请会长状态
+     *
+     * @param params
+     * @param handler
+     */
+    void queryPresidentByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    /**
+     * 申请会长
+     *
+     * @param params
+     * @param handler
+     */
+    void applyByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 }

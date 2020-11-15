@@ -63,7 +63,24 @@ public class BWechatUsersHandler {
             });
         };
     }
-
+    @RouteMapping(value = "/checkById", method = RouteMethod.POST, order = 1)
+    @ApiOperation(value = "审核会长")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "alumnusId", value = "组织ID", dataType = "String", paramType = "body", required = true)
+    })
+    public Handler<RoutingContext> checkById() {
+        return ctx -> {
+            bWechatUsersAsyncService.checkById(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
     @RouteMapping(value = "/queryById", method = RouteMethod.GET, order = 1)
     @ApiOperation(value = "根据ID查询微信用户")
     @ApiImplicitParams({

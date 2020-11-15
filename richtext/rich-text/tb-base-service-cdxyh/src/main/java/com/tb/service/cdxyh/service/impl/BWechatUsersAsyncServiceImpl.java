@@ -216,6 +216,15 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
             List<Map<String,Object>> res = bWechatUsersRepository.queryListByAlumnusId(userId,alumnusId,pageVo.getPageSize(),offset);
             Long zoom=bWechatUsersRepository.count();
             JsonArray array=new JsonArray(res);
+            JsonArray result=new JsonArray();
+            array.forEach(r->{
+                JsonObject s=(JsonObject)r;
+                JsonObject json=new JsonObject(s.toString());
+                if(json.getInteger("check_state")!=2){
+                    json.put("president",0);
+                }
+                result.add(json);
+            });
             future.complete(new JsonObject().put("content",array).put("total",zoom));
         }else{
             future.complete(new JsonObject().put("content",new JsonArray()).put("total",0));
@@ -246,7 +255,25 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
         future.complete(resObj);
         handler.handle(future);
     }
+    @Override
+    public void checkById(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        BWechatUsersEntity bWechatUsersEntity = new BWechatUsersEntity(params);
 
+        Optional<BWechatUsersEntity> sr =bWechatUsersRepository.findById(bWechatUsersEntity.getOpenid());
+        if (!sr.isPresent()) {
+            future.fail("未找到对应实体");
+        } else {
+            BWechatUsersEntity result=sr.get();
+            result.setAuditStatus(bWechatUsersEntity.getAuditStatus());
+//            result.setPresident(Integer.parseInt(params.getString("president","0")));
+            bWechatUsersRepository.save(result);
+            //TODO 返回false说明什么？
+            future.complete(new JsonObject(Json.encode(result)));
+        }
+
+        handler.handle(future);
+    }
     public static void main(String[] args) {
         JsonObject resObj = new JsonObject();
         System.out.println(resObj.getJsonObject("*"));

@@ -146,7 +146,7 @@
 				serverData: "",
 				peopleNums: 0,
 				groupNums: 21,
-				tabCur: "all",
+				tabCur: 2,
 				current: 0,
 				tabList: [
 					// {

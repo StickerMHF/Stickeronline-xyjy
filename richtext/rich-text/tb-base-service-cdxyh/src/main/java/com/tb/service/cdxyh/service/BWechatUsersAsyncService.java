@@ -86,4 +86,11 @@ public interface BWechatUsersAsyncService {
      * @param handler
      */
     void getUserDetailsByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    /**
+     * 审核
+     *
+     * @param params
+     * @param handler
+     */
+    void checkById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 }
