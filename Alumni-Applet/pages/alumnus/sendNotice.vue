@@ -1,5 +1,5 @@
 <template>
-	<view style="overflow-x: hidden;">
+	<view style="overflow-x: hidden;background: #fff;">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="content">发布公告</block>
 		</cu-custom>
@@ -38,6 +38,11 @@
 		onLoad(options) {
 			this.fid = options.id;
 			let userInfo = uni.getStorageSync("userInfo");
+			if(userInfo === undefined){
+				uni.reLaunch({
+				    url: '/pages/login/login'
+				});
+			}
 			this.userName = userInfo.nickName;
 			this.openId = uni.getStorageSync("openid");
 		},
@@ -62,11 +67,13 @@
 			},
 			send(){
 				let param = {
+					createBy:this.userName,
 					title:this.titleValue,
-					content:this.noticeContent,
+					context:this.noticeContent,
 					author:this.userName,
 					openId:this.openId,
 					fid:this.fid,
+					img:'http://cdxyh.stickeronline.cn/banner12x.png',
 					date:this.date
 				}
 				if(this.titleValue === "" || this.noticeContent === ""){
@@ -95,6 +102,9 @@
 </script>
 
 <style lang="scss">
+	body{
+		background: #fff;
+	}
 	.album-content{
 		width: 100%;
 		font-size: 14px;
