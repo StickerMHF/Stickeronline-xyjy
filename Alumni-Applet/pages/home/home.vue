@@ -41,6 +41,7 @@
             @click="menuClickHandler(item.id)"
             class="bg-img"
             v-for="(item, index) in menus"
+			:key="index"
             :style="[{ backgroundImage: 'url(' + menus[index] + ')' }]"
           >
             <navigator :url="item.page + '?title=' + item.txt">
@@ -55,9 +56,10 @@
         </view>
       </view>
     </view>
-	<!-- 校友分布 -->
-<view class="ph-menu" v-if="!state">
+    <!-- 校友分布 -->
+    <view class="ph-menu mapBox" v-if="!state">
       <alumnusDistribution></alumnusDistribution>
+      <image class="legend" src="../../static/home/legend.png" mode=""></image>
     </view>
     <view class="ph-menu">
       <scroll-view scroll-x class="bg-white nav" scroll-with-animation>
@@ -72,7 +74,7 @@
           {{ item.name }}
         </view>
       </scroll-view>
-	  
+
       <view
         class="phm-card cu-card case no-card"
         v-for="(item, index) in newsList"
@@ -92,7 +94,6 @@
 				<umap class="phm-map"></umap>
 			</view>
 		</view> -->
-    
   </view>
 </template>
 
@@ -156,7 +157,7 @@ export default {
           page: "/pages/cooperation/cooperation",
         },
         {
-			id:'xyrz',
+          id: "xyrz",
           icon: "http://www.imapway.cn/Alumni/static/home/yxxy2x.png",
           txt: "校友认证",
           page: "",
@@ -217,13 +218,13 @@ export default {
   },
   onLoad(options) {
     this.getNewsListData();
-	if(options.url){
-	    let url = decodeURIComponent(options.url);
-		console.log('url',url);
-		uni.navigateTo({
-			url:url
-		})
-	}
+    if (options.url) {
+      let url = decodeURIComponent(options.url);
+      console.log("url", url);
+      uni.navigateTo({
+        url: url,
+      });
+    }
   },
   methods: {
     getNewsListData(sort) {
@@ -261,20 +262,20 @@ export default {
           },
         });
       }
-	  if(value && value == 'xyrz'){
-		  // console.log('校友认证')
-		  //判断认证状态
-		  let isCertification = uni.getStorageSync('isCertification');
-		  if(isCertification){
-			  uni.navigateTo({
-			  	url: '/pages/personal/basicInfo/basicInfo'
-			  });
-		  } else {
-			  uni.navigateTo({
-			  	url: '/pages/personal/basicInfo/certification'
-			  });
-		  }		  
-	  }
+      if (value && value == "xyrz") {
+        // console.log('校友认证')
+        //判断认证状态
+        let isCertification = uni.getStorageSync("isCertification");
+        if (isCertification) {
+          uni.navigateTo({
+            url: "/pages/personal/basicInfo/basicInfo",
+          });
+        } else {
+          uni.navigateTo({
+            url: "/pages/personal/basicInfo/certification",
+          });
+        }
+      }
       // if (value && value == "ysjs") {
       //   uni.switchTab({
       //     url: "/pages/schoolHistory/schoolHistory",
@@ -290,37 +291,46 @@ export default {
   border-bottom: 1rpx solid #e5dee5;
 }
 .screen-swiper {
-    min-height: 300rpx;
+  min-height: 300rpx;
 }
 .ph-menu {
   padding: 10px;
   margin-bottom: 10px;
   background: white;
-  .cuItem{
-	height: 72rpx;
-	display: inline-block;
-	line-height: 80rpx;
-	margin: 0 6px;
-	padding: 0;
-	font-size: 16px;
+  .cuItem {
+    height: 72rpx;
+    display: inline-block;
+    line-height: 80rpx;
+    margin: 0 6px;
+    padding: 0;
+    font-size: 16px;
   }
   .text-green1 {
-    color: #00BEB7;
-    border-bottom: 2px solid #00BEB7;
-	}
+    color: #00beb7;
+    border-bottom: 2px solid #00beb7;
+  }
 }
-
+.mapBox {
+  position: relative;
+  .legend {
+    width: 50px;
+    height: 60px;
+    position: absolute;
+    bottom: 30rpx;
+    left: 40rpx;
+  }
+}
 .ph-banner {
   border-radius: 10px;
 }
 
 .bg-img {
-    min-height: 65px;
-    margin-bottom: 0rpx;
-    padding-bottom: 0rpx !important;
+  min-height: 65px;
+  margin-bottom: 0rpx;
+  padding-bottom: 0rpx !important;
 }
-.bg-white{
-	margin: 0 10px;
+.bg-white {
+  margin: 0 10px;
 }
 
 .ph-banner-item {
