@@ -345,7 +345,15 @@
                 "enablePullDownRefresh": false
             }
             
-        }
+        },
+		{
+			"path":"pages/personal/userDetail/userDetail",
+			"style" :
+			{
+			    "navigationBarTitleText": "",
+			    "enablePullDownRefresh": false
+			}
+		}
     ],
 	"globalStyle": {
 		"mp-alipay": {
@@ -366,8 +374,9 @@
 			"path": "pages/home/home", //启动页面
 			"query": "" //启动参数
 		}]
-	},
+	},	
 	"tabBar": {
+		"custom": false,
 		"color": "#7A7E83",
 		"selectedColor": "#3cc51f",
 		"borderStyle": "black",
@@ -399,5 +408,4 @@
 			"text": "我"
 		}]
 	}
-
 }

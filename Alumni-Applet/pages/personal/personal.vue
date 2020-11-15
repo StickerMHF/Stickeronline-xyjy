@@ -10,7 +10,7 @@
         <view class="box">
           <view class="box-hd">
             <view class="avator" @click="loginHandler">
-              <img :src="userInfo.avatarUrl" />
+              <img :src="userInfo.avatarUrl"/>
             </view>
             <view class="phone-number">{{ userInfo.nickName }}</view>
           </view>
@@ -47,7 +47,7 @@
       </view>
     </view>
     <view class="list-content">
-      <view class="list" v-for="item in menuList">
+      <view class="list" v-for="item in menuList" @click="navigateTo(item.id)">
         <navigator
           :url="isCertification && item.pageInfo ? item.pageInfo : item.page"
         >
@@ -57,7 +57,7 @@
             </view>
             <view class="text"
               >{{ item.name
-              }}{{ isCertification && item.pageInfo ? "(已认证)" : "" }}</view
+              }}{{ isCertification && item.pageInfo ? "(已认证)" : " " }}</view
             >
             <image
               class="to"
@@ -84,12 +84,14 @@ export default {
         avatarUrl: "http://www.imapway.cn/Alumni/static/user/face.jpg",
       },
       isCertification: false, //是否认证
+	  auditStatus: '', //认证状态
       menuList: [
         {
+		  id: 'xyrz',
           name: "校友认证",
           icon: "http://www.imapway.cn/Alumni/static/personal/grxx2x.png",
-          page: "/pages/personal/basicInfo/certification",
-          pageInfo: "/pages/personal/basicInfo/basicInfo",
+          // page: "/pages/personal/basicInfo/certification",
+          // pageInfo: "/pages/personal/basicInfo/basicInfo",
         },
         {
           name: "我的组织",
@@ -134,28 +136,54 @@ export default {
     getWechatUserInfo() {
       let that = this;
       that.isCertification = uni.getStorageSync("isCertification");
-      // let openid = uni.getStorageSync('openid');
-      // if (openid&&openid!="") {
-      // 	let param = {
-      // 		openid:openid
-      // 	};
-      // 	getWechatUserById(param).then(data => {
-      // 		var [error, res] = data;
-      // 		if (res && res.data.success) {
-      // 			let ss = res.data.result;
-      // 			if(ss!=null){
-      // 				that.isCertification=true;
-      // 				uni.setStorageSync('isCertification', that.isCertification);
-      // 			}else{
-      // 				that.isCertification=false;
-      // 				uni.setStorageSync('isCertification', that.isCertification);
-      // 			}
-      // 		}
-      // 	});
-      // } else {
-      // 	getApp().getUserInfo();
-      // }
+      let openid = uni.getStorageSync('openid');
+      if (openid&&openid!="") {
+      	let param = {
+      		openid:openid
+      	};
+      	getWechatUserById(param).then(data => {
+      		var [error, res] = data;
+      		if (res && res.data.success) {
+      			let result = res.data.result;
+      			if(result!=null){
+					let auditStatus = result.auditStatus
+					that.auditStatus = auditStatus
+					if(auditStatus == '1'){
+						that.isCertification = true;
+					} else {
+						that.isCertification = false;
+					}
+					uni.setStorageSync('auditStatus', that.auditStatus);
+      				uni.setStorageSync('isCertification', that.isCertification);
+      			}
+				else{
+      				that.isCertification=false;
+					uni.setStorageSync('auditStatus', null);
+      				uni.setStorageSync('isCertification', that.isCertification);
+      			}
+      		}
+      	});
+      } else {
+      	getApp().getUserInfo();
+      }
     },
+	
+	navigateTo(value){
+		if(value && value == 'xyrz'){
+			  //判断认证状态
+			  let auditStatus = uni.getStorageSync('auditStatus');
+			  let isCertification = uni.getStorageSync('isCertification');
+			  if(auditStatus != null){
+				  uni.navigateTo({
+					url: '/pages/personal/basicInfo/basicInfo'
+				  });
+			  } else {
+				  uni.navigateTo({
+					url: '/pages/personal/basicInfo/certification'
+				  });
+			  }		  
+		}
+	},
     changeSkin() {
       uni.navigateTo({
         url: "../skin-change/skin-change",
@@ -164,8 +192,20 @@ export default {
     loginHandler() {
       let openid = uni.getStorageSync("openid");
       let userInfo = uni.getStorageSync("userInfo");
+	  let isCertification= uni.getStorageSync("isCertification")
+	  // if()
       if (userInfo) {
         this.userInfo = userInfo;
+		if(isCertification){
+			uni.navigateTo({
+				url:"/pages/personal/userDetail/userDetail?userId="+openid
+			})
+		} else {
+			uni.navigateTo({
+				url:"/pages/personal/basicInfo/certification"
+			})
+		}
+		
       } else {
         uni.navigateTo({
           url: "/pages/login/login",

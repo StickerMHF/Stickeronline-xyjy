@@ -72,6 +72,11 @@ export const deleteWechatUserAttention = (params) => {
     return deleteAction(api.deleteWechatUserAttention, params)
 }
 
+//获取用户信息
+export const getUserDetailsByUserId = (params)=>{
+	return getAction(api.getUserDetailsByUserId,params)
+}
+
 
 
 

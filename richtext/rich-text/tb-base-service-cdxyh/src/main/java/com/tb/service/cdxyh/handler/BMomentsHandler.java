@@ -53,7 +53,8 @@ public class BMomentsHandler {
             @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
             @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true),
             @ApiImplicitParam(name = "order", value = "排序", dataType = "String", paramType = "query", required = true),
-            @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "String", paramType = "query", required = true)
+            @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "selfId", value = "当前用户ID", dataType = "String", paramType = "query", required = true)
     })
     public Handler<RoutingContext> queryPageList() {
         return ctx -> {

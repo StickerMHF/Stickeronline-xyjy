@@ -4,9 +4,14 @@ import com.sticker.online.core.anno.AsyncServiceHandler;
 import com.sticker.online.core.model.BaseAsyncService;
 import com.sticker.online.core.utils.TimeUtil;
 import com.tb.base.common.vo.PageVo;
+import com.tb.service.cdxyh.entity.BAlumnusJoinEntity;
 import com.tb.service.cdxyh.entity.BWechatUsersEntity;
+import com.tb.service.cdxyh.repository.BAlumnusJoinRepository;
+import com.tb.service.cdxyh.repository.BMomentsRepository;
+import com.tb.service.cdxyh.repository.BWechatUsersAttentionRepository;
 import com.tb.service.cdxyh.repository.BWechatUsersRepository;
 import com.tb.service.cdxyh.service.BWechatUsersAsyncService;
+import com.tb.service.cdxyh.service.BWechatUsersAttentionAsyncService;
 import com.tb.service.cdxyh.utils.Pinyin4jUtil;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -28,12 +33,19 @@ import java.util.Optional;
 public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, BaseAsyncService {
     @Autowired
     private BWechatUsersRepository bWechatUsersRepository;
+    @Autowired
+    private BWechatUsersAttentionRepository bWechatUsersAttentionRepository;
+    @Autowired
+    private BAlumnusJoinRepository bAlumnusJoinRepository;
+    @Autowired
+    private BMomentsRepository bMomentsRepository;
     @Override
     public void add(JsonObject params, Handler<AsyncResult<String>> handler) {
         Future<String> future = Future.future();
         BWechatUsersEntity bWechatUsersEntity = new BWechatUsersEntity(params);
         bWechatUsersEntity.setCreateTime(new Date());
         bWechatUsersEntity.setUpdateTime(new Date());
+        bWechatUsersEntity.setAuditStatus("0");
         //获取名字首字母
         String nameInitial = Pinyin4jUtil.getFirstPinYinHeadChar(bWechatUsersEntity.getName());
         bWechatUsersEntity.setNameInitial(nameInitial);
@@ -208,6 +220,30 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
         }else{
             future.complete(new JsonObject().put("content",new JsonArray()).put("total",0));
         }
+        handler.handle(future);
+    }
+
+    @Override
+    public void getUserDetailsByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        String userId = params.getString("userId");
+        JsonObject resObj = new JsonObject();
+        List<Map<String,Object>> list = bWechatUsersRepository.getUserInfoByUserId(userId);
+        if (list.size()>0){
+            Map<String,Object> user = list.get(0);
+            resObj.put("userInfo", user);
+
+            //统计我的关注数量
+            Integer followNum = bWechatUsersAttentionRepository.countAllByUserId(userId);
+            resObj.put("followNum", followNum);
+            //统计我的粉丝数量
+            Integer fansNum = bWechatUsersAttentionRepository.countAllByMemberId(userId);
+            resObj.put("fansNum",fansNum);
+            //统计加入组织数量
+            Integer alumnusNum = bAlumnusJoinRepository.countAllByUserId(userId);
+            resObj.put("alumnusNum", alumnusNum);
+        }
+        future.complete(resObj);
         handler.handle(future);
     }
 

@@ -79,3 +79,8 @@ export const updateActivityApply = (params) => {
 export const deleteActivityApply = (params) => {
     return deleteAction(api.deleteActivityApply, params)
 }
+
+//获取班级列表
+export const getClassGrade = (params) => {
+	return getAction(api.getClassGrade, params)
+}

@@ -9,5 +9,9 @@ import java.util.List;
 
 @Repository
 public interface BWechatUsersAttentionRepository extends JpaRepository<BWechatUsersAttentionEntity, String> {
-List<BWechatUsersAttentionEntity> findAllByUserIdAndMemberId(@Param("userId")String userId, @Param("memberId")String memberId);
+    List<BWechatUsersAttentionEntity> findAllByUserIdAndMemberId(@Param("userId")String userId, @Param("memberId")String memberId);
+
+    Integer countAllByUserId(@Param("userId") String userId);
+
+    Integer countAllByMemberId(@Param("userId") String userId);
 }

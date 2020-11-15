@@ -156,9 +156,10 @@ export default {
           page: "/pages/cooperation/cooperation",
         },
         {
+			id:'xyrz',
           icon: "http://www.imapway.cn/Alumni/static/home/yxxy2x.png",
-          txt: "优秀校友",
-          page: "/pages/alumnus/goodMember",
+          txt: "校友认证",
+          page: "",
         },
         // {
         //   icon: "http://www.imapway.cn/Alumni/static/home/dlqq2x.png",
@@ -174,7 +175,7 @@ export default {
           id: "xyjz",
           icon: "http://www.imapway.cn/Alumni/static/home/xyjz2x.png",
           txt: "校友捐赠",
-          page: "/pages/donations/donations1",
+          page: "",
         },
       ],
       tabCur: 0,
@@ -260,6 +261,20 @@ export default {
           },
         });
       }
+	  if(value && value == 'xyrz'){
+		  // console.log('校友认证')
+		  //判断认证状态
+		  let isCertification = uni.getStorageSync('isCertification');
+		  if(isCertification){
+			  uni.navigateTo({
+			  	url: '/pages/personal/basicInfo/basicInfo'
+			  });
+		  } else {
+			  uni.navigateTo({
+			  	url: '/pages/personal/basicInfo/certification'
+			  });
+		  }		  
+	  }
       // if (value && value == "ysjs") {
       //   uni.switchTab({
       //     url: "/pages/schoolHistory/schoolHistory",

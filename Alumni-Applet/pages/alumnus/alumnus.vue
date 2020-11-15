@@ -80,7 +80,7 @@
 										<view class="uni-ellipsis-2">{{ item.name }}</view>
 									</view>
 									<view>
-										<view class="cu-capsule radius">
+										<view class="cu-capsule radius" v-if="item.activity">
 											<view class="cu-tag bg-blue"> 活动 </view>
 											<view class="cu-tag line-blue">
 												{{ item.activity }}
@@ -93,7 +93,7 @@
 											</view>
 										</view>
 									</view>
-									<view class="starBox">
+									<view class="starBox" v-if="item.liveness">
 										<text class="liveness">活跃度</text>
 										<uniRate :readonly="true" :size="14" :value="item.liveness"></uniRate>
 									</view>
@@ -120,6 +120,7 @@
 <script>
 	import {
 		getAlumnusList,
+		getClassGrade,
 		addAlumnusJoin,
 		delAlumnusJoin
 	} from "@/api/alumnus.js";
@@ -148,22 +149,22 @@
 				tabCur: "all",
 				current: 0,
 				tabList: [
-					{
-						id: "all",
-						name: "全部",
-					},
+					// {
+					// 	id: "all",
+					// 	name: "全部",
+					// },
 					{
 					  id: 2,
-					  name: "校友之窗",
-					},
-					{
-						id: 3,
-						name: "同城校友",
-					},
+					  name: "各省校友",
+					},					
 					{
 						id: 4,
 						name: "行业校友",
-					}
+					},
+					{
+						id: 3,
+						name: "全部班级",
+					},
 				// 	, {
 				// 	id: 5,
 				// 	name: '校友统计',
@@ -235,7 +236,13 @@
 				this.params.type = e.currentTarget.dataset.id;
 				this.params.pageNo = 1;
 				this.lists = [];
-				this.getAlumnusList(this.params);
+				//判断数据类型
+				if(this.tabCur == 2 || this.tabCur == 4){
+					this.getAlumnusList(this.params);
+				} else {
+					this.getClassGradeList(this.params);
+				}
+				
 
 				if (e.currentTarget.dataset.id == 5) {
 					_self = this;
@@ -249,27 +256,12 @@
 			 */
 			select() {
 				this.waterfall = !this.waterfall;
-			},
-			/**
-			 * 下拉刷新回调函数
-			 */
-			// onPullDownRefresh() {
-			// 	// console.log("下拉刷新");
-			// 	if (this.params.pageNo > 1) {
-			// 		// this.status = "loading";
-			// 		this.params.pageNo -= 1;
-			// 		this.getAlumnusList(this.params);
-			// 	}
-				
-			// 	setTimeout(function () {
-			// 		uni.stopPullDownRefresh();
-			// 	}, 1000);
-			// },
+			},			
 			/**
 			 * 上拉加载回调函数
 			 */
 			onReachBottom() {
-				console.log("上拉刷新");
+				// console.log("上拉刷新");
 				this.getNewsList();
 			},
 			addJoin(alumnu) {
@@ -306,8 +298,7 @@
 								    title: '服务器忙，请稍后',
 								    duration: 2000
 								});
-							}
-							
+							}							
 						});
 					} else {
 						//跳转页面
@@ -316,14 +307,23 @@
 						});
 					}
 				}else{
+					let auditStatus = uni.getStorageSync('auditStatus');
+					let isCertification = uni.getStorageSync('isCertification');
+					if(isCertification&&auditStatus != null){
+						  uni.navigateTo({
+							url: '/pages/personal/basicInfo/basicInfo'
+						  });
+					} else {
+						  uni.navigateTo({
+							url: '/pages/personal/basicInfo/certification'
+						  });
+					}					
 					// getApp().getUserInfo();
-					uni.showToast({
-					    title: '请先进行校友认证',
-					    duration: 2000
-					});
-				}
-				
-				
+					// uni.showToast({
+					//     title: '请先进行校友认证',
+					//     duration: 2000
+					// });					
+				}				
 			},
 			//取消关注
 			deleteAlumnusJoin(alumnu){
@@ -359,7 +359,11 @@
 				if (this.totalPages > this.params.pageNo) {
 					this.status = "loading";
 					this.params.pageNo += 1;
-					this.getAlumnusList(this.params);
+					if(this.params.type == 2 || this.params.type == 4){						
+						this.getAlumnusList(this.params);
+					} else {
+						this.getClassGradeList(this.params);
+					}
 				} else {
 					this.status = "noMore";
 				}
@@ -525,6 +529,22 @@
 					},
 				});
 			},
+			getClassGradeList(params){
+				getClassGrade(params).then(data =>{
+					var [error, res] = data;
+					if (res && res.data && res.data.result) {
+						this.lists = this.lists.concat(res.data.result.content);
+						let pageable = res.data.result.pageable;
+						this.params.pageNo = pageable.pageNumber + 1;
+						this.totalPages = res.data.result.totalPages;
+						if (this.totalPages > this.params.pageNo) {
+							this.status = "more";
+						} else {
+							this.status = "noMore";
+						}
+					}
+				});
+			}
 		},
 	};
 </script>
