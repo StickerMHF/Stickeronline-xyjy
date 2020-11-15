@@ -21,7 +21,7 @@
                   ><img
                     src="http://www.imapway.cn/Alumni/static/personal/wdpl2x.png"
                 /></view>
-                <view class="text">我的消息</view>
+                <view class="text" @click="toNews">我的消息</view>
               </view>
             </navigator>
             <navigator url="">
@@ -30,7 +30,7 @@
                   ><img
                     src="http://www.imapway.cn/Alumni/static/personal/wdzz2x.png"
                 /></view>
-                <view class="text">我的申请</view>
+                <view class="text" @click="toApply">我的申请</view>
               </view>
             </navigator>
             <navigator url="">
@@ -39,7 +39,7 @@
                   ><img
                     src="http://www.imapway.cn/Alumni/static/personal/sc2x.png"
                 /></view>
-                <view class="text">我的收藏</view>
+                <view class="text" @click="toCollect">我的收藏</view>
               </view>
             </navigator>
           </view>
@@ -136,6 +136,21 @@ export default {
     }
   },
   methods: {
+	  toNews(){
+		  uni.navigateTo({
+		  	url:"/pages/personal/myNews/myNews/myNews"
+		  })
+	  },
+	  toApply(){
+		  uni.navigateTo({
+		  	url:"/pages/personal/myApply/myApply/myApply"
+		  })
+	  },
+	  toCollect(){
+		  uni.navigateTo({
+		  	url:"/pages/personal/myCollect/myCollect/myCollect"
+		  })
+	  },
     getWechatUserInfo() {
       let that = this;
       that.isCertification = uni.getStorageSync("isCertification");

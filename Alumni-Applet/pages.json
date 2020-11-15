@@ -405,6 +405,27 @@
 				"enablePullDownRefresh": false
 			}
         }
+        ,{
+            "path" : "pages/personal/myNews/myNews/myNews",
+            "style" : {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+        }
+        ,{
+            "path" : "pages/personal/myApply/myApply/myApply",
+            "style" : {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+        }
+        ,{
+            "path" : "pages/personal/myCollect/myCollect/myCollect",
+            "style" : {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+        }
     ],
 	"globalStyle": {
 		"mp-alipay": {
