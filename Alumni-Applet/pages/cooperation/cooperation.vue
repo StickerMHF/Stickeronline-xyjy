@@ -1,18 +1,16 @@
 <template>
-
 	<view>
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="backText">返回</block>
 			<block slot="content">校友合作</block>
 		</cu-custom>
-
 		<!-- 基于 uni-list 的页面布局 -->
 		<view class="cu-bar bg-white solid-bottom">
 			<view class="action">
-				<text class="cuIcon-titles text-green1"></text> 校友合作
-				<navigator url="/pages/cooperation/add" open-type="redirect">
+				<!-- <text class="cuIcon-titles text-green1"></text> 校友合作 -->
+				<navigator url="/pages/cooperation/addDetail/addDetail" open-type="redirect">
 					<span class="cooperation-pub">
-						<text class="lg text-gray cuIcon-roundadd"></text>
+						<text class="radius lg bg-gradual-green1 cuIcon-add"></text>
 						<text>发布合作</text>
 					</span>
 				</navigator>
@@ -31,7 +29,7 @@
 					<view class="uni-list-box">
 						<view class="uni-content">
 							<view class="uni-title-sub uni-ellipsis-2">{{item.contents}}</view>
-							<view class="uni-note">{{item.createBy?item.createBy:'管理员' + ' '+formatDate(item.createTime)}}</view>
+							<view class="uni-note">{{item.createBy?item.createBy:formatDate(item.createTime)}}&nbsp&nbsp | &nbsp&nbsp 管理员</view>
 						</view>
 					</view>
 				</template>
@@ -62,7 +60,7 @@
 			this.getNewsList();
 		},
 		methods: {
-			formatDate(date){
+			formatDate(date) {
 				return getApp().formatDate(date);
 			},
 			/**
@@ -84,8 +82,8 @@
 			 */
 			getNewsList(reload) {
 				this.status = 'loading'
-				let params={
-					status:1
+				let params = {
+					status: 1
 				}
 				getCooperationList(params).then(data => {
 					var [error, res] = data;
@@ -118,7 +116,7 @@
 						}
 					}
 				})
-			
+
 			}
 		}
 	};
@@ -127,15 +125,21 @@
 <style lang="scss">
 	@import '@/common/uni-ui.scss';
 
+	.radius{
+		border-radius: 5px;
+	}
 	page {
 		display: flex;
 		flex-direction: column;
 		box-sizing: border-box;
-		background-color: #efeff4;
+		background-color: #F5F5F5;
 		min-height: 100%;
 		height: auto;
 	}
 
+	.bg-white{
+		margin-bottom: 20rpx;
+	}
 	.tips {
 		color: #67c23a;
 		font-size: 14px;
@@ -192,5 +196,31 @@
 		position: absolute;
 		right: 10px;
 		top: 15px;
+	}
+
+	.cu-custom .cu-bar .content {
+		width: 0;
+	}
+
+	.cu-custom .cu-bar .content {
+		width: calc(100% - 80%);
+
+	}
+	.uni-list-box {
+		margin: 0;
+		border-bottom: 0.2px solid #dadada
+	}
+	 uni-list-item:last-child .uni-title{
+		background-color: red;
+	}
+	.uni-title{
+		margin: 0;
+	}
+	.uni-title-sub {
+		color: #AAA;
+	}
+	.uni-note{
+		margin: 0;
+		color: #858585;
 	}
 </style>

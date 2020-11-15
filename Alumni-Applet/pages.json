@@ -148,7 +148,7 @@
             
         }
         ,{
-            "path" : "pages/cooperation/add",
+            "path" : "pages/cooperation/addDetail/addDetail",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",
@@ -387,6 +387,13 @@
                 "enablePullDownRefresh": false
             }
             
+        }
+        ,{
+            "path" : "pages/personal/examine/examine",
+            "style" : {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
         }
     ],
 	"globalStyle": {

@@ -1,33 +1,35 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack='true' @callBack="callBack">
-			<block slot="backText">返回</block>
-			<block slot="content">{{title}}</block>
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack="true" @callBack="callback">
+			<!-- <block slot="backText">返回</block> -->
+			<block slot="content">校友合作信息登记</block>
 		</cu-custom>
 		<form>
 			<view class="cu-form-group margin-top">
-				<view class="title">合作事项</view>
-				<input placeholder="请输入合作事项" name="input" @input="inputTitleChange"></input>
+				<view class="action">
+					<text class="cuIcon-titles text-green1"></text> 合作事项
+				</view>
+				<!-- <view class="title">合作事项</view> -->
+				<view calss="cu-form-group">
+					<!-- <input placeholder="请输入合作事项" name="input" @input="inputTitleChange"></input> -->
+					<textarea maxlength="-1" @input="inputTitleChange" placeholder="请输入合作事项"></textarea>
+				</view>
 			</view>
 
 			<view class="cu-form-group">
-				<view class="title">联系方式</view>
-				<input placeholder="输入联系方式" name="input" @input="inputContactChange"></input>
-				<view class="cu-capsule radius">
-					<view class='cu-tag bg-blue '>
-						+86
-					</view>
-					<view class="cu-tag line-blue">
-						中国大陆
-					</view>
+				<view class="action">
+					<text class="title cuIcon-titles text-green1"></text>联系方式
 				</view>
+				<input placeholder="输入联系方式" name="input" @input="inputContactChange"></input>
 			</view>
 
 
 			<!-- !!!!! placeholder 在ios表现有偏移 建议使用 第一种样式 -->
 
 			<view class="cu-form-group align-start">
-				<view class="title">描述</view>
+				<view class="action">
+					<text class="title cuIcon-titles text-green1"></text>描述
+				</view>
 				<textarea maxlength="-1" @input="textareaInput" placeholder="多行文本输入框"></textarea>
 			</view>
 			<view class="padding flex flex-direction">
@@ -47,18 +49,28 @@
 				title: '',
 				name: '',
 				contents: '',
-				contact: ''
+				contact: '',
+				rules:{
+					phone: {
+						required: true, 
+						validator: this.validatePhone,
+					}
+				}
 			}
 		},
 		onLoad(options) {
 			// 初始化页面数据
 			this.title = options.title;
-
+  
 		},
 		methods: {
-			callBack(){
+			validatePhone(phone){
+				let phoneCodeVerification = /^[1][3,4,5,7,8][0-9]{9}$/;
+				return phoneCodeVerification.test(phone);
+			},
+			callback(){
 				uni.redirectTo({
-					url:'./cooperation'
+					url:"../cooperation"
 				})
 			},
 			textareaInput(e) {
@@ -98,5 +110,31 @@
 </script>
 
 <style>
+	.action {
+		font-size: 30rpx;
+		height: 60rpx;
+		line-height: 60rpx;
+	}
 
+	.cu-form-group {
+		display: block;
+	}
+
+	.cu-form-group textarea {
+		background-color: #eee;
+		border-radius: 10rpx;
+		padding: 20rpx;
+		height: 180rpx;
+	}
+
+	.cu-form-group input {
+		background-color: #eee;
+		height: 80rpx;
+		padding: 16rpx;
+		border-radius: 10rpx;
+		margin: 20rpx 0;
+	}
+	.cu-form-group+.cu-form-group {
+		border: none;
+	}
 </style>

@@ -105,6 +105,17 @@ const api = {
 	//获取组织成员信息
 	getAlumnusMemberById: baseurl + '/stickeronline/alumnusMember/queryById',
 	
+	// 获取审核页面信息
+	//会长
+	getPresidentList:baseurl+'/stickeronline/alumnusJoin/list?checkState=1',
+	getPresidentStatus:baseurl+'/stickeronline/alumnusJoin/checkById',
+	
+	//校友
+	getExamineList:baseurl+'/stickeronline/wechat/users/list?auditStatus=0',
+	getExamineStatus:baseurl+'/stickeronline/wechat/users/checkById',
+	
+	
+	
 	//获取班级列表
 	getClassGrade: baseurl+'/stickeronline/classGrade/list',
 	
