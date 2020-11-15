@@ -263,11 +263,11 @@ export default {
     },
 	applyHandler(){
 		let that=this;
-		this.params.userId=getApp().getOpenId();
-		this.params.alumnusId = this.params.fid;
-		this.params.checkState=1;
-		applyByUserId(this.params).then(data => {debugger
-		  let [error, res] = data;
+		that.params.userId=getApp().getOpenId();
+		that.params.alumnusId = this.params.fid;
+		that.params.checkState="1";
+		applyByUserId(that.params).then(data => {
+		  let [error, res] = data;debugger
 		  if (res && res.data && res.data.result) {
 		    let item = res.data.result;
 		    that.checkState=1;

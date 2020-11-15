@@ -84,6 +84,8 @@ const api = {
 	//加入组织
 	addAlumnusJoin: baseurl + '/stickeronline/alumnusJoin/add',
 	delAlumnusJoin: baseurl + '/stickeronline/alumnusJoin/delete',
+	applyByUserId: baseurl + '/stickeronline/alumnusJoin/applyByUserId',
+	queryPresidentByUserId: baseurl + '/stickeronline/alumnusJoin/queryPresidentByUserId',
 	//获取我加入的组织列表
 	getAlumnusByuserId: baseurl + '/stickeronline/alumnus/getListByUserId',
 	//资讯
@@ -106,6 +108,7 @@ const api = {
 	getAlumnusMemberById: baseurl + '/stickeronline/alumnusMember/queryById',
 	
 	// 获取审核页面信息
+	
 	//会长
 	getPresidentList:baseurl+'/stickeronline/alumnusJoin/list?checkState=1',
 	getPresidentStatus:baseurl+'/stickeronline/alumnusJoin/checkById',
