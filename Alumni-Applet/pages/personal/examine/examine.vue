@@ -150,7 +150,8 @@
 							user_name: item.nickName,
 							user_phopt: item.avatarUrl,
 							openid:item.openid,
-							auditStatus:item.auditStatus
+							auditStatus:item.auditStatus,
+							
 						}
 						this.lists.push(obj)
 					})
@@ -166,7 +167,7 @@
 						let opt = {
 							user_name: item.userName,
 							user_phopt: item.userPhoto,
-							id:item.userId,
+							id:item.id,
 							checkState:item.checkState
 						}
 						this.lists.push(opt)
@@ -196,7 +197,7 @@
 			alBtn(item){
 				let params={
 					id:item.item.id,
-					checkState:1
+					checkState:"2"
 				}
 				getPresidentStatus(params).then(res=>{
 					this.getPresidentList()
@@ -205,7 +206,7 @@
 			reBtn(item){
 				let params={
 					id:item.item.id,
-					checkState:-1
+					checkState:"-1"
 				}
 				getPresidentStatus(params).then(res=>{
 					this.getPresidentList()
