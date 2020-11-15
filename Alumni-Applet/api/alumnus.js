@@ -84,3 +84,16 @@ export const deleteActivityApply = (params) => {
 export const getClassGrade = (params) => {
 	return getAction(api.getClassGrade, params)
 }
+
+//发布公告
+export const sendNotice = (params) => {
+	return postAction(api.sendNotice, params)
+}
+//发布图文
+export const sendWeChat = (params) => {
+	return postAction(api.sendWeChat, params)
+}
+//发布活动
+export const sendActivity = (params) => {
+	return postAction(api.sendActivity, params)
+}

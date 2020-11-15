@@ -24,6 +24,10 @@
 								</view>
 							</view>
 						</view>
+						<view class="listBox" @click="selectAddress">
+							<i class="icon cuIcon-location"></i>
+							<text>{{address}}</text>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -37,7 +41,8 @@
 
 <script>
 	import image from '@/common/image.js';
-	import {uploadFile, publishMoment} from '@/api/discover.js'
+	import {uploadFile, publishMoment} from '@/api/discover.js';
+	const chooseLocation = requirePlugin('chooseLocation');
 	var sourceType = [
 		['camera'],
 		['album'],
@@ -53,6 +58,8 @@
 			return {
 				// title: 'choose/previewImage',
 				// input_content:'',
+				address:'所在位置',
+				location:'',
 				imageList: [],				
 				sourceTypeIndex: 2,
 				sourceType: ['拍照', '相册', '拍照或相册'],
@@ -85,14 +92,28 @@
 		},
 		onUnload() {
 			this.imageList = [],
-				this.sourceTypeIndex = 2,
-				this.sourceType = ['拍照', '相册', '拍照或相册'],
-				this.sizeTypeIndex = 2,
-				this.sizeType = ['压缩', '原图', '压缩或原图'],
-				this.countIndex = 8;			
+			this.sourceTypeIndex = 2,
+			this.sourceType = ['拍照', '相册', '拍照或相册'],
+			this.sizeTypeIndex = 2,
+			this.sizeType = ['压缩', '原图', '压缩或原图'],
+			this.countIndex = 8;			
 		},
 		
 		methods: {
+			getLocation(){
+				const location = chooseLocation.getLocation(); // 如果点击确认选点按钮，则返回选点结果对象，否则返回null
+				if(location !== null){
+					this.address = location.name;
+					this.location = JSON.stringify({
+					  latitude: location.latitude,
+					  longitude: location.longitude
+					});
+				}
+			},
+			setLocation(){
+				// 页面卸载时设置插件选点数据为null，防止再次进入页面，geLocation返回的是上次选点结果
+				chooseLocation.setLocation(null);
+			},
 			async publish(){
 				if (!this.publishData.content) {
 					uni.showModal({ content: '内容不能为空', showCancel: false, });
@@ -123,7 +144,7 @@
 				}
 				
 				this.publishData.photos = JSON.stringify(this.photosArray);
-				
+				this.publishData.address = this.address === "所在位置" ? '' :this.address;
 				publishMoment(this.publishData).then(data =>{
 					// console.log(data);
 					 // let pages = getCurrentPages() // 获取加载的页面
@@ -133,9 +154,10 @@
 					uni.showLoading({title:'审核中！'});
 					setTimeout(function () {
 					    uni.hideLoading();
-						uni.navigateBack({
-							url:"/pages/discover/discover"
-						});
+						uni.navigateBack()
+						// uni.navigateBack({
+						// 	url:"/pages/discover/discover"
+						// });
 					}, 1000);
 
 					
@@ -147,20 +169,46 @@
 					
 				});
 			},
-			
-			getLocation(){//h5中可能不支持,自己选择
-				return new Promise((resolve, reject) => {
+			selectAddress(){
+				let location = ""
+				if(this.location === ""){
+					let that = this;
 					uni.getLocation({
-						type: 'wgs84',
-						success: function (res) {
-							resolve(res);
-						},
-						fail: (e) => {  
-							reject(e);
-						}
+					    type: 'wgs84',
+					    success: function (res) {
+							location = JSON.stringify({
+								latitude: res.latitude,
+								longitude: res.longitude
+							});
+							that.chooseLocationByTx(location);
+					    }
 					});
-				} )
-			},			
+				}else{
+					location = this.location;
+					this.chooseLocationByTx(location);
+				}
+			},
+			
+			chooseLocationByTx(location){
+				console.log(this.txKey);
+				console.log(this.referer)
+				uni.navigateTo({
+				  url: `plugin://chooseLocation/index?key=${this.txKey}&referer=${this.referer}&location=${location}`
+				});
+			},
+			// getLocation(){//h5中可能不支持,自己选择
+			// 	return new Promise((resolve, reject) => {
+			// 		uni.getLocation({
+			// 			type: 'wgs84',
+			// 			success: function (res) {
+			// 				resolve(res);
+			// 			},
+			// 			fail: (e) => {  
+			// 				reject(e);
+			// 			}
+			// 		});
+			// 	} )
+			// },			
 			close(e){
 			    this.imageList.splice(e,1);
 				this.photosArray.splice(e,1);
@@ -268,7 +316,14 @@
 <style scoped>
 	
 	.footer {
-		margin-top: 80upx;
+		/* margin-top: 80upx; */
+		    position: fixed;
+		    width: 100%;
+		    bottom: 0;
+	}
+	.footer .feedback-submit{
+		    color: #fff;
+		    background-color: #00beb7;
 	}
 	
 	.cell-pd {
@@ -307,4 +362,14 @@
 		width: 750upx;
 		height: 100%;
 	}
+	.listBox{
+		display: flex;
+		align-items: center;
+		
+	}
+	.listBox .icon{
+			color: #00beb7;
+			font-size: 20px;
+			margin-right: 20px;
+		}
 </style>

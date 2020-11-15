@@ -4,7 +4,7 @@
 			<block slot="backText">返回</block>			
 		</cu-custom>
 		<view class="album-content">
-			<publish></publish>
+			<publish ref="pub"></publish>
 		</view>
 	</view>
 </template>
@@ -57,6 +57,12 @@
 		onLoad() {
 
 		},
+		onShow() {
+			this.$refs.pub.getLocation();
+		},
+		onUnload () {
+		  this.$refs.pub.setLocation();
+		},
 		methods: {
 			onAlbumSort (list) {
 				// 返回排序后的数组集合
@@ -91,8 +97,8 @@
 <style>
 	.album-content{
 		width: 100%;
-		height: calc(100vh - var(--window-top) - var(--window-bottom));
-		font-size: 13px;
+		/* height: calc(100vh - var(--window-top) - var(--window-bottom)); */
+		font-size: 14px;
 	}
 	.paddingLR30{
 		padding-left: 30rpx;

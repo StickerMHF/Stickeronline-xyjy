@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
+		<cu-custom bgColor="bg-gradual-green1" :isBack="true" :isCallBack='true' @callBack="callBack">
 			<block slot="backText">返回</block>
 			<block slot="content">{{title}}</block>
 		</cu-custom>
@@ -56,6 +56,11 @@
 
 		},
 		methods: {
+			callBack(){
+				uni.redirectTo({
+					url:'./cooperation'
+				})
+			},
 			textareaInput(e) {
 				this.contents = e.detail.value
 			},
