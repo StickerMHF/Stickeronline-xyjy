@@ -1,5 +1,5 @@
-// const baseurl = 'https://www.imapway.cn/alumniapi'
-const baseurl = 'http://192.168.0.222:8084'
+const baseurl = 'https://www.imapway.cn/alumniapi'
+// const baseurl = 'http://192.168.0.222:8084'
 const api = {
 	test: baseurl + '/stickeronline/rich/text/list',
 	getUserOpenid: baseurl + '/tb/wechat/getAppletUserInfo',
@@ -84,10 +84,6 @@ const api = {
 	//加入组织
 	addAlumnusJoin: baseurl + '/stickeronline/alumnusJoin/add',
 	delAlumnusJoin: baseurl + '/stickeronline/alumnusJoin/delete',
-	//申请会长接口
-	applyByUserId: baseurl + '/stickeronline/alumnusJoin/applyByUserId',
-	//获取用户会长身份接口
-	queryPresidentByUserId: baseurl + '/stickeronline/alumnusJoin/queryPresidentByUserId',
 	//获取我加入的组织列表
 	getAlumnusByuserId: baseurl + '/stickeronline/alumnus/getListByUserId',
 	//资讯
@@ -122,13 +118,6 @@ const api = {
 	
 	//获取班级列表
 	getClassGrade: baseurl+'/stickeronline/classGrade/list',
-	
-	//发布公告
-	sendNotice: baseurl+'/stickeronline/alumnusNews/add',
-	//发布图文
-	// sendWeChat: baseurl+'/stickeronline/alumnus/sendWeChat',
-	//发布活动
-	sendActivity: baseurl+'/stickeronline/alumnusActivity/add',
 	/**
 	 * 参加活动接口
 	 */
