@@ -67,6 +67,22 @@
 		    
 		},
 		{
+		    "path" : "pages/alumnus/sendNotice",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "发公告",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+		    "path" : "pages/alumnus/sendActivity",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "发活动",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
 			"path": "pages/alumnus/alumnus",
 			"style": {
 				"enablePullDownRefresh": false
@@ -403,7 +419,7 @@
 	"tabBar": {
 		"custom": false,
 		"color": "#7A7E83",
-		"selectedColor": "#3cc51f",
+		"selectedColor": "#00BEB7",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [{
@@ -430,7 +446,7 @@
 			"pagePath": "pages/personal/personal",
 			"iconPath": "static/nav/wd2x.png",
 			"selectedIconPath": "static/nav/wd_cur2x.png",
-			"text": "我"
+			"text": "我的"
 		}]
 	}
 }

@@ -65,6 +65,18 @@ public class BAlumnusJoinEntity extends BaseEntity {
     @Column(name = "status")
     private String status;
 
+    /**
+     * 审核状态：2:审核通过;0:未申请;-1:审核不通过;1:待审核
+     */
+    @Column(name = "check_state")
+    private Integer checkState;
+    /**
+     * 身份: 1:会长;2:副会长;0:成员
+     */
+    @Column(name = "president")
+    private Integer president;
+
+
     public String getId() {
         return id;
     }
@@ -111,5 +123,21 @@ public class BAlumnusJoinEntity extends BaseEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getCheckState() {
+        return checkState;
+    }
+
+    public void setCheckState(Integer checkState) {
+        this.checkState = checkState;
+    }
+
+    public Integer getPresident() {
+        return president;
+    }
+
+    public void setPresident(Integer president) {
+        this.president = president;
     }
 }

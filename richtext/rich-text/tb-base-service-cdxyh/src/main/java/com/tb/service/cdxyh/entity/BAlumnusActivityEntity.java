@@ -43,7 +43,7 @@ public class BAlumnusActivityEntity extends BaseEntity {
     private String id;
 
     /**
-     * 活动标题
+     * 活动主题
      */
     @Column(name = "title")
     private String title;

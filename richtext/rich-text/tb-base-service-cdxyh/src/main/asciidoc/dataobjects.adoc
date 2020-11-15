@@ -84,8 +84,10 @@
 |===
 ^|Name | Type ^| Description
 |[[alumnusId]]`@alumnusId`|`String`|-
+|[[checkState]]`@checkState`|`Number (Integer)`|-
 |[[createBy]]`@createBy`|`String`|-
 |[[id]]`@id`|`String`|-
+|[[president]]`@president`|`Number (Integer)`|-
 |[[status]]`@status`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
 |[[userId]]`@userId`|`String`|-

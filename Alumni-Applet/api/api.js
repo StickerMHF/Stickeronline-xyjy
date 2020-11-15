@@ -118,6 +118,13 @@ const api = {
 	
 	//获取班级列表
 	getClassGrade: baseurl+'/stickeronline/classGrade/list',
+	
+	//发布公告
+	sendNotice: baseurl+'/stickeronline/alumnusNews/add',
+	//发布图文
+	// sendWeChat: baseurl+'/stickeronline/alumnus/sendWeChat',
+	//发布活动
+	sendActivity: baseurl+'/stickeronline/alumnusActivity/add',
 	/**
 	 * 参加活动接口
 	 */
