@@ -41,7 +41,7 @@
             @click="menuClickHandler(item.id)"
             class="bg-img"
             v-for="(item, index) in menus"
-			:key="index"
+            :key="index"
             :style="[{ backgroundImage: 'url(' + menus[index] + ')' }]"
           >
             <navigator :url="item.page + '?title=' + item.txt">
@@ -78,6 +78,7 @@
       <view
         class="phm-card cu-card case no-card"
         v-for="(item, index) in newsList"
+        :key="index"
       >
         <navigator :url="'/pages/home/newsDetail/newsDetail?id=' + item.id">
           <newsItem :opts="item"></newsItem>
@@ -136,6 +137,12 @@ export default {
           page: "/pages/home/news/news",
         },
         {
+          id: "xyrz",
+          icon: "http://www.imapway.cn/Alumni/static/home/yxxy2x.png",
+          txt: "校友认证",
+          page: "",
+        },
+        {
           icon: "http://www.imapway.cn/Alumni/static/home/xqzt2x.png",
           txt: "校友统计",
           page: "/pages/home/statistics/statistics",
@@ -156,12 +163,7 @@ export default {
           txt: "校友合作",
           page: "/pages/cooperation/cooperation",
         },
-        {
-          id: "xyrz",
-          icon: "http://www.imapway.cn/Alumni/static/home/yxxy2x.png",
-          txt: "校友认证",
-          page: "",
-        },
+
         // {
         //   icon: "http://www.imapway.cn/Alumni/static/home/dlqq2x.png",
         //   txt: "点亮全球",
@@ -169,8 +171,8 @@ export default {
         // },
         {
           icon: "http://www.imapway.cn/Alumni/static/home/dlqq2x.png",
-          txt: "校友通讯",
-          page: "/pages/home/address/address",
+          txt: "优秀校友",
+          page: "/pages/alumnus/goodMember",
         },
         {
           id: "xyjz",
