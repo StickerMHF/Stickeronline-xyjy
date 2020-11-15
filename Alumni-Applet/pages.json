@@ -67,6 +67,22 @@
 		    
 		},
 		{
+		    "path" : "pages/alumnus/sendNotice",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "发公告",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
+		    "path" : "pages/alumnus/sendActivity",
+		    "style" :                                                                                    
+		    {
+		        "navigationBarTitleText": "发活动",
+		        "enablePullDownRefresh": false
+		    }
+		},
+		{
 			"path": "pages/alumnus/alumnus",
 			"style": {
 				"enablePullDownRefresh": false
