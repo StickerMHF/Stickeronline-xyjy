@@ -29,8 +29,6 @@
 			<moments ref="moments" :list="momentsList" @comment="commentHandler"></moments>
 		</view>		
 			<view class="discover-comment">
-				<!-- <comment></comment> -->
-				<button @click="showHere">发布评论</button>
 				<ygc-comment ref="ygcComment" 
 				        :placeholder="'发布评论'" 
 				        @pubComment="pubComment"></ygc-comment>
@@ -41,7 +39,7 @@
 <script>	
 import ygcComment from '@/components/ygc-comment/ygc-comment.vue';
 	import moments from '@/components/moments/moments.vue'; 
-	import {getDiscoverList} from '@/api/discover.js'
+	import {getDiscoverList,momentLike,momentComment} from '@/api/discover.js'
 	import {dateUtil } from "@/utils/dateUtil.js"
 	import comment from "@/components/comment/comment.vue"
 	var _self = '';
@@ -61,6 +59,7 @@ import ygcComment from '@/components/ygc-comment/ygc-comment.vue';
 				currentfromSelect: '1',
 				currentSelect: '2',
 				isSelect: false,
+				commentParams:{},
 				attentionList: [{
 						name: "道路桥梁与渡河工程",
 						active: true
@@ -191,16 +190,57 @@ import ygcComment from '@/components/ygc-comment/ygc-comment.vue';
 			// that = this;
 		},
 		methods: {
-			showHere(){
-				this.$refs.ygcComment.toggleMask('show');
+			//发表评论
+			pubComment(value){
+				var that = this;
+				this.commentParams.content=value.content;
+				this.commentParams.momentId=this.currentMomentId
+				this.$refs.ygcComment.toggleMask('hide');
+				// this.fatherCommentMethod(this.commentParams);
+				momentComment(this.commentParams).then(data => {
+					this.commentText = '';
+					//获取当前评论数据
+					var fid = this.commentParams.momentId;
+					var [error, res] = data;	
+					if(res&&res.data&&res.data.result){
+						if(res.data.result.status == 1){
+							this.momentsList.forEach(function(val, index, arr) {
+								if (fid == val.id) {							
+									that.momentsList[index].commentList.push({
+										userName: that.commentParams.userName,
+										content: that.commentParams.content,
+										userId: that.commentParams.userId,
+										replyTime: new Date(),
+										fid: that.commentParams.fid,
+										userPhoto: that.commentParams.userPhoto
+									});
+								}
+							});
+						}
+					}
+					
+				});
 			},
-			pubComment(){},
+			//评论按钮事件
 			commentHandler(id){
-				debugger
+				this.currentMomentId=id;
+				//获取用户信息
+				this.commentParams.userId = uni.getStorageSync('openid');
+				let userInfo = uni.getStorageSync('userInfo');
+				if (userInfo) {
+					this.commentParams.userName = userInfo.nickName;
+					this.commentParams.userPhoto = userInfo.avatarUrl;
+					this.$refs.ygcComment.toggleMask('show');
+				} else {
+					//跳转页面 
+					wx.navigateTo({
+						url: '/pages/login/login'
+					});
+				}
+				
+				
 			},
-			ss(){
-				// this.$refs.moments
-			},
+			
 			//点赞
 			// likeClick(params){
 			// 	momentLike(params).then(data => {
@@ -256,7 +296,8 @@ import ygcComment from '@/components/ygc-comment/ygc-comment.vue';
 						commentCount: item.commentCount,
 						likeList:item.likeList,
 						likeCount:item.likeList.length,
-						status: item.status
+						status: item.status,
+						userId:item.userId
 					}					
 				});
 				return list;
@@ -366,13 +407,11 @@ import ygcComment from '@/components/ygc-comment/ygc-comment.vue';
 		width: 40px;
 	}
 	.discover-comment{
-		position: absolute;
+	/* 	position: absolute;
 		top: 0rpx;
 		bottom: 0;
 		width: 100%;
-		background: #00008800;;
+		background: #00008800; */
 	}
-	.mask .mask-content .mask-content-topbar .right[data-v-7ae90f58] {
-		color:red
-	}
+	
 </style>
