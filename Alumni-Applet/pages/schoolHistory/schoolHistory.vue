@@ -64,6 +64,7 @@
 	}
 	.sch-his-content{
 		text-indent:2em ;
+		padding: 0 20rpx;
 	}
 	.school {
 		background-color: #ffffff;

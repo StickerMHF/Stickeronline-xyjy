@@ -132,7 +132,7 @@
             
         }
         ,{
-            "path" : "pages/cooperation/add",
+            "path" : "pages/cooperation/addDetail/addDetail",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "",

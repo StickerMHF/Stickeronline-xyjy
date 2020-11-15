@@ -193,7 +193,6 @@ export default {
       let openid = uni.getStorageSync("openid");
       let userInfo = uni.getStorageSync("userInfo");
 	  let isCertification= uni.getStorageSync("isCertification")
-	  // if()
       if (userInfo) {
         this.userInfo = userInfo;
 		if(isCertification){
