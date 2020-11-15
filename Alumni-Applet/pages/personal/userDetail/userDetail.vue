@@ -113,11 +113,6 @@
 			this.getDiscoverList();
 		},
 		methods: {
-			callBack() {
-				uni.switchTab({
-					url: '/pages/personal/userDetail/userDetail'
-				});
-			},
 			getUserDetailsByUserId(){
 				let params={
 					userId:this.params.userId
