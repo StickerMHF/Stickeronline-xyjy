@@ -119,7 +119,7 @@ public class BAlumnusJoinHandler {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
                 } else {
-                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
                 }
             });

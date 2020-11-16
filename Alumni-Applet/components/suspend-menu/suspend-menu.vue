@@ -1,19 +1,15 @@
 <template>
 	<view class="publishBtn">
-	  <image
-	    class="image"
-	    src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG"
-	    @click="handleMenu"
-	  ></image>
-	  <view class="menuUl" v-if="showMenu">
-		<view class="menuList" v-for="(item, index) in menusList" :key="index" @click="hrefToPage(item.url)">
-			<image class="img" :src="item.iconPath" mode=""></image>
-			<view class="pathName">{{item.name}}</view>
+		<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="handleMenu"></image>
+		<view class="menuUl" v-if="showMenu">
+			<view class="menuList" v-for="(item, index) in menusList" :key="index" @click="hrefToPage(item.url)">
+				<image class="img" :src="item.iconPath" mode=""></image>
+				<view class="pathName">{{item.name}}</view>
+			</view>
+			<view class="triangle">
+
+			</view>
 		</view>
-		<view class="triangle">
-			
-		</view>
-	  </view>
 	</view>
 </template>
 
@@ -21,30 +17,46 @@
 	export default {
 		props: {
 			menusList: {
-			  type: Array,
-			  default() {
-			    return [];
-			  },
+				type: Array,
+				default () {
+					return [];
+				},
 			},
-			fid:{
+			fid: {
 				type: String,
-				default() {
-				  return "";
+				default () {
+					return "";
+				},
+			},
+			isJoin: {
+				type: Number,
+				default () {
+					return -1;
 				},
 			}
 		},
-		data(){
-			return{
-				showMenu:false
+		data() {
+			return {
+				showMenu: false
 			}
 		},
-		methods:{
-			handleMenu(){
-				this.showMenu = !this.showMenu;
+		methods: {
+			handleMenu() {
+				let that = this;
+				if (that.isJoin==-1) {
+					uni.showToast({
+						title: "请先加入本会",
+						icon: 'none',
+						duration: 2000
+					});
+				}else {
+					this.showMenu = !this.showMenu;
+				}
+
 			},
-			hrefToPage(url){
+			hrefToPage(url) {
 				uni.navigateTo({
-					url:url+'?id='+this.fid
+					url: url + '?id=' + this.fid
 				})
 				this.showMenu = false;
 			}
@@ -54,19 +66,20 @@
 
 <style lang="scss">
 	.publishBtn {
-	  position: fixed;
-	  right: 5px;
-	  bottom: 40rpx;
-	  width: 40px;
-	  height: 40px;
-	  z-index: 100;
-	  .image {
-	    width: 100%;
-	    height: 100%;
-	  }
+		position: fixed;
+		right: 5px;
+		bottom: 40rpx;
+		width: 40px;
+		height: 40px;
+		z-index: 100;
+
+		.image {
+			width: 100%;
+			height: 100%;
+		}
 	}
-	
-	.menuUl{
+
+	.menuUl {
 		width: 90px;
 		background: #000000;
 		opacity: .7;
@@ -75,21 +88,25 @@
 		top: -115px;
 		right: 5px;
 		z-index: 100;
-		.menuList{
+
+		.menuList {
 			display: flex;
 			align-items: center;
 			margin: 12px 8px;
-			.img{
+
+			.img {
 				width: 15px;
 				height: 20px;
 				margin-right: 20rpx;
 			}
-			.pathName{
-				color:#fff;
+
+			.pathName {
+				color: #fff;
 				margin-top: -5px;
 			}
 		}
-		.triangle{
+
+		.triangle {
 			width: 0;
 			height: 0;
 			border-right: 5px solid transparent;

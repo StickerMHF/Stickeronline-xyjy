@@ -1,5 +1,5 @@
-const baseurl = 'https://www.imapway.cn/alumniapi'
-// const baseurl = 'http://192.168.0.222:8084'
+// const baseurl = 'https://www.imapway.cn/alumniapi'
+const baseurl = 'http://192.168.0.222:8084'
 const api = {
 	test: baseurl + '/stickeronline/rich/text/list',
 	getUserOpenid: baseurl + '/tb/wechat/getAppletUserInfo',

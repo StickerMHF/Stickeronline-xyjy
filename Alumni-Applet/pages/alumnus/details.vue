@@ -83,7 +83,7 @@
     <view class="view_more" @click="switchMenu" data-cur="photo">
       <uni-load-more status="more" :contentText="contentText"></uni-load-more>
     </view>
-	<suspendMenu :menusList="menusList" :showMenu="showMenu" :fid="params.fid"></suspendMenu>
+	<suspendMenu :menusList="menusList" :isJoin="isJoin" :showMenu="showMenu" :fid="params.fid"></suspendMenu>
   </view>
 </template>
 
@@ -112,6 +112,7 @@ export default {
     return {
 		showMenu:false,
 		checkState:0,//申请会长状态默认未申请
+		isJoin:0,//是否加入本会
 		menusList:[
 			{
 				iconPath:'http://www.imapway.cn/Alumni/static/alumnus/lxr2x.png',
@@ -267,7 +268,7 @@ export default {
 		that.params.alumnusId = this.params.fid;
 		that.params.checkState="1";
 		applyByUserId(that.params).then(data => {
-		  let [error, res] = data;debugger
+		  let [error, res] = data;
 		  if (res && res.data && res.data.result) {
 		    let item = res.data.result;
 		    that.checkState=1;
@@ -290,9 +291,12 @@ export default {
 		this.params.alumnusId = this.params.fid;
 		queryPresidentByUserId(this.params).then(data => {
 		  let [error, res] = data;
-		  if (res && res.data && res.data.result) {
+		  if (res && res.data && res.data.success) {
 		    let item = res.data.result;
 		    that.checkState=item.checkState;
+			that.isJoin=item.president;
+		  }else{
+			  that.isJoin=-1;
 		  }
 		});
 	},
