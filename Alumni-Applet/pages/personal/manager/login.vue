@@ -10,7 +10,7 @@
     <view class="list">
       <view class="list-call">
         <image class="img" src="http://www.imapway.cn/Alumni/static/shilu-login/1.png"></image>
-        <input class="sl-input" v-model="phone" type="number" maxlength="11" placeholder="账户" />
+        <input class="sl-input" v-model="phone" type="text" maxlength="11" placeholder="账户" />
       </view>
       <view class="list-call">
         <image class="img" src="http://www.imapway.cn/Alumni/static/shilu-login/2.png"></image>

@@ -281,11 +281,11 @@
 			}
 		},
 		methods: {
-			validatePhone(phone){
+			validatePhone(phone){debugger
 				let phoneCodeVerification = /^[1][3,4,5,7,8][0-9]{9}$/;
 				return phoneCodeVerification.test(phone);
 			},
-			validatorAccountNumber(idCard){
+			validatorAccountNumber(idCard){debugger
 				//15位和18位身份证号码的正则表达式
 				 let regIdCard=/^(^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$)|(^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])((\d{4})|\d{3}[Xx])$)$/;
 				  //如果通过该验证，说明身份证格式正确，但准确性还需计算
@@ -326,7 +326,7 @@
 			},
 			submit() {
 				let that = this;
-				this.$refs.form.validate(val => {
+				this.$refs.form.validate(val => {debugger
 					if (val) {
 						this.save(that.form);
 					}
@@ -387,7 +387,7 @@
 			inputTitleChange(e) {
 				this.name = e.detail.value
 			},
-			save(formData) {
+			save(formData) {debugger
 				let that = this;
 				let userInfo = uni.getStorageSync('userInfo');
 				let params = Object.assign(userInfo, formData);

@@ -320,6 +320,7 @@ export default {
     position: absolute;
     bottom: 30rpx;
     left: 40rpx;
+	z-index: 999;
   }
 }
 .ph-banner {
