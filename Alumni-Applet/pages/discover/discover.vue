@@ -6,11 +6,12 @@
         <ul class="discover-ul">
           <li
             class="discover-li"
-            :class="currentSelect == '1' ? 'discover-li-cur' : ''"
+            :class="currentSelect == '1' ? 'discover-li-cur' : 'discoverLi'"
             @click="selectHandler('1')"
           >
             <span>推荐</span>
-            <text class="lg text-gray cuIcon-triangleupfill"></text>
+			<text class="lg text-gray"></text>
+            <!-- <text class="lg text-gray cuIcon-triangleupfill"></text> -->
             <!-- <text v-if="currentSelect=='2'" class="lg text-gray cuIcon-title" style="color: #f85c0e;"></text> -->
           </li>
           <li
@@ -237,14 +238,13 @@ export default {
       params: {
         pageNo: 1,
         pageSize: 5,
-        order: "",
-        userId: "",
+        order: ""
       },
     };
   },
   onShow() {
     //获取用户ID
-    this.params.userId = uni.getStorageSync("openid");
+    // this.params.userId = uni.getStorageSync("openid");
 
     // if(!this.params.userId || this.params.userId == ''){
     // 	wx.navigateTo({
@@ -403,9 +403,23 @@ export default {
       return tree;
     },
     navigatorTo() {
-      wx.navigateTo({
-        url: "/pages/discover/publishData/publishData",
-      });
+		let certification=getApp().getIsCertification();
+		if(certification){
+			uni.navigateTo({
+			  url: "/pages/discover/publishData/publishData",
+			});
+		}else{
+			uni.showToast({
+				title: "请进行校友认证",
+				icon: 'none',
+				duration: 2000
+			});
+			uni.navigateTo({
+			  url: "/pages/personal/basicInfo/certification",
+			});
+		}
+		
+      
     },
     onConfirm(value) {
       console.log(value);
@@ -449,16 +463,19 @@ export default {
   border-bottom: 2px solid #ff5b3600;
   margin: 0px -5px;
   line-height: 30px;
+  padding-left: 5px;
 }
 
 .discover-li-cur span {
   border-bottom: 2px solid #ff5b36;
 }
 
-.discover-li-cur text {
-  padding-left: 10px;
+/* .discover-li-cur text {
+  padding-left: 5px;
 }
-
+discoverLi text {
+	padding-left: 5px;
+} */
 .discover-group {
   position: absolute;
   width: 100%;

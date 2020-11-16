@@ -28,7 +28,7 @@
               <view class="item">
                 <view class="icon"
                   ><img
-                    src="http://www.imapway.cn/Alumni/static/personal/wdzz2x.png"
+                    src="http://www.imapway.cn/Alumni/static/personal/apply2x.png"
                 /></view>
                 <view class="text" @click="toApply">我的申请</view>
               </view>
@@ -105,7 +105,7 @@ export default {
         },
         {
           name: "我的粉丝",
-          icon: "http://www.imapway.cn/Alumni/static/personal/sc2x.png",
+          icon: "http://www.imapway.cn/Alumni/static/personal/fans2x.png",
           page: "/pages/personal/fans/fans",
         },
 		{

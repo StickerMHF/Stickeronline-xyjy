@@ -2,7 +2,7 @@
 	<view class="publishBtn">
 		<image class="image" src="http://cdxyh.stickeronline.cn/FhDX9UB6L_r8YaQ6gqewXMPBCIqG" @click="handleMenu"></image>
 		<view class="menuUl" v-if="showMenu">
-			<view class="menuList" v-for="(item, index) in menusList" :key="index" @click="hrefToPage(item.url)">
+			<view class="menuList" v-for="(item, index) in menusList" :key="index" @click="hrefToPage(item)">
 				<image class="img" :src="item.iconPath" mode=""></image>
 				<view class="pathName">{{item.name}}</view>
 			</view>
@@ -54,11 +54,39 @@
 				}
 
 			},
-			hrefToPage(url) {
-				uni.navigateTo({
-					url: url + '?id=' + this.fid
-				})
-				this.showMenu = false;
+			hrefToPage(item) {
+				let that = this;
+				if(item.id=='gg'||item.id=='hd'){
+					if(that.isJoin!=0){
+						uni.navigateTo({
+							url: item.url + '?id=' + that.fid
+						})
+						that.showMenu = false;
+					}else{
+						uni.showToast({
+							title: "请申请会长权限",
+							icon: 'none',
+							duration: 2000
+						});
+						that.showMenu = false;
+					}
+				}else{
+					let certification=getApp().getIsCertification();
+					if(certification){
+						uni.navigateTo({
+							url: item.url + '?id=' + that.fid
+						})
+						that.showMenu = false;
+					}else{
+						uni.showToast({
+							title: "请进行校友认证",
+							icon: 'none',
+							duration: 2000
+						});
+						that.showMenu = false;
+					}
+				}
+				
 			}
 		}
 	}

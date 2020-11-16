@@ -61,7 +61,7 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
-        BMomentsEntity bMomentsEntity = new BMomentsEntity();
+        BMomentsEntity bMomentsEntity = new BMomentsEntity(params);
         String likeCount = params.getString("order");
         String selfId = params.getString("selfId");
         Sort sort;

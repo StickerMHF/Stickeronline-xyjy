@@ -115,16 +115,19 @@ export default {
 		isJoin:0,//是否加入本会
 		menusList:[
 			{
+				id:"gg",
 				iconPath:'http://www.imapway.cn/Alumni/static/alumnus/lxr2x.png',
 				name:'发公告',
 				url:'/pages/alumnus/sendNotice'
 			},
 			{
+				id:"tw",
 				iconPath:'http://www.imapway.cn/Alumni/static/alumnus/jj2x.png',
 				name:'发图文',
 				url:'/pages/discover/publishData/publishData'
 			},
 			{
+				id:"hd",
 				iconPath:'http://www.imapway.cn/Alumni/static/alumnus/ly2x.png',
 				name:'发活动',
 				url:'/pages/alumnus/sendActivity'
