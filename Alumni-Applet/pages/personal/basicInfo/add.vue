@@ -110,18 +110,18 @@
 					</picker>
 				</bjx-form-item>
 			</view>
-			<view class="cu-bar bg-white solid-bottom margin-top">
+			<view v-if="type=='1'" class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action">
 					<text class="cuIcon-titles text-green1"></text> 工作信息
 				</view>
 			</view>
-			<view v-if="type!='3'" class="cu-form-group">
+			<view v-if="type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="工作单位" label-right="left" prop='company'>
 					<input v-model="form.company" class="input" name="input" placeholder="请输入单位名称" />
 				</bjx-form-item>
 			</view>			
 			
-			<view v-if="type!='3'" class="cu-form-group">
+			<view v-if="type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="职位/职称" label-right="left" prop='jobTitle'>
 					<input v-model="form.jobTitle" class="input" name="input" placeholder="请输入职务/职称" />
 				</bjx-form-item>
@@ -188,7 +188,7 @@
 		},
 		data() {
 			return {
-				type: "2",
+				type: "",
 				isEdit: false,
 				form: {
 					openid: '',
