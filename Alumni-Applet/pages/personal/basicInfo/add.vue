@@ -12,7 +12,7 @@
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="姓名" prop="name">
-					<input class="basicinfo_name input" v-model="form.name" name="input" placeholder="请输入真实姓名" />
+					<input class="basicinfo_name input" v-model="form.name" @blur="formValidator('name')" name="input" placeholder="请输入真实姓名" />
 				</bjx-form-item>
 			</view>
 			<view class="cu-form-group">
@@ -26,7 +26,7 @@
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="身份证" label-right="left" prop='identityCard'>
-					<input v-model="form.identityCard" class="input" name="input" placeholder="请输入身份证号" />
+					<input v-model="form.identityCard" class="input" @blur="formValidator('identityCard')" name="input" placeholder="请输入身份证号" />
 				</bjx-form-item>
 			</view>
 			<view class="cu-bar bg-white solid-bottom margin-top">
@@ -36,7 +36,7 @@
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="所属学院" label-right="left" prop='college'>
-					<input v-model="form.college" class="input" name="input" placeholder="所属学院" disabled="true" />
+					<input v-model="form.college" class="input"  @blur="formValidator('college')" name="input" placeholder="所属学院" disabled="true" />
 				</bjx-form-item>
 			</view>
 			<!-- 不是教师 -->
@@ -51,12 +51,12 @@
 			</view>
 			<view v-if="type!='3'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="班级" label-right="left" prop='classGrade'>
-					<input v-model="form.classGrade" class="input" name="input" placeholder="请输入所在班级" />
+					<input v-model="form.classGrade" class="input" @blur="formValidator('classGrade')" name="input" placeholder="请输入所在班级" />
 				</bjx-form-item>
 			</view>
 			<view v-if="type!='3'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="学号" label-right="left" prop='studentNumber'>
-					<input v-model="form.studentNumber" class="input" name="input" placeholder="请输入学号" />
+					<input v-model="form.studentNumber" class="input" @blur="formValidator('studentNumber')" name="input" placeholder="请输入学号" />
 				</bjx-form-item>
 			</view>
 
@@ -117,13 +117,13 @@
 			</view>
 			<view v-if="type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="工作单位" label-right="left" prop='company'>
-					<input v-model="form.company" class="input" name="input" placeholder="请输入单位名称" />
+					<input v-model="form.company" @blur="formValidator('company')" class="input" name="input" placeholder="请输入单位名称" />
 				</bjx-form-item>
 			</view>
 
 			<view v-if="type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="职位/职称" label-right="left" prop='jobTitle'>
-					<input v-model="form.jobTitle" class="input" name="input" placeholder="请输入职务/职称" />
+					<input v-model="form.jobTitle" @blur="formValidator('jobTitle')" class="input" name="input" placeholder="请输入职务/职称" />
 				</bjx-form-item>
 			</view>
 
@@ -134,29 +134,29 @@
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="电话" label-right="left" prop='phone'>
-					<input v-model="form.phone" class="input" name="input" placeholder="请输入联系方式" />
+					<input v-model="form.phone" @blur="formValidator('phone')" class="input" name="input" placeholder="请输入联系方式" />
 				</bjx-form-item>
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="微信" label-right="left" prop='wechat'>
-					<input v-model="form.wechat" class="input" name="input" placeholder="请输入微信号(选填)" />
+					<input v-model="form.wechat" @blur="formValidator('wechat')" class="input" name="input" placeholder="请输入微信号(选填)" />
 				</bjx-form-item>
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="QQ" label-right="left" prop='qq'>
-					<input v-model="form.qq" class="input" name="input" placeholder="请输入QQ号码(选填)" />
+					<input v-model="form.qq" @blur="formValidator('qq')" class="input" name="input" placeholder="请输入QQ号码(选填)" />
 				</bjx-form-item>
 			</view>
 
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="Email" label-right="left" prop='email'>
-					<input v-model="form.email" class="input" name="input" placeholder="请输入邮箱地址(选填)" />
+					<input v-model="form.email" @blur="formValidator('email')" class="input" name="input" placeholder="请输入邮箱地址(选填)" />
 				</bjx-form-item>
 			</view>
 
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="住址" label-right="left" prop='address'>
-					<input v-model="form.address" class="input" name="input" placeholder="请输入住址(选填)" />
+					<input v-model="form.address" @blur="formValidator('address')" class="input" name="input" placeholder="请输入住址(选填)" />
 				</bjx-form-item>
 			</view>
 
@@ -216,34 +216,15 @@
 				eduIndex: -1,
 				sexIndex: -1,
 				professionIndex: -1,
-				picker: ['喵喵喵', '汪汪汪', '哼唧哼唧'],
+				// picker: ['喵喵喵', '汪汪汪', '哼唧哼唧'],
 				sex: ['男', '女'],
 				eduPicker: ['大专', '本科', '硕士', '博士'],
-				profession: ['勘查技术与工程', '地球物理学', '测绘工程', '地理信息科学', '遥感科学与技术', '安全工程', '地质工程']
-				
-
-			}
-		},
-		onLoad(options) {
-			// 初始化页面数据
-			this.title = options.title;
-			this.type = options.type;
-			this.isEdit = options.isEdit;
-			if (!this.type) {}
-			if (this.isEdit || this.isEdit == "true") {
-				this.isEdit = true;
-				this.getWechatUserInfo();
-			}
-			this.initValidate()
-		},
-		methods: {
-
-			//验证函数
-			initValidate() {
-				const rules = {
+				profession: ['勘查技术与工程', '地球物理学', '测绘工程', '地理信息科学', '遥感科学与技术', '安全工程', '地质工程'],
+				rules: {
 					name: {
 						required: true,
-						minlength: 2
+						minlength: 2,
+						
 					},
 					identityCard: {
 						required: true,
@@ -286,10 +267,9 @@
 					qq: {
 						required: false,
 						number: true
-					}
-					
-				}
-				const messages = {
+					}					
+				},
+				messages: {
 					name: {
 						required: '请输入姓名',
 						minlength: '请输入真实姓名'
@@ -337,12 +317,48 @@
 						number: '请正确填写QQ号码'
 					}
 				}
+			}
+		},
+		onLoad(options) {
+			// 初始化页面数据
+			this.title = options.title;
+			this.type = options.type;
+			this.isEdit = options.isEdit;
+			if (!this.type) {}
+			if (this.isEdit || this.isEdit == "true") {
+				this.isEdit = true;
+				this.getWechatUserInfo();
+			}
+			this.initValidate()
+		},
+		methods: {
+
+			//验证函数
+			initValidate() {
+				const rules = this.rules;
+				const messages = this.messages;
 				this.WxValidate = new WxValidate(rules, messages)
 			},
+			formValidator (param){
+				// let rules = this.rules[param];
+				//校验表单
+				// if(!this.WxValidate.checkParam(param, rules, this.form)){
+				// 	debugger
+				// 	const error = this.WxValidate.errorList[0];
+				// 	this.showModal(error);
+				// 	return false;
+				// }
+				let params = this.form;
+				if (!this.WxValidate.checkForm(params)) {
+					const error = this.WxValidate.errorList[0]
+					if(error.param == param){
+						this.showModal(error)
+						return false
+					}					
+				}
+			},
 			//调用验证函数
-			submitForm: function(e) {
-				// console.log('form发生了submit事件，携带的数据为：', e.detail.value)
-				// const params = e.detail.value
+			submitForm () {
 				let params = this.form;
 				//校验表单
 				if (!this.WxValidate.checkForm(params)) {
