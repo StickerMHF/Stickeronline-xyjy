@@ -198,4 +198,48 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         handler.handle(future);
     }
 
+    @Override
+    public void queryByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
+        BMomentsEntity bMomentsEntity = new BMomentsEntity(params);
+        String likeCount = params.getString("order");
+        String userId = params.getString("userId");
+        Sort sort;
+        if (likeCount != null&&!likeCount.isEmpty()){
+            sort =new Sort(Sort.Direction.DESC, likeCount);
+        } else {
+            sort = new Sort(Sort.Direction.DESC, "createTime");
+        }
+        Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
+        ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
+        matcher.withMatcher("status", ExampleMatcher.GenericPropertyMatchers.contains());
+        //创建实例
+        bMomentsEntity.setStatus(1);
+        Example<BMomentsEntity> ex = Example.of(bMomentsEntity,matcher);
+
+        Page<BMomentsEntity> plist = bMomentsRepository.findAll(ex,pageable);
+        JsonObject resObj = new JsonObject(Json.encode(plist));
+        JsonArray contents = resObj.getJsonArray("content");
+        for (int i = 0; i < contents.size(); i++) {
+            JsonObject content = contents.getJsonObject(i);
+            String commentId = content.getString("id");
+            //统计浏览量
+            Integer viewCount = content.getInteger("viewCount");
+            if (viewCount != null){
+                content.put("viewCount",viewCount+1);
+            } else {
+                content.put("viewCount",1);
+            }
+            List<BMomentsLikeEntity> likeList = bMomentsLikeRepository.findAllByUserIdAndMomentId(params.getString("userId"),commentId);
+            if(likeList.size()>0){
+                resObj.getJsonArray("content").getJsonObject(i).put("islike", likeList.get(0).getStatus());
+            }else {
+                resObj.getJsonArray("content").getJsonObject(i).put("islike", "unlike");
+            }
+        }
+        future.complete(resObj);
+        handler.handle(future);
+    }
+
 }

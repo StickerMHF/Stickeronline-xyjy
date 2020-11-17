@@ -80,9 +80,9 @@
 			<list-member v-bind:list="memberList"></list-member>
 		</view>
    
-    <view class="view_more" @click="switchMenu" data-cur="photo">
+    <!-- <view class="view_more" @click="loadMore" data-cur="photo">
       <uni-load-more status="more" :contentText="contentText"></uni-load-more>
-    </view>
+    </view> -->
 	<suspendMenu :menusList="menusList" :isJoin="isJoin" :showMenu="showMenu" :fid="params.fid"></suspendMenu>
   </view>
 </template>
@@ -303,9 +303,14 @@ export default {
 		  }
 		});
 	},
+	//加载更多
+	loadMore(){
+		this.initData(this.currentMenu);
+	},
     //切换菜单
     switchMenu(e) {
       let menu = e.currentTarget.dataset.cur;
+	  this.currentMenu=menu;
       this.initData(menu);
     },
     getAlumnusNewsList() {
