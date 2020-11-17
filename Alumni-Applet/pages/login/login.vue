@@ -46,23 +46,23 @@
 		},
 		methods: {
 			bindLogin() {
-				// getApp().wxGetUserInfo();
-				// uni.navigateBack({
-				//     delta: 1
-				// });
-				// uni.navigateTo({
-				// 	url:'/pages/personal/examine/examine'
-				// })
+				getApp().wxGetUserInfo();
+				uni.navigateBack({
+				    delta: 1
+				});
+				uni.navigateTo({
+					url:'/pages/personal/examine/examine'
+				})
 
 			},
 			bindGetUserInfo(e) {
 				uni.setStorageSync('userInfo', e.detail.userInfo); //记录是否第一次授权  false:表示不是第一次授权
-				// uni.navigateBack({
-				// 	delta: 1
-				// });
-				uni.navigateTo({
-					url:"/pages/personal/examine/examine"
-				})
+				uni.navigateBack({
+					delta: 1
+				});
+				// uni.navigateTo({
+				// 	url:"/pages/personal/examine/examine"
+				// })
 
 			},
 			callBackHandler(){

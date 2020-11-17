@@ -24,12 +24,12 @@
     <div class="ft">
       <view class="new-content" v-html="options.contents"></view>
     </div>
-	<view class="hm-new-bottom">
+	<!-- <view class="hm-new-bottom">
 		<text class="hmnb-item cuIcon-forward">10</text>
 			<text class="hmnb-item cuIcon-appreciate">10</text>
 			
 			<text class="hmnb-item cuIcon-like">10</text>
-	</view>
+	</view> -->
 	<view class="hm-new-bottoms">
 	</view>
   </div>

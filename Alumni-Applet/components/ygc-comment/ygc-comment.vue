@@ -7,8 +7,8 @@
 				 :show-confirm-bar="false" :focus="focus" maxlength="140"></textarea>
 			</view>
 			<view class="mask-content-topbar">
-				<view class="left cuIcon-location" @click="getLocation">点击获取位置</view>
-				<view class="right" @click="pubComment">发布</view>
+				<view class="left " ></view><!-- 点击获取位置 @click="getLocation cuIcon-location"-->
+				<view class="right bg-gradual-green1" @click="pubComment">发布</view>
 			</view>
 		</view>
 	</view>

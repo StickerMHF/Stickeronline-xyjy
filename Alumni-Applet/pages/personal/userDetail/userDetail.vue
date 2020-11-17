@@ -10,7 +10,8 @@
 				</cu-custom>
 				<view class="avator">
 				<view class="cu-avatar round lg margin-left" :style="[{ backgroundImage:'url(' + userInfo.avatar_url + ')' }]">
-					<view class="cu-tag badge" :class="userInfo.sex==='女'?'cuIcon-female bg-pink':'cuIcon-male bg-blue'"></view>
+					<view class="cu-tag badge" ></view>
+					<!-- :class="userInfo.sex==='女'?'cuIcon-female bg-pink':'cuIcon-male bg-blue'" -->
 				</view>
 				</view>
 				<view class="userName">{{userInfo.nick_name}}</view>
