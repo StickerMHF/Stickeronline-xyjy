@@ -12,7 +12,7 @@
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="姓名" prop="name">
-					<input class="basicinfo_name input" v-model="form.name" name="input" placeholder="请输入真实姓名" />
+					<input class="basicinfo_name input" v-model="form.name" @blur="formValidator('name')" name="input" placeholder="请输入真实姓名" />
 				</bjx-form-item>
 			</view>
 			<view class="cu-form-group">
@@ -26,7 +26,7 @@
 			</view>
 			<view class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="身份证" label-right="left" prop='identityCard'>
-					<input v-model="form.identityCard" class="input" name="input" placeholder="请输入身份证号" />
+					<input v-model="form.identityCard" class="input" @blur="formValidator('identityCard')" name="input" placeholder="请输入身份证号" />
 				</bjx-form-item>
 			</view>
 			<view class="cu-bar bg-white solid-bottom margin-top">
@@ -216,34 +216,15 @@
 				eduIndex: -1,
 				sexIndex: -1,
 				professionIndex: -1,
-				picker: ['喵喵喵', '汪汪汪', '哼唧哼唧'],
+				// picker: ['喵喵喵', '汪汪汪', '哼唧哼唧'],
 				sex: ['男', '女'],
 				eduPicker: ['大专', '本科', '硕士', '博士'],
-				profession: ['勘查技术与工程', '地球物理学', '测绘工程', '地理信息科学', '遥感科学与技术', '安全工程', '地质工程']
-				
-
-			}
-		},
-		onLoad(options) {
-			// 初始化页面数据
-			this.title = options.title;
-			this.type = options.type;
-			this.isEdit = options.isEdit;
-			if (!this.type) {}
-			if (this.isEdit || this.isEdit == "true") {
-				this.isEdit = true;
-				this.getWechatUserInfo();
-			}
-			this.initValidate()
-		},
-		methods: {
-
-			//验证函数
-			initValidate() {
-				const rules = {
+				profession: ['勘查技术与工程', '地球物理学', '测绘工程', '地理信息科学', '遥感科学与技术', '安全工程', '地质工程'],
+				rules: {
 					name: {
 						required: true,
-						minlength: 2
+						minlength: 2,
+						
 					},
 					identityCard: {
 						required: true,
@@ -286,10 +267,9 @@
 					qq: {
 						required: false,
 						number: true
-					}
-					
-				}
-				const messages = {
+					}					
+				},
+				messages: {
 					name: {
 						required: '请输入姓名',
 						minlength: '请输入真实姓名'
@@ -337,12 +317,48 @@
 						number: '请正确填写QQ号码'
 					}
 				}
+			}
+		},
+		onLoad(options) {
+			// 初始化页面数据
+			this.title = options.title;
+			this.type = options.type;
+			this.isEdit = options.isEdit;
+			if (!this.type) {}
+			if (this.isEdit || this.isEdit == "true") {
+				this.isEdit = true;
+				this.getWechatUserInfo();
+			}
+			this.initValidate()
+		},
+		methods: {
+
+			//验证函数
+			initValidate() {
+				const rules = this.rules;
+				const messages = this.messages;
 				this.WxValidate = new WxValidate(rules, messages)
 			},
+			formValidator (param){
+				// let rules = this.rules[param];
+				//校验表单
+				// if(!this.WxValidate.checkParam(param, rules, this.form)){
+				// 	debugger
+				// 	const error = this.WxValidate.errorList[0];
+				// 	this.showModal(error);
+				// 	return false;
+				// }
+				let params = this.form;
+				if (!this.WxValidate.checkForm(params)) {
+					const error = this.WxValidate.errorList[0]
+					if(error.param == param){
+						this.showModal(error)
+						return false
+					}					
+				}
+			},
 			//调用验证函数
-			submitForm: function(e) {
-				// console.log('form发生了submit事件，携带的数据为：', e.detail.value)
-				// const params = e.detail.value
+			submitForm () {
 				let params = this.form;
 				//校验表单
 				if (!this.WxValidate.checkForm(params)) {
