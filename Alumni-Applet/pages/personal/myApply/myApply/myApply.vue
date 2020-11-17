@@ -8,7 +8,7 @@
 					<block slot="content">我的申请</block>
 				</cu-custom>
 			</view>
-			<view>暂无数据</view>
+			<view class="apply_content">暂无数据</view>
 		</view>
 	</view>
 </template>
@@ -26,6 +26,11 @@
 	}
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.apply_content{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	margin: 20rpx;
+}
 </style>

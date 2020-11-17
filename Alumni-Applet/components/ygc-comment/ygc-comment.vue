@@ -119,7 +119,7 @@
 				}
 
 				.right {
-					height: 60rpx;
+					height: 50rpx;
 					line-height: 40rpx;
 					padding: 10upx 50upx;
 					border-radius: 50upx;

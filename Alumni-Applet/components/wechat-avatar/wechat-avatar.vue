@@ -275,7 +275,7 @@
 		background: #FF8901;
 		color: #fff;
 		padding: 0 40rpx;
-		line-height: 76rpx;
+		line-height: 60rpx;
 	}
 	/* button::after {
 		border: none;
