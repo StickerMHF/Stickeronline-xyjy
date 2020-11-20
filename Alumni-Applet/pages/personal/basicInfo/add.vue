@@ -277,9 +277,7 @@
 					},
 					email: {
 						required: false,
-						email: true,
-						minlength: 6,
-						maxlength: 20
+						email: true
 					},
 					qq: {
 						required: false,
@@ -299,19 +297,13 @@
 						idcard: true
 					},
 					college: {
-						required: true,
-						minlength: 2,
-						maxlength: 10
+						required: true
 					},
 					education: {
-						required: true,
-						minlength: 2,
-						maxlength: 10
+						required: true
 					},
 					startDate: {
-						required: true,
-						minlength: 2,
-						maxlength: 10
+						required: true
 					},
 					classGrade: {
 						required: true,
@@ -330,9 +322,7 @@
 					},
 					email: {
 						required: false,
-						email: true,
-						minlength: 6,
-						maxlength: 20
+						email: true
 					},
 					qq: {
 						required: false,
@@ -352,19 +342,13 @@
 						idcard: true
 					},
 					college: {
-						required: true,
-						minlength: 2,
-						maxlength: 10
+						required: true
 					},
 					education: {
-						required: true,
-						minlength: 2,
-						maxlength: 10
+						required: true
 					},
 					startDate: {
-						required: true,
-						minlength: 2,
-						maxlength: 10
+						required: true
 					},					
 					phone: {
 						required: true,
@@ -372,9 +356,7 @@
 					},
 					email: {
 						required: false,
-						email: true,
-						minlength: 6,
-						maxlength: 20
+						email: true
 					},
 					qq: {
 						required: false,
@@ -386,7 +368,8 @@
 				messages1: {
 					name: {
 						required: '请输入姓名',
-						minlength: '请输入真实姓名'
+						minlength: '请输入真实姓名',
+						maxlength: '请输入真实姓名'
 					},
 					identityCard: {
 						required: '请输入身份证号码',
@@ -406,17 +389,24 @@
 					},
 					classGrade: {
 						required: '请输入班级',
-						minlength: '请正确填写班级'
+						minlength: '请正确填写班级',
+						maxlength: '请正确填写班级'
 					},
 					studentNumber: {
 						required: '请输入学号',
-						digits: '请输入有效学号'
+						digits: '请输入有效学号',
+						minlength: '请输入有效学号',
+						maxlength: '请输入有效学号'
 					},
 					company: {
-						required: '请输入工作单位'
+						required: '请输入工作单位',
+						minlength: '请输入工作单位全称',
+						maxlength: '请输入工作单位全称'
 					},
 					jobTitle: {
-						required: '请输入职务'
+						required: '请输入职务',
+						minlength: '请输入职务全称',
+						maxlength: '请输入职务全称'
 					},
 					phone: {
 						required: '请输入手机号码',
@@ -428,13 +418,16 @@
 					},
 					qq: {
 						required: '请输入QQ号码',
-						number: '请正确填写QQ号码'
+						number: '请正确填写QQ号码',
+						minlength: '请正确填写QQ号码',
+						maxlength: '请正确填写QQ号码'
 					}
 				},
 				messages2: {
 					name: {
 						required: '请输入姓名',
-						minlength: '请输入真实姓名'
+						minlength: '请输入真实姓名',
+						maxlength: '请输入真实姓名'
 					},
 					identityCard: {
 						required: '请输入身份证号码',
@@ -451,11 +444,14 @@
 					},
 					classGrade: {
 						required: '请输入班级',
-						minlength: '请正确填写班级'
+						minlength: '请正确填写班级',
+						maxlength: '请正确填写班级'
 					},
 					studentNumber: {
 						required: '请输入学号',
-						digits: '请输入有效学号'
+						digits: '请输入有效学号',
+						minlength: '请输入有效学号',
+						maxlength: '请输入有效学号'
 					},					
 					phone: {
 						required: '请输入手机号码',
@@ -467,13 +463,16 @@
 					},
 					qq: {
 						required: '请输入QQ号码',
-						number: '请正确填写QQ号码'
+						number: '请正确填写QQ号码',
+						minlength: '请正确填写QQ号码',
+						maxlength: '请正确填写QQ号码'
 					}
 				},
 				messages3: {
 					name: {
 						required: '请输入姓名',
-						minlength: '请输入真实姓名'
+						minlength: '请输入真实姓名',
+						maxlength: '请输入真实姓名'
 					},
 					identityCard: {
 						required: '请输入身份证号码',
@@ -498,7 +497,9 @@
 					},
 					qq: {
 						required: '请输入QQ号码',
-						number: '请正确填写QQ号码'
+						number: '请正确填写QQ号码',
+						minlength: '请正确填写QQ号码',
+						maxlength: '请正确填写QQ号码'
 					}
 				}
 			}
