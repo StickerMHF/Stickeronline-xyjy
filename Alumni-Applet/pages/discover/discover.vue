@@ -88,7 +88,7 @@ export default {
       pixelRatio: 1,
       canvaMap: null,
       currentfromSelect: "1",
-      currentSelect: "2",
+      currentSelect: "1",
       isSelect: false,
       commentParams: {},
       attentionList: [
@@ -344,6 +344,7 @@ export default {
     //获取朋友圈列表
     getDiscoverList() {
 		if(this.currentSelect == "1"){//推荐
+		    delete this.params.userId;
 			getDiscoverList(this.params).then(data => {
 			  uni.stopPullDownRefresh();
 			  let [error, res] = data;
@@ -378,6 +379,7 @@ export default {
           commentList: item.commentList, //this.listToTree(item.commentList),
           viewCount: item.viewCount,
           commentCount: item.commentCount,
+		  address:item.address,
           likeList: item.likeList,
           likeCount: item.likeList.length,
           status: item.status,

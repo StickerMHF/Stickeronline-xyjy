@@ -146,7 +146,7 @@
 			bindendDateChange: function(e) {
 				this.endDate = e.target.value
 			},
-			send(){
+			send(){debugger
 				let param = {
 					title:this.title,
 					context:this.content,

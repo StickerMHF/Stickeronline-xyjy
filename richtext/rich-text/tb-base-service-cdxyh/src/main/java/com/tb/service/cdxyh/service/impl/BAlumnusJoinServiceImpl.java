@@ -6,8 +6,10 @@ import com.sticker.online.core.utils.oConvertUtils;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BAlumnusActivityEntity;
 import com.tb.service.cdxyh.entity.BAlumnusJoinEntity;
+import com.tb.service.cdxyh.entity.BMessageEntity;
 import com.tb.service.cdxyh.entity.BNewsEntity;
 import com.tb.service.cdxyh.repository.BAlumnusJoinRepository;
+import com.tb.service.cdxyh.repository.BMessageRepository;
 import com.tb.service.cdxyh.service.BAlumnusJoinService;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
@@ -28,6 +30,8 @@ import java.util.Optional;
 public class BAlumnusJoinServiceImpl implements BAlumnusJoinService, BaseAsyncService {
     @Autowired
     private BAlumnusJoinRepository bAlumnusJoinRepository;
+    @Autowired
+    private BMessageRepository bMessageRepository;
     @Override
     public void add(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
@@ -121,8 +125,25 @@ public class BAlumnusJoinServiceImpl implements BAlumnusJoinService, BaseAsyncSe
         if (sr.isPresent()) {
             BAlumnusJoinEntity result=sr.get();
             result.setCheckState(Integer.parseInt(params.getString("checkState","0")));
-//            result.setPresident(Integer.parseInt(params.getString("president","0")));
+            if(result.getCheckState().equals(2)){
+                result.setPresident(Integer.parseInt(params.getString("president","2")));
+            }
             bAlumnusJoinRepository.save(result);
+
+            //添加通知消息
+            BMessageEntity bMessageEntity=new BMessageEntity();
+            bMessageEntity.setStatus(0);
+            bMessageEntity.setType(2);
+            bMessageEntity.setCreateTime(new Date());
+            bMessageEntity.setUpdateTime(new Date());
+            bMessageEntity.setRecoreId(result.getId());
+            bMessageEntity.setUserid(result.getUserId());
+            if(result.getCheckState().equals(2)){
+                bMessageEntity.setContent("申请会长（副会长）通过");
+            }else{
+                bMessageEntity.setContent("申请会长（副会长）失败");
+            }
+            bMessageRepository.save(bMessageEntity);
             //TODO 返回false说明什么？
             future.complete(new JsonObject(Json.encode(result)));
 

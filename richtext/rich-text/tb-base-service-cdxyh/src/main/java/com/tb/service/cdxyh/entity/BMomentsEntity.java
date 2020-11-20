@@ -91,6 +91,12 @@ public class BMomentsEntity extends BaseEntity {
     @Column(name = "status")
     private Integer status;
     /**
+     * 发送位置
+     */
+    @Column(name = "address")
+    private String address;
+
+    /**
      * 评论列表
      */
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
@@ -200,5 +206,13 @@ public class BMomentsEntity extends BaseEntity {
 
     public void setLikeList(Set<BMomentsLikeEntity> likeList) {
         this.likeList = likeList;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

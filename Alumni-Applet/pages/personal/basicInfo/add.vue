@@ -464,6 +464,7 @@
 				addWechatUser(params).then(data => {
 					var [error, res] = data;
 					if (res && res.data && res.data.success) {
+						uni.setStorageSync('auditStatus',"0");
 						uni.navigateBack({
 							delta: 2
 						});

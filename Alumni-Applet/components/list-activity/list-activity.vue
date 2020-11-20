@@ -5,10 +5,10 @@
 				<template v-slot:body>
 					<view class="uni-list-box">
 						<view class="uni-thumb">
-							<image :src="item.avatar" mode="aspectFill"></image>
+							<image :src="item.img||'http://cdxyh.stickeronline.cn/banner12x.png'" mode="aspectFill"></image>
 						</view>
 						<view class="uni-content">
-							<view class="uni-title-sub uni-ellipsis-2">{{item.excerpt}}</view>
+							<view class="uni-title-sub uni-ellipsis-2">{{item.title}}</view>
 							<view class="uni-note">{{ item.user_name }} {{ item.last_modify_date }}</view>
 						</view>
 					</view>

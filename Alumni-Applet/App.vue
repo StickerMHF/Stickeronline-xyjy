@@ -198,14 +198,23 @@
 						var [error, res] = data;
 						if (res && res.data.success) {
 							let ss = res.data.result;
+							
 							if(ss!=null){
-								that.isCertification=true;
-								uni.setStorageSync('isCertification', that.isCertification);
+								let auditStatus = result.auditStatus
+									that.auditStatus = auditStatus
+									if(auditStatus == '1'){
+										that.isCertification = true;
+									} else {
+										that.isCertification = false;
+									}
+									uni.setStorageSync('auditStatus', that.auditStatus);
+									uni.setStorageSync('isCertification', that.isCertification);
+								}
 							}else{
 								that.isCertification=false;
+								uni.setStorageSync('auditStatus', null);
 								uni.setStorageSync('isCertification', that.isCertification);
 							}
-						}
 					});
 				} else {
 					that.getUserInfo();

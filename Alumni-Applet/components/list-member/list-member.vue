@@ -117,7 +117,7 @@
 
 <style lang="less" scoped>
 .cu-btn{
-	width: 140rpx;
+	width: 150rpx;
 	height: 50rpx;
 	font-size: 28rpx;
 }

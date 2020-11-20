@@ -5,10 +5,9 @@ import com.sticker.online.core.model.BaseAsyncService;
 import com.sticker.online.core.utils.TimeUtil;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BMessageEntity;
-import com.tb.service.cdxyh.entity.BWechatUsersAttentionEntity;
 import com.tb.service.cdxyh.repository.BMessageRepository;
-import com.tb.service.cdxyh.repository.BWechatUsersAttentionRepository;
-import com.tb.service.cdxyh.service.BWechatUsersAttentionAsyncService;
+import com.tb.service.cdxyh.service.BMessageAsyncService;
+import com.tb.service.cdxyh.utils.HttpUtil;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
@@ -19,35 +18,20 @@ import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 @Component
 @AsyncServiceHandler
-public class BWechatUsersAttentionAsyncServiceImpl implements BWechatUsersAttentionAsyncService, BaseAsyncService {
-    @Autowired
-    private BWechatUsersAttentionRepository bMemberAttentionRepository;
+public class BMessageAsyncServiceImpl implements BMessageAsyncService, BaseAsyncService {
     @Autowired
     private BMessageRepository bMessageRepository;
     @Override
     public void add(JsonObject params, Handler<AsyncResult<String>> handler) {
         Future<String> future = Future.future();
-        BWechatUsersAttentionEntity bMemberAttentionEntity = new BWechatUsersAttentionEntity(params);
-        bMemberAttentionEntity.setCreateTime(new Date());
-        bMemberAttentionEntity.setUpdateTime(new Date());
-        bMemberAttentionRepository.save(bMemberAttentionEntity);
-
-        //添加通知消息
-        BMessageEntity bMessageEntity=new BMessageEntity();
-        bMessageEntity.setStatus(0);
-        bMessageEntity.setType(3);
+        BMessageEntity bMessageEntity = new BMessageEntity(params);
         bMessageEntity.setCreateTime(new Date());
         bMessageEntity.setUpdateTime(new Date());
-        bMessageEntity.setRecoreId(bMemberAttentionEntity.getId());
-        bMessageEntity.setUserid(bMemberAttentionEntity.getMemberId());
-        bMessageEntity.setContent("有人关注了我");
         bMessageRepository.save(bMessageEntity);
-
         future.complete("添加成功!");
         handler.handle(future);
     }
@@ -56,34 +40,38 @@ public class BWechatUsersAttentionAsyncServiceImpl implements BWechatUsersAttent
     public void queryPageList(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         PageVo pageVo = new PageVo(params);
-        BWechatUsersAttentionEntity bMemberAttentionEntity = new BWechatUsersAttentionEntity(params);
+        BMessageEntity bMessageEntity = new BMessageEntity(params);
         String sorts=params.getString("sort","createTime");
         Sort sort = new Sort(Sort.Direction.DESC, sorts);
         Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
         ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
 //        matcher.withMatcher("userId", ExampleMatcher.GenericPropertyMatchers.contains());
         //创建实例
-        Example<BWechatUsersAttentionEntity> ex = Example.of(bMemberAttentionEntity, matcher);
-        Page<BWechatUsersAttentionEntity> plist = bMemberAttentionRepository.findAll(ex,pageable);
+        Example<BMessageEntity> ex = Example.of(bMessageEntity, matcher);
+        Page<BMessageEntity> plist = bMessageRepository.findAll(ex,pageable);
         JsonObject res=new JsonObject(Json.encode(plist));
+//        this.queryPageListOfChdEdu(r->{
+//            if(r.succeeded()){
+//                future.complete(res);
+//            }else {
+//                future.fail(r.cause());
+//            }
+//        });
         future.complete(res);
         handler.handle(future);
     }
 
-
-
-
     @Override
     public void edit(JsonObject params, Handler<AsyncResult<String>> handler) {
         Future<String> future = Future.future();
-        BWechatUsersAttentionEntity bMemberAttentionEntity = new BWechatUsersAttentionEntity(params);
-        bMemberAttentionEntity.setCreateTime(TimeUtil.convertStringToDate(params.getString("createTime")));
-        Optional<BWechatUsersAttentionEntity> sr = bMemberAttentionRepository.findById(bMemberAttentionEntity.getId());
+        BMessageEntity bMessageEntity = new BMessageEntity(params);
+        bMessageEntity.setCreateTime(TimeUtil.convertStringToDate(params.getString("createTime")));
+        Optional<BMessageEntity> sr = bMessageRepository.findById(bMessageEntity.getId());
         if (sr == null) {
             future.fail("未找到对应实体");
         } else {
-            bMemberAttentionEntity.setUpdateTime(new Date());
-            bMemberAttentionRepository.save(bMemberAttentionEntity);
+            bMessageEntity.setUpdateTime(new Date());
+            bMessageRepository.save(bMessageEntity);
             //TODO 返回false说明什么？
             future.complete("修改成功!");
         }
@@ -93,21 +81,10 @@ public class BWechatUsersAttentionAsyncServiceImpl implements BWechatUsersAttent
     @Override
     public void delete(JsonObject params, Handler<AsyncResult<String>> handler) {
         Future<String> future = Future.future();
-        BWechatUsersAttentionEntity bMemberAttentionEntity = new BWechatUsersAttentionEntity(params);
-        List<BWechatUsersAttentionEntity> list= bMemberAttentionRepository.findAllByUserIdAndMemberId(bMemberAttentionEntity.getUserId(),bMemberAttentionEntity.getMemberId());
-        bMemberAttentionRepository.deleteInBatch(list);
-
-        //添加通知消息
-        BMessageEntity bMessageEntity=new BMessageEntity();
-        bMessageEntity.setStatus(0);
-        bMessageEntity.setType(3);
-        bMessageEntity.setCreateTime(new Date());
-        bMessageEntity.setUpdateTime(new Date());
-        bMessageEntity.setRecoreId(bMemberAttentionEntity.getId());
-        bMessageEntity.setUserid(bMemberAttentionEntity.getMemberId());
-        bMessageEntity.setContent("取消关注");
-        bMessageRepository.save(bMessageEntity);
-
+        String[] ids = params.getString("id").split(",");
+        for (int i = 0; i < ids.length; i++) {
+            bMessageRepository.deleteById(ids[i]);
+        }
         future.complete("删除成功!");
         handler.handle(future);
     }
@@ -115,8 +92,8 @@ public class BWechatUsersAttentionAsyncServiceImpl implements BWechatUsersAttent
     @Override
     public void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
-        BWechatUsersAttentionEntity bMemberAttentionEntity = new BWechatUsersAttentionEntity(params);
-        Optional<BWechatUsersAttentionEntity> res = bMemberAttentionRepository.findById(bMemberAttentionEntity.getId());
+        BMessageEntity bMessageEntity = new BMessageEntity(params);
+        Optional<BMessageEntity> res = bMessageRepository.findById(bMessageEntity.getId());
         if (res.isPresent()) {
             future.complete(new JsonObject(Json.encode(res.get())));
         }else{
@@ -124,4 +101,5 @@ public class BWechatUsersAttentionAsyncServiceImpl implements BWechatUsersAttent
         }
         handler.handle(future);
     }
+
 }

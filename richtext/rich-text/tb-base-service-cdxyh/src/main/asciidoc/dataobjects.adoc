@@ -204,6 +204,24 @@
 |[[updateBy]]`@updateBy`|`String`|-
 |===
 
+[[BMessageEntity]]
+== BMessageEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[content]]`@content`|`String`|-
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[recoreId]]`@recoreId`|`String`|-
+|[[status]]`@status`|`Number (Integer)`|-
+|[[type]]`@type`|`Number (Integer)`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userid]]`@userid`|`String`|-
+|===
+
 [[BMomentsCommentEntity]]
 == BMomentsCommentEntity
 
@@ -232,6 +250,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[address]]`@address`|`String`|-
 |[[commentCount]]`@commentCount`|`Number (Integer)`|-
 |[[commentList]]`@commentList`|`Array of link:dataobjects.html#BMomentsCommentEntity[BMomentsCommentEntity]`|-
 |[[content]]`@content`|`String`|-

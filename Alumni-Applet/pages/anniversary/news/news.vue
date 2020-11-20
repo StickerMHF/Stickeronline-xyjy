@@ -2,7 +2,7 @@
 	<view class="ann_news">
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">新闻列表</block>
+			<block slot="content">校庆资讯</block>
 		</cu-custom>
 		<!-- <view class="place">
 			
@@ -55,7 +55,7 @@
 				let param = {
 					pageNo: this.current,
 					pageSize: this.pageSize,
-					type:0
+					type:1
 				};
 				getNewsList(param).then(data => {
 					var [error, res] = data;

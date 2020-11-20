@@ -5,9 +5,10 @@ import com.sticker.online.core.model.BaseAsyncService;
 import com.sticker.online.core.utils.TimeUtil;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BAlumnusJoinEntity;
+import com.tb.service.cdxyh.entity.BMessageEntity;
 import com.tb.service.cdxyh.entity.BWechatUsersEntity;
 import com.tb.service.cdxyh.repository.BAlumnusJoinRepository;
-import com.tb.service.cdxyh.repository.BMomentsRepository;
+import com.tb.service.cdxyh.repository.BMessageRepository;
 import com.tb.service.cdxyh.repository.BWechatUsersAttentionRepository;
 import com.tb.service.cdxyh.repository.BWechatUsersRepository;
 import com.tb.service.cdxyh.service.BWechatUsersAsyncService;
@@ -38,7 +39,7 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
     @Autowired
     private BAlumnusJoinRepository bAlumnusJoinRepository;
     @Autowired
-    private BMomentsRepository bMomentsRepository;
+    private BMessageRepository bMessageRepository;
     @Override
     public void add(JsonObject params, Handler<AsyncResult<String>> handler) {
         Future<String> future = Future.future();
@@ -112,7 +113,7 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
         if (res.isPresent()) {
             future.complete(new JsonObject(Json.encode(res.get())));
         }else{
-            future.complete(null);
+            future.fail("用户未认证");
         }
         handler.handle(future);
     }
@@ -267,6 +268,20 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
             BWechatUsersEntity result=sr.get();
             result.setAuditStatus(bWechatUsersEntity.getAuditStatus());
 //            result.setPresident(Integer.parseInt(params.getString("president","0")));
+            //添加通知消息
+            BMessageEntity bMessageEntity=new BMessageEntity();
+            bMessageEntity.setStatus(0);
+            bMessageEntity.setType(1);
+            bMessageEntity.setCreateTime(new Date());
+            bMessageEntity.setUpdateTime(new Date());
+            bMessageEntity.setRecoreId(result.getOpenid());
+            bMessageEntity.setUserid(result.getOpenid());
+            if(result.getAuditStatus().equals("1")){
+                bMessageEntity.setContent("校友认证审核成功");
+            }else{
+                bMessageEntity.setContent("校友认证失败");
+            }
+            bMessageRepository.save(bMessageEntity);
             bWechatUsersRepository.save(result);
             //TODO 返回false说明什么？
             future.complete(new JsonObject(Json.encode(result)));

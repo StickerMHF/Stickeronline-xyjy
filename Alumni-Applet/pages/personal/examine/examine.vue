@@ -177,7 +177,7 @@
 			agreeBtn(item){
 				let params={
 					openid:item.item.openid,
-					auditStatus:1
+					auditStatus:'1'
 				}
 				console.log(9999,params)
 				getExamineStatus(params).then(res=>{
@@ -187,7 +187,7 @@
 			refuseBtn(item){
 				let params={
 					id:item.item.openid,
-					auditStatus:-1
+					auditStatus:'-1'
 				}
 				getExamineStatus(params).then(res=>{
 					this.getExamineList()

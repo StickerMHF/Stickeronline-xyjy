@@ -13,6 +13,9 @@
 							<view class="text-gray text-sm flex justify-between">
 								{{moment.publishDate}}
 							</view>
+							<view v-if="moment.address" class="text-gray text-sm flex">
+								<i class="icon cuIcon-location"></i>{{moment.address?moment.address:''}}
+							</view>
 						</view>
 					</view>
 				</view>
@@ -197,7 +200,7 @@
 			bindFocusEvent() {
 				console.log('获得焦点');
 			},
-			avatarHandler(openid){debugger
+			avatarHandler(openid){
 				if(openid!=null){
 					uni.navigateTo({
 						url:"/pages/personal/userDetail/userDetail?userId="+openid

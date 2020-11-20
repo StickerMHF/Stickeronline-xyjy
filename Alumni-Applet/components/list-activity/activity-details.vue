@@ -1,7 +1,7 @@
 <template>
 	<view class="activity_details">
 		<view class="actd_heade">
-			<image :src="item.url||'http://cdxyh.stickeronline.cn/banner12x.png'" mode="aspectFill"></image>
+			<image :src="item.img||'http://cdxyh.stickeronline.cn/banner12x.png'" mode="aspectFill"></image>
 		</view>
 		<view class="actd_addr">
 			<view class="actd_addr_title">

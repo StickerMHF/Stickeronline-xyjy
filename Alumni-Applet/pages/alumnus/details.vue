@@ -125,7 +125,7 @@ export default {
 			{
 				id:"tw",
 				iconPath:'http://www.imapway.cn/Alumni/static/alumnus/jj2x.png',
-				name:'发图文',
+				name:'发动态',
 				url:'/pages/discover/publishData/publishData'
 			},
 			{
@@ -313,6 +313,7 @@ export default {
     switchMenu(e) {
       let menu = e.currentTarget.dataset.cur;
 	  this.currentMenu=menu;
+	  this.meanu=this.currentMenu;
       this.initData(menu);
     },
     getAlumnusNewsList() {
@@ -402,6 +403,7 @@ export default {
           content: item.content,
           viewCount: item.viewCount,
           likeCount: item.likeCount,
+		  address:item.address,
           commentCount: item.commentCount,
           commentList: this.listToTree(item.commentList),
         };
