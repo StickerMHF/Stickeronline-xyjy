@@ -170,7 +170,10 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
 //        Long zoom=bWechatUsersRepository.count();
             JsonArray array=new JsonArray();
             res.forEach(item->{
-                array.add(item.toJson());
+                if(item!=null){
+                    array.add(item.toJson());
+                }
+
             });
             future.complete(new JsonObject().put("content",array).put("total",0));
         }else{
@@ -275,7 +278,7 @@ public class BWechatUsersAsyncServiceImpl implements BWechatUsersAsyncService, B
             bMessageEntity.setCreateTime(new Date());
             bMessageEntity.setUpdateTime(new Date());
             bMessageEntity.setRecoreId(result.getOpenid());
-            bMessageEntity.setUserid(result.getOpenid());
+            bMessageEntity.setUserId(result.getOpenid());
             if(result.getAuditStatus().equals("1")){
                 bMessageEntity.setContent("校友认证审核成功");
             }else{

@@ -43,8 +43,8 @@ public class BWechatUsersAttentionAsyncServiceImpl implements BWechatUsersAttent
         bMessageEntity.setType(3);
         bMessageEntity.setCreateTime(new Date());
         bMessageEntity.setUpdateTime(new Date());
-        bMessageEntity.setRecoreId(bMemberAttentionEntity.getId());
-        bMessageEntity.setUserid(bMemberAttentionEntity.getMemberId());
+        bMessageEntity.setRecoreId(bMemberAttentionEntity.getUserId());
+        bMessageEntity.setUserId(bMemberAttentionEntity.getMemberId());
         bMessageEntity.setContent("有人关注了我");
         bMessageRepository.save(bMessageEntity);
 
@@ -103,8 +103,8 @@ public class BWechatUsersAttentionAsyncServiceImpl implements BWechatUsersAttent
         bMessageEntity.setType(3);
         bMessageEntity.setCreateTime(new Date());
         bMessageEntity.setUpdateTime(new Date());
-        bMessageEntity.setRecoreId(bMemberAttentionEntity.getId());
-        bMessageEntity.setUserid(bMemberAttentionEntity.getMemberId());
+        bMessageEntity.setRecoreId(bMemberAttentionEntity.getUserId());
+        bMessageEntity.setUserId(bMemberAttentionEntity.getMemberId());
         bMessageEntity.setContent("取消关注");
         bMessageRepository.save(bMessageEntity);
 

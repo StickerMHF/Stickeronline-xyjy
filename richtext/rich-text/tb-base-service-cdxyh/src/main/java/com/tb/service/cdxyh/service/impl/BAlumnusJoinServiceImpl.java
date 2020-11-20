@@ -137,7 +137,7 @@ public class BAlumnusJoinServiceImpl implements BAlumnusJoinService, BaseAsyncSe
             bMessageEntity.setCreateTime(new Date());
             bMessageEntity.setUpdateTime(new Date());
             bMessageEntity.setRecoreId(result.getId());
-            bMessageEntity.setUserid(result.getUserId());
+            bMessageEntity.setUserId(result.getUserId());
             if(result.getCheckState().equals(2)){
                 bMessageEntity.setContent("申请会长（副会长）通过");
             }else{

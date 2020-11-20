@@ -42,8 +42,8 @@ public class BMessageEntity extends BaseEntity {
     /**
      * 用户ID
      */
-    @Column(name = "userid")
-    private String userid;
+    @Column(name = "user_id")
+    private String userId;
     /**
      * 消息类型 1:校友认证;2:申请会长;3:关注消息;
      */
@@ -82,12 +82,12 @@ public class BMessageEntity extends BaseEntity {
         this.id = id;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public Integer getType() {

@@ -18,7 +18,7 @@ import io.vertx.ext.web.RoutingContext;
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_OK;
 
-@RouteHandler("stickeronline/member")
+@RouteHandler("stickeronline/message")
 @Api(tags = "消息")
 public class BMessageHandler {
     private BMessageAsyncService bMessageAsyncService =
@@ -73,6 +73,24 @@ public class BMessageHandler {
     public Handler<RoutingContext> queryById() {
         return ctx -> {
             bMessageAsyncService.queryById(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
+    @RouteMapping(value = "/queryByUserId", method = RouteMethod.GET, order = 1)
+    @ApiOperation(value = "根据userID查询")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "ID", dataType = "String", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> queryByUserId() {
+        return ctx -> {
+            bMessageAsyncService.queryByUserId(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
                 if (res.succeeded()) {
                     HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
                             ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));

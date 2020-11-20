@@ -2,7 +2,7 @@
 	<view>
 		<cu-custom bgColor="bg-gradual-green1" :isBack="true">
 			<block slot="backText">返回</block>
-			<block slot="content">{{title}}</block>
+			<block slot="content">基本信息</block>
 		</cu-custom>
 		<bjx-form labelType="inline" labelWidth="150" :form="form" ref="form">
 			<view class="cu-bar bg-white solid-bottom">
@@ -101,7 +101,7 @@
 			</view>
 
 			<!-- 曾经在校 -->
-			<view v-if="type=='1'" class="cu-form-group">
+			<view v-if="form.type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="离校时间" label-right="right" prop='endDate'>
 					<picker mode="date" :value="form.endDate" start="1970-09-01" end="2030-09-01" @change="endDateChange">
 						<view class="picker">
@@ -110,18 +110,18 @@
 					</picker>
 				</bjx-form-item>
 			</view>
-			<view v-if="type=='1'" class="cu-bar bg-white solid-bottom margin-top">
+			<view v-if="form.type=='1'" class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action">
 					<text class="cuIcon-titles text-green1"></text> 工作信息
 				</view>
 			</view>
-			<view v-if="type=='1'" class="cu-form-group">
+			<view v-if="form.type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="工作单位" label-right="left" prop='company'>
 					<input v-model="form.company" @blur="formValidator('company')" class="input" name="input" placeholder="请输入单位名称" />
 				</bjx-form-item>
 			</view>
 
-			<view v-if="type=='1'" class="cu-form-group">
+			<view v-if="form.type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="职位/职称" label-right="left" prop='jobTitle'>
 					<input v-model="form.jobTitle" @blur="formValidator('jobTitle')" class="input" name="input" placeholder="请输入职务/职称" />
 				</bjx-form-item>
@@ -233,27 +233,27 @@
 					college: {
 						required: true,
 						minlength: 2,
-						maxlength: 10
+						maxlength: 30
 					},
 					education: {
 						required: true,
 						minlength: 2,
-						maxlength: 10
+						maxlength: 30
 					},
 					startDate: {
 						required: true,
 						minlength: 2,
-						maxlength: 10
+						maxlength: 30
 					},
 					endDate: {
 						required: true,
 						minlength: 2,
-						maxlength: 10
+						maxlength: 30
 					},
 					classGrade: {
 						required: true,
 						minlength: 3,
-						maxlength: 10
+						maxlength: 30
 					},
 					studentNumber: {
 						required: true,
@@ -264,12 +264,12 @@
 					company: {
 						required: true,
 						minlength: 3,
-						maxlength: 20
+						maxlength: 120
 					},
 					jobTitle: {
 						required: true,
 						minlength: 3,
-						maxlength: 20
+						maxlength: 50
 					},
 					phone: {
 						required: true,
@@ -308,13 +308,13 @@
 					classGrade: {
 						required: true,
 						minlength: 3,
-						maxlength: 10
+						maxlength: 20
 					},
 					studentNumber: {
 						required: true,
 						digits: true,
 						minlength: 6,
-						maxlength: 20
+						maxlength: 30
 					},
 					phone: {
 						required: true,
@@ -369,7 +369,7 @@
 					name: {
 						required: '请输入姓名',
 						minlength: '请输入真实姓名',
-						maxlength: '请输入真实姓名'
+						maxlength: '姓名长度超出范围'
 					},
 					identityCard: {
 						required: '请输入身份证号码',
@@ -390,23 +390,23 @@
 					classGrade: {
 						required: '请输入班级',
 						minlength: '请正确填写班级',
-						maxlength: '请正确填写班级'
+						maxlength: '班级长度超出范围'
 					},
 					studentNumber: {
 						required: '请输入学号',
 						digits: '请输入有效学号',
 						minlength: '请输入有效学号',
-						maxlength: '请输入有效学号'
+						maxlength: '学号长度超出范围'
 					},
 					company: {
 						required: '请输入工作单位',
 						minlength: '请输入工作单位全称',
-						maxlength: '请输入工作单位全称'
+						maxlength: '工作单位长度超出范围'
 					},
 					jobTitle: {
 						required: '请输入职务',
 						minlength: '请输入职务全称',
-						maxlength: '请输入职务全称'
+						maxlength: '职务长度超出范围'
 					},
 					phone: {
 						required: '请输入手机号码',
@@ -420,14 +420,14 @@
 						required: '请输入QQ号码',
 						number: '请正确填写QQ号码',
 						minlength: '请正确填写QQ号码',
-						maxlength: '请正确填写QQ号码'
+						maxlength: 'QQ长度超出范围'
 					}
 				},
 				messages2: {
 					name: {
 						required: '请输入姓名',
 						minlength: '请输入真实姓名',
-						maxlength: '请输入真实姓名'
+						maxlength: '姓名长度超出范围'
 					},
 					identityCard: {
 						required: '请输入身份证号码',
@@ -445,13 +445,13 @@
 					classGrade: {
 						required: '请输入班级',
 						minlength: '请正确填写班级',
-						maxlength: '请正确填写班级'
+						maxlength: '班级长度超出范围'
 					},
 					studentNumber: {
 						required: '请输入学号',
 						digits: '请输入有效学号',
 						minlength: '请输入有效学号',
-						maxlength: '请输入有效学号'
+						maxlength: '学号长度超出范围'
 					},					
 					phone: {
 						required: '请输入手机号码',
@@ -465,14 +465,14 @@
 						required: '请输入QQ号码',
 						number: '请正确填写QQ号码',
 						minlength: '请正确填写QQ号码',
-						maxlength: '请正确填写QQ号码'
+						maxlength: 'QQ长度超出范围'
 					}
 				},
 				messages3: {
 					name: {
 						required: '请输入姓名',
 						minlength: '请输入真实姓名',
-						maxlength: '请输入真实姓名'
+						maxlength: '姓名长度超出范围'
 					},
 					identityCard: {
 						required: '请输入身份证号码',
@@ -499,7 +499,7 @@
 						required: '请输入QQ号码',
 						number: '请正确填写QQ号码',
 						minlength: '请正确填写QQ号码',
-						maxlength: '请正确填写QQ号码'
+						maxlength: 'QQ长度超出范围'
 					}
 				}
 			}
@@ -508,6 +508,7 @@
 			// 初始化页面数据
 			this.title = options.title;
 			this.type = options.type;
+			this.form.type = options.type;
 			this.isEdit = options.isEdit;
 			if (!this.type) {}
 			if (this.isEdit || this.isEdit == "true") {
@@ -640,12 +641,12 @@
 				let userInfo = uni.getStorageSync('userInfo');
 				let params = Object.assign(userInfo, formData);
 				let openid = uni.getStorageSync('openid');
-				if (openid && openid != "") {
+				if (openid && openid != "") {debugger
 					params.openid = openid;
 					params.type = that.type;
 					params.updateTime = that.formatTime(params.updateTime);
 					params.createTime = that.formatTime(params.createTime);
-					if (!this.isEdit) {
+					if (!this.isEdit) {debugger
 						this.addWechatUser(params);
 					} else {
 						this.updateWechatUser(params);
