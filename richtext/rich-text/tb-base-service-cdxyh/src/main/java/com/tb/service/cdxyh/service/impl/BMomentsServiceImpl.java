@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -217,13 +218,15 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
         //创建实例
         bMomentsEntity.setStatus(1);
         Example<BMomentsEntity> ex = Example.of(bMomentsEntity,matcher);
+        Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+        List<BMomentsEntity> plist = bMomentsRepository.queryUserId(userId,pageable.getPageSize(),offset);
+        JsonObject resObj = new JsonObject();
+        JsonArray contents=new JsonArray();
 
-        Page<BMomentsEntity> plist = bMomentsRepository.findAll(ex,pageable);
-        JsonObject resObj = new JsonObject(Json.encode(plist));
-        JsonArray contents = resObj.getJsonArray("content");
-        for (int i = 0; i < contents.size(); i++) {
-            JsonObject content = contents.getJsonObject(i);
+        for (int i = 0; i < plist.size(); i++) {
+            JsonObject content = plist.get(i).toJson();
             String commentId = content.getString("id");
+            content.put("createTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(plist.get(i).getCreateTime()));
             //统计浏览量
             Integer viewCount = content.getInteger("viewCount");
             if (viewCount != null){
@@ -233,11 +236,61 @@ public class BMomentsServiceImpl implements BMomentsService, BaseAsyncService {
             }
             List<BMomentsLikeEntity> likeList = bMomentsLikeRepository.findAllByUserIdAndMomentId(params.getString("userId"),commentId);
             if(likeList.size()>0){
-                resObj.getJsonArray("content").getJsonObject(i).put("islike", likeList.get(0).getStatus());
+                content.put("islike", likeList.get(0).getStatus());
             }else {
-                resObj.getJsonArray("content").getJsonObject(i).put("islike", "unlike");
+                content.put("islike", "unlike");
             }
+            contents.add(content);
         }
+        resObj.put("content",contents);
+        future.complete(resObj);
+        handler.handle(future);
+    }
+
+    @Override
+    public void queryByAlumnusId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
+        BMomentsEntity bMomentsEntity = new BMomentsEntity(params);
+        String likeCount = params.getString("order");
+        String alumnusId = params.getString("alumnusId");
+        Sort sort;
+        if (likeCount != null&&!likeCount.isEmpty()){
+            sort =new Sort(Sort.Direction.DESC, likeCount);
+        } else {
+            sort = new Sort(Sort.Direction.DESC, "createTime");
+        }
+        Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
+        ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
+        matcher.withMatcher("status", ExampleMatcher.GenericPropertyMatchers.contains());
+        //创建实例
+        bMomentsEntity.setStatus(1);
+        Example<BMomentsEntity> ex = Example.of(bMomentsEntity,matcher);
+        Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+        List<BMomentsEntity> plist = bMomentsRepository.queryByAlumnusId(alumnusId,pageable.getPageSize(),offset);
+        JsonObject resObj = new JsonObject();
+        JsonArray contents=new JsonArray();
+
+        for (int i = 0; i < plist.size(); i++) {
+            JsonObject content = plist.get(i).toJson();
+            String commentId = content.getString("id");
+            content.put("createTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(plist.get(i).getCreateTime()));
+            //统计浏览量
+            Integer viewCount = content.getInteger("viewCount");
+            if (viewCount != null){
+                content.put("viewCount",viewCount+1);
+            } else {
+                content.put("viewCount",1);
+            }
+            List<BMomentsLikeEntity> likeList = bMomentsLikeRepository.findAllByUserIdAndMomentId(params.getString("userId"),commentId);
+            if(likeList.size()>0){
+                content.put("islike", likeList.get(0).getStatus());
+            }else {
+                content.put("islike", "unlike");
+            }
+            contents.add(content);
+        }
+        resObj.put("content",contents);
         future.complete(resObj);
         handler.handle(future);
     }

@@ -1,5 +1,5 @@
-// const baseurl = 'https://www.imapway.cn/alumniapi'
-const baseurl = 'http://192.168.0.222:8084'
+const baseurl = 'https://www.imapway.cn/alumniapi'
+// const baseurl = 'http://192.168.0.222:8084'
 const api = {
 	test: baseurl + '/stickeronline/rich/text/list',
 	getUserOpenid: baseurl + '/tb/wechat/getAppletUserInfo',
@@ -134,6 +134,11 @@ const api = {
 	 */
 	//获取发现列表
 	getDiscoverList: baseurl + '/stickeronline/moments/list',
+	//获取关注人的朋友圈
+	getDiscoverListByUserId: baseurl + '/stickeronline/moments/queryByUserId',
+	//根据校友会ID获取朋友圈
+	getDiscoverListByAlumnusId: baseurl + '/stickeronline/moments/queryByAlumnusId',
+	
 	//发布消息
 	publishMoment: baseurl + '/stickeronline/moments/add',
 	//点赞操作

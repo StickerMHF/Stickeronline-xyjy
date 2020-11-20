@@ -70,7 +70,7 @@
 <script>
 import ygcComment from "@/components/ygc-comment/ygc-comment.vue";
 import moments from "@/components/moments/moments.vue";
-import { getDiscoverList, momentLike, momentComment } from "@/api/discover.js";
+import { getDiscoverList, getDiscoverListByUserId,momentLike, momentComment } from "@/api/discover.js";
 import { dateUtil } from "@/utils/dateUtil.js";
 import comment from "@/components/comment/comment.vue";
 var _self = "";
@@ -343,14 +343,27 @@ export default {
     },
     //获取朋友圈列表
     getDiscoverList() {
-      getDiscoverList(this.params).then(data => {
-        uni.stopPullDownRefresh();
-        let [error, res] = data;
-        if (res && res.data && res.data.result) {
-          let content = res.data.result.content;
-          this.momentsList = this.transformData(content);
-        }
-      });
+		if(this.currentSelect == "1"){//推荐
+			getDiscoverList(this.params).then(data => {
+			  uni.stopPullDownRefresh();
+			  let [error, res] = data;
+			  if (res && res.data && res.data.result) {
+			    let content = res.data.result.content;
+			    this.momentsList = this.transformData(content);
+			  }
+			});
+		}else{
+			this.params.userId=uni.getStorageSync("openid");
+			getDiscoverListByUserId(this.params).then(data => {
+			  uni.stopPullDownRefresh();
+			  let [error, res] = data;
+			  if (res && res.data && res.data.result) {
+			    let content = res.data.result.content;
+			    this.momentsList = this.transformData(content);
+			  }
+			});
+		}
+      
     },
     transformData(list) {
       list = list.map(item => {

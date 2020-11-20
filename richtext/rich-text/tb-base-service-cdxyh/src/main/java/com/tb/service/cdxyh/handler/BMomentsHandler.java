@@ -90,7 +90,27 @@ public class BMomentsHandler {
             });
         };
     }
-
+    @RouteMapping(value = "/queryByAlumnusId", method = RouteMethod.GET, order = 1)
+    @ApiOperation(value = "根据校友会ID获取朋友圈列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "order", value = "排序", dataType = "String", paramType = "query", required = true),
+            @ApiImplicitParam(name = "userId", value = "用户ID", dataType = "String", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> queryByAlumnusId() {
+        return ctx -> {
+            bMomentsService.queryByAlumnusId(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
     @RouteMapping(value = "queryById", method = RouteMethod.GET, order = 1)
     @ApiOperation(value = "查询成员详情")
     @ApiImplicitParams({

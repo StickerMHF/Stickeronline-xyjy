@@ -65,10 +65,16 @@ public interface BMomentsService {
     void likeClick(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
     /**
-     * 获取关注的成员列表
+     * 获取关注的成员朋友圈
      * @param params
      * @param handler
      */
     void queryByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    /**
+     * 根据校友会ID获取朋友圈
+     * @param params
+     * @param handler
+     */
+    void queryByAlumnusId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
 }

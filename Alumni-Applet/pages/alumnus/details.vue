@@ -101,6 +101,8 @@ import {
   queryPresidentByUserId,
   applyByUserId
 } from "@/api/alumnus.js";
+import { getDiscoverListByAlumnusId } from "@/api/discover.js";
+
 export default {
   components: {
     listMessage,
@@ -338,7 +340,7 @@ export default {
       });
     },
     getAlumnusPhotoList() {
-      getAlumnusPhotoList(this.params).then(data => {
+      getDiscoverListByAlumnusId(this.params).then(data => {
         let [error, res] = data;
         if (res && res.data && res.data.result) {
           let list = res.data.result.content;
@@ -394,22 +396,20 @@ export default {
       list = list.map(item => {
         var res = {
           id: item.id,
-          username: item.author,
+          username: item.userName,
           publishDate: dateUtil.formatDate(item.createTime),
-          photo: item.photo,
-          content: item.context,
+          photo: item.userPhoto,
+          content: item.content,
           viewCount: item.viewCount,
           likeCount: item.likeCount,
           commentCount: item.commentCount,
           commentList: this.listToTree(item.commentList),
         };
-        if (item.imgs) {
-          let imgArray = item.imgs.split(";");
+        if (item.photos) {
+          let imgArray = JSON.parse(item.photos);
           res.images = imgArray.map(item => {
-            if (item != "") {
-              return {
-                url: item,
-              };
+            if (item&&item != "") {
+              return item;
             }
           });
         }
