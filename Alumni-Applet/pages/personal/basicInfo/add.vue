@@ -224,37 +224,52 @@
 					name: {
 						required: true,
 						minlength: 2,
-						
+						maxlength: 10
 					},
 					identityCard: {
 						required: true,
 						idcard: true
 					},
 					college: {
-						required: true
+						required: true,
+						minlength: 2,
+						maxlength: 10
 					},
 					education: {
-						required: true
+						required: true,
+						minlength: 2,
+						maxlength: 10
 					},
 					startDate: {
-						required: true
+						required: true,
+						minlength: 2,
+						maxlength: 10
 					},
 					endDate: {
-						required: true
+						required: true,
+						minlength: 2,
+						maxlength: 10
 					},
 					classGrade: {
 						required: true,
-						minlength: 3
+						minlength: 3,
+						maxlength: 10
 					},
 					studentNumber: {
 						required: true,
-						digits: true
+						digits: true,
+						minlength: 3,
+						maxlength: 20
 					},
 					company: {
-						required: true
+						required: true,
+						minlength: 3,
+						maxlength: 20
 					},
 					jobTitle: {
-						required: true
+						required: true,
+						minlength: 3,
+						maxlength: 20
 					},
 					phone: {
 						required: true,
@@ -262,39 +277,52 @@
 					},
 					email: {
 						required: false,
-						email: true
+						email: true,
+						minlength: 6,
+						maxlength: 20
 					},
 					qq: {
 						required: false,
-						number: true
+						number: true,
+						minlength: 6,
+						maxlength: 20
 					}					
 				},
 				rules2: {
 					name: {
 						required: true,
 						minlength: 2,
-						
+						maxlength: 10
 					},
 					identityCard: {
 						required: true,
 						idcard: true
 					},
 					college: {
-						required: true
+						required: true,
+						minlength: 2,
+						maxlength: 10
 					},
 					education: {
-						required: true
+						required: true,
+						minlength: 2,
+						maxlength: 10
 					},
 					startDate: {
-						required: true
+						required: true,
+						minlength: 2,
+						maxlength: 10
 					},
 					classGrade: {
 						required: true,
-						minlength: 3
+						minlength: 3,
+						maxlength: 10
 					},
 					studentNumber: {
 						required: true,
-						digits: true
+						digits: true,
+						minlength: 6,
+						maxlength: 20
 					},
 					phone: {
 						required: true,
@@ -302,31 +330,41 @@
 					},
 					email: {
 						required: false,
-						email: true
+						email: true,
+						minlength: 6,
+						maxlength: 20
 					},
 					qq: {
 						required: false,
-						number: true
+						number: true,
+						minlength: 6,
+						maxlength: 20
 					}					
 				},
 				rules3: {
 					name: {
 						required: true,
 						minlength: 2,
-						
+						maxlength: 10
 					},
 					identityCard: {
 						required: true,
 						idcard: true
 					},
 					college: {
-						required: true
+						required: true,
+						minlength: 2,
+						maxlength: 10
 					},
 					education: {
-						required: true
+						required: true,
+						minlength: 2,
+						maxlength: 10
 					},
 					startDate: {
-						required: true
+						required: true,
+						minlength: 2,
+						maxlength: 10
 					},					
 					phone: {
 						required: true,
@@ -334,11 +372,15 @@
 					},
 					email: {
 						required: false,
-						email: true
+						email: true,
+						minlength: 6,
+						maxlength: 20
 					},
 					qq: {
 						required: false,
-						number: true
+						number: true,
+						minlength: 6,
+						maxlength: 20
 					}					
 				},
 				messages1: {
