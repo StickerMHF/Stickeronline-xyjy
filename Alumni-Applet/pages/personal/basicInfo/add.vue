@@ -220,7 +220,7 @@
 				sex: ['男', '女'],
 				eduPicker: ['大专', '本科', '硕士', '博士'],
 				profession: ['勘查技术与工程', '地球物理学', '测绘工程', '地理信息科学', '遥感科学与技术', '安全工程', '地质工程'],
-				rules: {
+				rules1: {
 					name: {
 						required: true,
 						minlength: 2,
@@ -269,7 +269,79 @@
 						number: true
 					}					
 				},
-				messages: {
+				rules2: {
+					name: {
+						required: true,
+						minlength: 2,
+						
+					},
+					identityCard: {
+						required: true,
+						idcard: true
+					},
+					college: {
+						required: true
+					},
+					education: {
+						required: true
+					},
+					startDate: {
+						required: true
+					},
+					classGrade: {
+						required: true,
+						minlength: 3
+					},
+					studentNumber: {
+						required: true,
+						digits: true
+					},
+					phone: {
+						required: true,
+						tel: true
+					},
+					email: {
+						required: false,
+						email: true
+					},
+					qq: {
+						required: false,
+						number: true
+					}					
+				},
+				rules3: {
+					name: {
+						required: true,
+						minlength: 2,
+						
+					},
+					identityCard: {
+						required: true,
+						idcard: true
+					},
+					college: {
+						required: true
+					},
+					education: {
+						required: true
+					},
+					startDate: {
+						required: true
+					},					
+					phone: {
+						required: true,
+						tel: true
+					},
+					email: {
+						required: false,
+						email: true
+					},
+					qq: {
+						required: false,
+						number: true
+					}					
+				},
+				messages1: {
 					name: {
 						required: '请输入姓名',
 						minlength: '请输入真实姓名'
@@ -316,6 +388,76 @@
 						required: '请输入QQ号码',
 						number: '请正确填写QQ号码'
 					}
+				},
+				messages2: {
+					name: {
+						required: '请输入姓名',
+						minlength: '请输入真实姓名'
+					},
+					identityCard: {
+						required: '请输入身份证号码',
+						idcard: '请正确填写身份证号码'
+					},
+					college: {
+						required: '请选择学院'
+					},
+					education: {
+						required: '请选择学历'
+					},
+					startDate: {
+						required: '请选择时间'
+					},
+					classGrade: {
+						required: '请输入班级',
+						minlength: '请正确填写班级'
+					},
+					studentNumber: {
+						required: '请输入学号',
+						digits: '请输入有效学号'
+					},					
+					phone: {
+						required: '请输入手机号码',
+						tel: '请正确填写手机号码'
+					},
+					email: {
+						required: '请输入邮箱地址',
+						email: '请正确填写邮箱地址'
+					},
+					qq: {
+						required: '请输入QQ号码',
+						number: '请正确填写QQ号码'
+					}
+				},
+				messages3: {
+					name: {
+						required: '请输入姓名',
+						minlength: '请输入真实姓名'
+					},
+					identityCard: {
+						required: '请输入身份证号码',
+						idcard: '请正确填写身份证号码'
+					},
+					college: {
+						required: '请选择学院'
+					},
+					education: {
+						required: '请选择学历'
+					},
+					startDate: {
+						required: '请选择时间'
+					},
+					phone: {
+						required: '请输入手机号码',
+						tel: '请正确填写手机号码'
+					},
+					email: {
+						required: '请输入邮箱地址',
+						email: '请正确填写邮箱地址'
+					},
+					qq: {
+						required: '请输入QQ号码',
+						number: '请正确填写QQ号码'
+					}
 				}
 			}
 		},
@@ -332,11 +474,20 @@
 			this.initValidate()
 		},
 		methods: {
-
 			//验证函数
 			initValidate() {
-				const rules = this.rules;
-				const messages = this.messages;
+				let rules = this.rules1;
+				let messages = this.messages1;
+				if(this.type == '1'){
+					messages = this.messages1;
+					rules = this.rules1;
+				} else if(this.type == '2'){
+					messages = this.messages2;
+					rules = this.rules2;
+				} else {
+					messages = this.messages3;
+					rules = this.rules3;
+				}
 				this.WxValidate = new WxValidate(rules, messages)
 			},
 			formValidator (param){
