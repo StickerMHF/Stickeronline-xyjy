@@ -81,11 +81,16 @@ export default {
         },
       ],
       listCur: "",
+      userId: "",
     };
   },
-  onLoad() {
+  onLoad(options) {
+    if (options.userId) {
+      this.userId = options.userId;
+    } else {
+      this.userId = uni.getStorageSync("openid");
+    }
     this.getMemberList(true);
-    // this.list = list;
   },
   onReady() {
     let that = this;
@@ -105,7 +110,7 @@ export default {
     getMemberList(reload) {
       let that = this;
       this.status = "loading";
-      let openid = uni.getStorageSync("openid");
+      let openid = this.userId;
       if (openid && openid != "") {
         let param = {
           userId: openid,
