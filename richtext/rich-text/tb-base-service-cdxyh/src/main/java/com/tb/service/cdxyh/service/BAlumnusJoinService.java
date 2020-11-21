@@ -70,4 +70,13 @@ public interface BAlumnusJoinService {
      * @param handler
      */
     void applyByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+
+    /**
+     * 申请会长
+     *
+     * @param params
+     * @param handler
+     */
+    void queryApplyListByuserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+
 }

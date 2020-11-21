@@ -144,4 +144,25 @@ public class BAlumnusJoinHandler {
             });
         };
     }
+    @RouteMapping(value = "/queryApplyListByuserId", method = RouteMethod.GET, order = 1)
+    @ApiOperation(value = "查询列表")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "pageNo", value = "当前页", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "pageSize", value = "页长", dataType = "Integer", paramType = "query", required = true),
+            @ApiImplicitParam(name = "type", value = "组织类型", dataType = "String", paramType = "query", required = true)
+    })
+    public Handler<RoutingContext> queryApplyListByuserId() {
+        return ctx -> {
+            bAlumnusJoinService.queryApplyListByuserId(CommonUtil.createCondition(ctx.request(), ctx.getBody()), res -> {
+                if (res.succeeded()) {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_OK,
+                            ReplyObj.build().setSuccess(true).setResult(res.result()).setMsg("succeed"));
+                } else {
+                    HttpUtil.fireJsonResponse(ctx.response(), HTTP_BAD_REQUEST,
+                            ReplyObj.build().setSuccess(false).setMsg(res.cause().getMessage()));
+                }
+            });
+        };
+    }
+
 }

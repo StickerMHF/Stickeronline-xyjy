@@ -313,7 +313,7 @@
 					studentNumber: {
 						required: true,
 						digits: true,
-						minlength: 6,
+						minlength: 2,
 						maxlength: 30
 					},
 					phone: {

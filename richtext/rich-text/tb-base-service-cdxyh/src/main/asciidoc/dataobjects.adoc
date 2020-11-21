@@ -83,6 +83,7 @@
 [frame="topbot"]
 |===
 ^|Name | Type ^| Description
+|[[alumnus]]`@alumnus`|`link:dataobjects.html#BAlumnusEntity[BAlumnusEntity]`|-
 |[[alumnusId]]`@alumnusId`|`String`|-
 |[[checkState]]`@checkState`|`Number (Integer)`|-
 |[[createBy]]`@createBy`|`String`|-
@@ -166,6 +167,23 @@
 |[[name]]`@name`|`String`|-
 |[[period]]`@period`|`String`|-
 |[[updateBy]]`@updateBy`|`String`|-
+|===
+
+[[BCollectEntity]]
+== BCollectEntity
+
+
+[cols=">25%,25%,50%"]
+[frame="topbot"]
+|===
+^|Name | Type ^| Description
+|[[createBy]]`@createBy`|`String`|-
+|[[id]]`@id`|`String`|-
+|[[recordId]]`@recordId`|`String`|-
+|[[recordTitle]]`@recordTitle`|`String`|-
+|[[type]]`@type`|`Number (Integer)`|-
+|[[updateBy]]`@updateBy`|`String`|-
+|[[userId]]`@userId`|`String`|-
 |===
 
 [[BCooperationEntity]]

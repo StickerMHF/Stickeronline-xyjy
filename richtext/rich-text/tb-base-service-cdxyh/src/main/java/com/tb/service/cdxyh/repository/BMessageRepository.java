@@ -12,6 +12,7 @@ import java.util.List;
 public interface BMessageRepository extends JpaRepository<BMessageEntity, String> {
     @Query(value = "SELECT * FROM b_message where user_id =?1 order by create_time desc limit ?2 offset ?3", nativeQuery = true)
     List<BMessageEntity> queryUserId(String userId, Integer pageSize, Integer offset);
-
+    @Query(value = "SELECT count(*) FROM b_message where user_id =?1 ", nativeQuery = true)
+    Integer countUserId(String userId);
 
 }

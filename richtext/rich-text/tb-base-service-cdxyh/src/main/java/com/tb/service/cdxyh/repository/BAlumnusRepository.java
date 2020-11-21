@@ -16,6 +16,10 @@ public interface BAlumnusRepository extends JpaRepository<BAlumnusEntity, String
     @Query(value="select a.id, a.thumb, a.name from b_alumnus a, b_alumnus_join b where a.id = b.alumnus_id and b.user_id=?1 limit ?2 offset ?3", nativeQuery = true)
     List<Map<String, Object>> queryByuserId(String userId,Integer pageSize,Integer offset);
 
+    //查询组织申请列表
+    @Query(value="select a.id, a.thumb, a.name from b_alumnus a, b_alumnus_join b where a.id = b.alumnus_id and b.user_id=?1 limit ?2 offset ?3", nativeQuery = true)
+    List<Map<String, Object>> queryApplyListByuserId(String userId,Integer pageSize,Integer offset);
+
     @Query(value="select count(*) as num from (select count(*) from b_photo group by user_id) a", nativeQuery = true)
     Integer countByuserId();
 }

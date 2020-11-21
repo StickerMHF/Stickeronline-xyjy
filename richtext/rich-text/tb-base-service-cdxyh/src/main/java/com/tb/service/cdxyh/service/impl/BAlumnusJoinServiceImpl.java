@@ -17,13 +17,18 @@ import io.vertx.core.Handler;
 import io.vertx.core.json.Json;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Component
 @AsyncServiceHandler
@@ -200,4 +205,54 @@ if(list.size()>0){
 
         handler.handle(future);
     }
+
+//    @Override
+//    public void queryApplyListByuserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+//        Future<JsonObject> future = Future.future();
+//        BAlumnusJoinEntity bAlumnusJoinEntity = new BAlumnusJoinEntity(params);
+//        String userId = bAlumnusJoinEntity.getUserId();
+//
+//        PageVo pageVo = new PageVo(params);
+//        Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+//
+//        List<BAlumnusJoinEntity> list = bAlumnusJoinRepository.findByUserIdAndCheckStateNot(userId,0);
+//
+//        JsonObject result=new JsonObject();
+//        result.put("content",new JsonArray(Json.encode(list)));
+////        result.put("total",count);
+//        future.complete(result);
+//        handler.handle(future);
+//    }
+    @Override
+    public void queryApplyListByuserId( JsonObject params,  Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        BAlumnusJoinEntity bAlumnusJoinEntity = new BAlumnusJoinEntity(params);
+
+        PageVo pageVo = new PageVo(params);
+        Sort sort = new Sort(Sort.Direction.DESC, "createTime");
+        Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
+        bAlumnusJoinEntity.setCheckState(0);
+        Page<BAlumnusJoinEntity> page = bAlumnusJoinRepository.findAll(new Specification<BAlumnusJoinEntity>() {
+            @Override
+            public Predicate toPredicate(Root<BAlumnusJoinEntity> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+                List<Predicate> list = new ArrayList<Predicate>();
+                if (StringUtils.isNotBlank(bAlumnusJoinEntity.getUserId())){
+                    //相当于 like
+                    list.add(criteriaBuilder.equal(root.get("userId").as(String.class),bAlumnusJoinEntity.getUserId()));
+                }
+                if (bAlumnusJoinEntity.getCheckState()!=null){
+                    //相当于 like
+                    list.add(criteriaBuilder.notEqual(root.get("checkState").as(Integer.class),bAlumnusJoinEntity.getCheckState()));
+                }
+                //重点
+                Predicate[] p = new Predicate[list.size()];
+                return criteriaBuilder.and(list.toArray(p));
+            }
+        }, pageable);
+        JsonObject res=new JsonObject(Json.encode(page));
+        future.complete(res);
+        handler.handle(future);
+    }
+
+
 }

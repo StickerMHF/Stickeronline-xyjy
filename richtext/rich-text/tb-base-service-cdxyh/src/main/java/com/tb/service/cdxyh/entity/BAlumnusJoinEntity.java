@@ -40,7 +40,12 @@ public class BAlumnusJoinEntity extends BaseEntity {
      */
     @Column(name = "alumnus_id")
     private String alumnusId;
-
+    /**
+     * 组织
+     */
+    @ManyToOne(cascade={CascadeType.MERGE,CascadeType.REFRESH},optional=false)//可选属性
+    @JoinColumn(name="alumnus_id",insertable = false, updatable = false)//设置在article表中的关联字段(外键)
+    private BAlumnusEntity alumnus;
     /**
      * 用户ID
      */
@@ -139,5 +144,13 @@ public class BAlumnusJoinEntity extends BaseEntity {
 
     public void setPresident(Integer president) {
         this.president = president;
+    }
+
+    public BAlumnusEntity getAlumnus() {
+        return alumnus;
+    }
+
+    public void setAlumnus(BAlumnusEntity alumnus) {
+        this.alumnus = alumnus;
     }
 }

@@ -108,6 +108,7 @@ public class BNewsAsyncServiceImpl implements BNewsAsyncService, BaseAsyncServic
     public void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
         Future<JsonObject> future = Future.future();
         BNewsEntity bNewsEntity = new BNewsEntity(params);
+        String userId=params.getString("userId","");
         Optional<BNewsEntity> res = bNewsRepository.findById(bNewsEntity.getId());
         if (res.isPresent()) {
             BNewsEntity bNewsEntity1=res.get();
@@ -118,7 +119,8 @@ public class BNewsAsyncServiceImpl implements BNewsAsyncService, BaseAsyncServic
             }
 
             bNewsRepository.save(bNewsEntity1);
-            future.complete(new JsonObject(Json.encode(bNewsEntity1)));
+            Integer collect=bNewsRepository.countMyCollectById(bNewsEntity1.getId(),userId);
+            future.complete(new JsonObject(Json.encode(bNewsEntity1)).put("collect",collect));
         }else{
             future.complete(new JsonObject());
         }
