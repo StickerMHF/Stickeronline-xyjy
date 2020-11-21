@@ -48,5 +48,12 @@ public interface BMessageAsyncService {
      * @param handler
      */
     void queryById(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
+    /**
+     * 根据用户ID查询
+     *
+     * @param params
+     * @param handler
+     */
+    void queryByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler);
 
 }

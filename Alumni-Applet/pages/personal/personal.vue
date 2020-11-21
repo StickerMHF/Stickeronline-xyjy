@@ -175,7 +175,6 @@ export default {
 
     navigateTo(value) {
       if (value && value == "xyrz") {
-        debugger;
         //判断认证状态
         let auditStatus = uni.getStorageSync("auditStatus");
         let isCertification = uni.getStorageSync("isCertification");
@@ -184,7 +183,7 @@ export default {
             url: "/pages/personal/basicInfo/basicInfo",
           });
         } else {
-          if (auditStatus) {
+          if (auditStatus && auditStatus != "") {
             uni.navigateTo({
               url: "/pages/personal/basicInfo/basicInfo",
             });

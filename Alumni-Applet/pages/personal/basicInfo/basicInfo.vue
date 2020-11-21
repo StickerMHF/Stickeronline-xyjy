@@ -88,19 +88,19 @@
 				</bjx-form-item>
 			</view>
 			
-			<view v-if="type=='1'" class="cu-bar bg-white solid-bottom margin-top">
+			<view v-if="form.type=='1'" class="cu-bar bg-white solid-bottom margin-top">
 				<view class="action">
 					<text class="cuIcon-titles text-green1"></text> 工作信息
 				</view>
 			</view>
-			<view v-if="type=='1'" class="cu-form-group">
+			<view v-if="form.type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="工作单位" label-right="right" prop='company'>
 					<input v-model="form.company" disabled class="input" name="input"/>
 				</bjx-form-item>
 			</view>
-			<view v-if="type=='1'" class="cu-form-group">
+			<view v-if="form.type=='1'" class="cu-form-group">
 				<bjx-form-item class="basicinfo_item" label="职位/职称" label-right="right" prop='jobTitle'>
-					<input v-model="form.profession" disabled class="jobTitle" name="input"/>
+					<input v-model="form.jobTitle" disabled class="jobTitle" name="input"/>
 				</bjx-form-item>
 			</view>
 			
@@ -195,9 +195,9 @@
 						openid: openid
 					};
 					getWechatUserById(param).then(data => {
-						var [error, res] = data;
+						var [error, res] = data;debugger
 						if (res && res.data.success) {
-							let ss = res.data.result;
+							let ss = res.data.result;debugger
 							if (ss != null) {
 								that.form=ss;
 							} else {

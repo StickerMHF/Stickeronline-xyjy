@@ -5,6 +5,8 @@ import com.sticker.online.core.model.BaseAsyncService;
 import com.sticker.online.core.utils.TimeUtil;
 import com.tb.base.common.vo.PageVo;
 import com.tb.service.cdxyh.entity.BMessageEntity;
+import com.tb.service.cdxyh.entity.BMomentsEntity;
+import com.tb.service.cdxyh.entity.BMomentsLikeEntity;
 import com.tb.service.cdxyh.repository.BMessageRepository;
 import com.tb.service.cdxyh.service.BMessageAsyncService;
 import com.tb.service.cdxyh.utils.HttpUtil;
@@ -12,12 +14,15 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Future;
 import io.vertx.core.Handler;
 import io.vertx.core.json.Json;
+import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -99,6 +104,33 @@ public class BMessageAsyncServiceImpl implements BMessageAsyncService, BaseAsync
         }else{
             future.complete(new JsonObject());
         }
+        handler.handle(future);
+    }
+    @Override
+    public void queryByUserId(JsonObject params, Handler<AsyncResult<JsonObject>> handler) {
+        Future<JsonObject> future = Future.future();
+        PageVo pageVo = new PageVo(params);
+        BMessageEntity bMessageEntity = new BMessageEntity(params);
+        String likeCount = params.getString("order");
+        String userId = params.getString("userId");
+        Sort sort;
+        if (likeCount != null&&!likeCount.isEmpty()){
+            sort =new Sort(Sort.Direction.DESC, likeCount);
+        } else {
+            sort = new Sort(Sort.Direction.DESC, "createTime");
+        }
+        Pageable pageable = PageRequest.of(pageVo.getPageNo() - 1, pageVo.getPageSize(), sort);
+        ExampleMatcher matcher = ExampleMatcher.matching(); //构建对象
+        matcher.withMatcher("status", ExampleMatcher.GenericPropertyMatchers.contains());
+        //创建实例
+        bMessageEntity.setStatus(1);
+        Example<BMessageEntity> ex = Example.of(bMessageEntity,matcher);
+        Integer offset=(pageVo.getPageNo()-1)*pageVo.getPageSize();
+        List<BMessageEntity> plist = bMessageRepository.queryUserId(userId,pageable.getPageSize(),offset);
+        JsonObject resObj = new JsonObject();
+        JsonArray contents=new JsonArray(Json.encode(plist));
+        resObj.put("content",contents);
+        future.complete(resObj);
         handler.handle(future);
     }
 

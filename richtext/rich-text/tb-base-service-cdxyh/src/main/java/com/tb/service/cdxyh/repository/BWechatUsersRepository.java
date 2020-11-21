@@ -27,7 +27,7 @@ public interface BWechatUsersRepository extends JpaRepository<BWechatUsersEntity
      */
 //    @Query(value = "SELECT b.* FROM b_wechat_users_attention a left JOIN w_wechat_users b ON a.user_id=b.id where a.member_id=?1 limit ?2 offset ?3", nativeQuery = true)
 //    List<BWechatUsersEntity> queryFansListByUserId(String userId, Integer pageSize, Integer offset);
-    @Query(value = "SELECT b.id,b.nick_name,b.avatar_url FROM b_wechat_users_attention a left JOIN w_wechat_users b ON a.user_id=b.id where a.member_id=?1 limit ?2 offset ?3", nativeQuery = true)
+    @Query(value = "SELECT b.* FROM b_wechat_users_attention a right JOIN w_wechat_users b ON a.user_id=b.id where a.member_id=?1 limit ?2 offset ?3", nativeQuery = true)
     List<BWechatUsersEntity> queryFansListByUserId(String userId, Integer pageSize, Integer offset);
 
     /**

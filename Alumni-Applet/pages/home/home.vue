@@ -229,32 +229,16 @@
 					});
 				}
 				if (value && value == "xyrz") {
-					debugger
-					// console.log('校友认证')
-					//判断认证状态
-					let openid = uni.getStorageSync('openid');
-					if (openid && openid != "") {debugger
-						let auditStatus = uni.getStorageSync('auditStatus');
-						let isCertification = uni.getStorageSync("isCertification");
-						if (isCertification && isCertification != "") {
-							uni.navigateTo({
-								url: "/pages/personal/basicInfo/basicInfo",
-							});
-						} else {
-							if(auditStatus){
-								uni.navigateTo({
-									url: "/pages/personal/basicInfo/basicInfo",
-								});
-							}else{
-								uni.navigateTo({
-									url: "/pages/personal/basicInfo/certification",
-								});
-							}
-							
-						}
+					let userInfo = uni.getStorageSync("userInfo");
+					if (userInfo && userInfo != "") {
+						this.userInfo = userInfo;
+						this.navigateToBasicInfo();
 					} else {
-						getApp().getUserInfo();
+						uni.navigateTo({
+							url: "/pages/login/login",
+						});
 					}
+					
 				}
 				// if (value && value == "ysjs") {
 				//   uni.switchTab({
@@ -262,6 +246,33 @@
 				//   });
 				// }
 			},
+			navigateToBasicInfo(){
+				// console.log('校友认证')
+				//判断认证状态
+				let openid = uni.getStorageSync('openid');
+				if (openid && openid != "") {
+					let auditStatus = uni.getStorageSync('auditStatus');
+					let isCertification = uni.getStorageSync("isCertification");
+					if (isCertification && isCertification != "") {
+						uni.navigateTo({
+							url: "/pages/personal/basicInfo/basicInfo",
+						});
+					} else {
+						if(auditStatus&&auditStatus!=""){
+							uni.navigateTo({
+								url: "/pages/personal/basicInfo/basicInfo",
+							});
+						}else{
+							uni.navigateTo({
+								url: "/pages/personal/basicInfo/certification",
+							});
+						}
+						
+					}
+				} else {
+					getApp().getUserInfo();
+				}
+			}
 		},
 	};
 </script>
