@@ -91,7 +91,11 @@ export default {
   onLoad(options) {
     // 初始化页面数据
     this.title = options.title;
-    this.params.userId = uni.getStorageSync("openid");
+    if (options.userId) {
+      this.params.userId = options.userId;
+    } else {
+      this.params.userId = uni.getStorageSync("openid");
+    }
     this.getAlumnusList(this.params);
   },
   methods: {

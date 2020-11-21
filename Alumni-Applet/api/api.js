@@ -4,6 +4,15 @@ const api = {
 	test: baseurl + '/stickeronline/rich/text/list',
 	getUserOpenid: baseurl + '/tb/wechat/getAppletUserInfo',
 	/**
+	 * 收藏相关接口
+	 */
+	addCollect: baseurl + '/stickeronline/collect/add',
+	delteCollect: baseurl + '/stickeronline/collect/deleteByUserIdAndRecordId',
+	getCollect: baseurl + '/stickeronline/collect/queryByUserId',
+
+
+	getApply: baseurl + '/stickeronline/alumnusJoin/queryApplyListByuserId',
+	/**
 	 * 微信用户接口
 	 */
 	getWechatUserList: baseurl + '/stickeronline/wechat/users/list',
@@ -14,9 +23,9 @@ const api = {
 	queryAllByUserId: baseurl + '/stickeronline/wechat/users/queryAllByUserId',
 	queryFansListByUserId: baseurl + '/stickeronline/wechat/users/queryFansListByUserId',
 	queryAttentionListByUserId: baseurl + '/stickeronline/wechat/users/queryAttentionListByUserId',
-	
-	getUserListByInitialGroup: baseurl+'/stickeronline/wechat/users/getUserListByInitialGroup',
-	getUserDetailsByUserId: baseurl+'/stickeronline/wechat/users/getUserDetailsByUserId',
+
+	getUserListByInitialGroup: baseurl + '/stickeronline/wechat/users/getUserListByInitialGroup',
+	getUserDetailsByUserId: baseurl + '/stickeronline/wechat/users/getUserDetailsByUserId',
 	/**
 	 * 关注校友
 	 */
@@ -96,7 +105,7 @@ const api = {
 	getAlumnusActivityList: baseurl + '/stickeronline/alumnusActivity/list',
 	//获取活动详情
 	getAlumnusActivityById: baseurl + '/stickeronline/alumnusActivity/queryById',
-    sendActivity: baseurl + '/stickeronline/alumnusActivity/add',
+	sendActivity: baseurl + '/stickeronline/alumnusActivity/add',
 	sendNotice: baseurl + '/stickeronline/alumnusNews/add',
 	//获取相册列表
 	getAlumnusPhotoList: baseurl + '/stickeronline/alumnusPhoto/list',
@@ -107,21 +116,21 @@ const api = {
 	gitAlumnusMemberList: baseurl + '/stickeronline/wechat/users/queryListByAlumnusId',
 	//获取组织成员信息
 	getAlumnusMemberById: baseurl + '/stickeronline/alumnusMember/queryById',
-	
+
 	// 获取审核页面信息
-	
+
 	//会长
-	getPresidentList:baseurl+'/stickeronline/alumnusJoin/list?checkState=1',
-	getPresidentStatus:baseurl+'/stickeronline/alumnusJoin/checkById',
-	
+	getPresidentList: baseurl + '/stickeronline/alumnusJoin/list?checkState=1',
+	getPresidentStatus: baseurl + '/stickeronline/alumnusJoin/checkById',
+
 	//校友
-	getExamineList:baseurl+'/stickeronline/wechat/users/list?auditStatus=0',
-	getExamineStatus:baseurl+'/stickeronline/wechat/users/checkById',
-	
-	
-	
+	getExamineList: baseurl + '/stickeronline/wechat/users/list?auditStatus=0',
+	getExamineStatus: baseurl + '/stickeronline/wechat/users/checkById',
+
+
+
 	//获取班级列表
-	getClassGrade: baseurl+'/stickeronline/classGrade/list',
+	getClassGrade: baseurl + '/stickeronline/classGrade/list',
 	/**
 	 * 参加活动接口
 	 */
@@ -130,7 +139,7 @@ const api = {
 	addActivityApply: baseurl + '/stickeronline/alumnusActivity/apply/add',
 	updateActivityApply: baseurl + '/stickeronline/alumnusActivity/apply/edit',
 	deleteActivityApply: baseurl + '/stickeronline/alumnusActivity/apply/delete',
-	
+
 	/**
 	 * 发现
 	 */
@@ -140,7 +149,7 @@ const api = {
 	getDiscoverListByUserId: baseurl + '/stickeronline/moments/queryByUserId',
 	//根据校友会ID获取朋友圈
 	getDiscoverListByAlumnusId: baseurl + '/stickeronline/moments/queryByAlumnusId',
-	
+
 	//发布消息
 	publishMoment: baseurl + '/stickeronline/moments/add',
 	//点赞操作
@@ -148,7 +157,9 @@ const api = {
 	//发现评论
 	momentComment: baseurl + '/stickeronline/momentsComment/add',
 
-	uploadFile: baseurl + '/file/upload'
+	uploadFile: baseurl + '/file/upload',
+
+	getMyNews: baseurl + '/stickeronline/message/queryByUserId'
 
 }
 export default api

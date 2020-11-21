@@ -50,14 +50,36 @@
                   >{{ item.name }}<text class="text-abc"></text>
                 </view>
               </view>
-              <view class="margin-tb-sm text-center mem-attention">
+              <view
+                class="margin-tb-sm text-center mem-attention"
+                v-if="userId === openId"
+              >
                 <button
-                  @click="payHandler(item)"
+                  @click="delAttention(item)"
                   class="cu-btn round bg-yellow"
                 >
                   已关注
                 </button>
               </view>
+              <!-- <view
+                class="margin-tb-sm text-center mem-attention"
+                v-if="userId === openId"
+              >
+                <button
+                  @click="delAttention(item)"
+                  v-if="item.attention && item.attention == 1"
+                  class="cu-btn round bg-yellow"
+                >
+                  已关注
+                </button>
+                <button
+                  @click="payHandler(item)"
+                  v-else
+                  class="cu-btn round bg-gradual-green1"
+                >
+                  关注
+                </button>
+              </view> -->
             </view>
           </view>
         </view>
@@ -67,7 +89,11 @@
 </template>
 
 <script>
-import { queryAttentionListByUserId } from "@/api/user.js";
+import {
+  queryAttentionListByUserId,
+  addWechatUserAttention,
+  deleteWechatUserAttention,
+} from "@/api/user.js";
 export default {
   data() {
     return {
@@ -77,30 +103,79 @@ export default {
       hidden: true,
       listCurID: "",
       lists: [
-        {
-          name: "张三",
-          photo:
-            "http://js.chd.edu.cn/_upload/article/images/df/42/4ad7726f43dfb1815313acc22675/740fe51e-61c5-4cfe-a160-9064c54cee06_s.png",
-          attention: 0,
-        },
+        // {
+        //   name: "张三",
+        //   photo:
+        //     "http://js.chd.edu.cn/_upload/article/images/df/42/4ad7726f43dfb1815313acc22675/740fe51e-61c5-4cfe-a160-9064c54cee06_s.png",
+        //   attention: 0,
+        // },
       ],
       listCur: "",
+      userId: "",
+      openId: "",
     };
   },
-  onLoad() {
+  onLoad(options) {
+    if (options.userId) {
+      this.userId = options.userId;
+    } else {
+      this.userId = uni.getStorageSync("openid");
+    }
+    this.openId = uni.getStorageSync("openid");
+
     this.queryAttentionListByUserId(true);
-    // this.list = list;
   },
   onReady() {
     let that = this;
   },
   methods: {
-    payHandler(item) {
-      if (item.attention == 0) {
-        item.attention = 1;
-      } else {
-        item.attention = 0;
-      }
+    // payHandler(item) {
+    //   //获取用户ID
+    //   // let userId = uni.getStorageSync("openid");
+    //   let params = {
+    //     memberId: item.id,
+    //     userId: this.userId,
+    //   };
+    //   addWechatUserAttention(params).then(data => {
+    //     // debugger
+    //     let [error, res] = data;
+    //     if (res && res.data && res.data.success) {
+    //       uni.showToast({
+    //         title: "关注成功",
+    //         duration: 2000,
+    //       });
+    //       item.attention = 1;
+    //     } else {
+    //       uni.showToast({
+    //         title: "服务器忙",
+    //         duration: 2000,
+    //       });
+    //     }
+    //   });
+    // },
+    delAttention(item) {
+      // let userId = uni.getStorageSync("openid");
+      let params = {
+        memberId: item.openid,
+        userId: this.userId,
+      };
+      deleteWechatUserAttention(params).then(data => {
+        // debugger
+        let [error, res] = data;
+        if (res && res.data && res.data.success) {
+          uni.showToast({
+            title: "取消关注",
+            duration: 2000,
+          });
+          item.attention = 0;
+          this.queryAttentionListByUserId(true);
+        } else {
+          uni.showToast({
+            title: "服务器忙",
+            duration: 2000,
+          });
+        }
+      });
     },
     /**
      * 获取页面数据
@@ -109,7 +184,7 @@ export default {
     queryAttentionListByUserId(reload) {
       let that = this;
       this.status = "loading";
-      let openid = uni.getStorageSync("openid");
+      let openid = this.userId;
       if (openid && openid != "") {
         let param = {
           userId: openid,
