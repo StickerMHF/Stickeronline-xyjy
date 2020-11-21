@@ -1,5 +1,9 @@
-
-import { getAction,deleteAction,putAction,postAction} from '@/api/manage'
+import {
+    getAction,
+    deleteAction,
+    putAction,
+    postAction
+} from '@/api/manage'
 import api from '@/api/api'
 
 // 获取模型
@@ -36,7 +40,7 @@ export const deleteWechatUser = (params) => {
 }
 //获取用户列表
 export const getUserListByInitialGroup = (params) => {
-	return getAction(api.getUserListByInitialGroup, params);
+    return getAction(api.getUserListByInitialGroup, params);
 }
 // 查询所有校友列表
 export const queryAllByUserId = (params) => {
@@ -73,10 +77,28 @@ export const deleteWechatUserAttention = (params) => {
 }
 
 //获取用户信息
-export const getUserDetailsByUserId = (params)=>{
-	return getAction(api.getUserDetailsByUserId,params)
+export const getUserDetailsByUserId = (params) => {
+    return getAction(api.getUserDetailsByUserId, params)
 }
 
+// 获取我的消息
+export const getMyNews = (params) => {
+    return getAction(api.getMyNews, params)
+}
 
-
-
+//获取我的申请
+export const getApply = (params) => {
+    return getAction(api.getApply, params)
+}
+//添加收藏
+export const addCollect = (params) => {
+    return postAction(api.addCollect, params)
+}
+//删除收藏
+export const delteCollect = (params) => {
+    return deleteAction(api.delteCollect, params)
+}
+//获取收藏状态
+export const getCollect = (params) => {
+    return getAction(api.getCollect, params)
+}
