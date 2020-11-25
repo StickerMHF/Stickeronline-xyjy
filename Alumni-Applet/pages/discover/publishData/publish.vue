@@ -129,45 +129,63 @@
 				// 	images.push(image_obj);
 				// }
 				
-				//获取用户信息
-				this.publishData.userId = uni.getStorageSync('openid');
-				let userInfo = uni.getStorageSync('userInfo');
-				console.log(userInfo)
-				if(userInfo){
-					this.publishData.userName = userInfo.nickName;
-					this.publishData.userPhoto = userInfo.avatarUrl;
-				} else {
-					//跳转页面 
-					 wx.navigateTo({
-					 	url:'pages/login/login'
-					 })
-				}
-				
-				this.publishData.photos = JSON.stringify(this.photosArray);
-				this.publishData.address = this.address === "所在位置" ? '' :this.address;
-				publishMoment(this.publishData).then(data =>{
-					// console.log(data);
-					 // let pages = getCurrentPages() // 获取加载的页面
-					 // console.log(pages,'UUUUUUUU')
-					 //  let currentPage = pages[pages.length - 2] // 获取当前页面的对象
-					 //  let url = currentPage.route // 当前页面url
-					uni.showLoading({title:'审核中！'});
-					setTimeout(function () {
-					    uni.hideLoading();
-						uni.navigateBack()
-						// uni.navigateBack({
-						// 	url:"/pages/discover/discover"
-						// });
-					}, 1000);
-
-					
-					// uni.navigateTo({
-					// 	url:"/pages/discover/discover"
-					// });
-					
-					// uni.hideLoading();
-					
-				});
+				wx.cloud.init()
+				wx.cloud.callFunction({
+					name: 'check',
+					data: {
+						"content": this.publishData.content
+					}
+				}).then(res => {
+					console.log(res.result)
+					if (res.result.code == 300) {
+						uni.showModal({
+							title: "温馨提示",
+							content: "内容含有违法违规内容，不支持进行下一步操作"
+						})
+						return
+					} else {
+						console.log("通过审核");
+						//获取用户信息
+						this.publishData.userId = uni.getStorageSync('openid');
+						let userInfo = uni.getStorageSync('userInfo');
+						console.log(userInfo)
+						if(userInfo){
+							this.publishData.userName = userInfo.nickName;
+							this.publishData.userPhoto = userInfo.avatarUrl;
+						} else {
+							//跳转页面 
+							 wx.navigateTo({
+							 	url:'pages/login/login'
+							 })
+						}
+						
+						this.publishData.photos = JSON.stringify(this.photosArray);
+						this.publishData.address = this.address === "所在位置" ? '' :this.address;
+						publishMoment(this.publishData).then(data =>{
+							// console.log(data);
+							 // let pages = getCurrentPages() // 获取加载的页面
+							 // console.log(pages,'UUUUUUUU')
+							 //  let currentPage = pages[pages.length - 2] // 获取当前页面的对象
+							 //  let url = currentPage.route // 当前页面url
+							uni.showLoading({title:'审核中！'});
+							setTimeout(function () {
+							    uni.hideLoading();
+								uni.navigateBack()
+								// uni.navigateBack({
+								// 	url:"/pages/discover/discover"
+								// });
+							}, 1000);
+						
+							
+							// uni.navigateTo({
+							// 	url:"/pages/discover/discover"
+							// });
+							
+							// uni.hideLoading();
+							
+						});
+					}
+				})
 			},
 			selectAddress(){
 				let location = ""
