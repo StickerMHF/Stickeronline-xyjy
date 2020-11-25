@@ -160,19 +160,37 @@
 					img:['http://cdxyh.stickeronline.cn/banner12x.png'],
 					type:2
 				}
-				sendActivity(param).then(data => {
-					let [error, res] = data;
-					if (res && res.data && res.data.result) {
-						if(res.data.success){
-							uni.showToast({
-								title:'发布成功'
-							})
-							setTimeout(v => {
-								uni.navigateBack();
-							},500)
-						}
+				wx.cloud.init()
+				wx.cloud.callFunction({
+					name: 'check',
+					data: {
+						"content": this.title+this.content
 					}
-				});
+				}).then(res => {
+					console.log(res.result)
+					if (res.result.code == 300) {
+						uni.showModal({
+							title: "温馨提示",
+							content: "内容含有违法违规内容，不支持进行下一步操作"
+						})
+						return
+					} else {
+						sendActivity(param).then(data => {
+							let [error, res] = data;
+							if (res && res.data && res.data.result) {
+								if(res.data.success){
+									uni.showToast({
+										title:'发布成功'
+									})
+									setTimeout(v => {
+										uni.navigateBack();
+									},500)
+								}
+							}
+						});
+					}
+				})
+				
 			}
 		}
 	}

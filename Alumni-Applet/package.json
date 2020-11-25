@@ -4,6 +4,7 @@
   "description": "<p style=\"text-align: center;\"><img src=\"https://image.weilanwl.com/uni/UniAppReadme.jpg\" alt=\"ColorUI简介\"></img></p>",
   "main": "main.js",
   "dependencies": {
+    "copy-webpack-plugin": "^6.3.2",
     "fibers": "^5.0.0",
     "mockjs": "^1.1.0",
     "moment": "^2.29.1",

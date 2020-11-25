@@ -66,7 +66,24 @@
 
 			},
 			pubComment() {
-				this.$emit('pubComment', this.item);
+				wx.cloud.init()
+				wx.cloud.callFunction({
+					name: 'check',
+					data: {
+						"content": this.item.content
+					}
+				}).then(res => {
+					console.log(res.result)
+					if (res.result.code == 300) {
+						uni.showModal({
+							title: "温馨提示",
+							content: "内容含有违法违规内容，不支持进行下一步操作"
+						})
+						return
+					} else {
+						this.$emit('pubComment', this.item);
+					}
+				})
 			}
 		}
 	}
