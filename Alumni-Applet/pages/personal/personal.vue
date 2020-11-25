@@ -119,6 +119,11 @@ export default {
           icon: "http://www.imapway.cn/Alumni/static/personal/sz2x.png",
           // page: "/pages/personal/manager/login"
         },
+		{
+		  id: "cdxyh",
+		  name: "长大校友会",
+		  icon: "http://www.imapway.cn/Alumni/static/personal/cdxyh2x.png"
+		},
         //   {
         // 	name: "设置",
         // 	icon: "http://www.imapway.cn/Alumni/static/personal/sz2x.png",
@@ -199,6 +204,14 @@ export default {
           url: "/pages/personal/manager/login",
         });
       }
+	  if (value && value == "cdxyh") {
+	  	uni.navigateToMiniProgram({
+	  		appId: "wx639b2d0889ba350e",
+	  		success(res) {
+	  			// 打开成功
+	  		},
+	  	});
+	  }
     },
     changeSkin() {
       uni.navigateTo({

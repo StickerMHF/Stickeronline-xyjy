@@ -45,7 +45,7 @@ public class BWechatUsersAttentionAsyncServiceImpl implements BWechatUsersAttent
         bMessageEntity.setUpdateTime(new Date());
         bMessageEntity.setRecoreId(bMemberAttentionEntity.getUserId());
         bMessageEntity.setUserId(bMemberAttentionEntity.getMemberId());
-        bMessageEntity.setContent("有人关注了我");
+        bMessageEntity.setContent("有人关注了我,快去我的粉丝看看吧");
         bMessageRepository.save(bMessageEntity);
 
         future.complete("添加成功!");
