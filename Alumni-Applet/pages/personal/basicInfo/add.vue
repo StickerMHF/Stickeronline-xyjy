@@ -227,7 +227,7 @@
 						maxlength: 10
 					},
 					identityCard: {
-						required: true,
+						required: false,
 						idcard: true
 					},
 					college: {
@@ -251,12 +251,12 @@
 						maxlength: 30
 					},
 					classGrade: {
-						required: true,
+						required: false,
 						minlength: 3,
 						maxlength: 30
 					},
 					studentNumber: {
-						required: true,
+						required: false,
 						digits: true,
 						minlength: 3,
 						maxlength: 20
@@ -293,7 +293,7 @@
 						maxlength: 10
 					},
 					identityCard: {
-						required: true,
+						required: false,
 						idcard: true
 					},
 					college: {
@@ -306,12 +306,12 @@
 						required: true
 					},
 					classGrade: {
-						required: true,
+						required: false,
 						minlength: 3,
 						maxlength: 20
 					},
 					studentNumber: {
-						required: true,
+						required: false,
 						digits: true,
 						minlength: 2,
 						maxlength: 30
@@ -338,7 +338,7 @@
 						maxlength: 10
 					},
 					identityCard: {
-						required: true,
+						required: false,
 						idcard: true
 					},
 					college: {
