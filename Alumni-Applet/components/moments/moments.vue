@@ -260,7 +260,8 @@
 	}
 	.details-list{
 		    // width: 340px;
-		    margin-left: 50px;
+		    // margin-left: 50px;
+			    margin: 10px 0 5px 50px;
 	}
 	.discover-comment {
 		position: fixed;

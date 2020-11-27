@@ -44,10 +44,10 @@ export default {
   data() {
     return {
       lists: [
-        { content: "xx关注了你", createTime: "2020-02-11" },
-        { content: "你的校友审核已通过", createTime: "2020-02-11" },
-        { content: "xx关注了你", createTime: "2020-02-11" },
-        { content: "有人赞了你的朋友圈", createTime: "2020-02-11" },
+        // { content: "xx关注了你", createTime: "2020-02-11" },
+        // { content: "你的校友审核已通过", createTime: "2020-02-11" },
+        // { content: "xx关注了你", createTime: "2020-02-11" },
+        // { content: "有人赞了你的朋友圈", createTime: "2020-02-11" },
       ],
       CustomBar: this.CustomBar,
       listCurID: "",
@@ -125,6 +125,7 @@ export default {
   height: 65px;
   .content {
     left: 20px;
+	width: 100%;
   }
 }
 </style>

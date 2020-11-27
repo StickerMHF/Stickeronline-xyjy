@@ -145,7 +145,7 @@
 						id: "xyjz",
 						icon: "http://www.imapway.cn/Alumni/static/home/xyjz2x.png",
 						txt: "校友捐赠",
-						page: "",
+						page: "/pages/alumnus/donation",
 					},
 				],
 				tabCur: 0,
@@ -220,14 +220,14 @@
 				}
 			},
 			menuClickHandler(value) {
-				if (value && value == "xyjz") {
-					uni.navigateToMiniProgram({
-						appId: "wx57ef5751ef32a454",
-						success(res) {
-							// 打开成功
-						},
-					});
-				}
+				// if (value && value == "xyjz") {
+				// 	uni.navigateToMiniProgram({
+				// 		appId: "wx57ef5751ef32a454",
+				// 		success(res) {
+				// 			// 打开成功
+				// 		},
+				// 	});
+				// }
 				if (value && value == "xyrz") {
 					let userInfo = uni.getStorageSync("userInfo");
 					if (userInfo && userInfo != "") {
