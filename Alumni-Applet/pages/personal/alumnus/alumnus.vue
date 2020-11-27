@@ -235,11 +235,15 @@ page {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  .uni-title{
+	  margin-bottom: 0;
+  }
 }
 
 .shop-picture {
   width: 50px;
   height: 50px;
+  margin-top: 10px;
 }
 
 .shop-picture-column {

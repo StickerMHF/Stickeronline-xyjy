@@ -1,483 +1,436 @@
 {
-	"pages": [
-		//pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		
-		{
-			"path": "pages/home/home",
-			"style": {}
-		},{
-			"path": "pages/login/login",
-			"style": {}
-		},{
-		    "path" : "pages/anniversary/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		},{
-		    "path" : "pages/teachers/detail/detail",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		},
-		{
-		    "path" : "pages/cooperation/cooperation",
-		    "style" : {
-		        "enablePullDownRefresh": true,
-		        "navigationBarTitleText": ""
-		    }
-		    
-		},{
-		    "path" : "pages/teachers/teachers",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		},		
-		{
-		    "path" : "pages/discover/discover",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "数据加载中",
-		        "enablePullDownRefresh": true
-		    }
-		    
-		},{
-		    "path" : "pages/discover/publishData/publishData",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		},{
-		    "path" : "pages/alumnus/details",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		},
-		{
-		    "path" : "pages/alumnus/sendNotice",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "发公告",
-		        "enablePullDownRefresh": false
-		    }
-		},
-		{
-		    "path" : "pages/alumnus/sendActivity",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "发活动",
-		        "enablePullDownRefresh": false
-		    }
-		},
-		{
-			"path": "pages/alumnus/alumnus",
-			"style": {
-				"enablePullDownRefresh": false
-			}
-		
-		},
-		{
-			"path": "pages/alumnus/activityDetails",
-			"style": {
-				
-			}
-		
-		},
-		{
-			"path": "pages/alumnus/messageDetails",
-			"style": {
-				
-			}
-		
-		},
-		{
-			"path":"pages/alumnus/statistics",
-			"style":{}
-		},
-		{
-			"path": "pages/personal/personal",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
+  "pages": [
+	  {
+	  	"path": "pages/index/index",
+	  	"style": {
+	  		"navigationBarTitleText": "自定义tabbar",
+	  		"enablePullDownRefresh": false,
+	  		"bounce": "none",
+	  		"app-plus": {
+	  			// "titleNView": {
+	  			// 	"type": "transparent",
+	  			// 	"backgroundColor" : "#FFFFFF"
+	  				
+	  			// }
+	  		}
+	  	}
+	  },
+    {
+      "path": "pages/home/home",
+      "style": {}
+    },
+    {
+      "path": "pages/login/login",
+      "style": {}
+    },
+    {
+      "path": "pages/anniversary/index",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/teachers/detail/detail",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/cooperation/cooperation",
+      "style": {
+        "enablePullDownRefresh": true,
+        "navigationBarTitleText": ""
+      }
+    },
+    {
+      "path": "pages/teachers/teachers",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/discover/discover",
+      "style": {
+        "navigationBarTitleText": "数据加载中",
+        "enablePullDownRefresh": true
+      }
+    },
+    {
+      "path": "pages/discover/publishData/publishData",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/alumnus/details",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/alumnus/sendNotice",
+      "style": {
+        "navigationBarTitleText": "发公告",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/alumnus/sendActivity",
+      "style": {
+        "navigationBarTitleText": "发活动",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/alumnus/alumnus",
+      "style": {
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/alumnus/activityDetails",
+      "style": {}
+    },
+    {
+      "path": "pages/alumnus/messageDetails",
+      "style": {}
+    },
+    {
+      "path": "pages/alumnus/statistics",
+      "style": {}
+    },
+    {
+      "path": "pages/personal/personal",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/home/news/news",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/home/newsDetail/newsDetail",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/schoolHistory/schoolHistory",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/donations/donations",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/cooperation/addDetail/addDetail",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/alumnus/news",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/alumnus/goodMember",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+	{
+      "path": "pages/alumnus/donation",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/anniversary/news/news",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/anniversary/activity/activity",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/anniversary/activity/activityDetail",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/anniversary/wish/wish",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/anniversary/headLogo/headLogo",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/anniversary/photos/photos",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/anniversary/photos/photoList",
+      "style": {
+        "navigationBarTitleText": "照片墙",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/anniversary/footprint/footprint",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
 
-		},{
-            "path" : "pages/home/news/news",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/home/newsDetail/newsDetail",
-            "style" : {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },{
-            "path" : "pages/schoolHistory/schoolHistory",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },{
-            "path" : "pages/donations/donations",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/cooperation/addDetail/addDetail",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/alumnus/news",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        } ,{
-            "path" : "pages/alumnus/goodMember",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        
-        ,{
-            "path" : "pages/anniversary/news/news",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/anniversary/activity/activity",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,
-		{
-		    "path" : "pages/anniversary/activity/activityDetail",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		}
-		,{
-            "path" : "pages/anniversary/wish/wish",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/anniversary/headLogo/headLogo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/anniversary/photos/photos",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
-		{
-		    "path" : "pages/anniversary/photos/photoList",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "照片墙",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		}
-		,{
-            "path" : "pages/anniversary/footprint/footprint",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        
-        ,{
-            "path" : "pages/personal/alumnus/alumnus",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/personal/basicInfo/basicInfo",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
-		{
-            "path" : "pages/personal/basicInfo/certification",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,
-		{
-            "path" : "pages/personal/attention/attention",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/personal/fans/fans",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/personal/collect/collect",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/personal/setting/setting",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
-		{
-		    "path" : "pages/imgPreview/imgPreview",
-		    "style" : {
-				"navigationBarTitleText": "查看图片"
-			}
-		}
-        ,{
-            "path" : "components/news-list/news-list",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
-		{
-		    "path" : "components/news-list2/index",
-		    "style" :                                                                                    
-		    {
-		        "navigationBarTitleText": "",
-		        "enablePullDownRefresh": false
-		    }
-		    
-		}
-        ,{
-            "path" : "pages/personal/basicInfo/add",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/home/address/address",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/alumnus/goodMemberDetails",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/home/statistics/statistics",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        },
-		{
-			"path":"pages/personal/userDetail/userDetail",
-			"style" :
-			{
-			    "navigationBarTitleText": "",
-			    "enablePullDownRefresh": false
-			}
-		}
-        ,{
-            "path" : "pages/personal/manager/manager",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/personal/manager/login",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
-            "path" : "pages/personal/examine/examine",
-            "style" : {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-        }
-        ,{
-            "path" : "pages/personal/myNews/myNews/myNews",
-            "style" : {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-        }
-        ,{
-            "path" : "pages/personal/myApply/myApply/myApply",
-            "style" : {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-        }
-        ,{
-            "path" : "pages/personal/myCollect/myCollect/myCollect",
-            "style" : {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-        }
-    ],
-	"globalStyle": {
-		"mp-alipay": {
-			/* 支付宝小程序特有相关 */
-			"transparentTitle": "always",
-			"allowsBounceVertical": "NO"
-		},
-		"navigationBarBackgroundColor": "#00BEB7",
-		"navigationBarTitleText": "",
-		"navigationStyle": "custom",
-		"navigationBarTextStyle": "white"
-	},
-	"usingComponts": true,
-	"condition": { //模式配置，仅开发期间生效
-		"current": 0, //当前激活的模式(list 的索引项)
-		"list": [{
-			"name": "表单", //模式名称
-			"path": "pages/home/home", //启动页面
-			"query": "" //启动参数
-		}]
-	},	
-	"tabBar": {
-		"custom": false,
-		"color": "#7A7E83",
-		"selectedColor": "#00BEB7",
-		"borderStyle": "black",
-		"backgroundColor": "#ffffff",
-		"list": [{
-			"pagePath": "pages/home/home",
-			"iconPath": "static/nav/sy2x.png",
-			"selectedIconPath": "static/nav/sy_cur2x.png",
-			"text": "首页"
-		}, {
-			"pagePath": "pages/alumnus/alumnus",
-			"iconPath": "static/nav/zz2x.png",
-			"selectedIconPath": "static/nav/zz_cur2x.png",
-			"text": "组织"
-		}, {
-			"pagePath": "pages/anniversary/index",
-			"iconPath": "static/nav/ys2x.png",
-			"selectedIconPath": "static/nav/ys_cur2x.png",
-			"text": "校庆"
-		}, {
-			"pagePath": "pages/discover/discover",
-			"iconPath": "static/nav/fx2x.png",
-			"selectedIconPath": "static/nav/fx_cur2x.png",
-			"text": "发现"
-		}, {
-			"pagePath": "pages/personal/personal",
-			"iconPath": "static/nav/wd2x.png",
-			"selectedIconPath": "static/nav/wd_cur2x.png",
-			"text": "我的"
-		}]
-	}
+    {
+      "path": "pages/personal/alumnus/alumnus",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/basicInfo/basicInfo",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/basicInfo/certification",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/attention/attention",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/fans/fans",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/collect/collect",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/setting/setting",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/imgPreview/imgPreview",
+      "style": {
+        "navigationBarTitleText": "查看图片"
+      }
+    },
+    {
+      "path": "components/news-list/news-list",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "components/news-list2/index",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/basicInfo/add",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/home/address/address",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/alumnus/goodMemberDetails",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/home/statistics/statistics",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/userDetail/userDetail",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/manager/manager",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/manager/login",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/examine/examine",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/myNews/myNews/myNews",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/myApply/myApply/myApply",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    },
+    {
+      "path": "pages/personal/myCollect/myCollect/myCollect",
+      "style": {
+        "navigationBarTitleText": "",
+        "enablePullDownRefresh": false
+      }
+    }
+  ],
+  "globalStyle": {
+    "mp-alipay": {
+      /* 支付宝小程序特有相关 */
+      "transparentTitle": "always",
+      "allowsBounceVertical": "NO"
+    },
+    "navigationBarBackgroundColor": "#00BEB7",
+    "navigationBarTitleText": "",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "white"
+  },
+  "usingComponts": true,
+  "condition": {
+    //模式配置，仅开发期间生效
+    "current": 0, //当前激活的模式(list 的索引项)
+    "list": [
+      {
+        "name": "表单", //模式名称
+        "path": "pages/home/home", //启动页面
+        "query": "" //启动参数
+      }
+    ]
+  }
+  // "tabBar": {
+    // "custom": false,
+    // "color": "#7A7E83",
+    // "selectedColor": "#00BEB7",
+    // "borderStyle": "black",
+    // "backgroundColor": "#ffffff",
+    // "list": [
+    //   {
+    //     "pagePath": "pages/home/home",
+    //     "iconPath": "static/tabBar/1.png",
+    //     "selectedIconPath": "static/tabBar/11.png",
+    //     "text": "首页"
+    //   },
+    //   {
+    //     "pagePath": "pages/alumnus/alumnus",
+    //     "iconPath": "static/tabBar/2.png",
+    //     "selectedIconPath": "static/tabBar/22.png",
+    //     "text": "组织"
+    //   },
+    //   {
+    //     "pagePath": "pages/anniversary/index",
+    //     "iconPath": "static/tabBar/3.png",
+    //     "selectedIconPath": "static/tabBar/33.png",
+    //     "text": "校庆"
+    //   },
+    //   {
+    //     "pagePath": "pages/discover/discover",
+    //     "iconPath": "static/tabBar/4.png",
+    //     "selectedIconPath": "static/tabBar/44.png",
+    //     "text": "发现"
+    //   },
+    //   {
+    //     "pagePath": "pages/personal/personal",
+    //     "iconPath": "static/tabBar/5.png",
+    //     "selectedIconPath": "static/tabBar/55.png",
+    //     "text": "我的"
+    //   }
+    // ]
+  // }
 }

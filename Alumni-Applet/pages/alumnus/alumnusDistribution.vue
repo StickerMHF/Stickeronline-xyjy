@@ -48,7 +48,7 @@ export default {
   methods: {
     getData() {
       _selfs = this;
-      this.cWidth = uni.upx2px(750);
+      this.cWidth = uni.upx2px(700);
       this.cHeight = uni.upx2px(500);
       uni.request({
         //就业地图分布
@@ -147,16 +147,18 @@ export default {
   color: #000000;
 }
 .qiun-charts {
-  width: 100%;
+  width: 730rpx;
   // height: 600rpx;
   background-color: #ffffff;
   padding: 10upx;
   overflow: hidden;
+  z-index: 9;
 }
 .charts {
   width: 730upx;
   height: 480upx;
   background-color: #ffffff;
+  z-index: 9;
 }
 .xyfb_icon {
   width: 15px;
